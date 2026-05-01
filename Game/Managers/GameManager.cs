@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel(LevelData level)
     {
         Debug.LogFormat("[GameManager] StartLevel called for level: {0}", level != null ? level.name : "NULL");
-        StopAllCoroutines(); // clear transient coroutines
+        StopAllCoroutines();
         currentLevel = level;
 
         if (level == null)
@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Determine target from goal: sum of all goal counts
         int goalSum = 0;
         if (level.goal != null)
         {
@@ -67,34 +66,19 @@ public class GameManager : MonoBehaviour
         }
         targetCountNeeded = goalSum;
 
-        // Level time values now come from LevelManager's timer; store for UI
         levelTimeSeconds = level.timeLimit;
         currentCollected = 0;
         remainingTime = levelTimeSeconds;
         isRunning = false;
 
-        // Defensive null checks & logs
-        if (ui == null) Debug.LogWarning("[GameManager] UIManager reference is null.");
-        if (spawner == null) Debug.LogWarning("[GameManager] Spawner reference is null.");
-        if (powerUpManager == null) Debug.LogWarning("[GameManager] PowerUpManager reference is null.");
-        if (scoreManager == null) Debug.LogWarning("[GameManager] ScoreManager reference is null.");
-        if (comboManager == null) Debug.LogWarning("[GameManager] ComboManager reference is null.");
-        if (audioManager == null) Debug.LogWarning("[GameManager] AudioManager reference is null.");
-
         ui?.UpdateTargetText(currentCollected, targetCountNeeded);
         ui?.UpdateTimer(remainingTime);
         ui?.SetProgress(0f);
 
-        // configure spawner & start spawning
         if (spawner != null)
         {
             spawner.Setup(level);
-            // spawner.StartSpawning();
-            Debug.Log("[GameManager] Spawner.Setup & StartSpawning called.");
-        }
-        else
-        {
-            Debug.LogError("[GameManager] spawner is null - cannot spawn animals.");
+            Debug.Log("[GameManager] Spawner.Setup called.");
         }
 
         powerUpManager?.InitForLevel(level);
@@ -102,32 +86,22 @@ public class GameManager : MonoBehaviour
         scoreManager?.ResetScore();
 
         onLevelStart?.Invoke();
-        // Start the GameManager-owned level timer coroutine so GameManager is single source of truth
-        // StartCoroutine(LevelTimer());
         StartCoroutine(countdown.PlayCountdown(OnCountdownFinished));
-        Debug.Log("[GameManager] LevelTimer coroutine started.");
     }
 
     void OnCountdownFinished()
     {
-        Debug.Log("[GameManager] Countdown finished. Starting gameplay.");
-
         isRunning = true;
         spawner?.StartSpawning();
         StartCoroutine(LevelTimer());
     }
 
-
-
     IEnumerator LevelTimer()
     {
-        Debug.Log("[GameManager] LevelTimer running.");
         while (isRunning)
         {
-            if (powerUpManager != null && !powerUpManager.isPaused)
+            if (powerUpManager == null || !powerUpManager.isPaused)
                 remainingTime -= Time.deltaTime;
-            else if (powerUpManager == null)
-                remainingTime -= Time.deltaTime; // still tick if no powerUpManager
 
             ui?.UpdateTimer(remainingTime);
 
@@ -135,18 +109,15 @@ public class GameManager : MonoBehaviour
             {
                 remainingTime = 0;
                 isRunning = false;
-                Debug.Log("[GameManager] Time ran out. Ending level as failure.");
                 EndLevel(false);
                 yield break;
             }
 
-            // progress bar
             float progress = targetCountNeeded > 0 ? Mathf.Clamp01((float)currentCollected / (float)targetCountNeeded) : 0f;
             ui?.SetProgress(progress);
 
             yield return null;
         }
-        Debug.Log("[GameManager] LevelTimer ended (isRunning false).");
     }
 
     public void OnCorrectTap(int tapsCount = 1, int points = 50)
@@ -160,12 +131,9 @@ public class GameManager : MonoBehaviour
         ui?.UpdateTargetText(currentCollected, targetCountNeeded);
         ui?.ShowFloating("+ " + (points * tapsCount), Camera.main.WorldToScreenPoint(Vector3.zero));
 
-        Debug.LogFormat("[GameManager] Correct tap. collected={0}/{1}", currentCollected, targetCountNeeded);
-
         if (currentCollected >= targetCountNeeded)
         {
             isRunning = false;
-            Debug.Log("[GameManager] Target reached. Ending level as success.");
             EndLevel(true);
         }
     }
@@ -179,20 +147,19 @@ public class GameManager : MonoBehaviour
             scoreManager?.AddPoints(-currentLevel.bombScorePenalty);
             ui?.ShowFloating("-" + currentLevel.bombScorePenalty, Camera.main.WorldToScreenPoint(Vector3.zero));
             audioManager?.PlaySFX(AudioManager.SfxType.Explosion);
-            Debug.Log("[GameManager] Bomb tapped: applied bomb penalties.");
         }
         else
         {
             remainingTime -= currentLevel.wrongTapTimePenalty;
             scoreManager?.AddPoints(-currentLevel.wrongTapScorePenalty);
             audioManager?.PlaySFX(AudioManager.SfxType.WrongTap);
-            Debug.Log("[GameManager] Wrong tap: applied generic penalties.");
         }
 
         ui?.UpdateTimer(Mathf.Max(remainingTime, 0f));
         comboManager?.ResetCombo();
     }
 
+    // --- FIX IS HERE ---
     private void EndLevel(bool success)
     {
         spawner?.StopSpawning();
@@ -201,26 +168,42 @@ public class GameManager : MonoBehaviour
 
         if (success)
         {
+            // 1. Show UI
             ui?.ShowLevelComplete();
             audioManager?.PlaySFX(AudioManager.SfxType.LevelWin);
             onLevelWin?.Invoke();
-            Debug.Log("[GameManager] Level ended SUCCESS.");
-            SaveManager.Instance?.AddCoins(currentLevel.rewardCoins);
+
+            if (SaveManager.Instance != null)
+                SaveManager.Instance.AddCoins(currentLevel.rewardCoins);
+
+            // 2. TELL LEVEL MANAGER TO PROCEED
+            // This triggers the save progress and the 2-second timer to go back to Main Scene
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.LevelSuccess();
+            }
+            else
+            {
+                Debug.LogError("LevelManager Instance is NULL. Cannot switch scenes.");
+            }
         }
         else
         {
             ui?.ShowLevelFailed();
             audioManager?.PlaySFX(AudioManager.SfxType.LevelLose);
             onLevelFail?.Invoke();
-            Debug.Log("[GameManager] Level ended FAIL.");
+
+            // Notify LevelManager of failure (optional, mostly for state tracking)
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.LevelFailed();
+            }
         }
     }
 
-    // Exposed helpers
     public void AddTime(float seconds)
     {
         remainingTime += seconds;
         ui?.UpdateTimer(remainingTime);
-        Debug.LogFormat("[GameManager] Added time: {0} seconds. New remaining: {1}", seconds, remainingTime);
     }
 }

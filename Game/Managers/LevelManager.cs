@@ -8,86 +8,93 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     [SerializeField] private LevelData[] allLevels;
-    [SerializeField] private LevelData currentLevel;
+
+    // We make this static or public so it survives fully across reloads if needed, 
+    // but DontDestroyOnLoad handles instance survival.
+    public int CurrentLevelIndex { get; private set; }
+    private LevelData currentLevel;
 
     public static event Action levelLoadedEvent;
     public static event Action levelSuccessEvent;
     public static event Action levelFailedEvent;
 
-    private float remainingTime;
     private bool isLevelActive;
 
     public LevelData CurrentLevelData => currentLevel;
+    public int TotalLevels => allLevels.Length;
 
     private void Awake()
     {
-        // 1. Singleton Logic with Persistence
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            return; // Important: Stop execution if this is a duplicate
+            return;
         }
-        else
-        {
-            Instance = this;
-            // 2. This makes the object survive scene changes
-            DontDestroyOnLoad(gameObject);
-        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
     {
         GoalPanel.allGoalsEndedEvent += OnGoalsCompleted;
-        // 3. Listen for Scene Changes
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         GoalPanel.allGoalsEndedEvent -= OnGoalsCompleted;
-        // Unsubscribe to prevent errors
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // 4. This runs every time a new scene finishes loading
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Check if we loaded the "GameScene" before trying to run game logic
-        // This prevents the game from trying to start in the Main Menu
         if (scene.name == "GameScene")
         {
             LoadLevel();
         }
-        else
+        else if (scene.name == "MainScene")
         {
-            // If we are in the Menu, stop any running level timers from the previous game
-            StopAllCoroutines();
+            // Ensure we aren't running game logic in the menu
             isLevelActive = false;
+            StopAllCoroutines();
         }
     }
 
-    // Note: Removed LoadLevel() from Start(), because OnSceneLoaded handles it now.
-    private void Start()
+    // Call this from MainMenuManager
+    public void LoadGameSceneForLevel(int levelIndex)
     {
-        // Optional: If you start directly in GameScene for testing, load manually
-        if (SceneManager.GetActiveScene().name == "GameScene")
-        {
-            LoadLevel();
-        }
+        // Set the index BEFORE loading the scene
+        CurrentLevelIndex = levelIndex;
+        SceneManager.LoadScene("GameScene");
     }
 
-    // ... (Rest of your code remains exactly the same below) ...
-
-    IEnumerator LevelTimer()
+    private void LoadLevel()
     {
-        while (remainingTime > 0 && isLevelActive)
+        // Safety Check
+        if (CurrentLevelIndex >= allLevels.Length)
         {
-            remainingTime -= Time.deltaTime;
-            yield return null;
+            Debug.LogWarning("Level index out of bounds. Wrapping to 0.");
+            CurrentLevelIndex = 0;
         }
 
+        currentLevel = allLevels[CurrentLevelIndex];
+
+        // Notify others (GameManager, Spawner, GoalPanel)
+        levelLoadedEvent?.Invoke();
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.StartLevel(currentLevel);
+
+        isLevelActive = true;
+    }
+
+    private void OnGoalsCompleted()
+    {
         if (isLevelActive)
-            LevelFailed();
+        {
+            LevelSuccess();
+        }
     }
 
     public void LevelSuccess()
@@ -95,44 +102,22 @@ public class LevelManager : MonoBehaviour
         if (!isLevelActive) return;
 
         isLevelActive = false;
-        levelSuccessEvent?.Invoke();
-    }
 
-    public void LoadNextLevel()
-    {
-        int next = PlayerPrefs.GetInt("Level", 0) + 1;
-        PlayerPrefs.SetInt("Level", next);
-        ReloadLevel();
-    }
+        // --- SAVE PROGRESS LOGIC ---
+        int highestCompleted = GetHighestUnlockedLevel();
 
-    public void ReloadLevel()
-    {
-        StopAllCoroutines();
-        LoadLevel();
-    }
-
-    private void LoadLevel()
-    {
-        int index = PlayerPrefs.GetInt("Level", 0) % allLevels.Length;
-        currentLevel = allLevels[index];
-
-        levelLoadedEvent?.Invoke();
-
-        if (GameManager.Instance != null)
-            GameManager.Instance.StartLevel(currentLevel);
-
-        remainingTime = currentLevel.timeLimit;
-        isLevelActive = true;
-        StartCoroutine(LevelTimer());
-    }
-
-    private void OnGoalsCompleted()
-    {
-        if (isLevelActive)
+        // If we just beat the highest unlocked level, unlock the next one
+        if (CurrentLevelIndex == highestCompleted)
         {
-            isLevelActive = false;
-            levelSuccessEvent?.Invoke();
+            PlayerPrefs.SetInt("HighestCompletedLevel", highestCompleted + 1);
+            PlayerPrefs.Save();
+            Debug.Log($"Progress Saved! Next Level Unlocked: {highestCompleted + 1}");
         }
+
+        levelSuccessEvent?.Invoke();
+
+        // Go back to menu after 2 seconds
+        StartCoroutine(ReturnToMainSceneAfterDelay(2f));
     }
 
     public void LevelFailed()
@@ -142,15 +127,23 @@ public class LevelManager : MonoBehaviour
         levelFailedEvent?.Invoke();
     }
 
-    public void LoadGameSceneForLevel(int levelIndex)
+    private IEnumerator ReturnToMainSceneAfterDelay(float delay)
     {
-        PlayerPrefs.SetInt("Level", levelIndex);
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("GameScene");
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("MainScene");
     }
 
-    public void RestartCurrentScene()
+    public int GetHighestUnlockedLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        return PlayerPrefs.GetInt("HighestCompletedLevel", 0);
+    }
+
+    // Reset for debugging
+    [ContextMenu("Reset Progress")]
+    public void ResetAllProgress()
+    {
+        PlayerPrefs.DeleteKey("HighestCompletedLevel");
+        PlayerPrefs.Save();
+        Debug.Log("Progress Reset to Level 1");
     }
 }
