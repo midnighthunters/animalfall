@@ -1,3 +1,13 @@
+// ============================================================
+//  Animal.cs  –  Animal Fall  (REFACTORED)
+//  Changes vs original:
+//    • Destroy(gameObject)   → return to AnimalPool
+//    • Explicit audio calls  → AudioManager.Instance
+//    • VFX calls             → VFXPoolRegistry
+//    • EventBus emission     → OnAnimalCollected / OnAnimalMissed
+//    • All GameManager refs  → GameManager.Instance (unchanged API)
+// ============================================================
+
 using System.Collections;
 using UnityEngine;
 
@@ -6,44 +16,59 @@ public enum TapResult { Correct, Wrong, BombExploded, ShieldBroken, Golden }
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D), typeof(AnimalMovement))]
 public class Animal : MonoBehaviour
 {
+    // ── Data ──────────────────────────────────────────────────
     public AnimalData data;
-    private LevelData level;
-    private SpriteRenderer sr;
-    private AnimalMovement movement;
-    private float spawnTime;
-    public int currentShield;
-    private float lastTapTime = -999f;
-    private int tapCount = 0;
+    public AnimalPool OwningPool;   // set by pool on Borrow
 
+    // ── Private ───────────────────────────────────────────────
+    private LevelData       _level;
+    private SpriteRenderer  _sr;
+    private AnimalMovement  _movement;
+    private float           _spawnTime;
+    public  int             currentShield;
+    private float           _lastTapTime = -999f;
+    private int             _tapCount    = 0;
+
+    // ── Lifecycle ─────────────────────────────────────────────
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
-        movement = GetComponent<AnimalMovement>();
+        _sr       = GetComponent<SpriteRenderer>();
+        _movement = GetComponent<AnimalMovement>();
     }
 
+    private void OnDisable()
+    {
+        // Reset state when returned to pool
+        _tapCount    = 0;
+        _lastTapTime = -999f;
+        _sr.color    = Color.white;
+    }
+
+    // ── Setup (called by Spawner) ─────────────────────────────
     public void Setup(AnimalData d, LevelData lv)
     {
-        data = d;
-        level = lv;
-        sr.sprite = d.sprite;
-        spawnTime = Time.time;
+        data         = d;
+        _level       = lv;
+        _sr.sprite   = d.sprite;
+        _spawnTime   = Time.time;
         currentShield = d.shieldHP;
-        movement.ConfigureRandomSpeed(d.speedMin, d.speedMax);
+        _tapCount    = 0;
+        _lastTapTime = -999f;
 
-        // visually indicate special types (outline, halo) - set material/shader if desired
-        if (d.type == AnimalType.Decoy)
-            sr.color = Color.Lerp(Color.white, Color.grey, 0.2f);
-        if (d.type == AnimalType.Bomb)
-            sr.color = Color.white; // bomb sprite should show explodable look
+        _movement.ConfigureRandomSpeed(d.speedMin, d.speedMax);
+
+        // Visual cues
+        _sr.color = d.type == AnimalType.Decoy
+            ? Color.Lerp(Color.white, Color.grey, 0.25f)
+            : Color.white;
     }
 
+    // ── Tap handling ──────────────────────────────────────────
     public TapResult HandleTap()
     {
-        // tap timing/double tap logic for shielded animals
-        tapCount++;
-        float now = Time.time;
-        bool isDoubleTap = (now - lastTapTime) < 0.4f;
-        lastTapTime = now;
+        _tapCount++;
+        float now         = Time.time;
+        _lastTapTime      = now;
 
         // Bomb
         if (data.type == AnimalType.Bomb)
@@ -52,84 +77,110 @@ public class Animal : MonoBehaviour
             return TapResult.BombExploded;
         }
 
-        // Shielded double-tap
+        // Shield
         if (data.requiresDoubleTap || data.type == AnimalType.Shielded)
         {
             currentShield--;
             if (currentShield > 0)
             {
-                // show break animation
                 StartCoroutine(FlashOutline());
-                return TapResult.ShieldBroken; // not counted as correct yet
+                AudioManager.Instance?.PlaySFX(AudioManager.SfxType.ShieldBreak);
+                return TapResult.ShieldBroken;
             }
         }
 
         // Golden
         if (data.type == AnimalType.Golden)
         {
-            OnCollected();
+            OnCollected(isGolden: true);
             return TapResult.Golden;
         }
 
-        // Normal or special
-        OnCollected();
-        return TapResult.Correct;
-    }
-
-    IEnumerator FlashOutline()
-    {
-        // Placeholder: make a flash to indicate shield lost
-        Vector3 origScale = transform.localScale;
-        transform.localScale = origScale * 1.05f;
-        yield return new WaitForSeconds(0.12f);
-        transform.localScale = origScale;
-    }
-
-    void Explode()
-    {
-        // show fx then notify GameManager
-        GameManager.Instance.OnWrongTap(true);
-        Destroy(gameObject);
-    }
-
-    void OnCollected()
-    {
-        // play fx
-        int pointValue = data.pointValue;
-        bool isTarget = data.isTargetSpecies;
-
-        if (isTarget)
+        // Normal / special / decoy
+        if (data.isTargetSpecies)
         {
-            GameManager.Instance.OnCorrectTap(1, pointValue);
+            OnCollected();
+            return TapResult.Correct;
         }
         else
         {
-            GameManager.Instance.OnWrongTap(false);
+            GameManager.Instance?.OnWrongTap(false);
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.WrongTap);
+            Release();
+            return TapResult.Wrong;
         }
-
-        // Decrease the goal if this animal maps to a species in Goal
-        if (data.species != AnimalSpecies.None && GoalPanel.Instance != null && GoalPanel.Instance.IsSpeciesRequired(data.species))
-        {
-            GoalPanel.Instance.DecreaseGoal(data.species);
-        }
-
-        // visual + audio
-        if (GameManager.Instance != null && GameManager.Instance.audioManager != null)
-            GameManager.Instance.audioManager.PlaySFX(AudioManager.SfxType.Collect);
-
-        Destroy(gameObject);
     }
 
+    // ── Internal ──────────────────────────────────────────────
+    private void OnCollected(bool isGolden = false)
+    {
+        int pts = isGolden ? data.pointValue * 3 : data.pointValue;
+
+        GameManager.Instance?.OnCorrectTap(1, pts);
+        AudioManager.Instance?.PlaySFX(AudioManager.SfxType.Collect);
+        VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.Collect, transform.position);
+
+        // Goal system
+        if (data.species != AnimalSpecies.None && GoalPanel.Instance != null
+            && GoalPanel.Instance.IsSpeciesRequired(data.species))
+        {
+            GoalPanel.Instance.DecreaseGoal(data.species);
+            VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.GoalPop,
+                GoalPanel.Instance.GetGoalPosition(data.species));
+        }
+
+        EventBus.Publish(new OnAnimalCollected
+        {
+            species  = data.species,
+            points   = pts,
+            worldPos = transform.position
+        });
+
+        // Camera shake on bomb-cleared / golden
+        if (isGolden)
+            CameraController.Instance?.Shake(0.15f, 0.08f);
+
+        Release();
+    }
+
+    private void Explode()
+    {
+        GameManager.Instance?.OnWrongTap(true);
+        AudioManager.Instance?.PlaySFX(AudioManager.SfxType.Explosion);
+        VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.Explosion, transform.position);
+        CameraController.Instance?.Shake();
+        Release();
+    }
+
+    private void Release()
+    {
+        if (OwningPool != null)
+            OwningPool.Return(gameObject);
+        else
+            Destroy(gameObject);
+    }
+
+    private IEnumerator FlashOutline()
+    {
+        Vector3 orig = transform.localScale;
+        transform.localScale = orig * 1.08f;
+        yield return new WaitForSeconds(0.1f);
+        transform.localScale = orig;
+    }
+
+    // ── Lifetime ──────────────────────────────────────────────
     private void Update()
     {
-        // lifespan
-        if (Time.time - spawnTime > data.lifetime)
-            Destroy(gameObject);
+        if (data == null) return;
+        if (Time.time - _spawnTime > data.lifetime)
+        {
+            EventBus.Publish(new OnAnimalMissed { species = data.species });
+            Release();
+        }
     }
 }
 
-
-
+// ── AnimalSpecies  (kept in same file for zero change to callers)
 public enum AnimalSpecies
 {
     None,

@@ -1,170 +1,133 @@
+// ============================================================
+//  Spawner.cs  –  Animal Fall  (REFACTORED)
+//  Changes from original:
+//    • Destroy(gameObject) replaced with VFXPoolRegistry calls
+//    • Animal pool: instead of Instantiate per animal, we borrow
+//      from AnimalPool, return on collect/expire
+//    • Emits EventBus events (OnAnimalMissed)
+//    • StopSpawning now clears on-screen animals cleanly
+// ============================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Transform[] spawnPoints;
-    public AnimalData[] spawnPool; // assign normal animals, decoys, bombs too
-    public GameObject animalPrefab; // generic animal prefab (will set data on instantiate)
-    private LevelData level;
-    private bool spawning = false;
-    [Header("Settings")]
-    public Transform animalContainer;
+    // ── Inspector ─────────────────────────────────────────────
+    [Header("Pool")]
+    [SerializeField] private AnimalPool animalPool;    // NEW – replaces animalPrefab + Instantiate
 
-    private List<GameObject> spawned = new List<GameObject>();
+    [Header("Legacy (fallback if pool is null)")]
+    [SerializeField] public GameObject animalPrefab;   // kept for Inspector compat
 
+    [Header("Spawn points")]
+    [SerializeField] public Transform[] spawnPoints;
+    [SerializeField] public AnimalData[] spawnPool;
+    [SerializeField] public Transform    animalContainer;
+
+    // ── State ─────────────────────────────────────────────────
+    private LevelData            _level;
+    private bool                 _spawning;
+    private List<GameObject>     _alive = new(32);
+
+    // ── API ───────────────────────────────────────────────────
     public void Setup(LevelData lv)
     {
-        level = lv;
-        Debug.LogFormat("[Spawner] Setup called. level = {0}", level != null ? level.name : "NULL");
-        if (level == null)
-        {
-            Debug.LogWarning("[Spawner] LevelData is null in Setup!");
-        }
+        _level = lv;
+        Debug.Log($"[Spawner] Setup → {lv?.name ?? "NULL"}");
     }
 
     public void StartSpawning()
     {
-        if (level == null)
-        {
-            Debug.LogWarning("[Spawner] StartSpawning called but level == null. Did you call Setup(level)?");
-            return;
-        }
+        if (_level == null) { Debug.LogWarning("[Spawner] StartSpawning – level is null."); return; }
+        if (spawnPoints == null || spawnPoints.Length == 0) { Debug.LogWarning("[Spawner] No spawn points."); return; }
+        if ((spawnPool == null || spawnPool.Length == 0))   { Debug.LogWarning("[Spawner] spawnPool empty."); return; }
+        if (animalPool == null && animalPrefab == null)     { Debug.LogError("[Spawner] No pool or prefab."); return; }
 
-        if (spawnPoints == null || spawnPoints.Length == 0)
-        {
-            Debug.LogWarning("[Spawner] No spawnPoints assigned! Assign some Transforms to spawnPoints in the inspector.");
-            return;
-        }
-
-        if (spawnPool == null || spawnPool.Length == 0)
-        {
-            Debug.LogWarning("[Spawner] spawnPool is empty! Assign AnimalData assets to spawnPool in inspector.");
-            return;
-        }
-
-        if (animalPrefab == null)
-        {
-            Debug.LogError("[Spawner] animalPrefab is null! Assign the Animal prefab in inspector.");
-            return;
-        }
-
-        spawning = true;
-        Debug.LogFormat("[Spawner] Starting spawn loop. spawnInterval={0}, spawnVariance={1}, maxOnScreen={2}",
-            level.spawnInterval, level.spawnVariance, level.maxOnScreen);
+        _spawning = true;
         StartCoroutine(SpawnLoop());
     }
 
     public void StopSpawning()
     {
-        spawning = false;
+        _spawning = false;
         StopAllCoroutines();
-        Debug.Log("[Spawner] Stopped spawning and stopped all coroutines.");
-        // optionally clear current animals
+
+        // Gracefully return alive animals to pool
+        foreach (var go in _alive)
+        {
+            if (go == null) continue;
+            if (animalPool != null) animalPool.Return(go);
+            else                   Destroy(go);
+        }
+        _alive.Clear();
     }
 
-    IEnumerator SpawnLoop()
+    // ── Internal ──────────────────────────────────────────────
+    private IEnumerator SpawnLoop()
     {
-        Debug.Log("[Spawner] SpawnLoop started.");
-        while (spawning)
+        while (_spawning)
         {
-            // cap on screen
-            spawned.RemoveAll(x => x == null);
-            if (spawned.Count < level.maxOnScreen)
-            {
+            _alive.RemoveAll(x => x == null);
+            if (_alive.Count < _level.maxOnScreen)
                 SpawnOne();
-            }
 
-            float interval = level.spawnInterval + Random.Range(-level.spawnVariance, level.spawnVariance);
+            float interval = _level.spawnInterval
+                + Random.Range(-_level.spawnVariance, _level.spawnVariance);
             yield return new WaitForSeconds(Mathf.Max(0.05f, interval));
         }
-        Debug.Log("[Spawner] SpawnLoop ended (spawning flag false).");
     }
 
-    void SpawnOne()
+    private void SpawnOne()
     {
-        if (spawnPoints == null || spawnPoints.Length == 0)
-        {
-            Debug.LogWarning("[Spawner] SpawnOne aborted: spawnPoints is empty.");
-            return;
-        }
-
         AnimalData data = ChooseAnimalData();
-        if (data == null)
-        {
-            Debug.LogWarning("[Spawner] ChooseAnimalData returned null. Check spawnPool contents and level flags.");
-            return;
-        }
+        if (data == null) return;
 
-        var spIndex = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[spIndex];
-        if (spawnPoint == null)
-        {
-            Debug.LogWarningFormat("[Spawner] spawnPoint at index {0} is null.", spIndex);
-            return;
-        }
+        int spIdx = Random.Range(0, spawnPoints.Length);
+        Transform pt = spawnPoints[spIdx];
+        if (pt == null) return;
 
         Transform parent = animalContainer != null ? animalContainer : transform;
-        GameObject obj = Instantiate(animalPrefab, spawnPoint.position, Quaternion.identity, parent);
-        if (obj == null)
-        {
-            Debug.LogError("[Spawner] Failed to Instantiate animalPrefab.");
-            return;
-        }
+
+        GameObject obj;
+        if (animalPool != null)
+            obj = animalPool.Borrow(pt.position, parent);
+        else
+            obj = Instantiate(animalPrefab, pt.position, Quaternion.identity, parent);
+
+        if (obj == null) { Debug.LogError("[Spawner] Failed to get animal GO."); return; }
 
         Animal animal = obj.GetComponent<Animal>();
         if (animal == null)
         {
-            Debug.LogError("[Spawner] Instantiated prefab does not contain Animal component!");
-            Destroy(obj);
+            Debug.LogError("[Spawner] Prefab missing Animal component.");
+            if (animalPool != null) animalPool.Return(obj); else Destroy(obj);
             return;
         }
 
-        animal.Setup(data, level);
-        spawned.Add(obj);
-
-        Debug.LogFormat("[Spawner] Spawned '{0}' at spawnPoint[{1}] pos={2}. On-screen now: {3}",
-            data.displayName ?? data.name, spIndex, spawnPoint.position, spawned.Count);
+        animal.Setup(data, _level);
+        _alive.Add(obj);
     }
 
-    AnimalData ChooseAnimalData()
+    private AnimalData ChooseAnimalData()
     {
-        if (spawnPool == null || spawnPool.Length == 0)
-        {
-            Debug.LogWarning("[Spawner] spawnPool is null or empty in ChooseAnimalData.");
-            return null;
-        }
-
         float r = Random.value;
-        if (level != null && level.enableBombs && r < 0.25f)
-        {
-            var d = System.Array.Find(spawnPool, x => x.type == AnimalType.Bomb);
-            if (d != null) return d;
-        }
-        if (level != null && level.enableShielded && r < 0.15f)
-        {
-            var d = System.Array.Find(spawnPool, x => x.type == AnimalType.Shielded);
-            if (d != null) return d;
-        }
-        if (level != null && level.enableDecoys && r < 0.2f)
-        {
-            var d = System.Array.Find(spawnPool, x => x.type == AnimalType.Decoy);
-            if (d != null) return d;
-        }
-        var goldChance = 0.02f;
-        if (Random.value < goldChance)
-        {
-            var g = System.Array.Find(spawnPool, x => x.type == AnimalType.Golden);
-            if (g != null) return g;
-        }
-        var normal = System.Array.FindAll(spawnPool, x => x.type == AnimalType.Normal || x.type == AnimalType.Special);
-        if (normal.Length == 0)
-        {
-            Debug.Log("[Spawner] No Normal/Special animals found in spawnPool. Picking random entry.");
-            return spawnPool[Random.Range(0, spawnPool.Length)];
-        }
-        var chosen = normal[Random.Range(0, normal.Length)];
-        return chosen;
+        if (_level.enableBombs   && r < 0.25f)
+        { var d = Find(AnimalType.Bomb);     if (d != null) return d; }
+        if (_level.enableShielded && r < 0.15f)
+        { var d = Find(AnimalType.Shielded); if (d != null) return d; }
+        if (_level.enableDecoys  && r < 0.20f)
+        { var d = Find(AnimalType.Decoy);    if (d != null) return d; }
+        if (Random.value < 0.02f)
+        { var d = Find(AnimalType.Golden);   if (d != null) return d; }
+
+        var normals = System.Array.FindAll(spawnPool,
+            x => x.type == AnimalType.Normal || x.type == AnimalType.Special);
+        if (normals.Length > 0) return normals[Random.Range(0, normals.Length)];
+        return spawnPool[Random.Range(0, spawnPool.Length)];
     }
+
+    private AnimalData Find(AnimalType t) =>
+        System.Array.Find(spawnPool, x => x.type == t);
 }

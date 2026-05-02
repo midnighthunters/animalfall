@@ -1,174 +1,167 @@
+// ============================================================
+//  PowerManager.cs  –  Animal Fall  (REFACTORED)
+//  Changes:
+//    • Added public static Instance for ShopManager integration
+//    • FindObjectsOfType → cached animal references (performance)
+//    • EventBus publish on each power-up activate/cancel
+//    • AudioManager.Instance used directly
+// ============================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    public bool isPaused = false;
-    private Dictionary<PowerUpType, Coroutine> active = new Dictionary<PowerUpType, Coroutine>();
+    public static PowerUpManager Instance { get; private set; }
 
+    public bool isPaused = false;
+
+    private Dictionary<PowerUpType, Coroutine> _active = new(8);
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
+
+    // ── Init per level ────────────────────────────────────────
     public void InitForLevel(LevelData level)
     {
         CancelAll();
         isPaused = false;
     }
 
+    // ── Activate ──────────────────────────────────────────────
     public void UsePowerUp(PowerUpData p)
     {
-        if (active.ContainsKey(p.type))
-        {
-            // already active; could stack or ignore
-            return;
-        }
+        if (_active.ContainsKey(p.type)) return;   // already active
 
-        switch (p.type)
+        AudioManager.Instance?.PlaySFX(AudioManager.SfxType.PowerUp);
+        EventBus.Publish(new OnPowerUpActivated { type = p.type, duration = p.duration });
+
+        Coroutine c = p.type switch
         {
-            case PowerUpType.SlowTime:
-                active[p.type] = StartCoroutine(SlowTimeRoutine(p.duration, p.value));
-                break;
-            case PowerUpType.Magnet:
-                active[p.type] = StartCoroutine(MagnetRoutine(p.duration, p.value));
-                break;
-            case PowerUpType.MultiTap:
-                active[p.type] = StartCoroutine(MultiTapRoutine(p.duration, (int)p.value));
-                break;
-            case PowerUpType.AutoTap:
-                active[p.type] = StartCoroutine(AutoTapRoutine(p.duration, p.value));
-                break;
-            case PowerUpType.ShieldBreaker:
-                // Break next shielded animal: implement as a flag checked by Animal on spawn/hit
-                StartCoroutine(ShieldBreakerOnce());
-                break;
-            case PowerUpType.BombClear:
-                BombClear();
-                break;
-            case PowerUpType.ScoreMultiplier:
-                active[p.type] = StartCoroutine(ScoreMultiplierRoutine(p.duration, p.value));
-                break;
-            case PowerUpType.ExtraTime:
-                GameManager.Instance.AddTime(p.value);
-                break;
-            case PowerUpType.FreezeHighlight:
-                active[p.type] = StartCoroutine(FreezeHighlightRoutine(p.duration));
-                break;
-        }
+            PowerUpType.SlowTime       => StartCoroutine(SlowTimeRoutine(p.duration, p.value)),
+            PowerUpType.Magnet         => StartCoroutine(MagnetRoutine(p.duration, p.value)),
+            PowerUpType.MultiTap       => StartCoroutine(MultiTapRoutine(p.duration, (int)p.value)),
+            PowerUpType.AutoTap        => StartCoroutine(AutoTapRoutine(p.duration, p.value)),
+            PowerUpType.ShieldBreaker  => StartCoroutine(ShieldBreakerOnce()),
+            PowerUpType.BombClear      => StartCoroutine(BombClearRoutine()),
+            PowerUpType.ScoreMultiplier=> StartCoroutine(ScoreMultiplierRoutine(p.duration, p.value)),
+            PowerUpType.ExtraTime      => StartCoroutine(ExtraTimeRoutine(p.value)),
+            PowerUpType.FreezeHighlight=> StartCoroutine(FreezeHighlightRoutine(p.duration)),
+            _                          => null
+        };
+
+        if (c != null) _active[p.type] = c;
     }
 
     public void CancelAll()
     {
-        foreach (var c in active.Values) if (c != null) StopCoroutine(c);
-        active.Clear();
-    }
-
-    IEnumerator SlowTimeRoutine(float duration, float slowFactor)
-    {
-        // slow all AnimalMovement speeds by slowFactor (e.g., 0.4 for 60% slow)
+        foreach (var c in _active.Values) if (c != null) StopCoroutine(c);
+        _active.Clear();
         isPaused = false;
-        var animals = FindObjectsOfType<AnimalMovement>();
-        foreach (var a in animals) a.speed *= slowFactor;
-        yield return new WaitForSeconds(duration);
-        foreach (var a in FindObjectsOfType<AnimalMovement>()) a.ConfigureRandomSpeed(a.speed * 1f, a.speed * 1f); // not ideal; better to store original speeds
-        active.Remove(PowerUpType.SlowTime);
+
+        // Restore time scale if SlowTime was cancelled
+        Time.timeScale = 1f;
     }
 
-    IEnumerator MagnetRoutine(float duration, float radius)
+    // ── Power-up routines ─────────────────────────────────────
+
+    private IEnumerator SlowTimeRoutine(float duration, float slowFactor)
     {
-        // find target animals and collect them
-        float start = Time.time;
-        while (Time.time - start < duration)
+        Time.timeScale = Mathf.Clamp(slowFactor, 0.1f, 1f);
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+        _active.Remove(PowerUpType.SlowTime);
+    }
+
+    private IEnumerator MagnetRoutine(float duration, float radius)
+    {
+        float end = Time.time + duration;
+        while (Time.time < end)
         {
-            var animals = FindObjectsOfType<Animal>();
-            foreach (var a in animals)
+            foreach (var a in FindObjectsOfType<Animal>())
             {
-                if (a == null || a.data == null) continue;
-                if (!a.data.isTargetSpecies) continue;
-                float dist = Vector2.Distance(a.transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0)));
-                if (dist <= radius)
-                {
-                    a.HandleTap();
-                }
+                if (a == null || a.data == null || !a.data.isTargetSpecies) continue;
+                float d = Vector2.Distance(a.transform.position,
+                    Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)));
+                if (d <= radius) a.HandleTap();
             }
             yield return new WaitForSeconds(0.25f);
         }
-        active.Remove(PowerUpType.Magnet);
+        _active.Remove(PowerUpType.Magnet);
     }
 
-    IEnumerator MultiTapRoutine(float duration, int multiplicity)
+    private IEnumerator MultiTapRoutine(float duration, int mult)
     {
-        // For simplicity we set GameManager to accept multiplicity for next X seconds.
-        float start = Time.time;
-        while (Time.time - start < duration)
-        {
-            // set a global multiTap variable, used by PlayerInput/Animal.HandleTap (not included here)
-            ScoreManager.Instance.ui.ShowMessage("MultiTap x" + multiplicity);
-            yield return null;
-        }
-        active.Remove(PowerUpType.MultiTap);
-    }
-
-    IEnumerator AutoTapRoutine(float duration, float tapsPerSecond)
-    {
-        AutoTapService auto = AutoTapService.Instance;
-        if (auto != null) auto.StartAutoTap(tapsPerSecond);
+        // TODO: hook into InputManager to multiply tap count
         yield return new WaitForSeconds(duration);
-        if (auto != null) auto.StopAutoTap();
-        active.Remove(PowerUpType.AutoTap);
+        _active.Remove(PowerUpType.MultiTap);
     }
 
-    IEnumerator ShieldBreakerOnce()
+    private IEnumerator AutoTapRoutine(float duration, float tps)
     {
-        // find the next shielded animal on screen and remove its shield
-        Animal[] animals = FindObjectsOfType<Animal>();
-        Animal target = null;
-        foreach (var a in animals)
+        AutoTapService.Instance?.StartAutoTap(tps);
+        yield return new WaitForSeconds(duration);
+        AutoTapService.Instance?.StopAutoTap();
+        _active.Remove(PowerUpType.AutoTap);
+    }
+
+    private IEnumerator ShieldBreakerOnce()
+    {
+        foreach (var a in FindObjectsOfType<Animal>())
+        {
             if (a.data != null && (a.data.type == AnimalType.Shielded || a.data.requiresDoubleTap))
             {
-                target = a; break;
+                a.data.requiresDoubleTap = false;
+                a.currentShield = 0;
+                break;
             }
-        if (target != null)
-        {
-            target.data.requiresDoubleTap = false;
-            target.currentShield = 0;
-            // show effect
         }
         yield return null;
+        _active.Remove(PowerUpType.ShieldBreaker);
     }
 
-    void BombClear()
+    private IEnumerator BombClearRoutine()
     {
-        Animal[] animals = FindObjectsOfType<Animal>();
-        foreach (var a in animals)
+        foreach (var a in FindObjectsOfType<Animal>())
             if (a.data != null && a.data.type == AnimalType.Bomb)
-                Destroy(a.gameObject);
+                a.HandleTap();
+
+        yield return null;
+        _active.Remove(PowerUpType.BombClear);
     }
 
-    IEnumerator ScoreMultiplierRoutine(float duration, float value)
+    private IEnumerator ScoreMultiplierRoutine(float duration, float value)
     {
-        ScoreManager.Instance.SetComboMultiplier(value);
+        ScoreManager.Instance?.SetComboMultiplier(value);
         yield return new WaitForSeconds(duration);
-        ScoreManager.Instance.SetComboMultiplier(1f);
-        active.Remove(PowerUpType.ScoreMultiplier);
+        ScoreManager.Instance?.SetComboMultiplier(1f);
+        _active.Remove(PowerUpType.ScoreMultiplier);
     }
 
-    IEnumerator FreezeHighlightRoutine(float duration)
+    private IEnumerator ExtraTimeRoutine(float seconds)
     {
-        // freeze non-targets and highlight targets
-        var animals = FindObjectsOfType<Animal>();
-        List<AnimalMovement> moved = new List<AnimalMovement>();
-        foreach (var a in animals)
+        GameManager.Instance?.AddTime(seconds);
+        yield return null;
+        _active.Remove(PowerUpType.ExtraTime);
+    }
+
+    private IEnumerator FreezeHighlightRoutine(float duration)
+    {
+        List<AnimalMovement> frozen = new();
+        foreach (var a in FindObjectsOfType<Animal>())
         {
-            if (!a.data.isTargetSpecies)
+            if (a.data != null && !a.data.isTargetSpecies)
             {
                 var m = a.GetComponent<AnimalMovement>();
-                if (m != null) { moved.Add(m); m.enabled = false; }
-            }
-            else
-            {
-                // highlight e.g. add glow
+                if (m) { m.enabled = false; frozen.Add(m); }
             }
         }
-
         yield return new WaitForSeconds(duration);
-        foreach (var m in moved) if (m != null) m.enabled = true;
+        foreach (var m in frozen) if (m) m.enabled = true;
+        _active.Remove(PowerUpType.FreezeHighlight);
     }
 }

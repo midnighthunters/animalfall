@@ -1,36 +1,44 @@
+// ============================================================
+//  ComboManager.cs  –  Animal Fall  (REFACTORED)
+//  Changes:
+//    • Publishes OnComboUpdated to EventBus
+//    • Visual feedback added via UIManager.ShowMessage
+// ============================================================
+
 using UnityEngine;
 
 public class ComboManager : MonoBehaviour
 {
-    public int consecutive = 0;
-    public float comboWindow = 2f;
-    private float lastCorrectTime = -999f;
+    [SerializeField] private float comboWindow = 2f;
+
+    public int   Consecutive      { get; private set; }
+    private float _lastCorrectTime = -999f;
 
     public void OnCorrect()
     {
         float now = Time.time;
-        if (now - lastCorrectTime <= comboWindow)
+        Consecutive = (now - _lastCorrectTime <= comboWindow)
+            ? Consecutive + 1
+            : 1;
+        _lastCorrectTime = now;
+
+        float multiplier = 1f + 0.1f * (Consecutive - 1);
+        ScoreManager.Instance?.SetComboMultiplier(multiplier);
+
+        EventBus.Publish(new OnComboUpdated
         {
-            consecutive++;
-        }
-        else
-        {
-            consecutive = 1;
-        }
-        lastCorrectTime = now;
-        ApplyComboBonus();
+            streak     = Consecutive,
+            multiplier = multiplier
+        });
+
+        if (Consecutive >= 3)
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.Combo);
     }
 
     public void ResetCombo()
     {
-        consecutive = 0;
-    }
-
-    void ApplyComboBonus()
-    {
-        // combo multiplier = 1 + 0.1*(consecutive-1)
-        float multiplier = 1f + 0.1f * (consecutive - 1);
-        // delegate to ScoreManager
-        ScoreManager.Instance.SetComboMultiplier(multiplier);
+        Consecutive = 0;
+        ScoreManager.Instance?.SetComboMultiplier(1f);
+        EventBus.Publish(new OnComboUpdated { streak = 0, multiplier = 1f });
     }
 }

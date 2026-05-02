@@ -1,36 +1,50 @@
-using UnityEngine;
+// ============================================================
+//  LevelManager.cs  –  Animal Fall  (REFACTORED)
+//  Changes:
+//    • All PlayerPrefs → SaveManager
+//    • All manual events → EventBus (static C# events retained
+//      for GoalPanel compatibility)
+//    • Scene names are constants, not magic strings
+//    • Camera focus-on-player delay built in
+// ============================================================
+
 using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    // ── Singleton ──────────────────────────────────────────────
     public static LevelManager Instance { get; private set; }
 
+    // ── Scene name constants ───────────────────────────────────
+    public const string SCENE_MAIN    = "MainScene";
+    public const string SCENE_GAME    = "GameScene";
+    public const string SCENE_SPLASH  = "SplashScene";
+
+    // ── Config ─────────────────────────────────────────────────
     [SerializeField] private LevelData[] allLevels;
+    [SerializeField] private float       returnToMenuDelay = 2.5f;
+    [SerializeField] private float       cameraFocusDelay  = 0.4f;
 
-    // We make this static or public so it survives fully across reloads if needed, 
-    // but DontDestroyOnLoad handles instance survival.
-    public int CurrentLevelIndex { get; private set; }
-    private LevelData currentLevel;
+    // ── State ─────────────────────────────────────────────────
+    public int       CurrentLevelIndex { get; private set; }
+    public LevelData CurrentLevelData  => _currentLevel;
+    public int       TotalLevels       => allLevels?.Length ?? 0;
 
+    private LevelData _currentLevel;
+    private bool      _isLevelActive;
+
+    // ── Legacy static events (GoalPanel hooks these) ──────────
     public static event Action levelLoadedEvent;
     public static event Action levelSuccessEvent;
     public static event Action levelFailedEvent;
 
-    private bool isLevelActive;
-
-    public LevelData CurrentLevelData => currentLevel;
-    public int TotalLevels => allLevels.Length;
-
+    // ── Lifecycle ─────────────────────────────────────────────
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -38,112 +52,100 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         GoalPanel.allGoalsEndedEvent += OnGoalsCompleted;
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded    += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         GoalPanel.allGoalsEndedEvent -= OnGoalsCompleted;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded    -= OnSceneLoaded;
     }
 
+    // ── Scene hooks ───────────────────────────────────────────
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GameScene")
+        if (scene.name == SCENE_GAME)
         {
-            LoadLevel();
+            StartCoroutine(LoadLevelWithCameraFocus());
         }
-        else if (scene.name == "MainScene")
+        else if (scene.name == SCENE_MAIN)
         {
-            // Ensure we aren't running game logic in the menu
-            isLevelActive = false;
+            _isLevelActive = false;
             StopAllCoroutines();
+            AudioManager.Instance?.PlayMusic(AudioManager.MusicTrack.MainMenu);
         }
     }
 
-    // Call this from MainMenuManager
+    // ── Public entry point ────────────────────────────────────
     public void LoadGameSceneForLevel(int levelIndex)
     {
-        // Set the index BEFORE loading the scene
-        CurrentLevelIndex = levelIndex;
-        SceneManager.LoadScene("GameScene");
+        CurrentLevelIndex = Mathf.Clamp(levelIndex, 0, TotalLevels - 1);
+        SceneManager.LoadScene(SCENE_GAME);
     }
 
-    private void LoadLevel()
+    // ── Level init ────────────────────────────────────────────
+    private IEnumerator LoadLevelWithCameraFocus()
     {
-        // Safety Check
+        // Safety clamp
         if (CurrentLevelIndex >= allLevels.Length)
         {
-            Debug.LogWarning("Level index out of bounds. Wrapping to 0.");
+            Debug.LogWarning("[LevelManager] Index out of bounds, wrapping to 0.");
             CurrentLevelIndex = 0;
         }
 
-        currentLevel = allLevels[CurrentLevelIndex];
+        _currentLevel = allLevels[CurrentLevelIndex];
 
-        // Notify others (GameManager, Spawner, GoalPanel)
+        // Brief delay to let the scene finish building before camera pans
+        yield return new WaitForSeconds(cameraFocusDelay);
+
+        // Fire loaded event so GoalPanel and others can init
         levelLoadedEvent?.Invoke();
 
         if (GameManager.Instance != null)
-            GameManager.Instance.StartLevel(currentLevel);
+            GameManager.Instance.StartLevel(_currentLevel);
 
-        isLevelActive = true;
+        _isLevelActive = true;
     }
 
+    // ── Goal completed hook ───────────────────────────────────
     private void OnGoalsCompleted()
     {
-        if (isLevelActive)
-        {
-            LevelSuccess();
-        }
+        if (_isLevelActive) LevelSuccess();
     }
 
+    // ── Success / Fail ────────────────────────────────────────
     public void LevelSuccess()
     {
-        if (!isLevelActive) return;
+        if (!_isLevelActive) return;
+        _isLevelActive = false;
 
-        isLevelActive = false;
-
-        // --- SAVE PROGRESS LOGIC ---
-        int highestCompleted = GetHighestUnlockedLevel();
-
-        // If we just beat the highest unlocked level, unlock the next one
-        if (CurrentLevelIndex == highestCompleted)
-        {
-            PlayerPrefs.SetInt("HighestCompletedLevel", highestCompleted + 1);
-            PlayerPrefs.Save();
-            Debug.Log($"Progress Saved! Next Level Unlocked: {highestCompleted + 1}");
-        }
+        // Save progress via SaveManager (no more PlayerPrefs)
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.UnlockNextLevel(CurrentLevelIndex);
 
         levelSuccessEvent?.Invoke();
-
-        // Go back to menu after 2 seconds
-        StartCoroutine(ReturnToMainSceneAfterDelay(2f));
+        StartCoroutine(ReturnToMenuAfterDelay(returnToMenuDelay));
     }
 
     public void LevelFailed()
     {
-        if (!isLevelActive) return;
-        isLevelActive = false;
+        if (!_isLevelActive) return;
+        _isLevelActive = false;
         levelFailedEvent?.Invoke();
     }
 
-    private IEnumerator ReturnToMainSceneAfterDelay(float delay)
+    // ── Return to menu ────────────────────────────────────────
+    private IEnumerator ReturnToMenuAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene(SCENE_MAIN);
     }
 
-    public int GetHighestUnlockedLevel()
-    {
-        return PlayerPrefs.GetInt("HighestCompletedLevel", 0);
-    }
+    // ── Query ─────────────────────────────────────────────────
+    public int GetHighestUnlockedLevel() =>
+        SaveManager.Instance?.GetHighestUnlockedLevel() ?? 0;
 
-    // Reset for debugging
+    // ── Debug ─────────────────────────────────────────────────
     [ContextMenu("Reset Progress")]
-    public void ResetAllProgress()
-    {
-        PlayerPrefs.DeleteKey("HighestCompletedLevel");
-        PlayerPrefs.Save();
-        Debug.Log("Progress Reset to Level 1");
-    }
+    public void ResetAllProgress() => SaveManager.Instance?.ResetAllProgress();
 }

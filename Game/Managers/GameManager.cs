@@ -1,209 +1,261 @@
+// ============================================================
+//  GameManager.cs  –  Animal Fall  (REFACTORED)
+//  Changes vs original:
+//    • All PlayerPrefs calls → SaveManager
+//    • All event firing   → EventBus
+//    • Direct AudioManager refs → AudioManager.Instance
+//    • Eliminated mutable public references (now [SerializeField])
+//    • Stars calculation added (1-star=50%, 2-star=80%, 3-star=100%)
+// ============================================================
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    // ── Singleton ──────────────────────────────────────────────
+    public static GameManager Instance { get; private set; }
 
-    [Header("Runtime")]
-    public LevelData currentLevel;
-    public int targetCountNeeded;
-    public float levelTimeSeconds;
+    // ── Runtime state ─────────────────────────────────────────
+    public LevelData CurrentLevel     { get; private set; }
+    public int       TargetCount      { get; private set; }
+    public int       CurrentCollected { get; private set; }
+    public float     RemainingTime    { get; private set; }
+    public bool      IsRunning        { get; private set; }
 
-    [HideInInspector] public int currentCollected;
-    [HideInInspector] public float remainingTime;
-    [HideInInspector] public bool isRunning;
+    // ── Inspector references (no longer public API surface) ───
+    [Header("Scene References")]
+    [SerializeField] private Spawner           spawner;
+    [SerializeField] private UIManager         ui;
+    [SerializeField] private PowerUpManager    powerUpManager;
+    [SerializeField] private ScoreManager      scoreManager;
+    [SerializeField] private ComboManager      comboManager;
+    [SerializeField] private CountdownController countdown;
 
-    [Header("References")]
-    public Spawner spawner;
-    public UIManager ui;
-    public PowerUpManager powerUpManager;
-    public ScoreManager scoreManager;
-    public ComboManager comboManager;
-    public AudioManager audioManager;
-    public CountdownController countdown;
-
+    // ── Legacy events (kept for Scene-wired UnityEvents) ──────
+    [Header("Legacy UnityEvents (optional)")]
     public UnityEvent onLevelStart;
     public UnityEvent onLevelWin;
     public UnityEvent onLevelFail;
 
+    // ── Convenience shim kept for backward compat ─────────────
+    // Old code: GameManager.Instance.audioManager.PlaySFX(...)
+    // Now just delegates to the singleton
+    public AudioManager audioManager => AudioManager.Instance;
+    public ScoreManager scoreManagerRef => scoreManager;
+
+    // ── Lifecycle ─────────────────────────────────────────────
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
     }
 
     private void Start()
     {
-        // Example: start level 1 if assigned
-        if (currentLevel != null) StartLevel(currentLevel);
+        // LevelManager drives StartLevel – nothing to do here unless standalone test
+        if (LevelManager.Instance == null && CurrentLevel != null)
+            StartLevel(CurrentLevel);
     }
 
+    // ── Level flow ────────────────────────────────────────────
     public void StartLevel(LevelData level)
     {
-        Debug.LogFormat("[GameManager] StartLevel called for level: {0}", level != null ? level.name : "NULL");
+        Debug.Log($"[GameManager] StartLevel → {level?.name ?? "NULL"}");
         StopAllCoroutines();
-        currentLevel = level;
+        CurrentLevel = level;
 
-        if (level == null)
-        {
-            Debug.LogError("[GameManager] StartLevel received null LevelData. Aborting start.");
-            return;
-        }
+        if (level == null) { Debug.LogError("[GameManager] Null LevelData."); return; }
 
+        // Count goals
         int goalSum = 0;
         if (level.goal != null)
-        {
-            goalSum =
-                level.goal.chickenCount +
-                level.goal.dogCount +
-                level.goal.cowCount +
-                level.goal.catCount +
-                level.goal.monkeyCount +
-                level.goal.balloonCount;
-        }
-        targetCountNeeded = goalSum;
+            goalSum = level.goal.chickenCount + level.goal.dogCount  + level.goal.cowCount
+                    + level.goal.catCount     + level.goal.monkeyCount + level.goal.balloonCount;
 
-        levelTimeSeconds = level.timeLimit;
-        currentCollected = 0;
-        remainingTime = levelTimeSeconds;
-        isRunning = false;
+        TargetCount      = goalSum;
+        CurrentCollected = 0;
+        RemainingTime    = level.timeLimit;
+        IsRunning        = false;
 
-        ui?.UpdateTargetText(currentCollected, targetCountNeeded);
-        ui?.UpdateTimer(remainingTime);
+        ui?.UpdateTargetText(CurrentCollected, TargetCount);
+        ui?.UpdateTimer(RemainingTime);
         ui?.SetProgress(0f);
 
-        if (spawner != null)
-        {
-            spawner.Setup(level);
-            Debug.Log("[GameManager] Spawner.Setup called.");
-        }
-
+        spawner?.Setup(level);
         powerUpManager?.InitForLevel(level);
         comboManager?.ResetCombo();
         scoreManager?.ResetScore();
 
+        // Music
+        AudioManager.Instance?.PlayMusic(AudioManager.MusicTrack.Gameplay);
+
         onLevelStart?.Invoke();
+        EventBus.Publish(new OnLevelStarted { levelIndex = LevelManager.Instance?.CurrentLevelIndex ?? 0 });
+
         StartCoroutine(countdown.PlayCountdown(OnCountdownFinished));
     }
 
-    void OnCountdownFinished()
+    private void OnCountdownFinished()
     {
-        isRunning = true;
+        IsRunning = true;
         spawner?.StartSpawning();
         StartCoroutine(LevelTimer());
     }
 
-    IEnumerator LevelTimer()
+    // ── Timer ─────────────────────────────────────────────────
+    private IEnumerator LevelTimer()
     {
-        while (isRunning)
+        while (IsRunning)
         {
             if (powerUpManager == null || !powerUpManager.isPaused)
-                remainingTime -= Time.deltaTime;
+                RemainingTime -= Time.deltaTime;
 
-            ui?.UpdateTimer(remainingTime);
+            float clamped = Mathf.Max(RemainingTime, 0f);
+            ui?.UpdateTimer(clamped);
+            EventBus.Publish(new OnTimerTick { remaining = clamped });
 
-            if (remainingTime <= 0f)
+            if (RemainingTime <= 0f)
             {
-                remainingTime = 0;
-                isRunning = false;
+                RemainingTime = 0f;
+                IsRunning     = false;
                 EndLevel(false);
                 yield break;
             }
 
-            float progress = targetCountNeeded > 0 ? Mathf.Clamp01((float)currentCollected / (float)targetCountNeeded) : 0f;
+            float progress = TargetCount > 0
+                ? Mathf.Clamp01((float)CurrentCollected / TargetCount)
+                : 0f;
             ui?.SetProgress(progress);
 
             yield return null;
         }
     }
 
+    // ── Tap handlers ──────────────────────────────────────────
     public void OnCorrectTap(int tapsCount = 1, int points = 50)
     {
-        if (!isRunning) return;
+        if (!IsRunning) return;
 
-        currentCollected += tapsCount;
-        scoreManager?.AddPoints(points * tapsCount);
+        CurrentCollected += tapsCount;
+        int earned = points * tapsCount;
+        scoreManager?.AddPoints(earned);
         comboManager?.OnCorrect();
 
-        ui?.UpdateTargetText(currentCollected, targetCountNeeded);
-        ui?.ShowFloating("+ " + (points * tapsCount), Camera.main.WorldToScreenPoint(Vector3.zero));
+        ui?.UpdateTargetText(CurrentCollected, TargetCount);
+        ui?.ShowFloating("+" + earned, Camera.main.WorldToScreenPoint(Vector3.zero));
 
-        if (currentCollected >= targetCountNeeded)
+        // VFX
+        VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.Collect, Vector3.zero);
+
+        if (CurrentCollected >= TargetCount)
         {
-            isRunning = false;
+            IsRunning = false;
             EndLevel(true);
         }
     }
 
     public void OnWrongTap(bool isBomb = false)
     {
-        if (!isRunning) return;
+        if (!IsRunning) return;
+
         if (isBomb)
         {
-            remainingTime -= currentLevel.bombTimePenalty;
-            scoreManager?.AddPoints(-currentLevel.bombScorePenalty);
-            ui?.ShowFloating("-" + currentLevel.bombScorePenalty, Camera.main.WorldToScreenPoint(Vector3.zero));
-            audioManager?.PlaySFX(AudioManager.SfxType.Explosion);
+            RemainingTime -= CurrentLevel.bombTimePenalty;
+            scoreManager?.AddPoints(-CurrentLevel.bombScorePenalty);
+            ui?.ShowFloating("-" + CurrentLevel.bombScorePenalty,
+                Camera.main.WorldToScreenPoint(Vector3.zero));
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.Explosion);
+            VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.Explosion, Vector3.zero);
         }
         else
         {
-            remainingTime -= currentLevel.wrongTapTimePenalty;
-            scoreManager?.AddPoints(-currentLevel.wrongTapScorePenalty);
-            audioManager?.PlaySFX(AudioManager.SfxType.WrongTap);
+            RemainingTime -= CurrentLevel.wrongTapTimePenalty;
+            scoreManager?.AddPoints(-CurrentLevel.wrongTapScorePenalty);
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.WrongTap);
         }
 
-        ui?.UpdateTimer(Mathf.Max(remainingTime, 0f));
+        ui?.UpdateTimer(Mathf.Max(RemainingTime, 0f));
         comboManager?.ResetCombo();
-    }
-
-    // --- FIX IS HERE ---
-    private void EndLevel(bool success)
-    {
-        spawner?.StopSpawning();
-        powerUpManager?.CancelAll();
-        isRunning = false;
-
-        if (success)
-        {
-            // 1. Show UI
-            ui?.ShowLevelComplete();
-            audioManager?.PlaySFX(AudioManager.SfxType.LevelWin);
-            onLevelWin?.Invoke();
-
-            if (SaveManager.Instance != null)
-                SaveManager.Instance.AddCoins(currentLevel.rewardCoins);
-
-            // 2. TELL LEVEL MANAGER TO PROCEED
-            // This triggers the save progress and the 2-second timer to go back to Main Scene
-            if (LevelManager.Instance != null)
-            {
-                LevelManager.Instance.LevelSuccess();
-            }
-            else
-            {
-                Debug.LogError("LevelManager Instance is NULL. Cannot switch scenes.");
-            }
-        }
-        else
-        {
-            ui?.ShowLevelFailed();
-            audioManager?.PlaySFX(AudioManager.SfxType.LevelLose);
-            onLevelFail?.Invoke();
-
-            // Notify LevelManager of failure (optional, mostly for state tracking)
-            if (LevelManager.Instance != null)
-            {
-                LevelManager.Instance.LevelFailed();
-            }
-        }
     }
 
     public void AddTime(float seconds)
     {
-        remainingTime += seconds;
-        ui?.UpdateTimer(remainingTime);
+        RemainingTime += seconds;
+        ui?.UpdateTimer(RemainingTime);
     }
+
+    // ── End level ─────────────────────────────────────────────
+    private void EndLevel(bool success)
+    {
+        spawner?.StopSpawning();
+        powerUpManager?.CancelAll();
+        IsRunning = false;
+
+        int finalScore  = scoreManager?.GetScore() ?? 0;
+        int levelIndex  = LevelManager.Instance?.CurrentLevelIndex ?? 0;
+        int stars       = CalculateStars();
+
+        if (success)
+        {
+            ui?.ShowLevelComplete();
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.LevelWin);
+            AudioManager.Instance?.PlayMusic(AudioManager.MusicTrack.Victory);
+            VFXPoolRegistry.Instance?.Spawn(VFXPoolRegistry.LevelWin, Vector3.zero);
+
+            SaveManager.Instance?.AddCoins(CurrentLevel.rewardCoins);
+            SaveManager.Instance?.RecordLevelResult(levelIndex, finalScore, stars);
+
+            onLevelWin?.Invoke();
+            EventBus.Publish(new OnLevelCompleted
+            {
+                levelIndex  = levelIndex,
+                score       = finalScore,
+                coinsEarned = CurrentLevel.rewardCoins
+            });
+
+            // Post to leaderboard
+            FirebaseManager.Instance?.PostScore(levelIndex, finalScore);
+
+            LevelManager.Instance?.LevelSuccess();
+        }
+        else
+        {
+            ui?.ShowLevelFailed();
+            AudioManager.Instance?.PlaySFX(AudioManager.SfxType.LevelLose);
+
+            onLevelFail?.Invoke();
+            EventBus.Publish(new OnLevelFailed { levelIndex = levelIndex });
+
+            LevelManager.Instance?.LevelFailed();
+        }
+    }
+
+    // ── Stars calculation ─────────────────────────────────────
+    private int CalculateStars()
+    {
+        if (TargetCount == 0) return 3;
+        float pct = (float)CurrentCollected / TargetCount;
+        if (pct >= 1f)   return 3;
+        if (pct >= 0.8f) return 2;
+        if (pct >= 0.5f) return 1;
+        return 0;
+    }
+
+    // ── Legacy shims ──────────────────────────────────────────
+    // Keep these properties so existing code that reads GameManager.Instance.isRunning
+    // still compiles without modifications.
+    [System.Obsolete("Use IsRunning property")]
+    public bool isRunning => IsRunning;
+    [System.Obsolete("Use CurrentLevel property")]
+    public LevelData currentLevel => CurrentLevel;
+    [System.Obsolete("Use RemainingTime property")]
+    public float remainingTime => RemainingTime;
+    [System.Obsolete("Use CurrentCollected property")]
+    public int currentCollected => CurrentCollected;
+    [System.Obsolete("Use TargetCount property")]
+    public int targetCountNeeded => TargetCount;
+    [System.Obsolete("Use scoreManagerRef")]
+    public ScoreManager scoreManager_legacy => scoreManager;
 }
