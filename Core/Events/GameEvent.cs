@@ -8,7 +8,8 @@ namespace AnimalFall.Core.Events
         DailyQuest,
         TimedEvent,
         SpecialChallenge,
-        WeekendBonus
+        WeekendBonus,
+        ArcadeEvent
     }
 
     [CreateAssetMenu(fileName = "NewGameEvent", menuName = "AnimalFall/Game Event")]

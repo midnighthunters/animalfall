@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using AnimalFall.Core.Animals;
 using AnimalFall.Core.Levels;
+using AnimalFall.Core.Arcade;
 using AnimalFall.Core.MegaLevel;
 using AnimalFall.Effects;
 using AnimalFall.UI;
@@ -223,6 +224,9 @@ namespace AnimalFall.Managers
                 if (Services.Save.SaveService.Instance != null)
                     Services.Save.SaveService.Instance.AddCoins(currentLevel.rewardCoins);
 
+                int stars = CalculateStars(score);
+                ArcadeTokenService.Instance?.AwardForLevelComplete(currentLevel.isMegaLevel, stars);
+
                 EventManager.Instance?.CheckQuestProgress("levels_completed", 1);
                 EventManager.Instance?.CheckQuestProgress("score_earned", score);
 
@@ -256,6 +260,14 @@ namespace AnimalFall.Managers
                 megaLevelController?.Cleanup();
                 villainHUD?.Hide();
             }
+        }
+
+        private int CalculateStars(int score)
+        {
+            if (score >= 500) return 3;
+            if (score >= 250) return 2;
+            if (score > 0) return 1;
+            return 0;
         }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using AnimalFall.Core.Arcade;
 using AnimalFall.Managers;
 using AnimalFall.Services.Auth;
 using AnimalFall.Services.Save;
@@ -26,6 +27,7 @@ namespace AnimalFall.UI.Screens
         [SerializeField] private Button logoutButton;
         [SerializeField] private Button journeyMapButton;
         [SerializeField] private Button eventsButton;
+        [SerializeField] private Button arcadeButton;
 
         [Header("Panels")]
         [SerializeField] private GameObject shopPanel;
@@ -56,6 +58,7 @@ namespace AnimalFall.UI.Screens
             if (leaderboardButton != null) leaderboardButton.onClick.AddListener(() => TogglePanel(leaderboardPanel));
             if (journeyMapButton != null) journeyMapButton.onClick.AddListener(() => TogglePanel(journeyMapPanel));
             if (eventsButton != null) eventsButton.onClick.AddListener(() => TogglePanel(eventsPanel));
+            if (arcadeButton != null) arcadeButton.onClick.AddListener(OnArcadeClicked);
             if (logoutButton != null) logoutButton.onClick.AddListener(OnLogoutClicked);
         }
 
@@ -121,6 +124,11 @@ namespace AnimalFall.UI.Screens
                 levelToLoad = 0;
 
             LevelManager.Instance.LoadGameSceneForLevel(levelToLoad);
+        }
+
+        private void OnArcadeClicked()
+        {
+            GameStateManager.Instance?.TransitionTo(GameState.ArcadeRoom);
         }
 
         private void OnLogoutClicked()

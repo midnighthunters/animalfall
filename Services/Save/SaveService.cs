@@ -130,6 +130,41 @@ namespace AnimalFall.Services.Save
             PlayerPrefs.Save();
         }
 
+        // Arcade Tokens
+        private const string ArcadeTokensKey = "arcade_tokens";
+
+        public int GetArcadeTokens() => PlayerPrefs.GetInt(ArcadeTokensKey, 0);
+
+        public void AddArcadeTokens(int amount)
+        {
+            int current = GetArcadeTokens() + amount;
+            PlayerPrefs.SetInt(ArcadeTokensKey, Mathf.Max(0, current));
+            PlayerPrefs.Save();
+        }
+
+        public bool SpendArcadeTokens(int amount)
+        {
+            int current = GetArcadeTokens();
+            if (current < amount) return false;
+            PlayerPrefs.SetInt(ArcadeTokensKey, current - amount);
+            PlayerPrefs.Save();
+            return true;
+        }
+
+        public int GetMiniGameHighScore(string gameType)
+        {
+            return PlayerPrefs.GetInt("arcade_hs_" + gameType, 0);
+        }
+
+        public void SetMiniGameHighScore(string gameType, int score)
+        {
+            if (score > GetMiniGameHighScore(gameType))
+            {
+                PlayerPrefs.SetInt("arcade_hs_" + gameType, score);
+                PlayerPrefs.Save();
+            }
+        }
+
         // Clear
         public void ClearAllData()
         {

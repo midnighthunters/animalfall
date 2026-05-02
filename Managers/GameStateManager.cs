@@ -12,7 +12,8 @@ namespace AnimalFall.Managers
         Game,
         MegaLevel,
         Paused,
-        Results
+        Results,
+        ArcadeRoom
     }
 
     public class GameStateManager : MonoBehaviour
@@ -64,6 +65,10 @@ namespace AnimalFall.Managers
                     break;
                 case GameState.Results:
                     break;
+                case GameState.ArcadeRoom:
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene("ArcadeScene");
+                    break;
             }
         }
 
@@ -85,5 +90,7 @@ namespace AnimalFall.Managers
 
         public bool IsPlaying =>
             CurrentState == GameState.Game || CurrentState == GameState.MegaLevel;
+
+        public bool IsInArcade => CurrentState == GameState.ArcadeRoom;
     }
 }
