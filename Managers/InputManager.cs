@@ -6,6 +6,17 @@ namespace AnimalFall.Managers
     [RequireComponent(typeof(Camera))]
     public class InputManager : MonoBehaviour
     {
+        public static InputManager Instance { get; private set; }
+
+        public Vector2 TapOffset { get; set; }
+        public bool IsMirrorModeActive { get; set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+        }
+
         private void Update()
         {
             if (GameManager.Instance == null || !GameManager.Instance.IsRunning) return;
@@ -23,17 +34,31 @@ namespace AnimalFall.Managers
 
         private void ProcessTap(Vector3 screenPos)
         {
+            if (IsMirrorModeActive)
+            {
+                screenPos.x = Screen.width - screenPos.x;
+            }
+
             screenPos.z = -Camera.main.transform.position.z;
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(screenPos);
 
+            worldPoint += TapOffset;
+
             Collider2D hitCollider = Physics2D.OverlapPoint(worldPoint);
-            if (hitCollider == null) return;
+            if (hitCollider == null)
+            {
+                if (EasterEggManager.Instance != null)
+                    CheckBackgroundCloudTap(worldPoint);
+                return;
+            }
 
             var animal = hitCollider.GetComponent<Animal>();
-            if (animal == null) return;
-
-            TapResult result = animal.HandleTap();
-            HandleTapResult(result, animal);
+            if (animal != null)
+            {
+                TapResult result = animal.HandleTap();
+                HandleTapResult(result, animal);
+                return;
+            }
         }
 
         private void HandleTapResult(TapResult result, Animal animal)
@@ -58,7 +83,22 @@ namespace AnimalFall.Managers
                     break;
                 case TapResult.BombExploded:
                     break;
+                case TapResult.Rainbow:
+                    EasterEggManager.Instance?.OnRainbowCollected();
+                    gm.AudioManager?.PlaySFX(AudioManager.SfxType.Collect);
+                    break;
+                case TapResult.FakeCollected:
+                    gm.OnWrongTap(false);
+                    break;
+                case TapResult.CursedSkullDestroyed:
+                    gm.AudioManager?.PlaySFX(AudioManager.SfxType.Explosion);
+                    break;
             }
+        }
+
+        private void CheckBackgroundCloudTap(Vector2 worldPoint)
+        {
+            EasterEggManager.Instance?.OnBackgroundCloudTapped();
         }
     }
 }

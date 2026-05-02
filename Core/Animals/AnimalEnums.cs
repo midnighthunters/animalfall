@@ -7,7 +7,16 @@ namespace AnimalFall.Core.Animals
         Bomb,
         Shielded,
         Golden,
-        Special
+        Special,
+        Paired,
+        Ghost,
+        Bubble,
+        IceCube,
+        Shrinking,
+        Rainbow,
+        FakeAnimal,
+        CursedSkull,
+        ThiefBird
     }
 
     public enum AnimalSpecies
@@ -27,7 +36,14 @@ namespace AnimalFall.Core.Animals
         Wrong,
         BombExploded,
         ShieldBroken,
-        Golden
+        Golden,
+        Rainbow,
+        FakeCollected,
+        IceCubeFrozen,
+        PairedWaiting,
+        CursedSkullDestroyed,
+        GhostMissed,
+        BubblePopped
     }
 
     public enum MovementPattern
@@ -36,6 +52,10 @@ namespace AnimalFall.Core.Animals
         Drift,
         ZigZag,
         Teleport,
-        Bounce
+        Bounce,
+        SineWave,
+        FloatUp,
+        HeavyFall,
+        Erratic
     }
 }

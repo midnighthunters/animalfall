@@ -1,4 +1,5 @@
 using UnityEngine;
+using AnimalFall.Effects;
 
 namespace AnimalFall.Core.Animals
 {
@@ -23,6 +24,7 @@ namespace AnimalFall.Core.Animals
         private float minX, maxX, minY;
         private float halfWidth, halfHeight;
         private float zDistance;
+        private bool hasBounced;
 
         private void Awake()
         {
@@ -59,6 +61,34 @@ namespace AnimalFall.Core.Animals
         {
             float dt = Time.deltaTime;
 
+            if (EnvironmentEffects.Instance != null && EnvironmentEffects.Instance.IsZeroGravityActive)
+            {
+                float floatX = Mathf.Sin(Time.time * 2f + startPos.x) * 0.3f;
+                float floatY = Mathf.Cos(Time.time * 1.5f + startPos.y) * 0.2f;
+                transform.Translate(new Vector3(floatX, floatY, 0) * dt);
+                return;
+            }
+
+            Vector3 windOffset = Vector3.zero;
+            if (EnvironmentEffects.Instance != null && EnvironmentEffects.Instance.IsWindActive)
+            {
+                Vector2 wind = EnvironmentEffects.Instance.WindForce;
+                windOffset = new Vector3(wind.x, wind.y, 0) * dt;
+            }
+
+            Vector3 bhPull = Vector3.zero;
+            if (EnvironmentEffects.Instance != null && EnvironmentEffects.Instance.IsBlackHoleActive)
+            {
+                Vector2 center = EnvironmentEffects.Instance.BlackHoleCenter;
+                Vector2 dir = center - (Vector2)transform.position;
+                float dist = dir.magnitude;
+                if (dist > 0.5f)
+                {
+                    float pullForce = EnvironmentEffects.Instance.BlackHolePullStrength / (dist * dist) * dt;
+                    bhPull = (Vector3)(dir.normalized * pullForce);
+                }
+            }
+
             switch (pattern)
             {
                 case MovementPattern.Static:
@@ -86,8 +116,36 @@ namespace AnimalFall.Core.Animals
 
                 case MovementPattern.Bounce:
                     transform.Translate(Vector3.down * speed * dt);
+                    if (!hasBounced && transform.position.y < minY + halfHeight + 0.1f)
+                    {
+                        hasBounced = true;
+                        speed = -Mathf.Abs(speed) * 0.6f;
+                    }
+                    break;
+
+                case MovementPattern.SineWave:
+                    float sinX = Mathf.Sin((Time.time - spawnTime) * zigzagFrequency * 2f) * zigzagAmplitude;
+                    transform.Translate((Vector3.down + Vector3.right * sinX) * speed * dt);
+                    break;
+
+                case MovementPattern.FloatUp:
+                    transform.Translate(Vector3.up * speed * 0.5f * dt);
+                    float driftX = Mathf.Sin(Time.time * 2f) * 0.3f;
+                    transform.Translate(Vector3.right * driftX * dt);
+                    break;
+
+                case MovementPattern.HeavyFall:
+                    transform.Translate(Vector3.down * speed * 3f * dt);
+                    break;
+
+                case MovementPattern.Erratic:
+                    float erX = Mathf.PerlinNoise(Time.time * 3f, startPos.x) - 0.5f;
+                    float erY = Mathf.PerlinNoise(Time.time * 2f, startPos.y) - 0.5f;
+                    transform.Translate((Vector3.down * speed + new Vector3(erX, erY, 0) * 2f) * dt);
                     break;
             }
+
+            transform.position += windOffset + bhPull;
 
             if (cam == null) cam = Camera.main;
             if (cam != null) RecalcBounds();

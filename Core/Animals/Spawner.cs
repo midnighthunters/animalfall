@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AnimalFall.Core.Levels;
+using AnimalFall.Managers;
 
 namespace AnimalFall.Core.Animals
 {
@@ -83,6 +84,12 @@ namespace AnimalFall.Core.Animals
         private AnimalData ChooseAnimalData()
         {
             float r = Random.value;
+
+            if (EasterEggManager.Instance != null && EasterEggManager.Instance.CheckRainbowSpawn())
+            {
+                var rainbow = System.Array.Find(spawnPool, x => x.type == AnimalType.Rainbow);
+                if (rainbow != null) return rainbow;
+            }
 
             if (level.enableBombs && r < 0.25f)
             {

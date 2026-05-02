@@ -25,5 +25,9 @@ namespace AnimalFall.Core.Animals
         [Header("Visuals")]
         public GameObject prefab;
         public Color outlineColor = Color.white;
+
+        [Header("Skins")]
+        public string skinId;
+        public Sprite[] skinSprites;
     }
 }

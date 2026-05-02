@@ -3,7 +3,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using AnimalFall.Core.Animals;
 using AnimalFall.Core.Levels;
+using AnimalFall.Core.MegaLevel;
+using AnimalFall.Effects;
 using AnimalFall.UI;
+using AnimalFall.UI.Screens;
 
 namespace AnimalFall.Managers
 {
@@ -23,6 +26,12 @@ namespace AnimalFall.Managers
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private CountdownController countdown;
 
+        [Header("New Systems")]
+        [SerializeField] private HindranceManager hindranceManager;
+        [SerializeField] private MegaLevelController megaLevelController;
+        [SerializeField] private ResultsScreenController resultsScreen;
+        [SerializeField] private VillainHUD villainHUD;
+
         [Header("Events")]
         public UnityEvent onLevelStart;
         public UnityEvent onLevelWin;
@@ -37,6 +46,9 @@ namespace AnimalFall.Managers
         private bool isRunning;
 
         public bool IsRunning => isRunning;
+        public int CurrentCollected => currentCollected;
+        public int TargetCount => targetCountNeeded;
+        public float RemainingTime => remainingTime;
 
         private void Awake()
         {
@@ -75,6 +87,16 @@ namespace AnimalFall.Managers
             comboManager?.ResetCombo();
             scoreManager?.ResetScore();
 
+            if (hindranceManager != null)
+                hindranceManager.InitForLevel(level);
+
+            if (level.isMegaLevel && megaLevelController != null)
+            {
+                megaLevelController.InitMegaLevel(level);
+                if (villainHUD != null && megaLevelController.ActiveVillain != null)
+                    villainHUD.Setup(megaLevelController.ActiveVillain);
+            }
+
             onLevelStart?.Invoke();
             StartCoroutine(countdown.PlayCountdown(OnCountdownFinished));
         }
@@ -83,6 +105,7 @@ namespace AnimalFall.Managers
         {
             isRunning = true;
             spawner?.StartSpawning();
+            hindranceManager?.StartSpawning();
             StartCoroutine(LevelTimer());
         }
 
@@ -98,6 +121,13 @@ namespace AnimalFall.Managers
                 if (remainingTime <= 0f)
                 {
                     remainingTime = 0;
+                    isRunning = false;
+                    EndLevel(false);
+                    yield break;
+                }
+
+                if (LivesManager.Instance != null && !LivesManager.Instance.HasLives())
+                {
                     isRunning = false;
                     EndLevel(false);
                     yield break;
@@ -123,10 +153,19 @@ namespace AnimalFall.Managers
             ui?.UpdateTargetText(currentCollected, targetCountNeeded);
             ui?.ShowFloatingText("+" + (points * tapsCount), Camera.main.WorldToScreenPoint(Vector3.zero));
 
+            EventManager.Instance?.CheckQuestProgress("animals_collected", tapsCount);
+
             if (currentCollected >= targetCountNeeded)
             {
-                isRunning = false;
-                EndLevel(true);
+                if (currentLevel.isMegaLevel && megaLevelController != null)
+                {
+                    megaLevelController.OnAnimalQuotaMet();
+                }
+                else
+                {
+                    isRunning = false;
+                    EndLevel(true);
+                }
             }
         }
 
@@ -158,32 +197,64 @@ namespace AnimalFall.Managers
             ui?.UpdateTimer(remainingTime);
         }
 
+        public void OnMegaLevelComplete()
+        {
+            isRunning = false;
+            EndLevel(true);
+        }
+
         private void EndLevel(bool success)
         {
             spawner?.StopSpawning();
             powerUpManager?.CancelAll();
+            hindranceManager?.StopAll();
             isRunning = false;
+
+            ScreenEffects.Instance?.ClearAll();
+            EnvironmentEffects.Instance?.ClearAll();
+
+            int score = scoreManager != null ? scoreManager.GetScore() : 0;
 
             if (success)
             {
-                ui?.ShowLevelComplete(scoreManager != null ? scoreManager.GetScore() : 0, currentLevel.rewardCoins);
                 audioManager?.PlaySFX(AudioManager.SfxType.LevelWin);
                 onLevelWin?.Invoke();
 
                 if (Services.Save.SaveService.Instance != null)
                     Services.Save.SaveService.Instance.AddCoins(currentLevel.rewardCoins);
 
+                EventManager.Instance?.CheckQuestProgress("levels_completed", 1);
+                EventManager.Instance?.CheckQuestProgress("score_earned", score);
+
                 if (LevelManager.Instance != null)
                     LevelManager.Instance.LevelSuccess();
+
+                if (resultsScreen != null)
+                    resultsScreen.ShowWin(score, currentLevel.rewardCoins, currentLevel.isMegaLevel);
+                else
+                    ui?.ShowLevelComplete(score, currentLevel.rewardCoins);
             }
             else
             {
-                ui?.ShowLevelFailed(scoreManager != null ? scoreManager.GetScore() : 0);
                 audioManager?.PlaySFX(AudioManager.SfxType.LevelLose);
                 onLevelFail?.Invoke();
 
+                if (LivesManager.Instance != null)
+                    LivesManager.Instance.UseLife();
+
                 if (LevelManager.Instance != null)
                     LevelManager.Instance.LevelFailed();
+
+                if (resultsScreen != null)
+                    resultsScreen.ShowLose(score);
+                else
+                    ui?.ShowLevelFailed(score);
+            }
+
+            if (currentLevel.isMegaLevel)
+            {
+                megaLevelController?.Cleanup();
+                villainHUD?.Hide();
             }
         }
     }

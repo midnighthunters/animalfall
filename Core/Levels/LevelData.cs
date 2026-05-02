@@ -1,5 +1,7 @@
 using UnityEngine;
 using AnimalFall.Core.Goals;
+using AnimalFall.Core.Hindrances;
+using AnimalFall.Core.MegaLevel;
 
 namespace AnimalFall.Core.Levels
 {
@@ -29,5 +31,15 @@ namespace AnimalFall.Core.Levels
         public int wrongTapScorePenalty = 30;
         public float bombTimePenalty = 3.0f;
         public int bombScorePenalty = 50;
+
+        [Header("Mega Level")]
+        public bool isMegaLevel;
+        public VillainData villain;
+
+        [Header("Hindrances")]
+        public HindranceType[] enabledHindrances;
+        public float hindranceSpawnInterval = 4f;
+        public float hindranceInitialDelay = 5f;
+        public int maxHindrancesOnScreen = 3;
     }
 }

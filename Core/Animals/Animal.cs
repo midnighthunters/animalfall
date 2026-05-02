@@ -32,6 +32,8 @@ namespace AnimalFall.Core.Animals
 
             if (animalData.type == AnimalType.Decoy)
                 sr.color = Color.Lerp(Color.white, Color.grey, 0.2f);
+            else if (animalData.type == AnimalType.Rainbow)
+                sr.color = Color.Lerp(Color.red, Color.cyan, 0.5f);
         }
 
         public TapResult HandleTap()
@@ -43,6 +45,25 @@ namespace AnimalFall.Core.Animals
             {
                 Explode();
                 return TapResult.BombExploded;
+            }
+
+            if (data.type == AnimalType.FakeAnimal)
+            {
+                GameManager.Instance?.OnWrongTap(false);
+                Destroy(gameObject);
+                return TapResult.FakeCollected;
+            }
+
+            if (data.type == AnimalType.CursedSkull)
+            {
+                Destroy(gameObject);
+                return TapResult.CursedSkullDestroyed;
+            }
+
+            if (data.type == AnimalType.Rainbow)
+            {
+                OnCollected();
+                return TapResult.Rainbow;
             }
 
             if (data.requiresDoubleTap || data.type == AnimalType.Shielded)
@@ -102,7 +123,14 @@ namespace AnimalFall.Core.Animals
         private void Update()
         {
             if (Time.time - spawnTime > data.lifetime)
+            {
+                if (data.type == AnimalType.CursedSkull)
+                {
+                    GameManager.Instance?.AddTime(-5f);
+                    AudioManager.Instance?.PlaySFX(AudioManager.SfxType.Explosion);
+                }
                 Destroy(gameObject);
+            }
         }
     }
 }

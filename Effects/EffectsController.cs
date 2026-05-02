@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using AnimalFall.Core.Animals;
 
 namespace AnimalFall.Effects
 {
@@ -9,114 +7,76 @@ namespace AnimalFall.Effects
     {
         public static EffectsController Instance { get; private set; }
 
-        [Header("Animal FX Prefabs")]
-        [SerializeField] private GameObject collectEffectPrefab;
-        [SerializeField] private GameObject explosionEffectPrefab;
-        [SerializeField] private GameObject shieldBreakEffectPrefab;
-        [SerializeField] private GameObject goldenCollectEffectPrefab;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private GameObject collectSparkPrefab;
+        [SerializeField] private GameObject coinRainPrefab;
 
         [Header("Camera Shake")]
-        [SerializeField] private float shakeDuration = 0.35f;
-        [SerializeField] private float shakeMagnitude = 0.15f;
+        [SerializeField] private float shakeIntensity = 0.3f;
+        [SerializeField] private float shakeDuration = 0.2f;
 
-        [Header("Species Colors")]
-        [SerializeField] private Color chickenColor = new Color(1f, 0.85f, 0.6f);
-        [SerializeField] private Color dogColor = new Color(0.45f, 0.75f, 1f);
-        [SerializeField] private Color cowColor = new Color(1f, 0.9f, 0.55f);
-        [SerializeField] private Color catColor = new Color(0.6f, 1f, 0.6f);
-        [SerializeField] private Color monkeyColor = new Color(0.75f, 0.6f, 1f);
+        private Camera mainCam;
+        private Vector3 originalCamPos;
+        private bool shaking;
 
         private void Awake()
         {
-            if (Instance != null && Instance != this) { Destroy(this); return; }
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
-        }
-
-        public void SpawnCollectEffect(Vector3 position, AnimalSpecies species)
-        {
-            if (collectEffectPrefab == null) return;
-            GameObject fx = Instantiate(collectEffectPrefab, position, Quaternion.identity);
-            SetParticleColor(fx, GetColorForSpecies(species));
-            Destroy(fx, 3f);
+            mainCam = Camera.main;
+            if (mainCam != null) originalCamPos = mainCam.transform.position;
         }
 
         public void SpawnExplosionEffect(Vector3 position)
         {
-            if (explosionEffectPrefab == null) return;
-            GameObject fx = Instantiate(explosionEffectPrefab, position, Quaternion.identity);
-            Destroy(fx, 3.5f);
+            if (explosionPrefab != null)
+            {
+                var obj = Instantiate(explosionPrefab, position, Quaternion.identity);
+                Destroy(obj, 1.5f);
+            }
         }
 
-        public void SpawnShieldBreakEffect(Vector3 position)
+        public void SpawnCollectSpark(Vector3 position)
         {
-            if (shieldBreakEffectPrefab == null) return;
-            GameObject fx = Instantiate(shieldBreakEffectPrefab, position, Quaternion.identity);
-            Destroy(fx, 2f);
+            if (collectSparkPrefab != null)
+            {
+                var obj = Instantiate(collectSparkPrefab, position, Quaternion.identity);
+                Destroy(obj, 1f);
+            }
         }
 
-        public void SpawnGoldenEffect(Vector3 position)
+        public void SpawnCoinRain(Vector3 position, float duration = 2f)
         {
-            if (goldenCollectEffectPrefab == null) return;
-            GameObject fx = Instantiate(goldenCollectEffectPrefab, position, Quaternion.identity);
-            Destroy(fx, 3f);
+            if (coinRainPrefab != null)
+            {
+                var obj = Instantiate(coinRainPrefab, position, Quaternion.identity);
+                Destroy(obj, duration + 1f);
+            }
         }
 
         public void ShakeCamera()
         {
-            StartCoroutine(CameraShakeRoutine(shakeDuration, shakeMagnitude));
+            if (!shaking && mainCam != null)
+                StartCoroutine(CameraShakeRoutine());
         }
 
-        public IEnumerator StaggeredEffects(IEnumerable<Transform> targets, float interval = 0.06f)
+        private IEnumerator CameraShakeRoutine()
         {
-            foreach (var t in targets)
-            {
-                if (t == null) continue;
-                SpawnCollectEffect(t.position, AnimalSpecies.None);
-                yield return new WaitForSeconds(interval);
-            }
-        }
-
-        private IEnumerator CameraShakeRoutine(float duration, float magnitude)
-        {
-            Camera cam = Camera.main;
-            if (cam == null) yield break;
-
-            Transform camTransform = cam.transform;
-            Vector3 originalPos = camTransform.localPosition;
+            shaking = true;
             float elapsed = 0f;
 
-            while (elapsed < duration)
+            while (elapsed < shakeDuration)
             {
+                float x = Random.Range(-shakeIntensity, shakeIntensity);
+                float y = Random.Range(-shakeIntensity, shakeIntensity);
+                mainCam.transform.position = originalCamPos + new Vector3(x, y, 0);
                 elapsed += Time.deltaTime;
-                float x = Random.Range(-1f, 1f) * magnitude;
-                float y = Random.Range(-1f, 1f) * magnitude;
-                camTransform.localPosition = originalPos + new Vector3(x, y, 0f);
                 yield return null;
             }
 
-            camTransform.localPosition = originalPos;
-        }
-
-        private void SetParticleColor(GameObject fx, Color color)
-        {
-            foreach (ParticleSystem ps in fx.GetComponentsInChildren<ParticleSystem>())
-            {
-                var main = ps.main;
-                main.startColor = color;
-            }
-        }
-
-        private Color GetColorForSpecies(AnimalSpecies species)
-        {
-            switch (species)
-            {
-                case AnimalSpecies.Chicken: return chickenColor;
-                case AnimalSpecies.Dog:     return dogColor;
-                case AnimalSpecies.Cow:     return cowColor;
-                case AnimalSpecies.Cat:     return catColor;
-                case AnimalSpecies.Monkey:  return monkeyColor;
-                default:                    return Color.white;
-            }
+            mainCam.transform.position = originalCamPos;
+            shaking = false;
         }
     }
 }
