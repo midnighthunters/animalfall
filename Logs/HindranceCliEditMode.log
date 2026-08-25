@@ -1,0 +1,786 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-ayush" at "2026-08-16T18:00:29.9032251Z"
+[Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 4372, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] Error: LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              b2e5d98cd58045edba65196a1e133a74
+  Correlation Id:          f8d093bbf5d1b3d571f3e023be05335b
+  External correlation Id: 7891933511159348356
+  Machine Id:              i89aphioMBa5HdGkzMh86Q5C3Mk=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-ayush" (connect: 0.00s, validation: 0.01s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-ayush-notifications" at "2026-08-16T18:00:29.9418591Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '6000.0/staging' branch; Version is '6000.0.42f1 (feb9a7235030) revision 16693671'; Using compiler version '193933523'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit CoreSingleLanguage' Language: 'en' Physical Memory: 16055 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-ZTNJ-AD29-DWJR-KJY2-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Unity.exe
+-batchmode
+-nographics
+-projectPath
+C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall
+-runTests
+-testPlatform
+EditMode
+-testResults
+C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Logs\HindranceCliEditModeResults.xml
+-logFile
+C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Logs\HindranceCliEditMode.log
+Successfully changed project path to: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall
+C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [8540]  Target information:
+
+Player connection [8540]  * "[IP] 192.168.0.119 [Port] 55504 [Flags] 2 [Guid] 1436879413 [EditorId] 1436879413 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-IJ3E2090) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [8540] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8540] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-5692" after 0.2 seconds.
+Library Redirect Path: Library/
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 70 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.collab-proxy@2.10.2 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.collab-proxy@3351acaba9c9)
+    com.unity.ide.rider@3.0.31 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ide.rider@7921be93db40)
+    com.unity.ide.visualstudio@2.0.22 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ide.visualstudio@8140e851d83e)
+    com.unity.inputsystem@1.13.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.inputsystem@e2c83221d2dc)
+    com.unity.postprocessing@3.4.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.postprocessing@026b2a0827a4)
+    com.unity.purchasing@5.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.purchasing@14f2ec4bbf07)
+    com.unity.test-framework@1.4.6 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.test-framework@5ac417e07314)
+    com.unity.timeline@1.8.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.timeline@c58b4ee65782)
+    com.unity.visualscripting@1.9.5 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.visualscripting@1b53f46e931b)
+    com.unity.ext.nunit@2.0.5 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ext.nunit@60ef35ffd3cd)
+    com.unity.services.core@1.14.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.services.core@9e81a5e38245)
+    com.unity.2d.animation@10.1.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.animation@494a3b4e73a9)
+    com.unity.2d.pixel-perfect@5.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.pixel-perfect@e3ae982b672d)
+    com.unity.2d.psdimporter@9.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.psdimporter@676bae148e11)
+    com.unity.2d.spriteshape@10.0.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.spriteshape@9e35352ae135)
+    com.unity.2d.tilemap.extras@4.1.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.tilemap.extras@13634da7dbe0)
+    com.unity.2d.aseprite@1.1.8 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.aseprite@1f731787b516)
+    com.unity.nuget.newtonsoft-json@3.2.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0)
+    com.unity.searcher@4.9.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.searcher@1e17ce91558d)
+    com.unity.burst@1.8.19 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.burst@7a907cf5a459)
+    com.unity.mathematics@1.3.2 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.mathematics@8017b507cc74)
+    com.unity.collections@2.5.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.collections@56bff8827a7e)
+    com.unity.2d.common@9.0.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.common@bb1fc9b3d81b)
+    com.unity.nuget.mono-cecil@1.11.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f)
+    com.unity.test-framework.performance@3.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.test-framework.performance@fb0dc592af8b)
+  Built-in packages:
+    com.unity.feature.2d@2.0.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.feature.2d@dd1ea8910f12)
+    com.unity.multiplayer.center@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.multiplayer.center@f3fb577b3546)
+    com.unity.render-pipelines.universal@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.universal@087c6d6dbb7d)
+    com.unity.ugui@2.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ugui@9496653a3df6)
+    com.unity.modules.accessibility@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.accessibility)
+    com.unity.modules.ai@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics2d)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.video)
+    com.unity.modules.vr@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vr)
+    com.unity.modules.wind@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.hierarchycore)
+    com.unity.render-pipelines.core@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.core@1c27dfa04d8a)
+    com.unity.shadergraph@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.shadergraph@608f316e1f48)
+    com.unity.render-pipelines.universal-config@17.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.universal-config@fa63c96d3e1a)
+    com.unity.2d.sprite@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.sprite@072d7bd355e5)
+    com.unity.2d.tilemap@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.tilemap@91afae292a4e)
+    com.unity.rendering.light-transport@1.0.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.rendering.light-transport@307bc27a498f)
+  Git packages:
+    com.coplaydev.unity-mcp@https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.coplaydev.unity-mcp@4ee62b097584)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 1.11 seconds
+Artifact Garbage Collection - Removed 1 unused hashed content files[Licensing::Client] Successfully resolved entitlement details
+Refreshing native plugins compatible for Editor in 5.54 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.0.42f1 (feb9a7235030)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
+[Licensing::Client] Successfully resolved entitlement details
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56692
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.015654 seconds.
+- Loaded All Assemblies, in  0.311 seconds
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 2176 ms
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.454 seconds
+Domain Reload Profiling: 2764ms
+	BeginReloadAssembly (98ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (53ms)
+	LoadAllAssembliesAndSetupDomain (122ms)
+		LoadAssemblies (97ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (119ms)
+			TypeCache.Refresh (118ms)
+				TypeCache.ScanAssembly (107ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (2455ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2428ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2248ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (38ms)
+			ProcessInitializeOnLoadAttributes (94ms)
+			ProcessInitializeOnLoadMethodAttributes (46ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+Starting: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\bee_backend.exe --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s301ms
+[1020/1336  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.27 seconds), 1 items updated, 1336 evaluated
+AssetDatabase: script compilation time: 0.675544s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.914 seconds
+Refreshing native plugins compatible for Editor in 5.72 ms, found 4 plugins.
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 4.87 ms, found 4 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.933 seconds
+Domain Reload Profiling: 3844ms
+	BeginReloadAssembly (248ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (9ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (136ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (602ms)
+		LoadAssemblies (354ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (323ms)
+			TypeCache.Refresh (240ms)
+				TypeCache.ScanAssembly (223ms)
+			BuildScriptInfoCaches (67ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (2934ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2796ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (25ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (132ms)
+			ProcessInitializeOnLoadAttributes (2509ms)
+			ProcessInitializeOnLoadMethodAttributes (122ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
+Asset Pipeline Refresh (id=b26ab477ab41ab04c828c7e093b0985a): Total: 5.073 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=3407 ms
+		Asset DB Callback time: managed=19 ms, native=0 ms
+		Scripting: domain reloads=1, domain reload time=914 ms, compile time=677 ms, other=53 ms
+		Project Asset Count: scripts=2093, non-scripts=4308
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 1.666ms
+	ApplyChangesToAssetFolders: 0.387ms
+	Scan: 127.161ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 55.296ms
+	ProcessAssetsWithTransientArtifactChanges: 79.340ms
+	CategorizeAssets: 56.150ms
+	ImportOutOfDateAssets: 2953.964ms (2274.564ms without children)
+		CompileScripts: 676.804ms
+		ReloadNativeAssets: 0.020ms
+		UnloadImportedAssets: 0.628ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.145ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.803ms
+	PostProcessAllAssets: 19.949ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.000ms
+	UnloadStreamsBegin: 1.528ms
+	PersistCurrentRevisions: 0.242ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 2.759ms
+	Untracked: 1777.424ms
+
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 0.629ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-AnimalFall
+Unloading 30 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8329 unused Assets / (2.8 MB). Loaded Objects now: 9029.
+Memory consumption went from 222.2 MB to 219.4 MB.
+Total: 11.738200 ms (FindLiveObjects: 0.606300 ms CreateObjectMapping: 0.656600 ms MarkObjects: 8.072200 ms  DeleteObjects: 2.401800 ms)
+
+Microsoft Media Foundation video decoding to texture disabled: graphics device is Null, only Direct3D 11 and Direct3D 12 (only on desktop) are supported for hardware-accelerated video decoding.
+[Project] Loading completed in 11.879 seconds
+	Project init time: 				9.792 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.200 seconds
+		Asset Database init time: 		1.372 seconds
+		Global illumination init time: 	0.002 seconds
+		Assemblies load time: 			2.778 seconds
+		Unity extensions init time: 	0.045 seconds
+		Asset Database refresh time: 	5.073 seconds
+	Scene opening time: 			0.469 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1786903241760,"processId":5692,"projectLoad":11.8793804,"projectInit":9.7917209,"templateInit":0.0,"packageManagerInit":0.2001286,"assetDatabaseInit":1.3719477,"globalIlluminationInit":0.0022057,"assembliesLoad":2.7779266,"unityExtensionsInit":0.0448179,"assetDatabaseRefresh":5.0732358,"sceneOpening":0.4691142}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1786903241760,"processId":5692,"editorVersion":"6000.0.42f1 (feb9a7235030)","branch":"6000.0/staging","buildType":"Release","platform":"Windows"}
+Asset Pipeline Refresh (id=7c5614acee8769d4fb68a9e9947400f1): Total: 0.060 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
+Running tests for ExecutionSettings with details:
+targetPlatform = 
+playerHeartbeatTimeout = 600
+filters[0] = 
+   Filter with settings:
+   testMode = EditMode
+   targetPlatform = 
+   testNames = null
+   groupNames = null
+   categoryNames = null
+   assemblyNames = null
+ignoreTests = {}
+featureFlags = null
+
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:InitializeAndExecuteRun (string[]) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:53)
+UnityEditor.TestTools.TestRunner.CommandLineTest.TestStarter:InitializeAndExecuteRun () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/TestStarter.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 53)
+
+[UnityConnectServicesConfig] config is NOT valid, switching to default
+Created GICache directory at C:/Users/ayush/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.012s, timestamps: [11.886 - 11.898]
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4 unused Assets / (2.0 KB). Loaded Objects now: 9078.
+Memory consumption went from 212.8 MB to 212.8 MB.
+Total: 6.967800 ms (FindLiveObjects: 0.349300 ms CreateObjectMapping: 0.182500 ms MarkObjects: 6.388000 ms  DeleteObjects: 0.047200 ms)
+
+Executing IPrebuildSetup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:51)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:35)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:173)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:108)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 51)
+
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Applied No Throttling for test run.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+MCPForUnity.Editor.Helpers.McpLog:Info (string,bool) (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Helpers/McpLog.cs:40)
+MCPForUnity.Editor.Services.TestRunnerNoThrottle:ApplyNoThrottling () (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Services/TestRunnerNoThrottle.cs:101)
+MCPForUnity.Editor.Services.TestRunnerNoThrottle/TestCallbacks:RunStarted (UnityEditor.TestTools.TestRunner.Api.ITestAdaptor) (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Services/TestRunnerNoThrottle.cs:138)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator/<>c__DisplayClass7_0:<RunStarted>b__0 (UnityEditor.TestTools.TestRunner.Api.ICallbacks) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:42)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator:TryInvokeAllCallbacks (System.Action`1<UnityEditor.TestTools.TestRunner.Api.ICallbacks>) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:135)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator:RunStarted (NUnit.Framework.Interfaces.ITest) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:42)
+UnityEngine.Events.InvokableCall`1<NUnit.Framework.Interfaces.ITest>:Invoke (NUnit.Framework.Interfaces.ITest)
+UnityEngine.Events.UnityEvent`1<NUnit.Framework.Interfaces.ITest>:Invoke (NUnit.Framework.Interfaces.ITest)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.Events.RunStartedInvocationEvent/<Execute>d__0:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/Events/RunStartedInvocationEvent.cs:15)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:173)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:108)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Helpers/McpLog.cs Line: 40)
+
+Start importing Assets/Levels/LevelData/Level_10.asset using Guid(0055617e22310b548a8a9dceebbf5ab3) (NativeFormatImporter) -> (artifact id: 'b4ab150449ff2d0fad3688a8d0bd9282') in 0.01077 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/claw_laser.asset using Guid(20613770806b9a147933baf1862e1d61) (NativeFormatImporter) -> (artifact id: '542406d50974bc3f187d15c7a7733b94') in 0.0018104 seconds
+Start importing Assets/MegaShooter/Data/Animals/turtle_guardian.asset using Guid(c059f591d1769794d9133e74549624dd) (NativeFormatImporter) -> (artifact id: 'de1ae0fb5e102e2b4a93e9da161a5b2a') in 0.0021329 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_01_Scrap_Wasp.asset using Guid(e02df6fc5ad125c438ce5e0c6648da65) (NativeFormatImporter) -> (artifact id: 'a71820d4c4055e02749e6c75b0a2cd92') in 0.0024451 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_13_Level_065.asset using Guid(11734d9d750bb07439d32942ef0ecaf0) (NativeFormatImporter) -> (artifact id: 'c489e8e06f707e6eea721d2aaf9b6318') in 0.0024017 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_13_Phantom_Prism.asset using Guid(31bc3fb9fb91fdf42b0cf27592a92855) (NativeFormatImporter) -> (artifact id: '54d8103fc3ef533034a54a616acbfea0') in 0.0023747 seconds
+Start importing Assets/MegaShooter/Data/Enemies/carrier.asset using Guid(81af1399810ea1c498798a069ec6fc65) (NativeFormatImporter) -> (artifact id: 'a39ed7b47565a26ea960c645f5d5ebf0') in 0.0018015 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_02_Twin-Core_Raider.asset using Guid(c1d9ea8271c3e21499cf8ab8151cb878) (NativeFormatImporter) -> (artifact id: '6b3130394cebbb9c5e184d69382537a9') in 0.0022571 seconds
+Start importing Assets/MegaShooter/Data/Enemies/shield_drone.asset using Guid(d1378cc4c0ef3cc4198219abb665c5b8) (NativeFormatImporter) -> (artifact id: '55fb4c97e9014d6d3b347edbce4d8512') in 0.0017782 seconds
+Start importing Assets/MegaShooter/Data/Animals/eagle_striker.asset using Guid(e185727fa42260448a04f87a43e79e32) (NativeFormatImporter) -> (artifact id: 'fc41a6b7df7e454136e7fe7c6afb64a7') in 0.0018842 seconds
+Start importing Assets/MegaShooter/Data/Enemies/armored_rammer.asset using Guid(f1a4c48ff68c47a4a92ecd187d914d9e) (NativeFormatImporter) -> (artifact id: '38363394b42601645233f606d560ac9e') in 0.0017109 seconds
+Start importing Assets/Levels/LevelData/Level_05.asset using Guid(f12c7f35b3fd87f48808f1bd55c36390) (NativeFormatImporter) -> (artifact id: '4a800e59cc5d32184d5e90c203481a51') in 0.0014908 seconds
+Start importing Assets/Levels/LevelData/Level_35.asset using Guid(02d20487d68ff5c4e80cf6f3c792cb12) (NativeFormatImporter) -> (artifact id: '1d33b1138afddb38f8a666ac75067cc1') in 0.0015297 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_20_Galactic_Overlord.asset using Guid(1217c34818736264fb0135eb1d55bd12) (NativeFormatImporter) -> (artifact id: '22e64458c02bad9088e9f2d035505fc5') in 0.0016002 seconds
+Start importing Assets/MegaShooter/Data/Animals/rhino_vanguard.asset using Guid(3274ca3d08999b14180abe8b1e442c26) (NativeFormatImporter) -> (artifact id: '8146458eb554a3bb463ec99d50755ab9') in 0.0015162 seconds
+Start importing Assets/Levels/LevelData/Level_65.asset using Guid(32eef89d6c877b949bfab469e1950989) (NativeFormatImporter) -> (artifact id: 'a3e4a02f8a8af0f9f1e9c58dac7315bc') in 0.001436 seconds
+Start importing Assets/MegaShooter/Data/Animals/lion_solaris.asset using Guid(92f4401d2484fa842a00649a099f0a01) (NativeFormatImporter) -> (artifact id: '6f0aa29fe1a53c3bbc4ca46217c55b7a') in 0.0015034 seconds
+Start importing Assets/Levels/LevelData/Level_20.asset using Guid(c2dd07775e6335045a1bff9837aa335c) (NativeFormatImporter) -> (artifact id: '113c1194a2c5a87d4aa66e0a22726552') in 0.0014769 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_18_Celestial_Fan.asset using Guid(03ae5c3b26e3cc94cb10c91a44c93de0) (NativeFormatImporter) -> (artifact id: '26c0806efbd5847db7ea4856c8e8f1ba') in 0.0014783 seconds
+Start importing Assets/Levels/LevelData/Level_45.asset using Guid(53fd9f72cd8422d48a241343e474453a) (NativeFormatImporter) -> (artifact id: 'eccf01203c42605a595b62fa0f1c90f6') in 0.0015068 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_09_Level_045.asset using Guid(631f8623b295f684a8e4557cde398a13) (NativeFormatImporter) -> (artifact id: '306c01e7cd08320d881b1070889b2e92') in 0.0015793 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_12_Level_060.asset using Guid(b3904036e4d3e1d45976cf1e1c4a44fc) (NativeFormatImporter) -> (artifact id: '1b474307a782d5a319870f142d8bd26f') in 0.0016487 seconds
+Start importing Assets/MegaShooter/Data/Animals/owl_volt.asset using Guid(e3a33d22d7b1bb943b225c96567f2dba) (NativeFormatImporter) -> (artifact id: '98947fe8317ae9b0b4b04781689d8e4b') in 0.0014684 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/solar.asset using Guid(f3653d8417799964897430755fb4a30b) (NativeFormatImporter) -> (artifact id: 'ba7394938e322a51ce5a963fe25a03e1') in 0.0014323 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_09_Hive_Carrier.asset using Guid(64029b09d70346f46a272fbc3706dc6e) (NativeFormatImporter) -> (artifact id: '17a1870b38155282178671029aec1bf9') in 0.0015322 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_04_Level_020.asset using Guid(648c3b4453475b74d8fc11914d02a4e6) (NativeFormatImporter) -> (artifact id: '4bf4963bebb501b2e27c818a199815a5') in 0.0015914 seconds
+Start importing Assets/MegaShooter/Data/Enemies/scout_drone.asset using Guid(84f9dce457aa9cd4e8e00f690ce52f72) (NativeFormatImporter) -> (artifact id: 'eccf9a77005d068e2c4cdc23deb41024') in 0.0017699 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_10_Level_050.asset using Guid(a4a4326eede48384b88bedfb24c331ff) (NativeFormatImporter) -> (artifact id: '6e0a661a9dd42c4f6d5974fb68bcf88d') in 0.0014918 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/missile.asset using Guid(a41a5c417e55af74f91c79fd708cb2d7) (NativeFormatImporter) -> (artifact id: 'e2c3f8800bb7e4838fe7da42884b8482') in 0.0014573 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_15_Bulwark_Destroyer.asset using Guid(05966f3ba3a54734f870db1cdc7eabd9) (NativeFormatImporter) -> (artifact id: '3aa7074096785b7497b6b8de4f9e5e21') in 0.0014149 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_20_Level_100.asset using Guid(55aa572147d2e214daaf9f30899ccc7a) (NativeFormatImporter) -> (artifact id: '0c031d7d758b5e9a84e139d9b0913231') in 0.001622 seconds
+Start importing Assets/MegaShooter/Data/Weapons/chameleon_prism_weapon.asset using Guid(65fd46de5535ac746846b230191ed7c0) (NativeFormatImporter) -> (artifact id: 'e7eb69c4d4b72e3e48645c1538a29b0f') in 0.0015494 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/rail.asset using Guid(753e6d56e8a78564ebed0cb0fea68770) (NativeFormatImporter) -> (artifact id: '1a90c2c73fe2a2b5f9b7de7fb7edc098') in 0.0014525 seconds
+Start importing Assets/MegaShooter/Data/Weapons/rhino_vanguard_weapon.asset using Guid(a5f06f0012b24ed43939b0cf27144804) (NativeFormatImporter) -> (artifact id: 'a106a2282f705210958369150ef4461b') in 0.0015577 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_17_Level_085.asset using Guid(a5dcfc8b8ae3ad349ac720b601a2f796) (NativeFormatImporter) -> (artifact id: 'a2892281830d4c03e40b62cf1933d21e') in 0.0016623 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/aurora_feather.asset using Guid(e518601668ac77448851c406f0cf7623) (NativeFormatImporter) -> (artifact id: 'd9253b065d47ddf975811a5feeaecba1') in 0.0015617 seconds
+Start importing Assets/MegaShooter/Data/Weapons/owl_volt_weapon.asset using Guid(065402a59606dad44b643be407aac1d1) (NativeFormatImporter) -> (artifact id: 'b138fb267c8748cc32ca14192e2384b7') in 0.0012562 seconds
+Start importing Assets/MegaShooter/Data/Weapons/peacock_aurora_weapon.asset using Guid(160487b92794e7f40b525262cbd2748f) (NativeFormatImporter) -> (artifact id: 'dcf13b33c72ac616e49d64487435ad84') in 0.0014216 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_07_Crimson_Saber.asset using Guid(167afd565727d4c4c9f45b858eb1c48b) (NativeFormatImporter) -> (artifact id: 'df4804efe1198a1ae7f3c3bb65be47d6') in 0.0012779 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_17_Aurora_Wing.asset using Guid(3677bdeb0faeef145894fa219688736e) (NativeFormatImporter) -> (artifact id: 'ebc8895dc3ce63efd4118dca7d6d4e8e') in 0.0013667 seconds
+Start importing Assets/MegaShooter/Data/Enemies/sniper_ship.asset using Guid(6642d4b8c68cf244cb16fc98fc5bb878) (NativeFormatImporter) -> (artifact id: '11266a161892c694e1395a91b14a158d') in 0.0014625 seconds
+Start importing Assets/MegaShooter/Data/Animals/fox_comet.asset using Guid(666df062b47801942987b6b0c93469e9) (NativeFormatImporter) -> (artifact id: '8200b37e83149ae548413cb37f439a7e') in 0.0015087 seconds
+Start importing Assets/Levels/LevelDatabase.asset using Guid(769de9562e9174549b0176739cc13670) (NativeFormatImporter) -> (artifact id: '9368b57c6602475e95d86fc2e3b68dca') in 0.0016986 seconds
+Start importing Assets/Levels/LevelData/Level_40.asset using Guid(b656262befdcc0d4fb64fdd1e36759a1) (NativeFormatImporter) -> (artifact id: '5f7bb4e6f9b137c50fe9e95438947121') in 0.0014185 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_02_Level_010.asset using Guid(c62b852d3de327f4abcc4f9bcb2bdfb5) (NativeFormatImporter) -> (artifact id: 'cc621d1e9536bf2a26e69523297648f0') in 0.0014347 seconds
+Start importing Assets/Levels/LevelData/Level_55.asset using Guid(d69d8dff9b14747408aa3bf7bb80a80d) (NativeFormatImporter) -> (artifact id: '22a8738cfef0997e415a7348f5bc7636') in 0.0014415 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_06_Fortress_Ray.asset using Guid(f6b94138cd6b52547a7b90249f926cf5) (NativeFormatImporter) -> (artifact id: 'f3ad17a3c32a945d92151c8e8f98b074') in 0.0013902 seconds
+Start importing Assets/MegaShooter/Data/Enemies/zigzag_interceptor.asset using Guid(070312f51697ebe40bbba2b45b6a2bdb) (NativeFormatImporter) -> (artifact id: '9ee4f42ce610321a21357738fe2036d4') in 0.0013947 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_14_Spectrum_Warden.asset using Guid(273e0a08efd27ef4ab9af707dde28581) (NativeFormatImporter) -> (artifact id: 'd4f4dc6de9008c30c594e898311e4383') in 0.0014253 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_04_Nebula_Trickster.asset using Guid(47dc29bdd3708b24ebf4df73c71061d5) (NativeFormatImporter) -> (artifact id: 'be9b834e5c3b546953bf4b62165950a6') in 0.0013968 seconds
+Start importing Assets/Levels/LevelData/Level_30.asset using Guid(87597eaf978dd494fb94ab94aeb65fff) (NativeFormatImporter) -> (artifact id: '705a8281c9552cf602c43343a12f6e9e') in 0.0012947 seconds
+Start importing Assets/MegaShooter/Data/Enemies/v_fighter.asset using Guid(9705f5db9661b9545887ab559c5bbee7) (NativeFormatImporter) -> (artifact id: '2e033f98519c64c4e195662f56e1f79f') in 0.0013888 seconds
+Start importing Assets/MegaShooter/Data/Enemies/laser_frigate.asset using Guid(c74035c39540fa04e942372584a351b1) (NativeFormatImporter) -> (artifact id: '54c93380453b0602e70145fab97153a9') in 0.0013081 seconds
+Start importing Assets/MegaShooter/Data/Weapons/fox_comet_weapon.asset using Guid(c7e0ec6395c31604a8cbb607d04848c9) (NativeFormatImporter) -> (artifact id: '4d7a8f5e8a767b07e64ba16c9d4bbc65') in 0.001334 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/plasma_boulder.asset using Guid(e7074eaa9c81fa1419bbbc223407d393) (NativeFormatImporter) -> (artifact id: 'b44aa59b2164a157ab579b3bf9f22136') in 0.0013816 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/feather.asset using Guid(e71a8e9ad7d8d884da392c0164753fb0) (NativeFormatImporter) -> (artifact id: '38b92f74aa7a8c4931b82d4c485c66c0') in 0.0013388 seconds
+Start importing Assets/MegaShooter/Data/Enemies/repair_drone.asset using Guid(18cf7750e3864fb4a818c42140e794ab) (NativeFormatImporter) -> (artifact id: 'd8926acb1f039e4bc07eaef08ca074fa') in 0.0013709 seconds
+Start importing Assets/MegaShooter/Data/Animals/tiger_nova.asset using Guid(4894b27f3f6026341803a6eebd58a256) (NativeFormatImporter) -> (artifact id: '7ebd3af7d6a25bb14c932082641aacdf') in 0.0014574 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_16_Level_080.asset using Guid(480ff652059b40c4882b4e9984ea82f9) (NativeFormatImporter) -> (artifact id: '4e37ba5985460269691f58324ab7ad51') in 0.001464 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_11_Chrono_Sentinel.asset using Guid(5844f557331b24d40a2088d30e3ee47f) (NativeFormatImporter) -> (artifact id: '5f5244d5f094058c6ec39a358a285842') in 0.0015417 seconds
+Start importing Assets/MegaShooter/Data/Weapons/tiger_nova_weapon.asset using Guid(8856838a43785eb4ea9bae8d10bdd6eb) (NativeFormatImporter) -> (artifact id: 'bb5d19f677999a768186e65b85fe5df6') in 0.0014361 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_11_Level_055.asset using Guid(c8aeb5b3459f98a4cb220a4c2ed135d2) (NativeFormatImporter) -> (artifact id: '87d452a205fbb7c4c408edbbefc20ed2') in 0.0015135 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_18_Level_090.asset using Guid(d891308726dcc20429aa9cd0e929334e) (NativeFormatImporter) -> (artifact id: '41609c7d273a837f7fe99e1988ba96ea') in 0.0015322 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/volt_orb.asset using Guid(f8b8ece9d0d63ad489d1c066dabecb66) (NativeFormatImporter) -> (artifact id: '60d9bd78886c623dee307d2f2835f6d3') in 0.0014051 seconds
+Start importing Assets/MegaShooter/Data/Weapons/turtle_guardian_weapon.asset using Guid(0955a525bed244340977c7900f591187) (NativeFormatImporter) -> (artifact id: 'b419b1ab34e9f254b6d850daf0b6f741') in 0.0013394 seconds
+Start importing Assets/MegaShooter/Data/Enemies/dive_bomber.asset using Guid(49fb83b6f064c7d409fe087cf8ee873d) (NativeFormatImporter) -> (artifact id: '8306f18ef5d41c1c94b4c7bca79b5468') in 0.0013999 seconds
+Start importing Assets/MegaShooter/Data/Weapons/lion_solaris_weapon.asset using Guid(799da891a84d8d04b85f861e0c3e0ceb) (NativeFormatImporter) -> (artifact id: '897c395ad6e23a497279c844378804ba') in 0.0013667 seconds
+Start importing Assets/Levels/LevelData/Level_75.asset using Guid(992e5d86185bd2a4dbd401893ca3d47b) (NativeFormatImporter) -> (artifact id: 'cc60c4853c5bb4c4858032c90a6d4151') in 0.0012827 seconds
+Start importing Assets/Levels/LevelData/Level_95.asset using Guid(a9bcbe718dd7c8b4fac575c58b72285f) (NativeFormatImporter) -> (artifact id: 'f146d9b8c4f2d7533a755ebc279d07dc') in 0.0014006 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_10_Titan_Foundry.asset using Guid(a90d34c75cd27cc459daffe85c9ffcfe) (NativeFormatImporter) -> (artifact id: '588c4bdb0318b2fc4c50e969f6415e65') in 0.0014465 seconds
+Start importing Assets/MegaShooter/Data/Enemies/cloaked_stalker.asset using Guid(e90f16423aa67de43a139fa80efac7a1) (NativeFormatImporter) -> (artifact id: '38de09270c53e1a89b3db89ecc09fc99') in 0.0014952 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_03_Mirage_Frigate.asset using Guid(f9b0eb70afd292f4d9c36b3a5c206779) (NativeFormatImporter) -> (artifact id: 'bf3882ac1a54f41aa9aec4b08c29b34b') in 0.001464 seconds
+Start importing Assets/MegaShooter/Data/Animals/gorilla_bomber.asset using Guid(f9ee3ff31d62cb24ab7f07ed17596381) (NativeFormatImporter) -> (artifact id: '0cb52fc310206253df90528bc59dc504') in 0.0013976 seconds
+Start importing Assets/MegaShooter/Data/Enemies/heavy_gunship.asset using Guid(0aa2f53334e73e648a50ec3515a5b86c) (NativeFormatImporter) -> (artifact id: '5bdcf7dd72378e7dab4e9591ac2f1e22') in 0.0014816 seconds
+Start importing Assets/MegaShooter/Data/VFX/DefaultMegaVFX.asset using Guid(1a923faa316340d43b6140c35c9c3ffe) (NativeFormatImporter) -> (artifact id: 'ea785c81fc61c49e410d6295b1985e61') in 0.0014051 seconds
+Start importing Assets/Levels/LevelData/Level_85.asset using Guid(1afb901a2381c094ab75b4eae5c30619) (NativeFormatImporter) -> (artifact id: '9d43e2b41870ec66e834031b8955fea2') in 0.0014018 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_16_Siege_Leviathan.asset using Guid(aac6b3d7d744d3b4f841a13469a953a6) (NativeFormatImporter) -> (artifact id: 'dc4eb9a968f9fa20a59cf76c0aa92de2') in 0.0014232 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_12_Clockwork_Colossus.asset using Guid(bad42abef28bde44280e10b12ff0a7ae) (NativeFormatImporter) -> (artifact id: '675046e8d28fb67fe9d5bc8898a63294') in 0.0017283 seconds
+Start importing Assets/Levels/LevelData/Level_15.asset using Guid(da41a41bfd66a8b45a85e8f1e453d83f) (NativeFormatImporter) -> (artifact id: 'd28431a2d9f491a72d89ff992e6e2cd4') in 0.0014056 seconds
+Start importing Assets/MegaShooter/Data/Animals/chameleon_prism.asset using Guid(1b27ee2a429685843aaf30251140dd0f) (NativeFormatImporter) -> (artifact id: '28cfd09f3c07ca2ff9e5a27445f9c687') in 0.0015509 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_08_Solar_Fang.asset using Guid(3b224991720b01a459b82f9e431a30ea) (NativeFormatImporter) -> (artifact id: 'beb46aacfaf89035a8619ad71343499d') in 0.0014302 seconds
+Start importing Assets/MegaShooter/Data/Enemies/splitter_craft.asset using Guid(7bb80f5f24eede841bf80baa8b7b8af4) (NativeFormatImporter) -> (artifact id: '8b3c19046f72d6879f8948b4fbe994d3') in 0.0014307 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_14_Level_070.asset using Guid(db96dff5b439c21498451d99902d60a6) (NativeFormatImporter) -> (artifact id: 'a49516fb6592a6a34abda07a3e3d007b') in 0.0014901 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_03_Level_015.asset using Guid(3cef06fa27058364f859bbf1f70faa60) (NativeFormatImporter) -> (artifact id: 'c5da81f96aedcb53c2d2172ec7c6f9a2') in 0.0015609 seconds
+Start importing Assets/Levels/LevelData/Level_70.asset using Guid(6c7d0dbce66581d4890ad069bb4d1897) (NativeFormatImporter) -> (artifact id: 'f89a433bccf53c926fcad31c061294dd') in 0.0014339 seconds
+Start importing Assets/Levels/LevelData/Level_90.asset using Guid(8c6463b81efc72e4d9ec6e270d52386a) (NativeFormatImporter) -> (artifact id: 'd5d06bc2019be1322afea1199f5a7b9a') in 0.0013119 seconds
+Start importing Assets/Levels/LevelData/Level_50.asset using Guid(acb9b53484f728244886284a29e892f5) (NativeFormatImporter) -> (artifact id: '99d385cfda1bba56ccf0861ff0fd0361') in 0.0013546 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_19_Level_095.asset using Guid(acb9bda4bb5228345b47ee40fb6cd3a2) (NativeFormatImporter) -> (artifact id: '6a7087b7c69c9c9b1f32addf92b23122') in 0.0013487 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_07_Level_035.asset using Guid(ec097861b3d95d14c8e5c5acca216e87) (NativeFormatImporter) -> (artifact id: '1230e47e1d6b1404b80bde9f9e361361') in 0.0014411 seconds
+Start importing Assets/MegaShooter/Data/Weapons/gorilla_bomber_weapon.asset using Guid(0d7af3e5e9232424a93ee0f92326f8e6) (NativeFormatImporter) -> (artifact id: '3a3c67d9923cb325b9c46df59c9d591b') in 0.0013646 seconds
+Start importing Assets/MegaShooter/Data/Enemies/reflector_ace.asset using Guid(6d5097b1f2f0c5f498a6157a0b3ef3cd) (NativeFormatImporter) -> (artifact id: '1318a52442d0e003303d53dcb534b7cd') in 0.0013762 seconds
+Start importing Assets/Levels/LevelData/Level_80.asset using Guid(6db64a29a3b9c4747b4dca5968f93701) (NativeFormatImporter) -> (artifact id: 'a4f1caa7df3acda885a40ebd38e95a21') in 0.0014413 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/prism.asset using Guid(6d1ef4b23d8de0e4392ed124a7140b17) (NativeFormatImporter) -> (artifact id: '328aaa4c585e84166443b8bd552c6b1e') in 0.0013106 seconds
+Start importing Assets/MegaShooter/Data/Enemies/mine_layer.asset using Guid(7d8102c39c2a91f4888805c51ae75a89) (NativeFormatImporter) -> (artifact id: 'f46cf885af0dd0a435bb59f75b955fd4') in 0.0014078 seconds
+Start importing Assets/Levels/LevelData/Level_100.asset using Guid(cddb54bc38c30d744b42de433283b5ce) (NativeFormatImporter) -> (artifact id: 'a75e85b5faf4c626acb0650e0adc1a43') in 0.0015093 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_05_Iron_Bastion.asset using Guid(1e3782fe81843284ab0e2ebf316a82f4) (NativeFormatImporter) -> (artifact id: 'c82072e4e51eaa9da5ba1a814910a8a6') in 0.0013798 seconds
+Start importing Assets/MegaShooter/Data/Animals/peacock_aurora.asset using Guid(4ef98d0e068cbe54d8d5ae15e3e81aa2) (NativeFormatImporter) -> (artifact id: '4815cf256912dbf08ab75f840b1d0962') in 0.0013995 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_15_Level_075.asset using Guid(4e9a138634ef56f4e8a4518d70327a56) (NativeFormatImporter) -> (artifact id: 'dbf44f221949cee71de46a7d3ea93df6') in 0.0013858 seconds
+Start importing Assets/MegaShooter/Data/Bosses/Boss_19_Eclipse_Emperor.asset using Guid(8e690a5c516af884a99219b8461c433a) (NativeFormatImporter) -> (artifact id: '85f6141ec6c4e12585da34bf0c4fe61b') in 0.0013037 seconds
+Start importing Assets/Levels/LevelData/Level_60.asset using Guid(ae7ef82c93928b2458fae80f0936ea2f) (NativeFormatImporter) -> (artifact id: 'e5482eefacd35ce7518bdaefb7418505') in 0.0015295 seconds
+Start importing Assets/MegaShooter/Data/Weapons/eagle_striker_weapon.asset using Guid(ce908f8dc31a357479650f36d74674c8) (NativeFormatImporter) -> (artifact id: '161c02c1dfd939ab7ef7ba35502f5eb8') in 0.001556 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_08_Level_040.asset using Guid(fe71baa1db99036419426295949a5758) (NativeFormatImporter) -> (artifact id: '63420736eba1f97d7e00e0c522e21d12') in 0.0016394 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_01_Level_005.asset using Guid(4fc2b054130aeca45aebd4501c540df4) (NativeFormatImporter) -> (artifact id: 'a8faf388fc4f073ef869fbf4929046c5') in 0.0015319 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/shell_plasma.asset using Guid(4fc709b7012cda146a008c3c8e1174c5) (NativeFormatImporter) -> (artifact id: '0b70c5a01eeabba555d7509a05290203') in 0.0013538 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_06_Level_030.asset using Guid(6fd4133ee1f417e409940068ab615cee) (NativeFormatImporter) -> (artifact id: '3a6aca62202c6229d6159b84741a38d5') in 0.0014486 seconds
+Start importing Assets/MegaShooter/Data/Projectiles/enemy_bolt.asset using Guid(6fd714d6effa2f84fa532aa1be82b4be) (NativeFormatImporter) -> (artifact id: 'c313eb76e3a5293302dd925984d23557') in 0.0013964 seconds
+Start importing Assets/MegaShooter/Data/Levels/Mega_05_Level_025.asset using Guid(af416c6a5bc9a9848bac546b02b9a533) (NativeFormatImporter) -> (artifact id: '339cacfecaf9ae13473d33093f869333') in 0.0016831 seconds
+Start importing Assets/Levels/LevelData/Level_25.asset using Guid(bf00a56d40824c44c8e8f5f49a1185cf) (NativeFormatImporter) -> (artifact id: 'c4130522230ae4181f53607dd5b85deb') in 0.0014331 seconds
+Refreshing native plugins compatible for Editor in 4.87 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=98d0c417fadc69149956da07a940a4ad): Total: 0.330 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=108 (actual=108, local cache=0, cache server=0)
+		Asset DB Process Time: managed=11 ms, native=224 ms
+		Asset DB Callback time: managed=79 ms, native=13 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4308
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 120
+	InvokeCustomDependenciesCallbacks: 0.000ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.124ms
+	Scan: 21.395ms
+	OnSourceAssetsModified: 0.000ms
+	CategorizeAssetsWithTransientArtifact: 0.099ms
+	ProcessAssetsWithTransientArtifactChanges: 0.078ms
+	CategorizeAssets: 2.082ms
+	ImportOutOfDateAssets: 208.444ms (0.468ms without children)
+		ImportManagerImport: 206.329ms (3.649ms without children)
+			ImportInProcess: 202.147ms
+			UpdateCategorizedAssets: 0.533ms
+		ReloadNativeAssets: 0.233ms
+		UnloadImportedAssets: 0.193ms
+		ReloadImportedAssets: 0.011ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.720ms
+		InitializingProgressBar: 0.007ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.482ms
+	PostProcessAllAssets: 86.734ms
+	Hotreload: 5.994ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.497ms
+	UnloadStreamsBegin: 0.973ms
+	PersistCurrentRevisions: 0.211ms
+	UnloadStreamsEnd: 0.001ms
+	Untracked: 3.051ms
+
+[MegaShooterGenerator] Configured exactly 20 mega slots; normal level assets were not regenerated or edited.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AnimalFall.MegaShooter.Editor.MegaShooterGenerator:GenerateOrUpdateMegaLevelsOnly () (at Assets/Scripts/MegaShooter/Editor/MegaShooterGenerator.cs:213)
+AnimalFall.Tests.Editor.MegaShooterEditModeTests:GeneratorIsIdempotentForNormalAssetsAndDatabaseReferences () (at Assets/Tests/Editor/MegaShooterEditModeTests.cs:114)
+System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+System.Reflection.MethodBase:Invoke (object,object[])
+NUnit.Framework.Internal.Reflect:InvokeMethod (System.Reflection.MethodInfo,object,object[])
+NUnit.Framework.Internal.MethodWrapper:Invoke (object,object[])
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext)
+UnityEngine.TestTools.UnityTestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/UnityTestMethodCommand.cs:19)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<>c__DisplayClass2_0:<Execute>b__0 () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:24)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand:CaptureException (NUnit.Framework.Internal.TestResult,System.Action) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:72)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand:ExecuteAndCheckLog (UnityEngine.TestTools.Logging.LogScope,NUnit.Framework.Internal.TestResult,System.Action) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:83)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:24)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:35)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__14<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:187)
+UnityEngine.TestTools.ImmediateEnumerableCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/ImmediateEnumerableCommand.cs:18)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__14<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:194)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__14<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:187)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__14<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:187)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestRunner.NUnitExtensions.Runner.DefaultTestWorkItem/<PerformWork>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/DefaultTestWorkItem.cs:50)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<RunChildren>d__16:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:197)
+UnityEngine.TestRunner.NUnitExtensions.Runner.CompositeWorkItem/<PerformWork>d__12:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEngine.TestRunner/NUnitExtensions/Runner/CompositeWorkItem.cs:76)
+UnityEditor.TestTools.TestRunner.EditModeRunner:MoveNextAndUpdateYieldObject () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRunner/EditModeRunner.cs:167)
+UnityEditor.TestTools.TestRunner.EditModeRunner:TestConsumer (UnityEditor.TestTools.TestRunner.TestRunnerStateSerializer) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRunner/EditModeRunner.cs:200)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.EditModeRunTask/<Execute>d__1:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/EditModeRunTask.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:173)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:108)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Scripts/MegaShooter/Editor/MegaShooterGenerator.cs Line: 213)
+
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+MCPForUnity.Editor.Helpers.McpLog:Info (string,bool) (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Helpers/McpLog.cs:40)
+MCPForUnity.Editor.Services.TestRunnerNoThrottle:RestoreThrottling () (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Services/TestRunnerNoThrottle.cs:114)
+MCPForUnity.Editor.Services.TestRunnerNoThrottle/TestCallbacks:RunFinished (UnityEditor.TestTools.TestRunner.Api.ITestResultAdaptor) (at ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Services/TestRunnerNoThrottle.cs:143)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator/<>c__DisplayClass9_0:<RunFinished>b__0 (UnityEditor.TestTools.TestRunner.Api.ICallbacks) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:55)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator:TryInvokeAllCallbacks (System.Action`1<UnityEditor.TestTools.TestRunner.Api.ICallbacks>) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:135)
+UnityEditor.TestTools.TestRunner.Api.CallbacksDelegator:RunFinished (NUnit.Framework.Interfaces.ITestResult) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/Api/CallbacksDelegator.cs:55)
+UnityEngine.Events.InvokableCall`1<NUnit.Framework.Interfaces.ITestResult>:Invoke (NUnit.Framework.Interfaces.ITestResult)
+UnityEngine.Events.UnityEvent`1<NUnit.Framework.Interfaces.ITestResult>:Invoke (NUnit.Framework.Interfaces.ITestResult)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.Events.RunFinishedInvocationEvent/<Execute>d__0:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/Events/RunFinishedInvocationEvent.cs:24)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:173)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:108)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.coplaydev.unity-mcp@4ee62b097584/Editor/Helpers/McpLog.cs Line: 40)
+
+Saving results to: C:/Users/ayush/AppData/LocalLow/ZemoLabs/AnimalFall\TestResults.xml
+Saving results to: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Logs\HindranceCliEditModeResults.xml
+Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:51)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:35)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:173)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:108)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 51)
+
+Asset Pipeline Refresh (id=0d44b4c0622a5844dbe2a3be5db61dcb): Total: 0.012 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 683 unused Assets / (2.7 MB). Loaded Objects now: 9226.
+Memory consumption went from 261.5 MB to 258.8 MB.
+Total: 8.140100 ms (FindLiveObjects: 0.278600 ms CreateObjectMapping: 0.178700 ms MarkObjects: 7.109400 ms  DeleteObjects: 0.572200 ms)
+
+DisplayProgressbar: Undo
+Test run completed. Exiting with code 0 (Ok). Run completed.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:81)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 81)
+
+Font Asset [gomarice_rocks] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:83)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_purple] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:83)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_white_outline] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:83)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_yellow_outline_big] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:83)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_yellow_outline_small] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:83)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@5ac417e07314/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Killing ADB server in 0.0518355 seconds.
+[Physics::Module] Cleanup current backned.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] License Notification channel disconnected successfully.
+[Licensing::IpcConnector] License Client channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1786903245125,"processId":5692,"allocatedMemory":18744077,"memoryLabels":[{"Default":14269},{"Permanent":15356},{"NewDelete":82857},{"Thread":4230344},{"Manager":28858},{"VertexData":8},{"Geometry":816},{"Texture":160},{"Shader":78795},{"Material":24},{"GfxDevice":55136},{"Animation":328},{"Audio":4040},{"FontEngine":256},{"Physics":1241},{"Serialization":968},{"Input":14824},{"JobScheduler":34872},{"TextLib":32},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1619920},{"Resource":1304},{"Renderer":2928},{"Transform":4646},{"File":1016},{"WebCam":752},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":9656},{"DynamicArray":134282},{"HashMap":105842},{"Utility":2662718},{"Curl":48},{"PoolAlloc":1912},{"AI":104},{"TypeTree":5005},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7888},{"Director":8240},{"WebRequest":808},{"VR":45961},{"SceneManager":496},{"Video":64},{"LazyScriptCache":32},{"NativeArray":8},{"Camera":17},{"Secure":1},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":256},{"Hierarchy":272},{"Gui":80},{"EditorUtility":85462},{"VersionControl":4},{"Undo":947},{"AssetDatabase":8920518},{"EditorGi":328},{"UnityConnect":24208},{"Upm":1996},{"DrivenProperties":72},{"LocalIPC":260},{"ProfilerEditor":9738},{"CoreBusinessMetrics":3610},{"Licensing":3512},{"AssetReference":32},{"IPCStream":32}]}

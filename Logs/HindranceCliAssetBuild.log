@@ -1,0 +1,1332 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-ayush" at "2026-08-16T17:58:42.9076563Z"
+[Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 4372, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] Error: LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              a4fc8752c4594ac1ba364d3a80a2f966
+  Correlation Id:          f8d093bbf5d1b3d571f3e023be05335b
+  External correlation Id: 1312504277186635685
+  Machine Id:              i89aphioMBa5HdGkzMh86Q5C3Mk=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-ayush" (connect: 0.00s, validation: 0.01s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-ayush-notifications" at "2026-08-16T17:58:42.9471127Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '6000.0/staging' branch; Version is '6000.0.42f1 (feb9a7235030) revision 16693671'; Using compiler version '193933523'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit CoreSingleLanguage' Language: 'en' Physical Memory: 16055 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-ZTNJ-AD29-DWJR-KJY2-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Unity.exe
+-batchmode
+-nographics
+-projectPath
+C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall
+-executeMethod
+AnimalFall.EditorTools.HindranceAssetPipeline.RebuildAll
+-logFile
+C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Logs\HindranceCliAssetBuild.log
+-quit
+Successfully changed project path to: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall
+C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [21928]  Target information:
+
+Player connection [21928]  * "[IP] 192.168.0.119 [Port] 55504 [Flags] 2 [Guid] 1980211208 [EditorId] 1980211208 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-IJ3E2090) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [21928] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [21928] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-6836" after 0.2 seconds.
+Library Redirect Path: Library/
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 70 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.collab-proxy@2.10.2 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.collab-proxy@3351acaba9c9)
+    com.unity.ide.rider@3.0.31 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ide.rider@7921be93db40)
+    com.unity.ide.visualstudio@2.0.22 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ide.visualstudio@8140e851d83e)
+    com.unity.inputsystem@1.13.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.inputsystem@e2c83221d2dc)
+    com.unity.postprocessing@3.4.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.postprocessing@026b2a0827a4)
+    com.unity.purchasing@5.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.purchasing@14f2ec4bbf07)
+    com.unity.test-framework@1.4.6 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.test-framework@5ac417e07314)
+    com.unity.timeline@1.8.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.timeline@c58b4ee65782)
+    com.unity.visualscripting@1.9.5 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.visualscripting@1b53f46e931b)
+    com.unity.ext.nunit@2.0.5 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ext.nunit@60ef35ffd3cd)
+    com.unity.services.core@1.14.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.services.core@9e81a5e38245)
+    com.unity.2d.animation@10.1.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.animation@494a3b4e73a9)
+    com.unity.2d.pixel-perfect@5.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.pixel-perfect@e3ae982b672d)
+    com.unity.2d.psdimporter@9.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.psdimporter@676bae148e11)
+    com.unity.2d.spriteshape@10.0.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.spriteshape@9e35352ae135)
+    com.unity.2d.tilemap.extras@4.1.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.tilemap.extras@13634da7dbe0)
+    com.unity.2d.aseprite@1.1.8 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.aseprite@1f731787b516)
+    com.unity.nuget.newtonsoft-json@3.2.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0)
+    com.unity.searcher@4.9.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.searcher@1e17ce91558d)
+    com.unity.burst@1.8.19 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.burst@7a907cf5a459)
+    com.unity.mathematics@1.3.2 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.mathematics@8017b507cc74)
+    com.unity.collections@2.5.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.collections@56bff8827a7e)
+    com.unity.2d.common@9.0.7 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.common@bb1fc9b3d81b)
+    com.unity.nuget.mono-cecil@1.11.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f)
+    com.unity.test-framework.performance@3.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.test-framework.performance@fb0dc592af8b)
+  Built-in packages:
+    com.unity.feature.2d@2.0.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.feature.2d@dd1ea8910f12)
+    com.unity.multiplayer.center@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.multiplayer.center@f3fb577b3546)
+    com.unity.render-pipelines.universal@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.universal@087c6d6dbb7d)
+    com.unity.ugui@2.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.ugui@9496653a3df6)
+    com.unity.modules.accessibility@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.accessibility)
+    com.unity.modules.ai@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics2d)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.video)
+    com.unity.modules.vr@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vr)
+    com.unity.modules.wind@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.hierarchycore)
+    com.unity.render-pipelines.core@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.core@1c27dfa04d8a)
+    com.unity.shadergraph@17.0.4 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.shadergraph@608f316e1f48)
+    com.unity.render-pipelines.universal-config@17.0.3 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.render-pipelines.universal-config@fa63c96d3e1a)
+    com.unity.2d.sprite@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.sprite@072d7bd355e5)
+    com.unity.2d.tilemap@1.0.0 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.2d.tilemap@91afae292a4e)
+    com.unity.rendering.light-transport@1.0.1 (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.unity.rendering.light-transport@307bc27a498f)
+  Git packages:
+    com.coplaydev.unity-mcp@https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main (location: C:\AnnusMirabilis\ZEMOLABS\NEMESIS\animal_fall\animal_fall\Library\PackageCache\com.coplaydev.unity-mcp@4ee62b097584)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 1.07 seconds
+[Licensing::Client] Successfully resolved entitlement details
+Refreshing native plugins compatible for Editor in 9.25 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.0.42f1 (feb9a7235030)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
+[Licensing::Client] Successfully resolved entitlement details
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56836
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.42f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.016096 seconds.
+- Loaded All Assemblies, in  0.325 seconds
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 2235 ms
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.515 seconds
+Domain Reload Profiling: 2838ms
+	BeginReloadAssembly (107ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (121ms)
+		LoadAssemblies (107ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (118ms)
+			TypeCache.Refresh (116ms)
+				TypeCache.ScanAssembly (106ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (2515ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2488ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2307ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (40ms)
+			ProcessInitializeOnLoadAttributes (91ms)
+			ProcessInitializeOnLoadMethodAttributes (46ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+Starting: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\bee_backend.exe --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+DisplayProgressbar: Compiling Scripts
+ExitCode: 4 Duration: 0s277ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/900b0aE-inputdata.json
+[1020/1336  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra requires additional run (0.24 seconds), 1 items updated, 1019 evaluated
+Starting: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Tools\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/900b0aE.dag.json" "Library/Bee/900b0aE-inputdata.json" "Library\Bee\buildprogram0.traceevents"
+WorkingDir: C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+ExitCode: 0 Duration: 0s915ms
+Starting: C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Data\bee_backend.exe --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --dagfilejson="Library\Bee\900b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall
+ExitCode: 0 Duration: 0s495ms
+Finished compiling graph: 1340 nodes, 25968 flattened edges (20770 ToBuild, 222 ToUse), maximum node priority 1464
+[1020/1336  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.47 seconds), 1 items updated, 1336 evaluated
+AssetDatabase: script compilation time: 2.103390s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.943 seconds
+Refreshing native plugins compatible for Editor in 5.28 ms, found 4 plugins.
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 5.37 ms, found 4 plugins.
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.226 seconds
+Domain Reload Profiling: 4166ms
+	BeginReloadAssembly (261ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (139ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (617ms)
+		LoadAssemblies (378ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (328ms)
+			TypeCache.Refresh (246ms)
+				TypeCache.ScanAssembly (230ms)
+			BuildScriptInfoCaches (65ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (3226ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (3076ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (25ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (133ms)
+			ProcessInitializeOnLoadAttributes (2782ms)
+			ProcessInitializeOnLoadMethodAttributes (127ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Asset Pipeline Refresh (id=29fcecdbfaf3ca74fa69e878550933ac): Total: 6.942 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=3796 ms
+		Asset DB Callback time: managed=39 ms, native=0 ms
+		Scripting: domain reloads=1, domain reload time=944 ms, compile time=2105 ms, other=56 ms
+		Project Asset Count: scripts=2092, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 1.570ms
+	ApplyChangesToAssetFolders: 0.409ms
+	Scan: 192.924ms
+	OnSourceAssetsModified: 0.002ms
+	CategorizeAssetsWithTransientArtifact: 55.792ms
+	ProcessAssetsWithTransientArtifactChanges: 83.118ms
+	CategorizeAssets: 54.836ms
+	ImportOutOfDateAssets: 3245.464ms (1137.986ms without children)
+		CompileScripts: 2104.948ms
+		ReloadNativeAssets: 0.021ms
+		UnloadImportedAssets: 0.715ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.970ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.823ms
+	PostProcessAllAssets: 39.542ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.000ms
+	UnloadStreamsBegin: 1.789ms
+	PersistCurrentRevisions: 0.225ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 3.039ms
+	Untracked: 3266.473ms
+
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 0.682ms
+Initializing Unity extensions:
+[Licensing::Client] Successfully resolved entitlement details
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-AnimalFall
+Unloading 30 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8329 unused Assets / (3.2 MB). Loaded Objects now: 9029.
+Memory consumption went from 226.0 MB to 222.8 MB.
+Total: 9.788400 ms (FindLiveObjects: 0.579000 ms CreateObjectMapping: 0.605900 ms MarkObjects: 5.734600 ms  DeleteObjects: 2.868200 ms)
+
+Start importing Assets/Prefabs/Hindrances/VFX using Guid(c8f145f3ec9ca054ca7afa1b4d008d17) (DefaultImporter) -> (artifact id: '8ceaeea651683738a2537d5bd8ddbab8') in 0.0148212 seconds
+Refreshing native plugins compatible for Editor in 16.15 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=e241595253aa29f43936f63b2d4fc9e0): Total: 0.308 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=98 ms
+		Asset DB Callback time: managed=179 ms, native=25 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=1, changed=1, moved=0, deleted=0
+		Scan Filter Count: 4
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.180ms
+	Scan: 39.265ms
+	OnSourceAssetsModified: 0.808ms
+	CategorizeAssetsWithTransientArtifact: 0.025ms
+	ProcessAssetsWithTransientArtifactChanges: 0.148ms
+	CategorizeAssets: 33.180ms
+	ImportOutOfDateAssets: 17.917ms (0.473ms without children)
+		ImportManagerImport: 16.177ms (0.994ms without children)
+			ImportInProcess: 15.161ms
+			UpdateCategorizedAssets: 0.022ms
+		ReloadNativeAssets: 0.028ms
+		UnloadImportedAssets: 0.146ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.739ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.354ms
+	PostProcessAllAssets: 186.668ms
+	Hotreload: 17.720ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.280ms
+	UnloadStreamsBegin: 1.120ms
+	PersistCurrentRevisions: 0.315ms
+	UnloadStreamsEnd: 0.001ms
+	Untracked: 10.419ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_current_01.png using Guid(20625509662f30a4e92d518d2b43b5c5) (TextureImporter) -> (artifact id: '0fc76ab78aa496bab89f73ea511bc91d') in 3.1995771 seconds
+Refreshing native plugins compatible for Editor in 10.82 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=90cd1d967c212aa4fbb4b38993c0cfe8): Total: 3.259 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=68 ms, native=3146 ms
+		Asset DB Callback time: managed=31 ms, native=12 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.221ms
+	Scan: 5.868ms
+	OnSourceAssetsModified: 0.000ms
+	CategorizeAssetsWithTransientArtifact: 0.012ms
+	ProcessAssetsWithTransientArtifactChanges: 0.080ms
+	CategorizeAssets: 1.622ms
+	ImportOutOfDateAssets: 3203.212ms (0.265ms without children)
+		ImportManagerImport: 3200.829ms (0.790ms without children)
+			ImportInProcess: 3200.006ms
+			UpdateCategorizedAssets: 0.034ms
+		ReloadNativeAssets: 0.028ms
+		UnloadImportedAssets: 0.235ms
+		ReloadImportedAssets: 0.332ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.884ms
+		InitializingProgressBar: 0.007ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.630ms
+	PostProcessAllAssets: 33.029ms
+	Hotreload: 10.948ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.284ms
+	UnloadStreamsBegin: 0.035ms
+	PersistCurrentRevisions: 0.266ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 3.114ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_current_01.png using Guid(20625509662f30a4e92d518d2b43b5c5) (TextureImporter) -> (artifact id: '0fc76ab78aa496bab89f73ea511bc91d') in 3.1711165 seconds
+Refreshing native plugins compatible for Editor in 12.21 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=bb78d4363b5f12444ac93a80c9c5d836): Total: 3.203 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=3181 ms
+		Asset DB Callback time: managed=1 ms, native=15 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.000ms
+	ApplyChangesToAssetFolders: 0.105ms
+	Scan: 5.862ms
+	OnSourceAssetsModified: 0.000ms
+	CategorizeAssetsWithTransientArtifact: 0.011ms
+	ProcessAssetsWithTransientArtifactChanges: 0.074ms
+	CategorizeAssets: 1.729ms
+	ImportOutOfDateAssets: 3175.359ms (0.292ms without children)
+		ImportManagerImport: 3172.729ms (1.060ms without children)
+			ImportInProcess: 3171.629ms
+			UpdateCategorizedAssets: 0.040ms
+		ReloadNativeAssets: 0.030ms
+		UnloadImportedAssets: 0.217ms
+		ReloadImportedAssets: 0.443ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.887ms
+		InitializingProgressBar: 0.007ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.755ms
+	PostProcessAllAssets: 3.767ms
+	Hotreload: 12.392ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.264ms
+	UnloadStreamsBegin: 0.002ms
+	PersistCurrentRevisions: 0.410ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 2.724ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_current_02.png using Guid(e5253f9161c618c4880b0ebd191581b1) (TextureImporter) -> (artifact id: 'b41829eb086e2df6e59de01d73c65c85') in 4.3499039 seconds
+Refreshing native plugins compatible for Editor in 11.98 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=6939a1671e9832548a6104a3f0e1c451): Total: 4.390 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=4370 ms
+		Asset DB Callback time: managed=1 ms, native=15 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.135ms
+	Scan: 9.218ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.024ms
+	ProcessAssetsWithTransientArtifactChanges: 0.086ms
+	CategorizeAssets: 2.848ms
+	ImportOutOfDateAssets: 4355.493ms (0.085ms without children)
+		ImportManagerImport: 4351.999ms (1.341ms without children)
+			ImportInProcess: 4350.605ms
+			UpdateCategorizedAssets: 0.053ms
+		ReloadNativeAssets: 0.042ms
+		UnloadImportedAssets: 0.322ms
+		ReloadImportedAssets: 0.641ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.376ms
+		InitializingProgressBar: 0.008ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.018ms
+	PostProcessAllAssets: 4.387ms
+	Hotreload: 12.212ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.318ms
+	UnloadStreamsBegin: 0.035ms
+	PersistCurrentRevisions: 0.557ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 4.655ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_current_02.png using Guid(e5253f9161c618c4880b0ebd191581b1) (TextureImporter) -> (artifact id: 'b41829eb086e2df6e59de01d73c65c85') in 4.6035901 seconds
+Refreshing native plugins compatible for Editor in 11.09 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=398d92e2ef92d1d4791cba95e3871bd6): Total: 4.646 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=4626 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.211ms
+	Scan: 12.901ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.007ms
+	ProcessAssetsWithTransientArtifactChanges: 0.088ms
+	CategorizeAssets: 2.817ms
+	ImportOutOfDateAssets: 4609.348ms (0.297ms without children)
+		ImportManagerImport: 4605.771ms (1.298ms without children)
+			ImportInProcess: 4604.420ms
+			UpdateCategorizedAssets: 0.053ms
+		ReloadNativeAssets: 0.052ms
+		UnloadImportedAssets: 0.379ms
+		ReloadImportedAssets: 0.603ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.408ms
+		InitializingProgressBar: 0.012ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.825ms
+	PostProcessAllAssets: 3.922ms
+	Hotreload: 11.337ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.471ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.521ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 3.995ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_01.png using Guid(8739acdc380db0d48b81b8ed1b5dae52) (TextureImporter) -> (artifact id: 'cd3c234664fbf30aaf4b3dd62055f754') in 5.5000809 seconds
+Refreshing native plugins compatible for Editor in 11.79 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=c8be8414b3a20bb42a71fd43bb298d61): Total: 5.545 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=5524 ms
+		Asset DB Callback time: managed=1 ms, native=15 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.214ms
+	Scan: 12.774ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.022ms
+	ProcessAssetsWithTransientArtifactChanges: 0.090ms
+	CategorizeAssets: 3.066ms
+	ImportOutOfDateAssets: 5505.983ms (0.313ms without children)
+		ImportManagerImport: 5502.123ms (1.296ms without children)
+			ImportInProcess: 5500.774ms
+			UpdateCategorizedAssets: 0.053ms
+		ReloadNativeAssets: 0.052ms
+		UnloadImportedAssets: 0.375ms
+		ReloadImportedAssets: 0.604ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.512ms
+		InitializingProgressBar: 0.013ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.990ms
+	PostProcessAllAssets: 4.844ms
+	Hotreload: 12.025ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.476ms
+	UnloadStreamsBegin: 0.056ms
+	PersistCurrentRevisions: 0.552ms
+	UnloadStreamsEnd: 0.005ms
+	Untracked: 5.227ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_01.png using Guid(8739acdc380db0d48b81b8ed1b5dae52) (TextureImporter) -> (artifact id: 'cd3c234664fbf30aaf4b3dd62055f754') in 5.2954352 seconds
+Refreshing native plugins compatible for Editor in 10.92 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=60720c4ae0673f149b4d61aecba39e4b): Total: 5.338 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=5319 ms
+		Asset DB Callback time: managed=1 ms, native=13 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.210ms
+	Scan: 12.828ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.007ms
+	ProcessAssetsWithTransientArtifactChanges: 0.090ms
+	CategorizeAssets: 2.812ms
+	ImportOutOfDateAssets: 5301.373ms (0.315ms without children)
+		ImportManagerImport: 5297.584ms (1.316ms without children)
+			ImportInProcess: 5296.215ms
+			UpdateCategorizedAssets: 0.053ms
+		ReloadNativeAssets: 0.051ms
+		UnloadImportedAssets: 0.390ms
+		ReloadImportedAssets: 0.652ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.437ms
+		InitializingProgressBar: 0.014ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.927ms
+	PostProcessAllAssets: 3.847ms
+	Hotreload: 11.147ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.475ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.584ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 4.327ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_02.png using Guid(cbe1ad95c7793c848be013d1bba86d30) (TextureImporter) -> (artifact id: 'cc5426e9b1c325812a10883cb150307d') in 4.7618402 seconds
+Refreshing native plugins compatible for Editor in 11.51 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=96d455647b7702b438e8424282833461): Total: 4.805 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=4785 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.214ms
+	Scan: 12.316ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.090ms
+	CategorizeAssets: 2.750ms
+	ImportOutOfDateAssets: 4767.380ms (0.226ms without children)
+		ImportManagerImport: 4763.863ms (1.319ms without children)
+			ImportInProcess: 4762.492ms
+			UpdateCategorizedAssets: 0.052ms
+		ReloadNativeAssets: 0.052ms
+		UnloadImportedAssets: 0.371ms
+		ReloadImportedAssets: 0.623ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.394ms
+		InitializingProgressBar: 0.012ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.838ms
+	PostProcessAllAssets: 4.086ms
+	Hotreload: 11.785ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.475ms
+	UnloadStreamsBegin: 0.062ms
+	PersistCurrentRevisions: 0.533ms
+	UnloadStreamsEnd: 0.001ms
+	Untracked: 4.901ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_icons_02.png using Guid(cbe1ad95c7793c848be013d1bba86d30) (TextureImporter) -> (artifact id: 'cc5426e9b1c325812a10883cb150307d') in 4.7659697 seconds
+Refreshing native plugins compatible for Editor in 11.01 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=10fbfe845aaf4b14d807ac900d8e2aa5): Total: 4.806 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=4787 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.221ms
+	Scan: 11.355ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.009ms
+	ProcessAssetsWithTransientArtifactChanges: 0.088ms
+	CategorizeAssets: 2.563ms
+	ImportOutOfDateAssets: 4771.431ms (0.182ms without children)
+		ImportManagerImport: 4767.904ms (1.212ms without children)
+			ImportInProcess: 4766.642ms
+			UpdateCategorizedAssets: 0.051ms
+		ReloadNativeAssets: 0.078ms
+		UnloadImportedAssets: 0.322ms
+		ReloadImportedAssets: 0.566ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.298ms
+		InitializingProgressBar: 0.011ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.070ms
+	PostProcessAllAssets: 4.037ms
+	Hotreload: 11.229ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.492ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.538ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 4.145ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_interactions.png using Guid(08596f139b842874aa8b2aed1eb0d5f5) (TextureImporter) -> (artifact id: '0367dd151d08d264d4f9ca4c527f5d78') in 5.0814676 seconds
+Refreshing native plugins compatible for Editor in 11.52 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=4984190c9d06d944aaae3c3f3b300697): Total: 5.125 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=5105 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.231ms
+	Scan: 12.207ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.010ms
+	ProcessAssetsWithTransientArtifactChanges: 0.090ms
+	CategorizeAssets: 2.630ms
+	ImportOutOfDateAssets: 5087.009ms (0.290ms without children)
+		ImportManagerImport: 5083.437ms (1.236ms without children)
+			ImportInProcess: 5082.148ms
+			UpdateCategorizedAssets: 0.053ms
+		ReloadNativeAssets: 0.047ms
+		UnloadImportedAssets: 0.298ms
+		ReloadImportedAssets: 0.578ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.367ms
+		InitializingProgressBar: 0.009ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.983ms
+	PostProcessAllAssets: 4.863ms
+	Hotreload: 11.762ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.466ms
+	UnloadStreamsBegin: 0.052ms
+	PersistCurrentRevisions: 0.546ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 4.966ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_interactions.png using Guid(08596f139b842874aa8b2aed1eb0d5f5) (TextureImporter) -> (artifact id: '0367dd151d08d264d4f9ca4c527f5d78') in 5.1059205 seconds
+Refreshing native plugins compatible for Editor in 10.73 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=99e0244e9b0673143989c8c2280a0048): Total: 5.147 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=5129 ms
+		Asset DB Callback time: managed=1 ms, native=13 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.209ms
+	Scan: 12.275ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.092ms
+	CategorizeAssets: 2.725ms
+	ImportOutOfDateAssets: 5111.456ms (0.347ms without children)
+		ImportManagerImport: 5107.916ms (1.202ms without children)
+			ImportInProcess: 5106.650ms
+			UpdateCategorizedAssets: 0.064ms
+		ReloadNativeAssets: 0.061ms
+		UnloadImportedAssets: 0.350ms
+		ReloadImportedAssets: 0.532ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.379ms
+		InitializingProgressBar: 0.010ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.860ms
+	PostProcessAllAssets: 3.987ms
+	Hotreload: 10.946ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.474ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.538ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 3.947ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_physics_props.png using Guid(d90be2bde5b61c44a80544d85e21b8a3) (TextureImporter) -> (artifact id: '9d0664bb4bb059fcd62366c57e3f6285') in 4.191233 seconds
+Refreshing native plugins compatible for Editor in 11.83 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=5d28d44d3113f514ab671d491e6a1f1a): Total: 4.233 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=4213 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.203ms
+	Scan: 10.851ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.088ms
+	CategorizeAssets: 2.631ms
+	ImportOutOfDateAssets: 4196.711ms (0.243ms without children)
+		ImportManagerImport: 4193.284ms (1.261ms without children)
+			ImportInProcess: 4191.967ms
+			UpdateCategorizedAssets: 0.057ms
+		ReloadNativeAssets: 0.048ms
+		UnloadImportedAssets: 0.300ms
+		ReloadImportedAssets: 0.528ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.371ms
+		InitializingProgressBar: 0.010ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.926ms
+	PostProcessAllAssets: 3.971ms
+	Hotreload: 12.067ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.427ms
+	UnloadStreamsBegin: 0.046ms
+	PersistCurrentRevisions: 0.560ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 5.045ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_physics_props.png using Guid(d90be2bde5b61c44a80544d85e21b8a3) (TextureImporter) -> (artifact id: '9d0664bb4bb059fcd62366c57e3f6285') in 4.3120934 seconds
+Refreshing native plugins compatible for Editor in 10.37 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=6a8cd4119e4540d4dad4ee0e83decc96): Total: 4.353 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=4335 ms
+		Asset DB Callback time: managed=1 ms, native=13 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.224ms
+	Scan: 12.199ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.007ms
+	ProcessAssetsWithTransientArtifactChanges: 0.090ms
+	CategorizeAssets: 2.690ms
+	ImportOutOfDateAssets: 4317.563ms (0.311ms without children)
+		ImportManagerImport: 4314.047ms (1.239ms without children)
+			ImportInProcess: 4312.756ms
+			UpdateCategorizedAssets: 0.052ms
+		ReloadNativeAssets: 0.051ms
+		UnloadImportedAssets: 0.319ms
+		ReloadImportedAssets: 0.525ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.359ms
+		InitializingProgressBar: 0.014ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.937ms
+	PostProcessAllAssets: 4.369ms
+	Hotreload: 10.600ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.492ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.572ms
+	UnloadStreamsEnd: 0.003ms
+	Untracked: 4.221ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_dynamic_states.png using Guid(c0559f4097a5a5b438229c41d42c68c9) (TextureImporter) -> (artifact id: 'd10141f0ff9b28f1ffe89b8fdd5621d2') in 4.6145117 seconds
+Refreshing native plugins compatible for Editor in 11.40 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=267646e456875ae46b9e91a0fb45d55e): Total: 4.659 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=4638 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.214ms
+	Scan: 13.886ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.095ms
+	CategorizeAssets: 2.755ms
+	ImportOutOfDateAssets: 4620.262ms (0.235ms without children)
+		ImportManagerImport: 4616.635ms (1.338ms without children)
+			ImportInProcess: 4615.239ms
+			UpdateCategorizedAssets: 0.058ms
+		ReloadNativeAssets: 0.047ms
+		UnloadImportedAssets: 0.325ms
+		ReloadImportedAssets: 0.607ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.556ms
+		InitializingProgressBar: 0.011ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.845ms
+	PostProcessAllAssets: 4.027ms
+	Hotreload: 11.636ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.451ms
+	UnloadStreamsBegin: 0.051ms
+	PersistCurrentRevisions: 0.542ms
+	UnloadStreamsEnd: 0.001ms
+	Untracked: 5.035ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_dynamic_states.png using Guid(c0559f4097a5a5b438229c41d42c68c9) (TextureImporter) -> (artifact id: 'd10141f0ff9b28f1ffe89b8fdd5621d2') in 4.6224398 seconds
+Refreshing native plugins compatible for Editor in 11.11 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=f9986ec0b38c0194c9c73f818eb65219): Total: 4.664 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=4644 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.209ms
+	Scan: 11.859ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.009ms
+	ProcessAssetsWithTransientArtifactChanges: 0.093ms
+	CategorizeAssets: 2.697ms
+	ImportOutOfDateAssets: 4628.430ms (0.285ms without children)
+		ImportManagerImport: 4624.489ms (1.321ms without children)
+			ImportInProcess: 4623.113ms
+			UpdateCategorizedAssets: 0.055ms
+		ReloadNativeAssets: 0.054ms
+		UnloadImportedAssets: 0.368ms
+		ReloadImportedAssets: 0.649ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.436ms
+		InitializingProgressBar: 0.013ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.134ms
+	PostProcessAllAssets: 4.098ms
+	Hotreload: 11.379ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.483ms
+	UnloadStreamsBegin: 0.003ms
+	PersistCurrentRevisions: 0.614ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 3.971ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_vfx.png using Guid(f939809086ddb2b438db8fe11c8da608) (TextureImporter) -> (artifact id: 'e09ae0abe2d312b36487d2bd09ec30b3') in 5.0069483 seconds
+Refreshing native plugins compatible for Editor in 12.05 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=e1c6e61fece87dd429912c335c8db962): Total: 5.050 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=5031 ms
+		Asset DB Callback time: managed=1 ms, native=15 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.228ms
+	Scan: 12.364ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.099ms
+	CategorizeAssets: 2.642ms
+	ImportOutOfDateAssets: 5012.438ms (0.404ms without children)
+		ImportManagerImport: 5008.866ms (1.174ms without children)
+			ImportInProcess: 5007.642ms
+			UpdateCategorizedAssets: 0.051ms
+		ReloadNativeAssets: 0.051ms
+		UnloadImportedAssets: 0.307ms
+		ReloadImportedAssets: 0.471ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.498ms
+		InitializingProgressBar: 0.010ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.830ms
+	PostProcessAllAssets: 4.018ms
+	Hotreload: 12.279ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.517ms
+	UnloadStreamsBegin: 0.054ms
+	PersistCurrentRevisions: 0.545ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 4.583ms
+
+Start importing Assets/Resources/icons/hindrances/Sheets/hindrance_vfx.png using Guid(f939809086ddb2b438db8fe11c8da608) (TextureImporter) -> (artifact id: 'e09ae0abe2d312b36487d2bd09ec30b3') in 4.9962036 seconds
+Refreshing native plugins compatible for Editor in 11.07 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=1a146a610ebd2444bb82262a1ef28eb5): Total: 5.037 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=5019 ms
+		Asset DB Callback time: managed=1 ms, native=14 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2093, non-scripts=4303
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.210ms
+	Scan: 11.623ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.008ms
+	ProcessAssetsWithTransientArtifactChanges: 0.092ms
+	CategorizeAssets: 2.783ms
+	ImportOutOfDateAssets: 5001.991ms (0.296ms without children)
+		ImportManagerImport: 4998.320ms (1.278ms without children)
+			ImportInProcess: 4996.944ms
+			UpdateCategorizedAssets: 0.099ms
+		ReloadNativeAssets: 0.049ms
+		UnloadImportedAssets: 0.331ms
+		ReloadImportedAssets: 0.527ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.379ms
+		InitializingProgressBar: 0.012ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.076ms
+	PostProcessAllAssets: 4.053ms
+	Hotreload: 11.299ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.627ms
+	UnloadStreamsBegin: 0.002ms
+	PersistCurrentRevisions: 0.539ms
+	UnloadStreamsEnd: 0.002ms
+	Untracked: 3.973ms
+
+Asset Pipeline Refresh (id=a8a86182bab922f428ef7981dc3be053): Total: 0.018 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/VFX/Hindrance_Leaf.prefab using Guid(3ae78e20e04f2a943a88c5b47ac3ec26) (PrefabImporter) -> (artifact id: '16caf2c129417c726f8519570a266b41') in 0.0274908 seconds
+Refreshing native plugins compatible for Editor in 11.66 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=f2ac33e73c9801b4bb252886223c44c0): Total: 0.109 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/VFX/Overlay_Ink.prefab using Guid(f5a1ab31d45d7c84d8b7a6fb5b79c91e) (PrefabImporter) -> (artifact id: 'e9e3f4c1c6d8f9f05d29ea4f5a763dcb') in 0.0246986 seconds
+Refreshing native plugins compatible for Editor in 8.99 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=c6f74ad0751c0e84a9e932cbe53c8cf3): Total: 0.099 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/VFX/Overlay_Storm.prefab using Guid(6cf33fa68494cd747b0c8be8b9476d8b) (PrefabImporter) -> (artifact id: '56da9473c7ac5390ef7439aa20d69eb5') in 0.0209109 seconds
+Refreshing native plugins compatible for Editor in 6.41 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=49a92102edc657546af90e147f217624): Total: 0.086 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/VFX/Overlay_Flash.prefab using Guid(76f34d86d1d84804585152ddde477541) (PrefabImporter) -> (artifact id: '2f1e45d4996e4c4b6cfaed2e8071728a') in 0.0242814 seconds
+Refreshing native plugins compatible for Editor in 6.57 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=7253681bf0a5d0840b9860fba8c6d471): Total: 0.082 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/VFX/Overlay_Border.prefab using Guid(e808ad624886d9146bfcb02199445d02) (PrefabImporter) -> (artifact id: '533155c9f70e5858f40fdd493b8f5c6a') in 0.0201323 seconds
+Refreshing native plugins compatible for Editor in 6.39 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=73ce6d046f699894eae8eb09931a9f7a): Total: 0.082 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=7778ca4ba5d24f54b971597cf94dabdf): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=31027ce10567e7c4fbaad8f4dba61915): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2b3e44f9aee9b6f409575b9afbd5bede): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=52e9e07b2dd1dc841939c4d0c58d2a11): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=fe35136873787994aba762e87a861395): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=94f53603f55d0f3478e5343d875a2cfc): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=42f26f24c33b2a244a91abdcbae61c13): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=f4034dbaeff40ce48b66bf4e87ddf759): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=ae3b5a91fc8ae454493c7117d2a6d063): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=59ad6946efee8e34b86243076fe788c9): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=4bdee8d66bc96994e80de9eb944b458d): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Prefabs/Hindrances/Hindrance_12_FallingLeaves.prefab using Guid(99d27cdd005960d4eb0d28569bbbee0e) (PrefabImporter) -> (artifact id: '6a2b1a033f856ed23747d9be875e616c') in 0.0039571 seconds
+Refreshing native plugins compatible for Editor in 5.03 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=b109518d6b7f9164a85c45f921e4afe4): Total: 0.049 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=dc37f5bf9af94ce4399a7921aa7731f4): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=95f58e0b2fd6261468417c83594ced5f): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=ddcc8208719efcd4a9887163d873fa32): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b5f6279f61710984b8612818d8130c92): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=1e2adf7a8e40c204f8cc6df65a2cb75e): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=dfe71b734cbb64c4d97d4e5f0efb78a8): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=8327299adca379d4796dbe591a91661c): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=980cd71d0ec6f7e4087f7ab1c325d6e8): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b6d5e6e44d1489146a9c1719e96155a6): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=a338fc8730994d9449a3a210d2fd5f81): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=5012924881775b147ba67ec61367e310): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=09a64f07b5f2f2840a93cfc454cca586): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b762a5e05ffee7d429007c25cfc719ad): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=0b3fcc4359a869a4592e19bf880a08b4): Total: 0.014 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=a38643df912f346428554c9f4b12fe6c): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2e7a60eb601b3ef4085eacaa2f5afa75): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=932d47d3e8802a045931242c6dc5179d): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b3a19b9be3f733d49a4cde17579a1d2f): Total: 0.014 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=e9c71ae163d052e4498f145e2e64fea4): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=7ab4f37f9b599e84a91ef1258cd81a69): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=97838d3248121c747a370358a9d4f624): Total: 0.029 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=c334fa4ef060b434c8a7194273c32b1b): Total: 0.010 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=d91193bcbab62d140a12eb128a5d73ce): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=10f62ef9f0d9b454dbe98446e892df57): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2aad86b91dc86a2419100230c7cb18c3): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=fcec1cd9388e86d47a4aa337d5f8d0ef): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=d26f6e2476d61bc418eb3f4ded7541c7): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=48cdf8ba5eff5fb4cb25be6fbe5ab4e8): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=976f924cb8075644d933989437fcde65): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=173f442ddfe0ed54bb429e4a31402a18): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=237e8951ab2d6ce458da09dafec23322): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=c1063e5775e7c3a4b801d53f1424929c): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=016d3c5a6a3305c4cbea78a9490d421b): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=5913b9bd7e4efc84aa9f46935e1cb69a): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b71140489be1eab44ad225cdb5eef99f): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=e0684289100fbde4a87ac11af43b8fcd): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=acc8e8100b5445940ba5790c673ebe6f): Total: 0.009 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2ea2de28fc3e67a4f981f56acc3a6ca3): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Opening scene 'Assets/Scenes/GameScene.unity additively'
+[Licensing::Client] Successfully resolved entitlement details
+Loaded scene 'Assets/Scenes/GameScene.unity'
+	Deserialize:            99.126 ms
+	Integration:            70.953 ms
+	Integration of assets:  11.839 ms
+	Thread Wait Time:       0.056 ms
+	Total Operation Time:   181.975 ms
+Start importing Assets/Resources/Hindrances/HindranceAtlas.spriteatlas using Guid(a844b622c344b284f8145b7053b8a2d3) (NativeFormatImporter) -> (artifact id: '108d16b61bb6225b5b760113fd5e96c8') in 0.0021583 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_04_ThiefBird.asset using Guid(401214c3e460ffc4999b046167e5fbc9) (NativeFormatImporter) -> (artifact id: '77a245d41f513257296b61e26ff78c58') in 0.0020931 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_02_AlarmClock.asset using Guid(a01670b2444c9914aade120818a4f8bf) (NativeFormatImporter) -> (artifact id: '792d1c0bcf645c0c1d401deffe4cd619') in 0.0016913 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_30_KeepersWhistle.asset using Guid(b0d9c1fcd3262df48b8cb5194134113d) (NativeFormatImporter) -> (artifact id: 'e3827e1fb50baba28662699d092cccf2') in 0.0017768 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_17_MagnetTrap.asset using Guid(c0d161af0b86504409be4a8e24aec7f6) (NativeFormatImporter) -> (artifact id: '2055723d4f41b071930b61e29ca1f657') in 0.0015062 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_50_RaccoonCoinHeist.asset using Guid(c0325e5b441586c489049ff4005c234b) (NativeFormatImporter) -> (artifact id: 'b85386143ca4551488320b5973ff7b80') in 0.0017203 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_14_ZeroGravity.asset using Guid(d0ff1018a81269a47bde93798a3e975c) (NativeFormatImporter) -> (artifact id: '171318fd79e67f2aea04fbc5df2685f7') in 0.0017807 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_37_TrapdoorClouds.asset using Guid(e0f9c1334bedeee4193daade57072157) (NativeFormatImporter) -> (artifact id: '7677bce26abfc1c20b5b364d54478b12') in 0.0013959 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_16_Tornado.asset using Guid(d19b6a62ffb6c3d4999033ab07503319) (NativeFormatImporter) -> (artifact id: '6d853527f1229e9bd3900916f7ab94f6') in 0.001379 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_33_CrumblingPerches.asset using Guid(4250665f8c370e44cb90d81fdc3e8603) (NativeFormatImporter) -> (artifact id: '34ede03b6595b4ca8c12053ac223c42a') in 0.0014942 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_22_FireflyLockAndKey.asset using Guid(42ba43d19b12dab43bc6569ba2f85c1f) (NativeFormatImporter) -> (artifact id: 'abf3842298b4d3e861e057118deaa7a7') in 0.0013432 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_31_SpringMushroomBumpers.asset using Guid(421eac5459b761e4c87f164e3ed3679a) (NativeFormatImporter) -> (artifact id: '7b2a4f14366ce33e3362501ad0d947bb') in 0.0015272 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_48_PorcupinePulse.asset using Guid(8249d5b3437c7da47abd4fd3f986e3eb) (NativeFormatImporter) -> (artifact id: 'c7a1ad667199ff6f798a4416ec0f5486') in 0.0014375 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_28_NumberedFlock.asset using Guid(92ce28b7044449c4b899227993c022a3) (NativeFormatImporter) -> (artifact id: '8986491c21cbaa1694802c7ed6511679') in 0.0013656 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_10_StormCloud.asset using Guid(e29b8b70b8abf774ebd4fad290b7380d) (NativeFormatImporter) -> (artifact id: 'f9b92d8fe509a4153b9148f1db59aef8') in 0.0015003 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_03_PoisonVial.asset using Guid(f208acb95ee54cd43ae2bc4521ae4cad) (NativeFormatImporter) -> (artifact id: '61150fb5f658c3cd1a57b02ed2422b06') in 0.0015024 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_19_CursedSkull.asset using Guid(2332539903d41c54d9d37de80da65213) (NativeFormatImporter) -> (artifact id: '8a7c4d1da82ea4b36a757c7beb2fb5c7') in 0.0016086 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_21_SpiderwebCurtain.asset using Guid(431de9db0aaae984ba377f21db2d974c) (NativeFormatImporter) -> (artifact id: '06b1a059f5eb22052a2424370f9b54b5') in 0.002214 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_47_BeeSwarmGuard.asset using Guid(54d18c7db45aa234899947016918577b) (NativeFormatImporter) -> (artifact id: '3a8a80b36dcb9dfe9d48cefb01213f50') in 0.0017925 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_38_RollingLog.asset using Guid(548f87ea14678ec4eae6e076005d40b6) (NativeFormatImporter) -> (artifact id: 'eee5179f06d892ac205035a3624afb61') in 0.0014555 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_36_CarouselNests.asset using Guid(74ab2eadbcca88a4681a10d8e3cb2beb) (NativeFormatImporter) -> (artifact id: '4ce160c85d0bdd87c176558710283c3e') in 0.001697 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_40_WindmillGate.asset using Guid(253775ee0d56d15488342f8137f336a7) (NativeFormatImporter) -> (artifact id: 'dc8a9ada12c712e0c8bb570fcc92f326') in 0.0014298 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_25_TrackingRescueCage.asset using Guid(65b33cb979c35d4448586f71a71159d9) (NativeFormatImporter) -> (artifact id: 'e43d22c9c8e8404b0dcc4cdcc3dab064') in 0.0013955 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_06_BubbleShield.asset using Guid(7569bfa96e4cfdd4fa3520991bdb177a) (NativeFormatImporter) -> (artifact id: 'c9aec5ddcba8ab909c30b763a34f75c2') in 0.0013767 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_20_PairedAnimal.asset using Guid(8506a01bd973f6e4d84c4a0e2b12057c) (NativeFormatImporter) -> (artifact id: '7d5ab01f679298cc7ca66949bda59dbb') in 0.0013449 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_32_ConveyorClouds.asset using Guid(a5c7a9093809e7b4cb722aa0aa31670f) (NativeFormatImporter) -> (artifact id: 'f024d1d14339105e98b5214fd608eeee') in 0.0013531 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_34_PendulumVines.asset using Guid(e6ddb6702967efc49bd62348756e22b3) (NativeFormatImporter) -> (artifact id: '697b357427b1cf95df7415dcae906741') in 0.0014124 seconds
+Start importing Assets/Resources/Hindrances/HindranceRegistry.asset using Guid(a7c3c7700dfbeb248862b181ce02f67a) (NativeFormatImporter) -> (artifact id: '5c4942c8f6dc45853d7c9474f7dc55e9') in 0.0016169 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_24_TrafficLightOwl.asset using Guid(b7dae870a571d1244b658d8d1c5b9e04) (NativeFormatImporter) -> (artifact id: '6008a5000d163473e0261a18c8d4e5ab') in 0.0015648 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_01_Bomb.asset using Guid(c80279bfa79f1834783e0db5f9992a5a) (NativeFormatImporter) -> (artifact id: '75434f0aa0914226a2b5efd33d48e393') in 0.0013844 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_05_KnightHelmet.asset using Guid(e87990d4902a0ef4d8f893ef9e6a162a) (NativeFormatImporter) -> (artifact id: '41dc7c5b395cc8615be2f37f0bea0b9b') in 0.0014428 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_26_LassoRing.asset using Guid(29bf6d7d9682ba94abc80374561ce8f5) (NativeFormatImporter) -> (artifact id: '369dcfad6e386e3ac28209789a07f6aa') in 0.0014293 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_15_BlackHole.asset using Guid(69275ea75c9bd4c47aa4236342df01f6) (NativeFormatImporter) -> (artifact id: '2c2b5c30a277d19f912bd6ccaaebed9b') in 0.0013357 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_12_FallingLeaves.asset using Guid(baad7e72a5098e741bd632880aa9f5ea) (NativeFormatImporter) -> (artifact id: '46a5aa2962a54c46a2f77bb6669afb63') in 0.0014947 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_13_WindGust.asset using Guid(da37637e790eed040af4269ce76997e0) (NativeFormatImporter) -> (artifact id: '8521bea512c54adcf112bcb8fc1447b1') in 0.0013471 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_42_EclipseSilhouettes.asset using Guid(ea1df9eeaf553ea4c9cddc4767d689ef) (NativeFormatImporter) -> (artifact id: 'b520927b9107e9ed118daa2a2994ff6a') in 0.0013656 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_43_MemoryFog.asset using Guid(1b7a6b714b3a05644a1d3a5ee2a76e76) (NativeFormatImporter) -> (artifact id: '6694a662500cca788bb5040aa9951231') in 0.0012903 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_08_GhostAnimal.asset using Guid(9bd031b85d5419b47991574431aaa001) (NativeFormatImporter) -> (artifact id: 'bfd3552867a001ed88d199834ee1622d') in 0.0016113 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_11_Flashbang.asset using Guid(eb51f4c911a039f4e8a40671f341c985) (NativeFormatImporter) -> (artifact id: '63c6b6d93e0d1438385c07514fdfae76') in 0.0014644 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_49_VenusFlytrapRescue.asset using Guid(0c6473159e899e64aa3892156f22de45) (NativeFormatImporter) -> (artifact id: '4f15401116618ddca13167fb93aaf0c6') in 0.0015954 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_09_InkSquid.asset using Guid(2c633b3e4c25a64499e23566b2537e81) (NativeFormatImporter) -> (artifact id: '14dd948c1701a16e677c558f67dc98f2') in 0.0016489 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_46_GoalSwapMonkey.asset using Guid(2ce65a8dfca144245804257f8a96faad) (NativeFormatImporter) -> (artifact id: '965ebe10bfd1f73ae9d9b50b8849c93e') in 0.0014688 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_35_SeesawBranch.asset using Guid(bcc56e69910b633418ac0a91e44d7013) (NativeFormatImporter) -> (artifact id: '678c7523ef924bb4e261c1444bad1f99') in 0.0014891 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_23_RhythmTotem.asset using Guid(bc2a031ee1b1ad8419bfdbe346a0fd94) (NativeFormatImporter) -> (artifact id: '6d39830117eb2bc1d0437316feec72b0') in 0.0014281 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_45_TimerMoth.asset using Guid(dc17947a24357604d9150c61b62c89e3) (NativeFormatImporter) -> (artifact id: '9e715e4190a6046fe9b6063fec102536') in 0.0014857 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_41_LanternSpotlight.asset using Guid(ce50c300ae0eb3f429b6225be18571db) (NativeFormatImporter) -> (artifact id: '0b4acde9918d0ed829138d667c67d84a') in 0.0014822 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_18_MirrorMode.asset using Guid(1f08e71fa2396464493f075731bbce51) (NativeFormatImporter) -> (artifact id: 'e174cd757cac5aca9c3b2cebbaffa021') in 0.0016068 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_29_MovingSafeHalo.asset using Guid(6fcb91c0230e8554d8277d44c35ef946) (NativeFormatImporter) -> (artifact id: '134bbda0d3a6c46d57b6a229b5f67e59') in 0.0016347 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_07_IceCube.asset using Guid(7fb410a21204cb84cae527253eb27f7a) (NativeFormatImporter) -> (artifact id: 'e1f54084075e96668942d50602b70d1f') in 0.0015418 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_44_ColourWashRain.asset using Guid(af74ccbc126ba064aa23adf2b311ed30) (NativeFormatImporter) -> (artifact id: '69755e7cec1d96f3ab17fe1d2b762e4b') in 0.0014324 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_39_AcornHail.asset using Guid(df808aaef52b8be419d848b72c76f8bc) (NativeFormatImporter) -> (artifact id: '9cca2b78efe9db1cd38cfe937f36c5df') in 0.0014549 seconds
+Start importing Assets/Resources/Hindrances/Definitions/Hindrance_27_EchoTapRune.asset using Guid(dfc5a4250873c4a4aa6450b054b1a056) (NativeFormatImporter) -> (artifact id: 'c784fa9f556686c4a0dc0cf28020f9d6') in 0.0014622 seconds
+Refreshing native plugins compatible for Editor in 5.44 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=b5de81d1a70c89f4097576c904d5e679): Total: 0.144 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Scenes/GameScene.unity using Guid(b92af2776df07aa41ba8a5161ca73130) (DefaultImporter) -> (artifact id: 'b3d0107310add06704ddf26071542c1c') in 0.000912 seconds
+Refreshing native plugins compatible for Editor in 5.18 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=2f34387790ef05343959553b7df8d31e): Total: 0.058 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Opening scene 'Assets/Scenes/MainScene.unity additively'
+Loaded scene 'Assets/Scenes/MainScene.unity'
+	Deserialize:            4.477 ms
+	Integration:            5.189 ms
+	Integration of assets:  0.060 ms
+	Thread Wait Time:       0.076 ms
+	Total Operation Time:   9.802 ms
+Start importing Assets/Scenes/MainScene.unity using Guid(037bcb442fa019c4280e85e1d2b9891f) (DefaultImporter) -> (artifact id: '06d30f3834150dcb92e535fb0f984455') in 0.0013311 seconds
+Refreshing native plugins compatible for Editor in 5.21 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=a3723a85de44e2c4e99ad95c20aa6700): Total: 0.043 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/ArtSource/Hindrances/hindrance_level_assignments.json using Guid(3bddaf57e7701f14dbff0987b68761fe) (TextScriptImporter) -> (artifact id: '14dc31a13d60749ffa887fdffbea66b6') in 0.0026577 seconds
+Refreshing native plugins compatible for Editor in 4.71 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=77c3da7bbda57694dbc3cfd2842d85c7): Total: 0.058 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/ArtSource/Hindrances/hindrance_manifest.json using Guid(619cc6e0e231ce446894e930255f594e) (TextScriptImporter) -> (artifact id: '518901d81f50a3439bce326c292c2b1b') in 0.0018517 seconds
+Refreshing native plugins compatible for Editor in 4.54 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=6ccb0cb58e410574483d560680ac7a55): Total: 0.042 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Levels/LevelData/Level_10.asset using Guid(0055617e22310b548a8a9dceebbf5ab3) (NativeFormatImporter) -> (artifact id: 'b4ab150449ff2d0fad3688a8d0bd9282') in 0.0017546 seconds
+Start importing Assets/Levels/LevelData/Level_42.asset using Guid(410aaa08e4a2d3443ab398695eb5ffc8) (NativeFormatImporter) -> (artifact id: '0cefb8cc2ab824e831bfd63b38992c25') in 0.0016216 seconds
+Start importing Assets/Levels/LevelData/Level_04.asset using Guid(e1e5cb0bd52ef9a4592e43bcf62e75e5) (NativeFormatImporter) -> (artifact id: '24de33574fcbe6c6801b27cb39e724a1') in 0.0016681 seconds
+Start importing Assets/Levels/LevelData/Level_05.asset using Guid(f12c7f35b3fd87f48808f1bd55c36390) (NativeFormatImporter) -> (artifact id: '4a800e59cc5d32184d5e90c203481a51') in 0.0016826 seconds
+Start importing Assets/Levels/LevelData/Level_26.asset using Guid(0270dc16139954944abdccb16eaf2d82) (NativeFormatImporter) -> (artifact id: '1528fea8ee60a9a357514561780f9bb9') in 0.0015571 seconds
+Start importing Assets/Levels/LevelData/Level_35.asset using Guid(02d20487d68ff5c4e80cf6f3c792cb12) (NativeFormatImporter) -> (artifact id: '1d33b1138afddb38f8a666ac75067cc1') in 0.0016608 seconds
+Start importing Assets/Levels/LevelData/Level_23.asset using Guid(027303a4f969cd24e961091af3d12a4d) (NativeFormatImporter) -> (artifact id: '96e0e294e7cd52ef03ee6809391808b7') in 0.0017507 seconds
+Start importing Assets/Levels/LevelData/Level_65.asset using Guid(32eef89d6c877b949bfab469e1950989) (NativeFormatImporter) -> (artifact id: 'a3e4a02f8a8af0f9f1e9c58dac7315bc') in 0.0017132 seconds
+Start importing Assets/Levels/LevelData/Level_20.asset using Guid(c2dd07775e6335045a1bff9837aa335c) (NativeFormatImporter) -> (artifact id: '113c1194a2c5a87d4aa66e0a22726552') in 0.0015792 seconds
+Start importing Assets/Levels/LevelData/Level_21.asset using Guid(f2c02f49ae2073840a6f43af2dbd6045) (NativeFormatImporter) -> (artifact id: 'd643e518b06202b30bf2d5df568f2aaa') in 0.0016349 seconds
+Start importing Assets/Levels/LevelData/Level_34.asset using Guid(239342dda27a0c04586530b665841ffd) (NativeFormatImporter) -> (artifact id: '6bd2001b2664a9a713370612262b0994') in 0.0016164 seconds
+Start importing Assets/Levels/LevelData/Level_45.asset using Guid(53fd9f72cd8422d48a241343e474453a) (NativeFormatImporter) -> (artifact id: 'eccf01203c42605a595b62fa0f1c90f6') in 0.0016404 seconds
+Start importing Assets/Levels/LevelData/Level_48.asset using Guid(7357e642e657d52489602d5116ff711b) (NativeFormatImporter) -> (artifact id: 'd24b596e1122bda5acacd20b2725463e') in 0.0017354 seconds
+Start importing Assets/Levels/LevelData/Level_01.asset using Guid(930cceee37a6e7b4a95f949a35b4da93) (NativeFormatImporter) -> (artifact id: 'faa7fdd07843c6b4eed4b129da35acef') in 0.00152 seconds
+Start importing Assets/Levels/LevelData/Level_29.asset using Guid(a32e021bcbb03704ba0a88325c9c8568) (NativeFormatImporter) -> (artifact id: 'f4c6236a7e1f1d83b2288835436d65f4') in 0.0016045 seconds
+Start importing Assets/Levels/LevelData/Level_18.asset using Guid(5423d17332c0429499bd5f6c30577e61) (NativeFormatImporter) -> (artifact id: '89fc42faf00a603fca9c4487441ffeda') in 0.0016434 seconds
+Start importing Assets/Levels/LevelData/Level_19.asset using Guid(4592f2fe906abdf4db1839a62f87a2f4) (NativeFormatImporter) -> (artifact id: '039420029f89bd8958cfe11be7cb68b7') in 0.0017561 seconds
+Start importing Assets/Levels/LevelData/Level_44.asset using Guid(46dbc1f9675dc1c4a889242c96d245df) (NativeFormatImporter) -> (artifact id: '7f90bd874ba9a1485158d2440baca72f') in 0.0019892 seconds
+Start importing Assets/Levels/LevelData/Level_16.asset using Guid(86813024f78c8da4d9f449a642dca1a4) (NativeFormatImporter) -> (artifact id: '921cb1e0eab81d5158347e31518e2e1c') in 0.0016283 seconds
+Start importing Assets/Levels/LevelData/Level_40.asset using Guid(b656262befdcc0d4fb64fdd1e36759a1) (NativeFormatImporter) -> (artifact id: '5f7bb4e6f9b137c50fe9e95438947121') in 0.0017163 seconds
+Start importing Assets/Levels/LevelData/Level_31.asset using Guid(b669454492d3ded4192cf9f245c7f454) (NativeFormatImporter) -> (artifact id: '96defaeebc867f0361922cac9f3cfdd2') in 0.0016656 seconds
+Start importing Assets/Levels/LevelData/Level_55.asset using Guid(d69d8dff9b14747408aa3bf7bb80a80d) (NativeFormatImporter) -> (artifact id: '22a8738cfef0997e415a7348f5bc7636') in 0.0017278 seconds
+Start importing Assets/Levels/LevelData/Level_11.asset using Guid(6763f72e4b13685488f781ac22f2311d) (NativeFormatImporter) -> (artifact id: '4ba62bddfd148cf01d35ac573a1221c8') in 0.0017745 seconds
+Start importing Assets/Levels/LevelData/Level_30.asset using Guid(87597eaf978dd494fb94ab94aeb65fff) (NativeFormatImporter) -> (artifact id: '705a8281c9552cf602c43343a12f6e9e') in 0.0018004 seconds
+Start importing Assets/Levels/LevelData/Level_49.asset using Guid(97dd66b355084d9449c6079adf91ea0a) (NativeFormatImporter) -> (artifact id: '2a250ae472edc732f237f01ba9541c5b') in 0.0018802 seconds
+Start importing Assets/Levels/LevelData/Level_22.asset using Guid(1841496ff0892ae4ca6c9b83a22789b9) (NativeFormatImporter) -> (artifact id: 'b1083e13e3bf0827287d3f21895e5c71') in 0.0016631 seconds
+Start importing Assets/Levels/LevelData/Level_38.asset using Guid(780f5d46a8c05e7489dd570769867ea8) (NativeFormatImporter) -> (artifact id: '3d350d6d964954d4b71974e4720a26a2') in 0.0016953 seconds
+Start importing Assets/Levels/LevelData/Level_32.asset using Guid(c87bd75b8ad2ba4439329e341289bc4a) (NativeFormatImporter) -> (artifact id: '0962ece2107094a24bed7f95226c0f1c') in 0.0018671 seconds
+Start importing Assets/Levels/LevelData/Level_08.asset using Guid(19e7c9fdb6724bf4e93ca9906205e755) (NativeFormatImporter) -> (artifact id: '31052116b69c568f4eb95edd20954048') in 0.0018889 seconds
+Start importing Assets/Levels/LevelData/Level_37.asset using Guid(7983282a0418066469c4d1f1c41d8aee) (NativeFormatImporter) -> (artifact id: '815acc6311d350fd94807521ca74bb48') in 0.0016367 seconds
+Start importing Assets/Levels/LevelData/Level_75.asset using Guid(992e5d86185bd2a4dbd401893ca3d47b) (NativeFormatImporter) -> (artifact id: 'cc60c4853c5bb4c4858032c90a6d4151') in 0.001982 seconds
+Start importing Assets/Levels/LevelData/Level_95.asset using Guid(a9bcbe718dd7c8b4fac575c58b72285f) (NativeFormatImporter) -> (artifact id: 'f146d9b8c4f2d7533a755ebc279d07dc') in 0.0016216 seconds
+Start importing Assets/Levels/LevelData/Level_85.asset using Guid(1afb901a2381c094ab75b4eae5c30619) (NativeFormatImporter) -> (artifact id: '9d43e2b41870ec66e834031b8955fea2') in 0.0017086 seconds
+Start importing Assets/Levels/LevelData/Level_24.asset using Guid(9aa8770c31bae1d428ae8727f108b3ab) (NativeFormatImporter) -> (artifact id: 'ca73c9ee61a2e911c934b75024686b8d') in 0.0017952 seconds
+Start importing Assets/Levels/LevelData/Level_15.asset using Guid(da41a41bfd66a8b45a85e8f1e453d83f) (NativeFormatImporter) -> (artifact id: 'd28431a2d9f491a72d89ff992e6e2cd4') in 0.0017342 seconds
+Start importing Assets/Levels/LevelData/Level_17.asset using Guid(6c102b9bbc739c241be29582822df742) (NativeFormatImporter) -> (artifact id: 'a0f990d1197e05a874ee27af5ebaeb3d') in 0.0016174 seconds
+Start importing Assets/Levels/LevelData/Level_70.asset using Guid(6c7d0dbce66581d4890ad069bb4d1897) (NativeFormatImporter) -> (artifact id: 'f89a433bccf53c926fcad31c061294dd') in 0.0015858 seconds
+Start importing Assets/Levels/LevelData/Level_90.asset using Guid(8c6463b81efc72e4d9ec6e270d52386a) (NativeFormatImporter) -> (artifact id: 'd5d06bc2019be1322afea1199f5a7b9a') in 0.0016391 seconds
+Start importing Assets/Levels/LevelData/Level_07.asset using Guid(8c2f9282dcb5ad74ba243a086ece26a6) (NativeFormatImporter) -> (artifact id: '707cad96eea784a1764ab1f19c5d4043') in 0.0017639 seconds
+Start importing Assets/Levels/LevelData/Level_50.asset using Guid(acb9b53484f728244886284a29e892f5) (NativeFormatImporter) -> (artifact id: '99d385cfda1bba56ccf0861ff0fd0361') in 0.0016534 seconds
+Start importing Assets/Levels/LevelData/Level_43.asset using Guid(6d801a99a948aeb4fb89deaddbbcb9b7) (NativeFormatImporter) -> (artifact id: 'f7481e9f5c2f93d579bf13beda837edd') in 0.0016547 seconds
+Start importing Assets/Levels/LevelData/Level_80.asset using Guid(6db64a29a3b9c4747b4dca5968f93701) (NativeFormatImporter) -> (artifact id: 'a4f1caa7df3acda885a40ebd38e95a21') in 0.0016524 seconds
+Start importing Assets/Levels/LevelData/Level_28.asset using Guid(9df46d3124136a644a3dacfaf7b9d9bf) (NativeFormatImporter) -> (artifact id: '44ca75abf411c32a7a6829216e644da5') in 0.0017497 seconds
+Start importing Assets/Levels/LevelData/Level_33.asset using Guid(9dfef1a3661d7204f992ddadfc4e5767) (NativeFormatImporter) -> (artifact id: 'a28e8d72c95163c7bc2908ad21a99946') in 0.0016754 seconds
+Start importing Assets/Levels/LevelData/Level_06.asset using Guid(bdfcf59630ca838438d0c5eb930034d8) (NativeFormatImporter) -> (artifact id: 'e1da717521e952d77c09419291212219') in 0.001572 seconds
+Start importing Assets/Levels/LevelData/Level_27.asset using Guid(bd2db371df957a942ad53cc107f90b80) (NativeFormatImporter) -> (artifact id: '8d2128743123acf48c7e41439a82dd54') in 0.0015338 seconds
+Start importing Assets/Levels/LevelData/Level_100.asset using Guid(cddb54bc38c30d744b42de433283b5ce) (NativeFormatImporter) -> (artifact id: 'a75e85b5faf4c626acb0650e0adc1a43') in 0.0016698 seconds
+Start importing Assets/Levels/LevelData/Level_39.asset using Guid(1ef5ddbff90f3684ab642b7b1851b16d) (NativeFormatImporter) -> (artifact id: '58b13db342d6232f2e5b9e410e9d6f6a') in 0.0019258 seconds
+Start importing Assets/Levels/LevelData/Level_46.asset using Guid(2e7343952bfed714ba0d253bd7b7cb9c) (NativeFormatImporter) -> (artifact id: 'fe6683250a1415fecf9b3c5580558e86') in 0.0017724 seconds
+Start importing Assets/Levels/LevelData/Level_47.asset using Guid(6e527bae42bf8f64db882d2e4f1e5bb2) (NativeFormatImporter) -> (artifact id: '9461d9908823df83eec26b23853a4dc9') in 0.0017023 seconds
+Start importing Assets/Levels/LevelData/Level_36.asset using Guid(aec87fbe7e9d9e64e8931fb46e5ab205) (NativeFormatImporter) -> (artifact id: '4626dcf14ca453b65e4a7c717b2a5fed') in 0.0017103 seconds
+Start importing Assets/Levels/LevelData/Level_60.asset using Guid(ae7ef82c93928b2458fae80f0936ea2f) (NativeFormatImporter) -> (artifact id: 'e5482eefacd35ce7518bdaefb7418505') in 0.0018172 seconds
+Start importing Assets/Levels/LevelData/Level_14.asset using Guid(fe4fea1906a3c82478ade089767eaeff) (NativeFormatImporter) -> (artifact id: '979b83b653bb916bc713b8c01cd7f460') in 0.0016679 seconds
+Start importing Assets/Levels/LevelData/Level_09.asset using Guid(0f5cb3541f19bc8428c3fbacfa2f0f0b) (NativeFormatImporter) -> (artifact id: '8f999f02e5f54185bd43960670b50fc8') in 0.0016859 seconds
+Start importing Assets/Levels/LevelData/Level_02.asset using Guid(1ff45cb79fcf7af449273805e2f6de22) (NativeFormatImporter) -> (artifact id: '894cf0562e514feed7fa442ad3aa85fa') in 0.0017884 seconds
+Start importing Assets/Levels/LevelData/Level_03.asset using Guid(4f26a861a24d68b45b1ea232977a4ba0) (NativeFormatImporter) -> (artifact id: '90abc725f49484362b6b819269dc69ca') in 0.0016762 seconds
+Start importing Assets/Levels/LevelData/Level_41.asset using Guid(5fc92b60e10f5414b98501b87dea061f) (NativeFormatImporter) -> (artifact id: '99b1ab1504138e84bd24f45fbd3d52c0') in 0.0017466 seconds
+Start importing Assets/Levels/LevelData/Level_25.asset using Guid(bf00a56d40824c44c8e8f5f49a1185cf) (NativeFormatImporter) -> (artifact id: 'c4130522230ae4181f53607dd5b85deb') in 0.0019151 seconds
+Start importing Assets/Levels/LevelData/Level_12.asset using Guid(ef43365b71e5dc24f810253aa482af7c) (NativeFormatImporter) -> (artifact id: 'f7c0c6daefed48b80ec49d602075f86c') in 0.0016675 seconds
+Start importing Assets/Levels/LevelData/Level_13.asset using Guid(ff507f06712fa8c408c317c8e363aea0) (NativeFormatImporter) -> (artifact id: '3e2b58bcd878ec2b29701fe890ae3bbe') in 0.0016827 seconds
+Refreshing native plugins compatible for Editor in 6.04 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=c0eab0cb8d74e1d4eb58a103ef5f7871): Total: 0.150 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[HindranceAssetPipeline] Built and validated 50 definitions and prefabs.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AnimalFall.EditorTools.HindranceAssetPipeline:RebuildAll () (at Assets/Scripts/Editor/HindranceAssetPipeline.cs:107)
+
+(Filename: Assets/Scripts/Editor/HindranceAssetPipeline.cs Line: 107)
+
+Batchmode quit successfully invoked - shutting down!
+Font Asset [gomarice_rocks] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_purple] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_white_outline] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_yellow_outline_big] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Font Asset [gomarice_rocks_yellow_outline_small] Units Per EM set to 1024. Please commit the newly serialized value.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TMPro.TMP_FontAsset:ReadFontAssetDefinition () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:819)
+TMPro.TMP_FontAsset:OnValidate () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs:757)
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<TMPro.TMP_FontAsset> (string)
+TMPro.EditorEventCallbacks/<>c:<InitializeFontAssetResourceChangeCallBacks>b__0_0 () (at ./Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_EditorResourceManager.cs:32)
+UnityEditor.EditorApplication:Internal_EditorApplicationQuit ()
+
+(Filename: ./Library/PackageCache/com.unity.ugui@9496653a3df6/Runtime/TMP/TMP_FontAsset.cs Line: 819)
+
+Killing ADB server in 0.0485048 seconds.
+[Physics::Module] Cleanup current backned.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] License Notification channel disconnected successfully.
+[Licensing::IpcConnector] License Client channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

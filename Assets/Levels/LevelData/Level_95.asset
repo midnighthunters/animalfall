@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_95
+  m_EditorClassIdentifier: 
+  _levelNumber: 95
+  _chapterTheme: Summit
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60
+  _goal: {fileID: 0}
+  _spawnPool: []
+  _spawnInterval: 0.6052525
+  _spawnVariance: 0.15595959
+  _maxOnScreen: 10
+  _hindrances: []
+  _hindranceSpawnInterval: 6.676768
+  _hindranceInitialDelay: 5.151515
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 1.9292929
+  _wrongTapScorePenalty: 38
+  _bombTimePenalty: 3.89899
+  _bombScorePenalty: 63
+  _rewardCoins: 172
+  _isMegaLevel: 1
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 1
+  _megaShooterData: {fileID: 11400000, guid: acb9bda4bb5228345b47ee40fb6cd3a2, type: 2}

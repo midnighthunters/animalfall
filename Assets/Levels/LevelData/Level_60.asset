@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_60
+  m_EditorClassIdentifier: 
+  _levelNumber: 60
+  _chapterTheme: Mountain
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60
+  _goal: {fileID: 0}
+  _spawnPool: []
+  _spawnInterval: 0.7820202
+  _spawnVariance: 0.12767677
+  _maxOnScreen: 8
+  _hindrances: []
+  _hindranceSpawnInterval: 7.914141
+  _hindranceInitialDelay: 6.212121
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 1.4343435
+  _wrongTapScorePenalty: 28
+  _bombTimePenalty: 3.1919193
+  _bombScorePenalty: 49
+  _rewardCoins: 113
+  _isMegaLevel: 1
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 1
+  _megaShooterData: {fileID: 11400000, guid: b3904036e4d3e1d45976cf1e1c4a44fc, type: 2}

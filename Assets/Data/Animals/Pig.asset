@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280725e81321e784aa73a01807d4ed4e, type: 3}
+  m_Name: Pig
+  m_EditorClassIdentifier: 
+  species: 6
+  type: 0
+  movementPattern: 1
+  speedMin: 2.2
+  speedMax: 3.4
+  pointValue: 50
+  shieldHP: 0
+  isTargetSpecies: 1
+  lifetime: 12
+  zigzagAmplitude: 1.4
+  zigzagFrequency: 1.6
+  requiresDoubleTap: 0

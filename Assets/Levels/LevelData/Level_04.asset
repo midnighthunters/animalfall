@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_04
+  m_EditorClassIdentifier: 
+  _levelNumber: 4
+  _chapterTheme: Meadow
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60.454544
+  _goal: {fileID: 11400000, guid: 328aafdcd2ccbfc4cba4b2e80285a6cf, type: 2}
+  _spawnPool:
+  - {fileID: 11400000, guid: 096241694917a1a49ab89b04d1c5c5ee, type: 2}
+  - {fileID: 11400000, guid: 8c5dcab498953414783fedc586715717, type: 2}
+  - {fileID: 11400000, guid: 4dee5e7fd0334844bb3475dd4d2712df, type: 2}
+  _spawnInterval: 0.73939395
+  _spawnVariance: 0.15
+  _maxOnScreen: 6
+  _hindrances:
+  - type: 12
+    weight: 1
+    initialDelay: 6
+  _hindranceSpawnInterval: 7
+  _hindranceInitialDelay: 5
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 0.6424243
+  _wrongTapScorePenalty: 11
+  _bombTimePenalty: 2.060606
+  _bombScorePenalty: 26
+  _rewardCoins: 20
+  _isMegaLevel: 0
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 0
+  _megaShooterData: {fileID: 0}

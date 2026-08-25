@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18fb4def45800384199f508dddced9f3, type: 3}
+  m_Name: fox_comet_weapon
+  m_EditorClassIdentifier: 
+  stableId: fox_comet_weapon
+  displayName: Fox Comet Primary
+  icon: {fileID: -5557420877203330147, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  pattern: 2
+  projectile: {fileID: 11400000, guid: a41a5c417e55af74f91c79fd708cb2d7, type: 2}
+  damage: 6
+  shotsPerSecond: 4
+  burstCount: 1
+  projectileCount: 2
+  spreadDegrees: 10
+  pierce: 0
+  splashRadius: 0
+  homingStrength: 1.8
+  chainCount: 0
+  projectileLifetime: 5
+  stronglyHomingEveryNthVolley: 5
+  muzzleVFX: {fileID: 0}
+  shotAudio: {fileID: 0}

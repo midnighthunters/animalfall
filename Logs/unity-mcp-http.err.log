@@ -1,0 +1,162 @@
+Installed 73 packages in 4.40s
+
+
++-----------------------------------------------------------------------------+
+|                                                                             |
+|                                                                             |
+|                        \u2584\u2580\u2580 \u2584\u2580\u2588 \u2588\u2580\u2580 \u2580\u2588\u2580 \u2588\u2580\u2584\u2580\u2588 \u2588\u2580\u2580 \u2588\u2580\u2588                        |
+|                        \u2588\u2580  \u2588\u2580\u2588 \u2584\u2584\u2588  \u2588  \u2588 \u2580 \u2588 \u2588\u2584\u2584 \u2588\u2580\u2580                        |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                FastMCP 3.4.7                                |
+|                            https://gofastmcp.com                            |
+|                                                                             |
+|                 \U0001f5a5  Server:      mcp-for-unity-server, 3.4.7                 |
+|                 \U0001f680 Deploy free: https://horizon.prefect.io                  |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+[08/16/26 22:35:01] INFO     Starting MCP server               transport.py:361
+                             'mcp-for-unity-server' with                       
+                             transport 'http' on                               
+                             http://127.0.0.1:8080/mcp                         
+INFO:     Started server process [15408]
+INFO:     Waiting for application startup.
+2026-08-16 22:35:01,601 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+2026-08-16 22:35:15,157 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 54df93de25154880a884eed0a4ee9bb5
+2026-08-16 22:35:32,277 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: aaf74ea657af48e688bbb6db057d8889
+[08/16/26 22:35:32] DEBUG    Sending INFO to client: Listing    context.py:1446
+                             Unity instances                                   
+2026-08-16 22:35:52,447 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=default)
+2026-08-16 22:36:12,549 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=default)
+INFO:     127.0.0.1:63625 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 22:37:45,137 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 22:37:46,279 - transport.plugin_hub - INFO - Registered 34 tools for session 31d5a9af-1224-444f-b677-b8fd33aa867b
+2026-08-16 22:37:46,280 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 22:37:46,281 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 2 MCP session(s)
+2026-08-16 22:38:00,227 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 2897038d6a5a472881d8c6360759ea85
+[08/16/26 22:38:00] DEBUG    Sending INFO to client: Listing    context.py:1446
+                             Unity instances                                   
+2026-08-16 22:45:50,575 - transport.plugin_hub - INFO - Plugin session 31d5a9af-1224-444f-b677-b8fd33aa867b disconnected (1005)
+INFO:     127.0.0.1:64909 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 22:45:53,699 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 22:45:54,149 - transport.plugin_hub - INFO - Registered 34 tools for session 17fafc7c-d257-4d6d-bd45-7970e6af4f70
+2026-08-16 22:45:54,150 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 22:45:54,150 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 3 MCP session(s)
+2026-08-16 22:58:12,287 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f54f84e3b04c4fb0898e31cdcbf5dc67
+2026-08-16 22:58:27,670 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: ef94bb0f97874239a8c80aa101fe11fe
+2026-08-16 22:58:53,940 - transport.plugin_hub - INFO - Plugin session 17fafc7c-d257-4d6d-bd45-7970e6af4f70 disconnected (1005)
+2026-08-16 22:58:53,943 - services.tools.refresh_unity - INFO - refresh_unity: Connection lost during compile (expected - domain reload triggered)
+INFO:     127.0.0.1:54773 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 22:58:54,142 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 22:59:01,393 - transport.plugin_hub - INFO - Registered 34 tools for session f438c820-9287-405d-9c28-80ebbd420cc4
+2026-08-16 22:59:01,394 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 22:59:01,395 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 5 MCP session(s)
+2026-08-16 22:59:12,287 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: de7df5fd475f42d48612a433eee240e2
+2026-08-16 22:59:33,293 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: d110e9f2eb2e48f4925c5a629d0fb31d
+2026-08-16 22:59:54,071 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 1bac017883eb4d74b4426603226b8bef
+2026-08-16 22:59:58,985 - transport.plugin_hub - INFO - Plugin session f438c820-9287-405d-9c28-80ebbd420cc4 disconnected (1005)
+INFO:     127.0.0.1:54353 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:00:02,068 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:00:02,509 - transport.plugin_hub - INFO - Registered 34 tools for session 47a9ba12-a17b-43f3-a896-e5cf432f880d
+2026-08-16 23:00:02,510 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:00:02,511 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 8 MCP session(s)
+2026-08-16 23:00:09,158 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: facb325db5524ddc8850f0f3f7201f25
+2026-08-16 23:07:16,147 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 81faed06f4674c6da9086394b0b1bc1a
+2026-08-16 23:07:36,729 - transport.plugin_hub - INFO - Plugin session 47a9ba12-a17b-43f3-a896-e5cf432f880d disconnected (1005)
+INFO:     127.0.0.1:62722 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:07:39,893 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:07:40,324 - transport.plugin_hub - INFO - Registered 34 tools for session ef4b9344-549e-455a-ba35-ce3a036e5336
+2026-08-16 23:07:40,326 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:07:40,327 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 10 MCP session(s)
+2026-08-16 23:09:01,731 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 2fc1ee3bc01e45ddafffcede675f725a
+2026-08-16 23:09:08,877 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 5abd978572db4a0190e3c25720e92ef6
+2026-08-16 23:09:21,325 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 20bc70bed61f46198184d02d6cbacdae
+2026-08-16 23:12:02,067 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 8ae4cdfaef50462fb9f6930ba4fff724
+2026-08-16 23:12:10,855 - transport.plugin_hub - INFO - Plugin session ef4b9344-549e-455a-ba35-ce3a036e5336 disconnected (1005)
+INFO:     127.0.0.1:51278 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:12:14,266 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:12:14,750 - transport.plugin_hub - INFO - Registered 34 tools for session 75c137bc-43f2-4d90-bf7e-90b54b85218a
+2026-08-16 23:12:14,752 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:12:14,754 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 14 MCP session(s)
+2026-08-16 23:12:26,359 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 636ab1618e3b4996880a55cd6ae46582
+2026-08-16 23:12:36,990 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: a65d2e9141344aafbbf5b64426ff3d09
+2026-08-16 23:13:27,116 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 2c3bf18bc09745268a5473f08a10bc68
+2026-08-16 23:16:19,002 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 8cb3f6a97843412f902f2591da4f7679
+2026-08-16 23:16:25,950 - transport.plugin_hub - INFO - Plugin session 75c137bc-43f2-4d90-bf7e-90b54b85218a disconnected (1005)
+INFO:     127.0.0.1:58182 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:16:29,205 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:16:29,670 - transport.plugin_hub - INFO - Registered 34 tools for session 38cc4713-e029-41b3-9d69-b2d62c649cbb
+2026-08-16 23:16:29,671 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:16:29,672 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 18 MCP session(s)
+2026-08-16 23:16:43,143 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 9d961eb16df448da8069406c46d7e8b4
+2026-08-16 23:16:54,260 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 6077316b8516429bb984fffc5929c2aa
+2026-08-16 23:17:09,705 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 56fd3cb208944311aa675d3b6e64fedc
+2026-08-16 23:17:22,432 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 1bd83a2d79a4446d8946f13f78316230
+2026-08-16 23:17:34,901 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 70fecb1f061a4dc69308092370816a03
+2026-08-16 23:17:36,574 - transport.plugin_hub - INFO - Plugin session 38cc4713-e029-41b3-9d69-b2d62c649cbb disconnected (1005)
+INFO:     127.0.0.1:57496 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:17:39,724 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:17:40,137 - transport.plugin_hub - INFO - Registered 34 tools for session 16380ffa-a35d-4351-8d31-25776eb4f6f0
+2026-08-16 23:17:40,137 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:17:40,139 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 23 MCP session(s)
+2026-08-16 23:18:00,649 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 45d4b99d91e64483a0039000649c0d07
+2026-08-16 23:18:22,085 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 35369a4013844b2d86dfc89dedf93631
+2026-08-16 23:18:34,061 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: b47bbdf88a6540df80b7b3908e046a4b
+2026-08-16 23:18:54,593 - transport.plugin_hub - INFO - Plugin session 16380ffa-a35d-4351-8d31-25776eb4f6f0 disconnected (1005)
+INFO:     127.0.0.1:61004 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:18:57,804 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:18:58,650 - transport.plugin_hub - INFO - Registered 34 tools for session ace4e60b-2102-4b3f-9c36-9a05b0fc3fa3
+2026-08-16 23:18:58,651 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:18:58,653 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 26 MCP session(s)
+2026-08-16 23:19:17,965 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 364023880fb647138a5543717c8a1c42
+2026-08-16 23:19:33,736 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 4858b223429d4e30b717cadae58fc8ea
+2026-08-16 23:19:35,835 - transport.plugin_hub - INFO - Plugin session ace4e60b-2102-4b3f-9c36-9a05b0fc3fa3 disconnected (1005)
+INFO:     127.0.0.1:58833 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:19:38,798 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:19:39,192 - transport.plugin_hub - INFO - Registered 34 tools for session 863ea1fc-6f44-499d-9e47-c2296f5dded8
+2026-08-16 23:19:39,193 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:19:39,194 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 28 MCP session(s)
+2026-08-16 23:19:42,336 - transport.plugin_hub - INFO - Plugin session 863ea1fc-6f44-499d-9e47-c2296f5dded8 disconnected (1005)
+INFO:     127.0.0.1:58838 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:19:42,900 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+INFO:     127.0.0.1:58844 - "WebSocket /hub/plugin" [accepted]
+INFO:     connection open
+2026-08-16 23:19:45,449 - transport.plugin_hub - INFO - Evicted previous session 25d3f852-e710-4698-9532-b4d9bf3c6688 for same instance
+2026-08-16 23:19:45,450 - transport.plugin_hub - INFO - Plugin registered: animal_fall (ee9c91c07f1b2b8d)
+2026-08-16 23:19:46,534 - transport.plugin_hub - INFO - Registered 34 tools for session d90c6e42-27a4-45e2-b9e4-45188c3e6c85
+2026-08-16 23:19:46,536 - transport.plugin_hub - INFO - Server-level tool visibility synced from Unity: enabled=[animation, asset_gen, core, docs, probuilder, profiling, scripting_ext, testing, ui, vfx], disabled=[], total_transforms=19, unity_start=9
+2026-08-16 23:19:46,537 - transport.plugin_hub - INFO - Sent tools/list_changed notification to 28 MCP session(s)
+2026-08-16 23:20:02,440 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 60bc6684f91a4437a2c84ce94854f69a
+2026-08-16 23:20:15,722 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 49dea5dd63b1453c93ec5f94e91ebed6
+2026-08-16 23:20:31,867 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: b8925749389a430e8e8de81d39462a8e
+2026-08-16 23:20:32,477 - transport.plugin_hub - INFO - Plugin session d90c6e42-27a4-45e2-b9e4-45188c3e6c85 disconnected (1000)
+2026-08-16 23:31:58,207 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 1d8bc7f7571c4001aff912355dfb79f8
+2026-08-16 23:32:18,431 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:33:45,690 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 2b1a08c9ea604148aa4edd94a9f55311
+2026-08-16 23:34:05,958 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:34:06,764 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: e7d36ce3acfa4ec5b91e60a29dc2b6b1
+2026-08-16 23:34:16,157 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f22d939227154e31ba4f06ddf48c307f
+2026-08-16 23:34:26,913 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:34:36,304 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:38:35,743 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 6827ad1cbbca434493d1e162fe8bbb6c
+2026-08-16 23:38:55,982 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:39:28,181 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f2ee264e44e94d1bb6834d8bddc87bf1
+2026-08-16 23:39:35,097 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: aba68b08acc54d79b1bfb5d32c75d724
+2026-08-16 23:39:48,310 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)
+2026-08-16 23:39:55,288 - transport.plugin_hub - WARNING - No Unity plugin reconnected within 20.00s (instance=animal_fall@ee9c91c07f1b2b8d)

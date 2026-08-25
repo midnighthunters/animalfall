@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18fb4def45800384199f508dddced9f3, type: 3}
+  m_Name: rhino_vanguard_weapon
+  m_EditorClassIdentifier: 
+  stableId: rhino_vanguard_weapon
+  displayName: Rhino Vanguard Primary
+  icon: {fileID: 853742892412031643, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  pattern: 2
+  projectile: {fileID: 11400000, guid: 753e6d56e8a78564ebed0cb0fea68770, type: 2}
+  damage: 25
+  shotsPerSecond: 2
+  burstCount: 1
+  projectileCount: 1
+  spreadDegrees: 0
+  pierce: 2
+  splashRadius: 0
+  homingStrength: 0
+  chainCount: 0
+  projectileLifetime: 5
+  stronglyHomingEveryNthVolley: 0
+  muzzleVFX: {fileID: 0}
+  shotAudio: {fileID: 0}

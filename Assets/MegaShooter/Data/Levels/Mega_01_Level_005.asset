@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da51f9745b7f274a982cf839595dce2, type: 3}
+  m_Name: Mega_01_Level_005
+  m_EditorClassIdentifier: 
+  gameLevelNumber: 5
+  displayTitle: First Flight
+  megaSequenceIndex: 1
+  description: 'Mega 1: First Flight. Clear 3 authored waves, master readable telegraphs,
+    then defeat Scrap Wasp.'
+  backgroundLayers:
+  - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
+  - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
+  - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
+  - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
+  backgroundLayerSpeeds:
+  - 0.12
+  - 0.24
+  - 0.42
+  - 0.68
+  backgroundSpeed: 0.45
+  backgroundColor: {r: 0.015, g: 0.07, b: 0.16, a: 1}
+  accentColor: {r: 0.95, g: 0.82, b: 0.25, a: 1}
+  introImage: {fileID: 0}
+  bossWarningText: "WARNING \u2014 SCRAP WASP APPROACHING"
+  featuredAnimal: {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
+  allowedAnimals:
+  - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
+  startingHealth: 5
+  movementSpeedMultiplier: 1
+  playerPowerMultiplier: 1
+  invulnerabilityDuration: 1
+  counterChargeMultiplier: 1
+  cameraBounds:
+    serializedVersion: 2
+    x: -5
+    y: -8.9
+    width: 10
+    height: 17.8
+  playerMovementBounds:
+    serializedVersion: 2
+    x: -4.25
+    y: -7.7
+    width: 8.5
+    height: 6.3
+  safeUiMargins: {x: 0.2, y: 1.2, z: 0.2, w: 1.15}
+  scrollSpeed: 0.7
+  bottomProjectileExclusion: 1.4
+  waves:
+  - waveName: Teach
+    waveNumber: 1
+    startDelay: 1
+    completionDelay: 0.8
+    warningBanner: SCOUT DRONE
+    spawnGroups:
+    - enemy: {fileID: 11400000, guid: 84f9dce457aa9cd4e8e00f690ce52f72, type: 2}
+      count: 4
+      formation: 0
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.45
+      columns: 4
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+      count: 2
+      formation: 1
+      spawnPath: 1
+      startDelay: 0
+      cadence: 0.45
+      columns: 2
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1
+    speedMultiplier: 1
+    fireRateMultiplier: 1
+    scoreMultiplier: 1
+    maximumSimultaneousEnemies: 6
+    environmentEvent: 0
+    completionCondition: 0
+    surviveDuration: 0
+  - waveName: Practice
+    waveNumber: 2
+    startDelay: 0.6
+    completionDelay: 0.8
+    warningBanner: 
+    spawnGroups:
+    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+      count: 4
+      formation: 1
+      spawnPath: 1
+      startDelay: 0
+      cadence: 0.45
+      columns: 4
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 84f9dce457aa9cd4e8e00f690ce52f72, type: 2}
+      count: 2
+      formation: 2
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.45
+      columns: 2
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1
+    speedMultiplier: 1.025
+    fireRateMultiplier: 1
+    scoreMultiplier: 1.04
+    maximumSimultaneousEnemies: 6
+    environmentEvent: 0
+    completionCondition: 0
+    surviveDuration: 0
+  - waveName: Test
+    waveNumber: 3
+    startDelay: 0.6
+    completionDelay: 0.8
+    warningBanner: 
+    spawnGroups:
+    - enemy: {fileID: 11400000, guid: 84f9dce457aa9cd4e8e00f690ce52f72, type: 2}
+      count: 4
+      formation: 2
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.45
+      columns: 4
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+      count: 2
+      formation: 3
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.45
+      columns: 2
+      rows: 1
+      spacing: 0.9
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1
+    speedMultiplier: 1.05
+    fireRateMultiplier: 1
+    scoreMultiplier: 1.08
+    maximumSimultaneousEnemies: 6
+    environmentEvent: 0
+    completionCondition: 0
+    surviveDuration: 0
+  boss: {fileID: 11400000, guid: e02df6fc5ad125c438ce5e0c6648da65, type: 2}
+  bossOverrides:
+    healthMultiplier: 1
+    attackIntervalMultiplier: 1
+    projectileSpeedMultiplier: 1
+    dropCriticalHealthPickup: 0
+    healthPickupBossThreshold: 0.5
+    playerCriticalHealthThreshold: 0.35
+  enemyHealthMultiplier: 0.75
+  enemyDamageMultiplier: 1
+  enemyProjectileSpeedMultiplier: 0.65
+  ordinaryEnemyFireInterval: 2.4
+  enemyFireIntervalMultiplier: 1
+  spawnCadenceMultiplier: 1
+  maximumActiveEnemies: 6
+  maximumHostileProjectiles: 24
+  targetEnemyCount: 18
+  scoreMultiplier: 1
+  comboTimeout: 2
+  nearMissScore: 25
+  counterScore: 250
+  parTime: 85
+  coinReward: 100
+  arcadeTokenReward: 3
+  unlockReward: Eagle Striker
+  vfxProfile: {fileID: 11400000, guid: 1a923faa316340d43b6140c35c9c3ffe, type: 2}
+  cameraShakeScale: 1
+  flashScale: 1
+  reducedEffectsCompatible: 1
+  audio:
+    music: {fileID: 0}
+    shot: {fileID: 0}
+    hit: {fileID: 0}
+    explosion: {fileID: 0}
+    warning: {fileID: 0}
+    counterReady: {fileID: 0}
+    counterActivate: {fileID: 0}
+    victory: {fileID: 0}
+  deterministicSeed: 5001
+  randomizeSeed: 0

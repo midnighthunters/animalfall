@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36de9298a1c2d04caf4fe082510ef0f, type: 3}
+  m_Name: reflector_ace
+  m_EditorClassIdentifier: 
+  stableId: reflector_ace
+  displayName: Reflector Ace
+  prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
+  sprite: {fileID: 8554398286600171670, guid: 3d5a7da51915229458e9a54927131e7f, type: 3}
+  weaponIcon: {fileID: -5039132156621874023, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  shadow: {fileID: 0}
+  colliderSize: {x: 0.6, y: 0.6}
+  hitPoints: 112
+  contactDamage: 1
+  speed: 1.9799999
+  score: 380
+  movementPattern: 2
+  weaponPattern: 5
+  projectile: {fileID: 11400000, guid: 6fd714d6effa2f84fa532aa1be82b4be, type: 2}
+  fireInterval: 2
+  initialFireDelay: 1.2
+  telegraphTime: 0.85
+  deathVFX: {fileID: 0}
+  hitVFX: {fileID: 0}
+  fireAudio: {fileID: 0}
+  deathAudio: {fileID: 0}
+  pickupChance: 0.04
+  poolingKey: reflector_ace
+  priorityTarget: 0
+  splitsOnDeath: 0
+  shieldsNearby: 0
+  repairsNearby: 0

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_70
+  m_EditorClassIdentifier: 
+  _levelNumber: 70
+  _chapterTheme: Night
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60
+  _goal: {fileID: 0}
+  _spawnPool: []
+  _spawnInterval: 0.73151517
+  _spawnVariance: 0.13575757
+  _maxOnScreen: 8
+  _hindrances: []
+  _hindranceSpawnInterval: 7.560606
+  _hindranceInitialDelay: 5.909091
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 1.5757576
+  _wrongTapScorePenalty: 31
+  _bombTimePenalty: 3.3939395
+  _bombScorePenalty: 53
+  _rewardCoins: 130
+  _isMegaLevel: 1
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 1
+  _megaShooterData: {fileID: 11400000, guid: db96dff5b439c21498451d99902d60a6, type: 2}

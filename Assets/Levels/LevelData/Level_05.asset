@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_05
+  m_EditorClassIdentifier: 
+  _levelNumber: 5
+  _chapterTheme: Meadow
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60
+  _goal: {fileID: 0}
+  _spawnPool: []
+  _spawnInterval: 1.059798
+  _spawnVariance: 0.08323232
+  _maxOnScreen: 5
+  _hindrances: []
+  _hindranceSpawnInterval: 9.858586
+  _hindranceInitialDelay: 7.878788
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 0.65656567
+  _wrongTapScorePenalty: 11
+  _bombTimePenalty: 2.0808082
+  _bombScorePenalty: 27
+  _rewardCoins: 22
+  _isMegaLevel: 1
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 1
+  _megaShooterData: {fileID: 11400000, guid: 4fc2b054130aeca45aebd4501c540df4, type: 2}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Name: Hindrance_41_LanternSpotlight
+  m_EditorClassIdentifier: 
+  hindranceType: 41
+  prefab: {fileID: 787873604005811007, guid: 2a19d6f034de7ed4ab6fd1f8ffd3620c, type: 3}
+  icon: {fileID: -962929630, guid: cbe1ad95c7793c848be013d1bba86d30, type: 3}
+  unlockLevel: 83
+  displayName: Lantern Spotlight
+  effectDescription: Move the light, then tap!
+  category: 7
+  baseWeight: 1
+  difficultyTier: 0
+  minDuration: 4
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 12
+  compatibilityTags: 4
+  exclusionTags: 4
+  inputMode: 3
+  targetScope: 0
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Move the light, then tap!
+  stateSprites:
+  - {fileID: 457136151, guid: c0559f4097a5a5b438229c41d42c68c9, type: 3}
+  - {fileID: -1281222066, guid: c0559f4097a5a5b438229c41d42c68c9, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 5
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

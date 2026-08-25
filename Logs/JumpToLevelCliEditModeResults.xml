@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Passed" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.937446">
+  <test-suite type="TestSuite" id="1000" name="AnimalFall" fullname="AnimalFall" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.937446" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1021" name="Assembly-CSharp-Editor.dll" fullname="C:/AnnusMirabilis/ZEMOLABS/NEMESIS/animal_fall/animal_fall/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.933949" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14016" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1022" name="AnimalFall" fullname="AnimalFall" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.933649" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1023" name="Tests" fullname="AnimalFall.Tests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.933530" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1024" name="Editor" fullname="AnimalFall.Tests.Editor" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.933366" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="HindranceSystemEditModeTests" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.127295" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1006" name="CompatibilityGroupsAreMutuallyExclusiveByTag" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.CompatibilityGroupsAreMutuallyExclusiveByTag" methodname="CompatibilityGroupsAreMutuallyExclusiveByTag" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="589241755" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.035864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="CuratedPoolsKeepMegaLevelsEmptyAndIntroduceNewTypesAlone" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.CuratedPoolsKeepMegaLevelsEmptyAndIntroduceNewTypesAlone" methodname="CuratedPoolsKeepMegaLevelsEmptyAndIntroduceNewTypesAlone" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="1514956797" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.054399" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="NonAnimalInteractionPrefabsUseUnifiedPointerTargets" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.NonAnimalInteractionPrefabsUseUnifiedPointerTargets" methodname="NonAnimalInteractionPrefabsUseUnifiedPointerTargets" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="797592192" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.000708" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="PersistedEnumIdsRemainStableAndNewIdsAreContiguous" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.PersistedEnumIdsRemainStableAndNewIdsAreContiguous" methodname="PersistedEnumIdsRemainStableAndNewIdsAreContiguous" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="245772125" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.001000" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="RegistryContainsFiftyProductionReadyDefinitions" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.RegistryContainsFiftyProductionReadyDefinitions" methodname="RegistryContainsFiftyProductionReadyDefinitions" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="800225866" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.005754" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="RuntimeSheetsImportAsNamedFourByFourSpriteGrids" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.RuntimeSheetsImportAsNamedFourByFourSpriteGrids" methodname="RuntimeSheetsImportAsNamedFourByFourSpriteGrids" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="747346832" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.012306" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="ScopedEnvironmentTokensComposeAndReleaseIdempotently" fullname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests.ScopedEnvironmentTokensComposeAndReleaseIdempotently" methodname="ScopedEnvironmentTokensComposeAndReleaseIdempotently" classname="AnimalFall.Tests.Editor.HindranceSystemEditModeTests" runstate="Runnable" seed="78786927" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.004464" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1009" name="LevelJumpControllerEditModeTests" fullname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests" classname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.006720" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1011" name="LevelManagerCanSelectWithoutReloadingScene" fullname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests.LevelManagerCanSelectWithoutReloadingScene" methodname="LevelManagerCanSelectWithoutReloadingScene" classname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests" runstate="Runnable" seed="2011114135" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.003337" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="ResolvesConfiguredNormalAndMegaLevelsByOneBasedNumber" fullname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests.ResolvesConfiguredNormalAndMegaLevelsByOneBasedNumber" methodname="ResolvesConfiguredNormalAndMegaLevelsByOneBasedNumber" classname="AnimalFall.Tests.Editor.LevelJumpControllerEditModeTests" runstate="Runnable" seed="699989249" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.001754" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1012" name="MegaShooterEditModeTests" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.798089" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1017" name="BossThresholdsAreStrictlyDescendingAndReferencesAreComplete" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.BossThresholdsAreStrictlyDescendingAndReferencesAreComplete" methodname="BossThresholdsAreStrictlyDescendingAndReferencesAreComplete" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="591697786" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.009125" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="DatabaseIsDynamicAndOnlyMultiplesOfFiveUseShooterMode" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.DatabaseIsDynamicAndOnlyMultiplesOfFiveUseShooterMode" methodname="DatabaseIsDynamicAndOnlyMultiplesOfFiveUseShooterMode" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="862624751" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.002796" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="ExactlyTwentyMegaLevelsCoverMultiplesOfFive" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.ExactlyTwentyMegaLevelsCoverMultiplesOfFive" methodname="ExactlyTwentyMegaLevelsCoverMultiplesOfFive" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="465297154" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.005161" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="FullValidatorPasses" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.FullValidatorPasses" methodname="FullValidatorPasses" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="357491955" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:18Z" duration="0.013255" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="GeneratorIsIdempotentForNormalAssetsAndDatabaseReferences" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.GeneratorIsIdempotentForNormalAssetsAndDatabaseReferences" methodname="GeneratorIsIdempotentForNormalAssetsAndDatabaseReferences" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="766601642" result="Passed" start-time="2026-08-16 18:08:18Z" end-time="2026-08-16 18:08:19Z" duration="0.752966" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MegaShooterGenerator] Configured exactly 20 mega slots; normal level assets were not regenerated or edited.
+]]></output>
+              </test-case>
+              <test-case id="1018" name="LevelRoutingSelectsExistingAndDedicatedScenes" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.LevelRoutingSelectsExistingAndDedicatedScenes" methodname="LevelRoutingSelectsExistingAndDedicatedScenes" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="3060882" result="Passed" start-time="2026-08-16 18:08:19Z" end-time="2026-08-16 18:08:19Z" duration="0.002260" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="MegaLevelsHaveCompleteEncounterAndDifficultyData" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.MegaLevelsHaveCompleteEncounterAndDifficultyData" methodname="MegaLevelsHaveCompleteEncounterAndDifficultyData" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="963394617" result="Passed" start-time="2026-08-16 18:08:19Z" end-time="2026-08-16 18:08:19Z" duration="0.002591" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="SuperAnimalUnlocksAndStableIdsAreValid" fullname="AnimalFall.Tests.Editor.MegaShooterEditModeTests.SuperAnimalUnlocksAndStableIdsAreValid" methodname="SuperAnimalUnlocksAndStableIdsAreValid" classname="AnimalFall.Tests.Editor.MegaShooterEditModeTests" runstate="Runnable" seed="2071229935" result="Passed" start-time="2026-08-16 18:08:19Z" end-time="2026-08-16 18:08:19Z" duration="0.004324" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/ayush/AppData/LocalLow/ZemoLabs/AnimalFall\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

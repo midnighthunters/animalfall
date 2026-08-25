@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Name: Level_40
+  m_EditorClassIdentifier: 
+  _levelNumber: 40
+  _chapterTheme: Forest
+  _chapterBackground: {fileID: 0}
+  _timeLimit: 60
+  _goal: {fileID: 0}
+  _spawnPool: []
+  _spawnInterval: 0.8830303
+  _spawnVariance: 0.11151515
+  _maxOnScreen: 7
+  _hindrances: []
+  _hindranceSpawnInterval: 8.621212
+  _hindranceInitialDelay: 6.818182
+  _maxHindrancesActive: 1
+  _wrongTapTimePenalty: 1.1515151
+  _wrongTapScorePenalty: 22
+  _bombTimePenalty: 2.7878788
+  _bombScorePenalty: 41
+  _rewardCoins: 80
+  _isMegaLevel: 1
+  _allowNormalHindrancesInMegaLevel: 0
+  _villain: {fileID: 0}
+  _levelMode: 1
+  _megaShooterData: {fileID: 11400000, guid: fe71baa1db99036419426295949a5758, type: 2}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Name: Hindrance_49_VenusFlytrapRescue
+  m_EditorClassIdentifier: 
+  hindranceType: 49
+  prefab: {fileID: 6422440449743379676, guid: 7b3259956682d5143925cfa2f9190075, type: 3}
+  icon: {fileID: -1161634988, guid: cbe1ad95c7793c848be013d1bba86d30, type: 3}
+  unlockLevel: 99
+  displayName: Venus Flytrap Rescue
+  effectDescription: Tap left and right!
+  category: 8
+  baseWeight: 1
+  difficultyTier: 0
+  minDuration: 4
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 12
+  compatibilityTags: 80
+  exclusionTags: 80
+  inputMode: 1
+  targetScope: 1
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Tap left and right!
+  stateSprites:
+  - {fileID: 1013441765, guid: c0559f4097a5a5b438229c41d42c68c9, type: 3}
+  - {fileID: 577303522, guid: c0559f4097a5a5b438229c41d42c68c9, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 5
+  requiredInteractions: 4
+  primaryValue: 1
+  secondaryValue: 0

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Name: Hindrance_39_AcornHail
+  m_EditorClassIdentifier: 
+  hindranceType: 39
+  prefab: {fileID: 3206594553048346862, guid: e9f68edef1b61674aaf6d8fca070445c, type: 3}
+  icon: {fileID: 854979256, guid: cbe1ad95c7793c848be013d1bba86d30, type: 3}
+  unlockLevel: 79
+  displayName: Acorn Hail
+  effectDescription: Counter the Acorn Hail!
+  category: 6
+  baseWeight: 1
+  difficultyTier: 0
+  minDuration: 4
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 12
+  compatibilityTags: 0
+  exclusionTags: 0
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Counter the Acorn Hail!
+  stateSprites:
+  - {fileID: 1079678145, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  - {fileID: 1619441777, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 5
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18fb4def45800384199f508dddced9f3, type: 3}
+  m_Name: peacock_aurora_weapon
+  m_EditorClassIdentifier: 
+  stableId: peacock_aurora_weapon
+  displayName: Peacock Aurora Primary
+  icon: {fileID: -7706190253212291482, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  pattern: 2
+  projectile: {fileID: 11400000, guid: e518601668ac77448851c406f0cf7623, type: 2}
+  damage: 4
+  shotsPerSecond: 3
+  burstCount: 1
+  projectileCount: 4
+  spreadDegrees: 70
+  pierce: 0
+  splashRadius: 0
+  homingStrength: 0
+  chainCount: 0
+  projectileLifetime: 5
+  stronglyHomingEveryNthVolley: 0
+  muzzleVFX: {fileID: 0}
+  shotAudio: {fileID: 0}

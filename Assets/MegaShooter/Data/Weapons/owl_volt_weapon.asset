@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18fb4def45800384199f508dddced9f3, type: 3}
+  m_Name: owl_volt_weapon
+  m_EditorClassIdentifier: 
+  stableId: owl_volt_weapon
+  displayName: Owl Volt Primary
+  icon: {fileID: 2920547695714349933, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  pattern: 2
+  projectile: {fileID: 11400000, guid: f8b8ece9d0d63ad489d1c066dabecb66, type: 2}
+  damage: 8
+  shotsPerSecond: 3
+  burstCount: 1
+  projectileCount: 2
+  spreadDegrees: 10
+  pierce: 0
+  splashRadius: 0
+  homingStrength: 1.8
+  chainCount: 3
+  projectileLifetime: 5
+  stronglyHomingEveryNthVolley: 0
+  muzzleVFX: {fileID: 0}
+  shotAudio: {fileID: 0}

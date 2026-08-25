@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff9ecb80a5bf104184dcac6b8d30261, type: 3}
+  m_Name: enemy_bolt
+  m_EditorClassIdentifier: 
+  stableId: enemy_bolt
+  prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
+  sprite: {fileID: 21300000, guid: 715fe2e285713a54eb3797af14dc9292, type: 3}
+  motion: 0
+  speed: 4.2
+  damage: 1
+  lifetime: 7
+  colliderRadius: 0.11
+  homingStrength: 0
+  sineAmplitude: 0
+  sineFrequency: 0
+  reflectable: 1
+  playerColor: {r: 0.25, g: 1, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0.2, b: 0.35, a: 1}
+  impactVFX: {fileID: 0}
+  trailVFX: {fileID: 0}
+  impactAudio: {fileID: 0}
+  poolingKey: enemy_bolt
