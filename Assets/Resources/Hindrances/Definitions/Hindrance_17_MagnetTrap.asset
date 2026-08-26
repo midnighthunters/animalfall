@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_17_MagnetTrap
   m_EditorClassIdentifier: 
   hindranceType: 17
   prefab: {fileID: 2968614504017350527, guid: b61d1d93448162d4da96fe13b6460c66, type: 3}
-  icon: {fileID: -882266135, guid: e5253f9161c618c4880b0ebd191581b1, type: 3}
+  icon: {fileID: 21300000, guid: 9e065707660b14445a0005ad236f4076, type: 3}
   unlockLevel: 35
   displayName: Magnet Trap
   effectDescription: Counter the Magnet Trap!
@@ -34,10 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Magnet Trap!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: 9e065707660b14445a0005ad236f4076, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

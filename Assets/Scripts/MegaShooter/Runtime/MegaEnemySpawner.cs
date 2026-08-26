@@ -51,19 +51,35 @@ namespace AnimalFall.MegaShooter
             float x = Mathf.Lerp(bounds.xMin + 0.7f, bounds.xMax - 0.7f, group.normalizedEntry) + centered * group.spacing;
             float y = bounds.yMax + 0.8f + row * group.spacing;
 
-            if (group.formation == MegaFormationType.V)
-                y += Mathf.Abs(centered) * group.spacing * 0.55f;
-            else if (group.formation == MegaFormationType.Arc)
-                y += Mathf.Abs(centered) * Mathf.Abs(centered) * 0.18f;
-            else if (group.formation == MegaFormationType.AlternatingSides)
-                x = index % 2 == 0 ? bounds.xMin - 0.4f : bounds.xMax + 0.4f;
-            else if (group.formation == MegaFormationType.Mirrored)
-                x = index % 2 == 0 ? -Mathf.Abs(x) : Mathf.Abs(x);
+            switch (group.formation)
+            {
+                case MegaFormationType.Line:
+                    y = bounds.yMax + 0.8f;
+                    break;
+                case MegaFormationType.V:
+                    y += Mathf.Abs(centered) * group.spacing * 0.55f;
+                    break;
+                case MegaFormationType.Arc:
+                    y += Mathf.Abs(centered) * Mathf.Abs(centered) * 0.18f;
+                    break;
+                case MegaFormationType.Column:
+                    x = Mathf.Lerp(bounds.xMin + 0.7f, bounds.xMax - 0.7f, group.normalizedEntry);
+                    y = bounds.yMax + 0.8f + index * group.spacing;
+                    break;
+                case MegaFormationType.AlternatingSides:
+                    x = index % 2 == 0 ? bounds.xMin - 0.4f : bounds.xMax + 0.4f;
+                    break;
+                case MegaFormationType.Mirrored:
+                    x = index % 2 == 0 ? -Mathf.Abs(x) : Mathf.Abs(x);
+                    break;
+            }
 
             if (group.spawnPath == MegaSpawnPath.Left) x = bounds.xMin - 0.4f;
             else if (group.spawnPath == MegaSpawnPath.Right) x = bounds.xMax + 0.4f;
             else if (group.spawnPath == MegaSpawnPath.Center) x = centered * group.spacing;
             else if (group.spawnPath == MegaSpawnPath.DiveLane) y += 1.2f;
+            else if (group.spawnPath == MegaSpawnPath.SideReentry)
+                x = index % 2 == 0 ? bounds.xMin - 0.4f : bounds.xMax + 0.4f;
 
             return new Vector2(x, y);
         }

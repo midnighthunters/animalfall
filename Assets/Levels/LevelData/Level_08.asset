@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c6af095a1b17d4f822e10c304f6e2d, type: 3}
   m_Name: Level_08
   m_EditorClassIdentifier: 
   _levelNumber: 8
@@ -18,22 +18,16 @@ MonoBehaviour:
   _timeLimit: 61.060608
   _goal: {fileID: 11400000, guid: 3dd211374ab6f314f915b9c302707ea7, type: 2}
   _spawnPool:
-  - {fileID: 11400000, guid: 78664353021660343aa248d258e75741, type: 2}
-  - {fileID: 11400000, guid: acdfc60a3ea343b4d917861654ab672c, type: 2}
-  - {fileID: 11400000, guid: 4dee5e7fd0334844bb3475dd4d2712df, type: 2}
+  - {fileID: 11400000, guid: b29f74b4c62945743ac511106e063224, type: 2}
+  - {fileID: 11400000, guid: 8c5dcab498953414783fedc586715717, type: 2}
+  - {fileID: 11400000, guid: 0dc6fe2b39a1c744c8c8a242b08ccb98, type: 2}
   _spawnInterval: 0.7252525
   _spawnVariance: 0.15
   _maxOnScreen: 6
   _hindrances:
-  - type: 12
-    weight: 1
-    initialDelay: 6
-  - type: 13
-    weight: 1
-    initialDelay: 8
   - type: 7
-    weight: 0.8
-    initialDelay: 8
+    weight: 1
+    initialDelay: 0
   _hindranceSpawnInterval: 7
   _hindranceInitialDelay: 5
   _maxHindrancesActive: 1

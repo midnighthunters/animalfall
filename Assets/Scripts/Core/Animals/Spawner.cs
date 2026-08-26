@@ -20,11 +20,19 @@ namespace AnimalFall.Core.Animals
         [SerializeField, Tooltip("Spawn point positions (6 recommended).")]
         private Transform[] _spawnPoints;
 
+        [Header("Spawn Spacing")]
+        [SerializeField, Range(3, 8), Tooltip("Fallback horizontal lanes used when no spawn points are assigned.")]
+        private int _spawnLaneCount = 6;
+
+        [SerializeField, Min(0.5f), Tooltip("Minimum world-space distance between newly spawned animals.")]
+        private float _spawnClearance = 1.65f;
+
         private LevelData    _level;
         private AnimalData[] _cachedPool;
         private int          _cachedPoolLen;
         private bool         _spawning;
         private int          _activeCount;
+        private int          _nextSpawnLane;
         private Coroutine    _loop;
 
         private void Awake()
@@ -59,6 +67,7 @@ namespace AnimalFall.Core.Animals
                 _cachedPool[i] = level.SpawnPool[i];
 
             _activeCount = 0;
+            _nextSpawnLane = 0;
         }
 
         public void StartSpawning()
@@ -148,16 +157,7 @@ namespace AnimalFall.Core.Animals
             AnimalData data = ChooseAnimalData();
             if (data == null) return;
 
-            int spIdx = (_spawnPoints != null && _spawnPoints.Length > 0)
-                ? Random.Range(0, _spawnPoints.Length)
-                : 0;
-
-            Vector3 spawnPos = (_spawnPoints != null && _spawnPoints.Length > spIdx)
-                ? _spawnPoints[spIdx].position
-                : transform.position + Vector3.up * 5f;
-
-            // Slight X jitter so animals don't stack perfectly
-            spawnPos.x += Random.Range(-0.15f, 0.15f);
+            Vector3 spawnPos = FindSpacedSpawnPosition();
 
             GameObject obj = ObjectPooler.Instance.SpawnFromPool(
                 _animalPrefab, spawnPos, Quaternion.identity, _animalContainer);
@@ -180,6 +180,67 @@ namespace AnimalFall.Core.Animals
             obj.transform.localScale = Vector3.one * (target * 0.15f);
             DOTween.Kill(obj);
             obj.transform.DOScale(target, 0.28f).SetEase(Ease.OutBack).SetId(obj);
+        }
+
+        private Vector3 FindSpacedSpawnPosition()
+        {
+            if (_spawnPoints != null && _spawnPoints.Length > 0)
+            {
+                for (int i = 0; i < _spawnPoints.Length; i++)
+                {
+                    int index = (_nextSpawnLane + i) % _spawnPoints.Length;
+                    Transform point = _spawnPoints[index];
+                    if (point == null) continue;
+                    Vector3 candidate = point.position;
+                    if (!IsSpawnAreaClear(candidate)) continue;
+                    _nextSpawnLane = (index + 1) % _spawnPoints.Length;
+                    return candidate;
+                }
+            }
+
+            Camera cam = Camera.main;
+            float left = transform.position.x - 3f;
+            float right = transform.position.x + 3f;
+            float top = transform.position.y + 5f;
+            if (cam != null)
+            {
+                float z = Mathf.Abs(cam.transform.position.z);
+                left = cam.ViewportToWorldPoint(new Vector3(0f, 1f, z)).x + 0.65f;
+                right = cam.ViewportToWorldPoint(new Vector3(1f, 1f, z)).x - 0.65f;
+                top = cam.ViewportToWorldPoint(new Vector3(0.5f, 1f, z)).y + 0.65f;
+            }
+
+            int lanes = Mathf.Max(3, _spawnLaneCount);
+            Vector3 fallback = new Vector3((left + right) * 0.5f, top, 0f);
+            for (int i = 0; i < lanes; i++)
+            {
+                int lane = (_nextSpawnLane + i) % lanes;
+                float t = lanes == 1 ? 0.5f : lane / (float)(lanes - 1);
+                Vector3 candidate = new Vector3(Mathf.Lerp(left, right, t), top, 0f);
+                fallback = candidate;
+                if (!IsSpawnAreaClear(candidate)) continue;
+                _nextSpawnLane = (lane + 1) % lanes;
+                return candidate;
+            }
+
+            // All lanes are occupied: place the next animal slightly above the row
+            // instead of stacking it directly on another animal.
+            _nextSpawnLane = (_nextSpawnLane + 1) % lanes;
+            fallback.y += _spawnClearance;
+            return fallback;
+        }
+
+        private bool IsSpawnAreaClear(Vector3 candidate)
+        {
+            float minDistanceSqr = _spawnClearance * _spawnClearance;
+            var animals = ActiveAnimalRegistry.All;
+            for (int i = 0; i < animals.Count; i++)
+            {
+                Animal animal = animals[i];
+                if (animal == null || !animal.gameObject.activeInHierarchy || animal.IsCollected) continue;
+                if ((animal.transform.position - candidate).sqrMagnitude < minDistanceSqr) return false;
+            }
+            return true;
         }
 
         private AnimalData ChooseAnimalData()

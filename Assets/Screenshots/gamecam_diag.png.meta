@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gamecam_diag_0: 6244759112261767319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

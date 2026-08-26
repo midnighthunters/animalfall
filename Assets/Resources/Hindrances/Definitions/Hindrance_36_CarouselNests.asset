@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_36_CarouselNests
   m_EditorClassIdentifier: 
   hindranceType: 36
   prefab: {fileID: 2296557627898682592, guid: d6521edac4d10df4aa749a77c4437808, type: 3}
-  icon: {fileID: 5106240, guid: 8739acdc380db0d48b81b8ed1b5dae52, type: 3}
+  icon: {fileID: 21300000, guid: d525314edad03264f994ec9bb0834137, type: 3}
   unlockLevel: 73
   displayName: Carousel Nests
   effectDescription: Counter the Carousel Nests!
@@ -34,8 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Carousel Nests!
   stateSprites:
-  - {fileID: 1079678145, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
-  - {fileID: 1619441777, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  - {fileID: 21300000, guid: d525314edad03264f994ec9bb0834137, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

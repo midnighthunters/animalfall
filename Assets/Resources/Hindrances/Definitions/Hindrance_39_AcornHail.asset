@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_39_AcornHail
   m_EditorClassIdentifier: 
   hindranceType: 39
   prefab: {fileID: 3206594553048346862, guid: e9f68edef1b61674aaf6d8fca070445c, type: 3}
-  icon: {fileID: 854979256, guid: cbe1ad95c7793c848be013d1bba86d30, type: 3}
+  icon: {fileID: 21300000, guid: 4ad4774c24fa0204faf0ff6bd17daf20, type: 3}
   unlockLevel: 79
   displayName: Acorn Hail
   effectDescription: Counter the Acorn Hail!
@@ -34,8 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Acorn Hail!
   stateSprites:
-  - {fileID: 1079678145, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
-  - {fileID: 1619441777, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  - {fileID: 21300000, guid: 4ad4774c24fa0204faf0ff6bd17daf20, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

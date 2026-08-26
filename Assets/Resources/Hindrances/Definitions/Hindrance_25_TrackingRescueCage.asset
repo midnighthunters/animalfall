@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_25_TrackingRescueCage
   m_EditorClassIdentifier: 
   hindranceType: 25
   prefab: {fileID: 7803578485098366638, guid: 55e34c65d3da21f40b3b88856d4a1d61, type: 3}
-  icon: {fileID: -693863270, guid: 8739acdc380db0d48b81b8ed1b5dae52, type: 3}
+  icon: {fileID: 21300000, guid: 56b9adad85cfae44f93f88e4ddc20ea2, type: 3}
   unlockLevel: 51
   displayName: Tracking Rescue Cage
   effectDescription: Hold the moving latch!
@@ -34,10 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Hold the moving latch!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: 56b9adad85cfae44f93f88e4ddc20ea2, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

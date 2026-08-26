@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c6af095a1b17d4f822e10c304f6e2d, type: 3}
   m_Name: Level_01
   m_EditorClassIdentifier: 
   _levelNumber: 1
@@ -18,8 +18,7 @@ MonoBehaviour:
   _timeLimit: 60
   _goal: {fileID: 11400000, guid: 6ba494d2afebe7a488f582bbed04583c, type: 2}
   _spawnPool:
-  - {fileID: 11400000, guid: 096241694917a1a49ab89b04d1c5c5ee, type: 2}
-  - {fileID: 11400000, guid: 78664353021660343aa248d258e75741, type: 2}
+  - {fileID: 11400000, guid: b29f74b4c62945743ac511106e063224, type: 2}
   _spawnInterval: 0.75
   _spawnVariance: 0.15
   _maxOnScreen: 6

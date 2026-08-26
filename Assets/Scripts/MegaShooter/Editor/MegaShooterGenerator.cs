@@ -85,6 +85,7 @@ namespace AnimalFall.MegaShooter.Editor
         {
             EnsureFolders();
             GenerateMissingPlaceholderArt();
+            NormalizeMegaWorldArtwork();
             GenerateMissingPrefabs();
             GenerateOrUpdateMegaLevelsOnly();
             GenerateMegaShooterScene();
@@ -92,6 +93,29 @@ namespace AnimalFall.MegaShooter.Editor
             AssetDatabase.Refresh();
             MegaShooterValidator.ValidateAll(true);
             Debug.Log("[MegaShooterGenerator] Complete feature generation finished.");
+        }
+
+        [MenuItem("Tools/Animal Fall/Mega Shooter/Normalize Mega World Artwork")]
+        public static void NormalizeMegaWorldArtwork()
+        {
+            NormalizeWorldSpriteTexture($"{MegaResourceRoot}/heroes.png", 220f);
+            NormalizeWorldSpriteTexture($"{MegaResourceRoot}/villains.png", 220f);
+            string bossDirectory = Path.GetFullPath($"{MegaResourceRoot}/boss");
+            if (Directory.Exists(bossDirectory))
+            {
+                foreach (string path in Directory.GetFiles(bossDirectory, "*.png"))
+                    NormalizeWorldSpriteTexture(path.Replace('\\', '/').Replace(Path.GetFullPath("Assets").Replace('\\', '/'), "Assets"), 300f);
+            }
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private static void NormalizeWorldSpriteTexture(string assetPath, float pixelsPerUnit)
+        {
+            TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+            if (importer == null || Mathf.Approximately(importer.spritePixelsPerUnit, pixelsPerUnit)) return;
+            importer.spritePixelsPerUnit = pixelsPerUnit;
+            importer.SaveAndReimport();
         }
 
         [MenuItem("Tools/Animal Fall/Mega Shooter/Generate Missing Placeholder Art")]
@@ -597,41 +621,88 @@ namespace AnimalFall.MegaShooter.Editor
             int remaining = EnemyCounts[megaIndex];
             var waves = new MegaWaveData[waveCount];
             var unlocked = new List<EnemyShipData>();
-            for (int i = 0; i < enemies.Length; i++) if (EnemyFirstMega[i] <= megaIndex + 1) unlocked.Add(enemies[i]);
-            EnemyShipData firstType = unlocked[megaIndex % unlocked.Count];
-            EnemyShipData secondType = unlocked[(megaIndex + Mathf.Max(1, unlocked.Count / 2)) % unlocked.Count];
-            if (secondType == firstType && unlocked.Count > 1) secondType = unlocked[(megaIndex + 1) % unlocked.Count];
+            for (int i = 0; i < enemies.Length; i++)
+                if (EnemyFirstMega[i] <= megaIndex + 1) unlocked.Add(enemies[i]);
 
-            for (int w = 0; w < waveCount; w++)
+            for (int waveIndex = 0; waveIndex < waveCount; waveIndex++)
             {
-                int wavesLeft = waveCount - w;
-                int thisWave = Mathf.CeilToInt(remaining / (float)wavesLeft);
-                remaining -= thisWave;
-                int firstCount = Mathf.CeilToInt(thisWave * .55f);
-                int secondCount = thisWave - firstCount;
-                EnemyShipData first = (w & 1) == 0 ? firstType : secondType;
-                EnemyShipData second = (w & 1) == 0 ? secondType : firstType;
-                var groups = secondCount > 0 ? new EnemySpawnGroup[2] : new EnemySpawnGroup[1];
-                groups[0] = CreateGroup(first, firstCount, w, megaIndex, false);
-                if (secondCount > 0) groups[1] = CreateGroup(second, secondCount, w + 1, megaIndex, w == waveCount - 1);
-                waves[w] = new MegaWaveData
+                int wavesLeft = waveCount - waveIndex;
+                int waveEnemyCount = Mathf.CeilToInt(remaining / (float)wavesLeft);
+                remaining -= waveEnemyCount;
+                int leadCount = Mathf.CeilToInt(waveEnemyCount * .6f);
+                int supportCount = waveEnemyCount - leadCount;
+                EnemyShipData lead = unlocked[(megaIndex + waveIndex * 2) % unlocked.Count];
+                EnemyShipData support = unlocked[(megaIndex + waveIndex * 2 + Mathf.Max(1, unlocked.Count / 2)) % unlocked.Count];
+                if (support == lead && unlocked.Count > 1) support = unlocked[(megaIndex + waveIndex + 1) % unlocked.Count];
+
+                bool isFinale = waveIndex == waveCount - 1;
+                bool isPriorityHunt = megaIndex >= 3 && waveIndex == waveCount / 2;
+                bool isEndurance = megaIndex >= 6 && waveIndex == waveCount - 2;
+                MegaWaveCompletion completion = isEndurance ? MegaWaveCompletion.SurviveDuration
+                    : isPriorityHunt ? MegaWaveCompletion.DefeatPriorityTargets
+                    : MegaWaveCompletion.DefeatAll;
+                MegaFormationType formation = SelectFormation(waveIndex, isPriorityHunt, isEndurance, isFinale);
+                MegaSpawnPath spawnPath = SelectSpawnPath(waveIndex, isPriorityHunt, isEndurance, isFinale);
+                var groups = supportCount > 0 ? new EnemySpawnGroup[2] : new EnemySpawnGroup[1];
+                groups[0] = CreateGroup(lead, leadCount, waveIndex, megaIndex, false, false, formation, spawnPath);
+                if (supportCount > 0)
+                    groups[1] = CreateGroup(support, supportCount, waveIndex + 1, megaIndex, isPriorityHunt,
+                        isFinale || (isPriorityHunt && megaIndex >= 8), formation, spawnPath);
+
+                waves[waveIndex] = new MegaWaveData
                 {
-                    waveName = w == 0 ? "Teach" : w == waveCount - 1 ? "Test" : "Practice",
-                    waveNumber = w + 1,
-                    startDelay = w == 0 ? 1f : .6f,
-                    completionDelay = .8f,
-                    warningBanner = w == 0 ? first.displayName.ToUpperInvariant() : string.Empty,
+                    waveName = GetWaveName(waveIndex, isPriorityHunt, isEndurance, isFinale),
+                    waveNumber = waveIndex + 1,
+                    startDelay = waveIndex == 0 ? 1f : .65f,
+                    completionDelay = .9f,
+                    warningBanner = GetWaveBanner(waveIndex, lead, isPriorityHunt, isEndurance, isFinale),
                     spawnGroups = groups,
-                    healthMultiplier = 1f,
-                    speedMultiplier = 1f + w * .025f,
+                    healthMultiplier = 1f + waveIndex * .025f,
+                    speedMultiplier = 1f + waveIndex * .02f,
                     fireRateMultiplier = 1f,
-                    scoreMultiplier = 1f + w * .04f,
+                    scoreMultiplier = 1f + waveIndex * .06f,
                     maximumSimultaneousEnemies = Mathf.Clamp(6 + megaIndex / 2, 6, 16),
-                    completionCondition = MegaWaveCompletion.DefeatAll,
-                    environmentEvent = megaIndex >= 10 && w == waveCount / 2 ? MegaEnvironmentEvent.SlowField : MegaEnvironmentEvent.None
+                    completionCondition = completion,
+                    surviveDuration = isEndurance ? Mathf.Lerp(6f, 11f, megaIndex / 19f) : 0f,
+                    environmentEvent = megaIndex >= 10 && waveIndex == 1 ? MegaEnvironmentEvent.TimeRift : MegaEnvironmentEvent.None
                 };
             }
             return waves;
+        }
+
+        private static MegaFormationType SelectFormation(int waveIndex, bool priorityHunt, bool endurance, bool finale)
+        {
+            if (finale) return MegaFormationType.Mirrored;
+            if (priorityHunt) return MegaFormationType.Column;
+            if (endurance) return MegaFormationType.Grid;
+            MegaFormationType[] rotation = { MegaFormationType.V, MegaFormationType.Arc, MegaFormationType.Line, MegaFormationType.AlternatingSides, MegaFormationType.Grid };
+            return rotation[waveIndex % rotation.Length];
+        }
+
+        private static MegaSpawnPath SelectSpawnPath(int waveIndex, bool priorityHunt, bool endurance, bool finale)
+        {
+            if (finale) return MegaSpawnPath.DiveLane;
+            if (priorityHunt) return MegaSpawnPath.SideReentry;
+            if (endurance) return MegaSpawnPath.Center;
+            MegaSpawnPath[] rotation = { MegaSpawnPath.Top, MegaSpawnPath.Left, MegaSpawnPath.Right, MegaSpawnPath.Center };
+            return rotation[waveIndex % rotation.Length];
+        }
+
+        private static string GetWaveName(int waveIndex, bool priorityHunt, bool endurance, bool finale)
+        {
+            if (waveIndex == 0) return "Opening Formation";
+            if (priorityHunt) return "Priority Hunt";
+            if (endurance) return "Endurance Flight";
+            if (finale) return "Elite Finale";
+            return "Crossfire Pattern";
+        }
+
+        private static string GetWaveBanner(int waveIndex, EnemyShipData lead, bool priorityHunt, bool endurance, bool finale)
+        {
+            if (priorityHunt) return "PRIORITY TARGET — BREAK THE FORMATION";
+            if (endurance) return "ENDURANCE FLIGHT — HOLD THE LINE";
+            if (finale) return "ELITE FINALE — CLEAR THE SKIES";
+            return waveIndex == 0 && lead != null ? lead.displayName.ToUpperInvariant() : string.Empty;
         }
 
         private static Sprite[] LoadAllSprites(string path)
@@ -649,22 +720,24 @@ namespace AnimalFall.MegaShooter.Editor
             return separator >= 0 && int.TryParse(spriteName.Substring(separator + 1), out int index) ? index : int.MaxValue;
         }
 
-        private static EnemySpawnGroup CreateGroup(EnemyShipData enemy, int count, int wave, int megaIndex, bool priority)
+        private static EnemySpawnGroup CreateGroup(EnemyShipData enemy, int count, int wave, int megaIndex, bool priority,
+            bool explicitElite = false, MegaFormationType? formationOverride = null, MegaSpawnPath? spawnPathOverride = null)
         {
             return new EnemySpawnGroup
             {
                 enemy = enemy,
                 count = Mathf.Max(1, count),
-                formation = (MegaFormationType)((wave + megaIndex) % Enum.GetValues(typeof(MegaFormationType)).Length),
-                spawnPath = wave % 4 == 1 ? MegaSpawnPath.Left : wave % 4 == 2 ? MegaSpawnPath.Right : MegaSpawnPath.Top,
+                formation = formationOverride ?? (MegaFormationType)((wave + megaIndex) % Enum.GetValues(typeof(MegaFormationType)).Length),
+                spawnPath = spawnPathOverride ?? (wave % 4 == 1 ? MegaSpawnPath.Left : wave % 4 == 2 ? MegaSpawnPath.Right : MegaSpawnPath.Top),
                 startDelay = 0f,
                 cadence = Mathf.Max(.16f, .45f - megaIndex * .009f),
                 columns = Mathf.Clamp(count, 2, 6),
                 rows = Mathf.Max(1, Mathf.CeilToInt(count / 6f)),
                 spacing = .9f,
                 normalizedEntry = .5f,
-                eliteChance = megaIndex >= 6 ? Mathf.Min(.3f, .04f + megaIndex * .01f) : 0f,
-                priorityTarget = priority && enemy.priorityTarget
+                eliteChance = megaIndex >= 6 ? Mathf.Min(.24f, .03f + megaIndex * .009f) : 0f,
+                explicitElite = explicitElite,
+                priorityTarget = priority
             };
         }
 

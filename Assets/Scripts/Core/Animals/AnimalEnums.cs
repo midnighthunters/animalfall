@@ -4,7 +4,7 @@ namespace AnimalFall.Core.Animals
     /// <summary>12 playable animal species (None = unassigned).</summary>
     public enum AnimalSpecies
     {
-        None, Chicken, Dog, Cow, Cat, Monkey,
+        None, Chicken, Dog, Cow, Panda, Monkey,
         Pig, Rabbit, Penguin, Owl, Mouse, Zebra, Duck
     }
 

@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_07_IceCube
   m_EditorClassIdentifier: 
   hindranceType: 7
   prefab: {fileID: 5171824717870044448, guid: 87f235b97cad6e24ea3ec131955abb31, type: 3}
-  icon: {fileID: -135899540, guid: 20625509662f30a4e92d518d2b43b5c5, type: 3}
-  unlockLevel: 15
-  displayName: Ice Cube
-  effectDescription: Counter the Ice Cube!
+  icon: {fileID: 21300000, guid: 2a117f7e23b40b6488e45a05c25cc17d, type: 3}
+  unlockLevel: 7
+  displayName: Frozen Pig
+  effectDescription: Tap once to break the ice, then tap the pig again to collect
+    it.
   category: 1
   baseWeight: 1
   difficultyTier: 0
@@ -32,12 +33,9 @@ MonoBehaviour:
   normalLevelEligible: 1
   megaLevelEligible: 0
   debugShowcaseOnly: 0
-  tutorialInstruction: Counter the Ice Cube!
+  tutorialInstruction: Tap the frozen pig to break the ice!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: 2a117f7e23b40b6488e45a05c25cc17d, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

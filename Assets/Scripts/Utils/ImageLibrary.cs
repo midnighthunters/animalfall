@@ -81,7 +81,7 @@ namespace AnimalFall.Utils
 
         private static void LoadAnimalSprites()
         {
-            // AnimalSpecies enum: None(0), Chicken(1), Dog(2), Cow(3), Cat(4),
+            // AnimalSpecies enum: None(0), Chicken(1), Dog(2), Cow(3), Panda(4),
             //   Monkey(5), Pig(6), Rabbit(7), Penguin(8), Owl(9), Mouse(10), Zebra(11), Duck(12)
             // Actual files present: CHICKEN, DOG2, ELEPHANT, MONKEY2, PANDA2, PENGUIN, PIG2
             // Map each species to the closest available sprite; share sprites for missing ones.
@@ -91,7 +91,7 @@ namespace AnimalFall.Utils
                 "icons/animals/CHICKEN",        // 1 = Chicken  ✓
                 "icons/animals/DOG2",           // 2 = Dog       ✓
                 "icons/animals/ELEPHANT",       // 3 = Cow  → Elephant (best substitute)
-                "icons/animals/PANDA2",         // 4 = Cat  → Panda   (best substitute)
+                "icons/animals/PANDA2",         // 4 = Panda     ✓
                 "icons/animals/MONKEY2",        // 5 = Monkey    ✓
                 "icons/animals/PIG2",           // 6 = Pig       ✓
                 "icons/animals/PANDA2",         // 7 = Rabbit → Panda  (reuse)

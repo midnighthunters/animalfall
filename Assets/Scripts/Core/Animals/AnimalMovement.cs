@@ -9,6 +9,10 @@ namespace AnimalFall.Core.Animals
     [RequireComponent(typeof(Animal))]
     public class AnimalMovement : MonoBehaviour
     {
+        private const float FallSpeedMultiplier = 0.65f;
+        private const float SeparationDistance = 1.9f;
+        private const float SeparationStrength = 6f;
+
         private float _screenLeft, _screenRight, _screenBottom, _screenTop;
         private int   _cachedScreenWidth, _cachedScreenHeight;
 
@@ -42,7 +46,7 @@ namespace AnimalFall.Core.Animals
         public void Configure(AnimalData data, LevelData level)
         {
             _pattern     = data.movementPattern;
-            _speed       = Random.Range(data.speedMin, data.speedMax);
+            _speed       = Random.Range(data.speedMin, data.speedMax) * FallSpeedMultiplier;
             _zigzagAmp   = data.zigzagAmplitude;
             _zigzagFreq  = data.zigzagFrequency;
             _spawnTime   = Time.time;
@@ -225,6 +229,7 @@ namespace AnimalFall.Core.Animals
             if (!float.IsNaN(pendingTeleportX)) pos.x = pendingTeleportX;
             dx += _externalVelocity.x * dt;
             dy += _externalVelocity.y * dt;
+            dx += CalculateHorizontalSeparation(dt);
             _externalVelocity = Vector2.MoveTowards(_externalVelocity, Vector2.zero, 3.5f * dt);
             pos.x += dx;
             pos.y += dy;
@@ -255,6 +260,31 @@ namespace AnimalFall.Core.Animals
                 if (exitedBottom) GameEvents.OnAnimalMissed?.Invoke();
                 _animal.Despawn();
             }
+        }
+
+        private float CalculateHorizontalSeparation(float dt)
+        {
+            float push = 0f;
+            Vector3 position = transform.position;
+            var animals = ActiveAnimalRegistry.All;
+            for (int i = 0; i < animals.Count; i++)
+            {
+                Animal other = animals[i];
+                if (other == null || other == _animal || !other.gameObject.activeInHierarchy || other.IsCollected)
+                    continue;
+
+                Vector3 delta = position - other.transform.position;
+                float absX = Mathf.Abs(delta.x);
+                if (absX >= SeparationDistance || Mathf.Abs(delta.y) >= SeparationDistance) continue;
+
+                float direction = absX > 0.001f
+                    ? Mathf.Sign(delta.x)
+                    : (System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this) <
+                       System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(other) ? -1f : 1f);
+                push += direction * (SeparationDistance - absX) * SeparationStrength * dt;
+            }
+
+            return Mathf.Clamp(push, -3.5f * dt, 3.5f * dt);
         }
 
         private void RecalcBounds()

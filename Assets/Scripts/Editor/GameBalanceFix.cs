@@ -17,11 +17,11 @@ public static class GameBalanceFix
     const string ANIMAL_DIR = "Assets/Data/Animals";
 
     // Species that map to a *distinct* sprite in ImageLibrary.
-    // Chicken, Dog, Cow(Elephant), Cat(Panda), Monkey, Pig, Penguin
+    // Chicken, Dog, Cow(Elephant), Panda, Monkey, Pig, Penguin
     static readonly AnimalSpecies[] DistinctSpecies =
     {
         AnimalSpecies.Chicken, AnimalSpecies.Dog, AnimalSpecies.Cow,
-        AnimalSpecies.Cat, AnimalSpecies.Monkey, AnimalSpecies.Pig,
+        AnimalSpecies.Panda, AnimalSpecies.Monkey, AnimalSpecies.Pig,
         AnimalSpecies.Penguin
     };
 

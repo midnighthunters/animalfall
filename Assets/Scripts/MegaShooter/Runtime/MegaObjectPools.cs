@@ -70,7 +70,7 @@ namespace AnimalFall.MegaShooter
             instance.transform.SetParent(parent, false);
             instance.transform.SetPositionAndRotation(position, rotation);
             instance.SetActive(true);
-            _active[instance.GetInstanceID()] = instance;
+            _active[instance.GetHashCode()] = instance;
             Notify(instance, true);
             return instance;
         }
@@ -78,7 +78,7 @@ namespace AnimalFall.MegaShooter
         public void Despawn(GameObject instance)
         {
             if (instance == null) return;
-            int id = instance.GetInstanceID();
+            int id = instance.GetHashCode();
             if (!_active.Remove(id)) return;
 
             Notify(instance, false);

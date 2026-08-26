@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_03_PoisonVial
   m_EditorClassIdentifier: 
   hindranceType: 3
   prefab: {fileID: 5111794322150989686, guid: 7ed593b8364ca00448a42165cdf08710, type: 3}
-  icon: {fileID: -1164023365, guid: 20625509662f30a4e92d518d2b43b5c5, type: 3}
+  icon: {fileID: 21300000, guid: 814deb5a909d4704aba584792c94dcd6, type: 3}
   unlockLevel: 7
   displayName: Poison Vial
   effectDescription: Counter the Poison Vial!
@@ -34,10 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Poison Vial!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: 814deb5a909d4704aba584792c94dcd6, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

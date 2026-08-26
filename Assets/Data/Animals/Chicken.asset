@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280725e81321e784aa73a01807d4ed4e, type: 3}
+  m_Script: {fileID: 11500000, guid: b4ed306e6c08c674a83460f42ca2b6a4, type: 3}
   m_Name: Chicken
   m_EditorClassIdentifier: 
   species: 1

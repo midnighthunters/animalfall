@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5658ddb7aaca9478d2296561358ab9, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c6af095a1b17d4f822e10c304f6e2d, type: 3}
   m_Name: Level_04
   m_EditorClassIdentifier: 
   _levelNumber: 4
@@ -18,16 +18,15 @@ MonoBehaviour:
   _timeLimit: 60.454544
   _goal: {fileID: 11400000, guid: 328aafdcd2ccbfc4cba4b2e80285a6cf, type: 2}
   _spawnPool:
-  - {fileID: 11400000, guid: 096241694917a1a49ab89b04d1c5c5ee, type: 2}
+  - {fileID: 11400000, guid: b29f74b4c62945743ac511106e063224, type: 2}
   - {fileID: 11400000, guid: 8c5dcab498953414783fedc586715717, type: 2}
-  - {fileID: 11400000, guid: 4dee5e7fd0334844bb3475dd4d2712df, type: 2}
   _spawnInterval: 0.73939395
   _spawnVariance: 0.15
   _maxOnScreen: 6
   _hindrances:
-  - type: 12
+  - type: 1
     weight: 1
-    initialDelay: 6
+    initialDelay: 0
   _hindranceSpawnInterval: 7
   _hindranceInitialDelay: 5
   _maxHindrancesActive: 1

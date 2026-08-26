@@ -10,7 +10,7 @@ using AnimalFall.Core.Hindrances;
 
 namespace AnimalFall.Core.Animals
 {
-    [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D), typeof(AnimalMovement))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(AnimalMovement))]
     public class Animal : MonoBehaviour
     {
         /// <summary>Fallback world scale for a portrait ortho camera (~size 5–6).</summary>
@@ -19,6 +19,7 @@ namespace AnimalFall.Core.Animals
         /// <summary>Target on-screen size (world units) for an animal's largest dimension.
         /// Every species is normalised to this so no animal looks bigger/smaller than another.</summary>
         public const float TargetWorldSize = 1.35f;
+        public const float EarlyLevelTargetWorldSize = 1.75f;
 
         /// <summary>Per-instance normalised scale, computed from the current sprite in SetupForPool.
         /// Movement, pop and pool-reset logic all read this instead of the flat IdealScale.</summary>
@@ -52,6 +53,8 @@ namespace AnimalFall.Core.Animals
         {
             _sr       = GetComponent<SpriteRenderer>();
             _col      = GetComponent<BoxCollider2D>();
+            if (_col == null) _col = gameObject.AddComponent<BoxCollider2D>();
+            _col.isTrigger = true;
             _movement = GetComponent<AnimalMovement>();
             _rb       = GetComponent<Rigidbody2D>();
         }
@@ -89,7 +92,10 @@ namespace AnimalFall.Core.Animals
 
             // Normalise scale so every species renders at a consistent on-screen size,
             // regardless of source resolution / aspect ratio (fixes "some big, some small").
-            CurrentScale = ComputeNormalisedScale(_sr.sprite);
+            float targetWorldSize = level != null && level.LevelNumber >= 1 && level.LevelNumber <= 4
+                ? EarlyLevelTargetWorldSize
+                : TargetWorldSize;
+            CurrentScale = ComputeNormalisedScale(_sr.sprite, targetWorldSize);
 
             // Fit collider to sprite so taps feel fair
             if (_col != null && _sr.sprite != null)
@@ -107,14 +113,39 @@ namespace AnimalFall.Core.Animals
             _lifetimeCoroutine = StartCoroutine(LifetimeCoroutine(data.lifetime));
         }
 
+        public void SetDisplaySprite(Sprite sprite)
+        {
+            if (_sr == null) _sr = GetComponent<SpriteRenderer>();
+            _sr.sprite = sprite != null ? sprite : ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
+            FitColliderToDisplaySprite();
+        }
+
+        public void RestoreDisplaySprite()
+        {
+            if (_sr == null) _sr = GetComponent<SpriteRenderer>();
+            _sr.sprite = ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
+            transform.localScale = Vector3.one * CurrentScale;
+            FitColliderToDisplaySprite();
+        }
+
+        private void FitColliderToDisplaySprite()
+        {
+            if (_col == null) _col = GetComponent<BoxCollider2D>();
+            if (_col == null || _sr == null || _sr.sprite == null) return;
+            _col.size = _sr.sprite.bounds.size * 0.85f;
+            _col.offset = _sr.sprite.bounds.center;
+            _col.isTrigger = true;
+        }
+
+
         /// <summary>Returns a uniform scale so the sprite's largest world dimension equals TargetWorldSize.</summary>
-        private static float ComputeNormalisedScale(Sprite sprite)
+        private static float ComputeNormalisedScale(Sprite sprite, float targetWorldSize)
         {
             if (sprite == null) return IdealScale;
             Vector2 size = sprite.bounds.size;
             float largest = Mathf.Max(size.x, size.y);
             if (largest <= 0.0001f) return IdealScale;
-            return TargetWorldSize / largest;
+            return targetWorldSize / largest;
         }
 
         public bool TryClaimExclusive(object owner)
@@ -141,7 +172,10 @@ namespace AnimalFall.Core.Animals
 
             if (IsIceFrozen)
             {
+                IsIceFrozen = false;
+                RestoreDisplaySprite();
                 GameEvents.OnSfxRequested?.Invoke(SfxType.ShieldHit);
+                GameEvents.OnIceBroken?.Invoke(this);
                 return TapResult.IceCubeFrozen;
             }
 
@@ -187,7 +221,9 @@ namespace AnimalFall.Core.Animals
             if (IsBubble)
             {
                 IsBubble = false;
-                _movement.ResumeFall();
+                RestoreDisplaySprite();
+                _movement?.ResumeFall();
+                GameEvents.OnBubblePopped?.Invoke(this);
                 return TapResult.BubblePopped;
             }
 

@@ -216,6 +216,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -286,14 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0449e2050e34ef248859e005376f4561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nodeContainer: {fileID: 0}
-  _nodePrefab: {fileID: 0}
-  _scrollRect: {fileID: 0}
-  _save: {fileID: 624290197}
-  _levelDatabase: {fileID: 0}
-  _megaUnlockedIcon: {fileID: 0}
-  _megaLockedIcon: {fileID: 0}
-  _megaTint: {r: 0.35, g: 0.95, b: 1, a: 1}
 --- !u!4 &162851294
 Transform:
   m_ObjectHideFlags: 0
@@ -601,6 +594,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -771,7 +765,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -779,6 +772,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &609403381
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +868,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -926,6 +921,7 @@ GameObject:
   - component: {fileID: 624290199}
   - component: {fileID: 624290198}
   - component: {fileID: 624290197}
+  - component: {fileID: 624290200}
   m_Layer: 0
   m_Name: '[Bootstrap]'
   m_TagString: Untagged
@@ -972,6 +968,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &624290200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624290196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65f77974523155438782f300077f1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.AppBootstrap
 --- !u!1 &628594836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1075,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1241,6 +1250,7 @@ GameObject:
   - component: {fileID: 646824475}
   - component: {fileID: 646824474}
   - component: {fileID: 646824473}
+  - component: {fileID: 646824478}
   m_Layer: 0
   m_Name: "[UI \u2014 MapCanvas]"
   m_TagString: Untagged
@@ -1260,27 +1270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd057287c040aa44afe9b2f29670c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _avatarImage: {fileID: 293388235}
-  _livesIcon: {fileID: 0}
-  _livesText: {fileID: 883567000}
-  _coinsIcon: {fileID: 0}
-  _coinsText: {fileID: 1008422915}
-  _topBarBg: {fileID: 0}
-  _backgroundImage: {fileID: 1923662572}
-  _playButton: {fileID: 1443385508}
-  _levelButtonText: {fileID: 1649432709}
-  _levelButtonBg: {fileID: 1443385505}
-  _bottomBarBg: {fileID: 878923895}
-  _mapTabButton: {fileID: 0}
-  _trophyTabButton: {fileID: 0}
-  _castleTabButton: {fileID: 0}
-  _petsTabButton: {fileID: 0}
-  _shopTabButton: {fileID: 0}
-  _mapTabIcon: {fileID: 0}
-  _trophyTabIcon: {fileID: 0}
-  _castleTabIcon: {fileID: 0}
-  _petsTabIcon: {fileID: 0}
-  _shopTabIcon: {fileID: 0}
 --- !u!114 &646824474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,6 +1328,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1372,6 +1362,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &646824478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646824472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3e15c96f7c8484dac25af5cdb7a0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.UI.MainScreenController
+  _avatarImage: {fileID: 0}
+  _livesIcon: {fileID: 0}
+  _livesText: {fileID: 0}
+  _coinsIcon: {fileID: 0}
+  _coinsText: {fileID: 0}
+  _topBarBg: {fileID: 0}
+  _backgroundImage: {fileID: 0}
+  _playButton: {fileID: 1443385508}
+  _levelButtonText: {fileID: 1649432709}
+  _levelButtonBg: {fileID: 0}
+  _bottomBarBg: {fileID: 0}
+  _mapTabButton: {fileID: 0}
+  _trophyTabButton: {fileID: 0}
+  _castleTabButton: {fileID: 0}
+  _petsTabButton: {fileID: 0}
+  _shopTabButton: {fileID: 0}
+  _mapTabIcon: {fileID: 0}
+  _trophyTabIcon: {fileID: 0}
+  _castleTabIcon: {fileID: 0}
+  _petsTabIcon: {fileID: 0}
+  _shopTabIcon: {fileID: 0}
 --- !u!1 &691323989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1490,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1663,6 +1687,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1845,6 +1870,9 @@ GameObject:
   - component: {fileID: 962994561}
   - component: {fileID: 962994560}
   - component: {fileID: 962994562}
+  - component: {fileID: 962994565}
+  - component: {fileID: 962994564}
+  - component: {fileID: 962994563}
   m_Layer: 0
   m_Name: '[Persistence]'
   m_TagString: Untagged
@@ -1864,16 +1892,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e900b22673eac49b15b47c6573a895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelDatabase: {fileID: 11400000, guid: 769de9562e9174549b0176739cc13670, type: 2}
-  _objectPooler: {fileID: 962994562}
-  _animalPrefab: {fileID: 0}
-  _battleEffectWhitePrefab: {fileID: 0}
-  _explosionBamPrefab: {fileID: 0}
-  _explosionZapPrefab: {fileID: 0}
-  _floatingTextPrefab: {fileID: 0}
-  _gameSceneName: GameScene
-  _megaShooterSceneName: MegaShooterScene
-  _mainSceneName: MainScene
 --- !u!4 &962994561
 Transform:
   m_ObjectHideFlags: 0
@@ -1901,6 +1919,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eaa49f79ad7cbf4aa235c542fcffa33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &962994563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962994559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1194389566de7045a31f7087402f575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Managers.LivesManager
+--- !u!114 &962994564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962994559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1bf8c6e99fdc747bc2dac0d653e072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Managers.LevelManager
+  _levelDatabase: {fileID: 11400000, guid: 769de9562e9174549b0176739cc13670, type: 2}
+  _objectPooler: {fileID: 0}
+  _animalPrefab: {fileID: 0}
+  _battleEffectWhitePrefab: {fileID: 0}
+  _explosionBamPrefab: {fileID: 0}
+  _explosionZapPrefab: {fileID: 0}
+  _floatingTextPrefab: {fileID: 0}
+  _gameSceneName: GameScene
+  _megaShooterSceneName: MegaShooterScene
+  _mainSceneName: MainScene
+--- !u!114 &962994565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962994559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5b7a76fd4f80a40a538e52e898e7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Services.SaveService
 --- !u!1 &976001379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2162,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2253,6 +2318,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2679,6 +2745,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2936,6 +3003,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3147,6 +3215,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3291,6 +3360,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_35_SeesawBranch
   m_EditorClassIdentifier: 
   hindranceType: 35
   prefab: {fileID: 6173694193164103207, guid: 3d88ebd2340fb9d4182a9f0c9cca58d5, type: 3}
-  icon: {fileID: 1047379379, guid: 8739acdc380db0d48b81b8ed1b5dae52, type: 3}
+  icon: {fileID: 21300000, guid: de0d283f90ea5954a86c1748cdace315, type: 3}
   unlockLevel: 71
   displayName: Seesaw Branch
   effectDescription: Counter the Seesaw Branch!
@@ -34,8 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Seesaw Branch!
   stateSprites:
-  - {fileID: 1079678145, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
-  - {fileID: 1619441777, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  - {fileID: 21300000, guid: de0d283f90ea5954a86c1748cdace315, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

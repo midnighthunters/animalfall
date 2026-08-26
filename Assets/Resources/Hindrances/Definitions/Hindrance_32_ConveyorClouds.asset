@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_32_ConveyorClouds
   m_EditorClassIdentifier: 
   hindranceType: 32
   prefab: {fileID: 5834806718142432889, guid: 1a691a72eef5db84eaf1d65ef2be7d1e, type: 3}
-  icon: {fileID: -71912049, guid: 8739acdc380db0d48b81b8ed1b5dae52, type: 3}
+  icon: {fileID: 21300000, guid: 72be6f0c3015e5547a2a984436fc25b7, type: 3}
   unlockLevel: 65
   displayName: Conveyor Clouds
   effectDescription: Counter the Conveyor Clouds!
@@ -34,8 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Conveyor Clouds!
   stateSprites:
-  - {fileID: 1079678145, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
-  - {fileID: 1619441777, guid: d90be2bde5b61c44a80544d85e21b8a3, type: 3}
+  - {fileID: 21300000, guid: 72be6f0c3015e5547a2a984436fc25b7, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

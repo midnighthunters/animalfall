@@ -37,6 +37,7 @@ namespace AnimalFall.MegaShooter
                 CurrentWaveIndex = i;
                 MegaWaveData wave = waves[i];
                 _game.EnterWave(i, waves.Length, wave);
+                ApplyEnvironmentEvent(wave);
                 if (wave.startDelay > 0f) yield return new WaitForSeconds(wave.startDelay);
 
                 _spawning = true;
@@ -65,6 +66,13 @@ namespace AnimalFall.MegaShooter
             }
 
             if (_game.CanAdvanceCombat) _game.AllWavesCompleted();
+        }
+
+        private void ApplyEnvironmentEvent(MegaWaveData wave)
+        {
+            if (wave == null || _game == null || wave.environmentEvent != MegaEnvironmentEvent.TimeRift) return;
+            _game.SetHostileTimeScale(.62f, 3.5f);
+            _game.Hud?.ShowBanner("TIME RIFT — ENEMIES SLOWED", 2.2f);
         }
 
         public void EnemySpawned(MegaEnemyController enemy)

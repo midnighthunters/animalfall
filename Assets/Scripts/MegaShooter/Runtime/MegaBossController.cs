@@ -89,9 +89,7 @@ namespace AnimalFall.MegaShooter
             float dt = Time.deltaTime * _game.HostileTimeScale;
             _age += dt;
             BossPhaseData phase = CurrentPhase;
-            Rect bounds = _data.movementBounds;
-            float x = bounds.center.x + Mathf.Sin(_age * (0.65f + _phaseIndex * 0.08f)) * bounds.width * 0.42f;
-            transform.position = new Vector3(x, Mathf.Clamp(transform.position.y, bounds.yMin, bounds.yMax), 0f);
+            UpdateMovement(phase, dt);
 
             _attackTimer -= dt;
             if (_attackTimer <= 0f && !_transitioning)
@@ -99,6 +97,47 @@ namespace AnimalFall.MegaShooter
                 FireAttack(phase);
                 _attackTimer = Mathf.Max(0.25f, phase.attackInterval * _level.bossOverrides.attackIntervalMultiplier);
             }
+        }
+
+        private void UpdateMovement(BossPhaseData phase, float dt)
+        {
+            Rect bounds = _data.movementBounds;
+            float x = bounds.center.x;
+            float y = bounds.center.y;
+            float horizontal = bounds.width * 0.42f;
+            float vertical = bounds.height * 0.34f;
+            float pace = 0.65f + _phaseIndex * 0.08f;
+
+            switch (phase.movementPattern)
+            {
+                case MegaMovementPattern.Stationary:
+                    break;
+                case MegaMovementPattern.SideSweep:
+                    x = bounds.xMin + Mathf.PingPong(_age * (1.1f + _phaseIndex * 0.06f), bounds.width);
+                    y += Mathf.Sin(_age * 1.6f) * vertical;
+                    break;
+                case MegaMovementPattern.Orbit:
+                    x += Mathf.Cos(_age * pace) * horizontal;
+                    y += Mathf.Sin(_age * pace * 1.35f) * vertical;
+                    break;
+                case MegaMovementPattern.ZigZag:
+                    x = bounds.xMin + Mathf.PingPong(_age * (1.35f + _phaseIndex * 0.06f), bounds.width);
+                    y += Mathf.PingPong(_age * .7f, vertical * 2f) - vertical;
+                    break;
+                case MegaMovementPattern.Dive:
+                case MegaMovementPattern.Rammer:
+                    x += Mathf.Sin(_age * pace) * horizontal;
+                    y = bounds.yMax - Mathf.PingPong(_age * .55f, bounds.height * .72f);
+                    break;
+                case MegaMovementPattern.Sine:
+                case MegaMovementPattern.Hover:
+                default:
+                    x += Mathf.Sin(_age * pace) * horizontal;
+                    y += Mathf.Sin(_age * 1.25f) * vertical * .4f;
+                    break;
+            }
+
+            transform.position = new Vector3(Mathf.Clamp(x, bounds.xMin, bounds.xMax), Mathf.Clamp(y, bounds.yMin, bounds.yMax), 0f);
         }
 
         private BossPhaseData CurrentPhase

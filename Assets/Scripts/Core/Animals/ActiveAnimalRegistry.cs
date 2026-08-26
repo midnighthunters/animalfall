@@ -29,6 +29,30 @@ namespace AnimalFall.Core.Animals
             return null;
         }
 
+        public static Animal GetEligibleSpecies(AnimalSpecies species, int seedOffset = 0)
+        {
+            int count = Animals.Count;
+            if (count == 0) return null;
+
+            int start = UnityEngine.Random.Range(0, count);
+            for (int i = 0; i < count; i++)
+            {
+                Animal animal = Animals[(start + i + seedOffset) % count];
+                if (animal != null &&
+                    animal.gameObject.activeInHierarchy &&
+                    !animal.IsCollected &&
+                    !animal.HasExclusiveOwner &&
+                    animal.Data != null &&
+                    animal.Data.species == species)
+                {
+                    return animal;
+                }
+            }
+
+            return null;
+        }
+
+
         public static void Clear() => Animals.Clear();
     }
 }

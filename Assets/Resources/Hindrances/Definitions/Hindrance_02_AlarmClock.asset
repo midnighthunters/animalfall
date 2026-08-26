@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_02_AlarmClock
   m_EditorClassIdentifier: 
   hindranceType: 2
   prefab: {fileID: 3811714988966867437, guid: 17d4be0501610e74b8db9347372c1234, type: 3}
-  icon: {fileID: 121857110, guid: 20625509662f30a4e92d518d2b43b5c5, type: 3}
+  icon: {fileID: 21300000, guid: 3672438c7a72c90449733c2b0cc3cadd, type: 3}
   unlockLevel: 5
   displayName: Alarm Clock
   effectDescription: Counter the Alarm Clock!
@@ -34,10 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Alarm Clock!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: 3672438c7a72c90449733c2b0cc3cadd, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

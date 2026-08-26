@@ -9,10 +9,10 @@ namespace AnimalFall.Core
     {
         public static ObjectPooler Instance { get; private set; }
 
-        // keyed by prefab InstanceID
+        // keyed by prefab object identity hash
         private readonly Dictionary<int, Stack<GameObject>> _pools    = new Dictionary<int, Stack<GameObject>>();
         private readonly Dictionary<int, GameObject>        _prefabMap = new Dictionary<int, GameObject>();
-        // O(1) double-return guard: stores InstanceID of every active object
+        // O(1) double-return guard: stores object identity hashes for active objects
         private readonly HashSet<int> _activeObjects = new HashSet<int>();
 
         private void Awake()
@@ -35,7 +35,7 @@ namespace AnimalFall.Core
         public void CreatePool(GameObject prefab, int initialSize, Transform parent = null)
         {
             if (prefab == null) { Debug.LogWarning("[ObjectPooler] CreatePool: prefab is null."); return; }
-            int key = prefab.GetInstanceID();
+            int key = prefab.GetHashCode();
             if (!_pools.ContainsKey(key))
             {
                 _pools[key]    = new Stack<GameObject>(initialSize);
@@ -53,7 +53,7 @@ namespace AnimalFall.Core
         public GameObject SpawnFromPool(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent = null)
         {
             if (prefab == null) { Debug.LogWarning("[ObjectPooler] SpawnFromPool: prefab is null."); return null; }
-            int key = prefab.GetInstanceID();
+            int key = prefab.GetHashCode();
 
             if (!_pools.ContainsKey(key))
             {
@@ -75,7 +75,7 @@ namespace AnimalFall.Core
             obj.transform.SetParent(parent);
             obj.transform.SetPositionAndRotation(pos, rot);
             obj.SetActive(true);
-            _activeObjects.Add(obj.GetInstanceID());
+            _activeObjects.Add(obj.GetHashCode());
             // Stamp pool key so ReturnToPool can route back correctly
             var tag = obj.GetComponent<PoolTag>();
             if (tag == null) tag = obj.AddComponent<PoolTag>();
@@ -87,7 +87,7 @@ namespace AnimalFall.Core
         public void ReturnToPool(GameObject obj)
         {
             if (obj == null) return;
-            int instanceId = obj.GetInstanceID();
+            int instanceId = obj.GetHashCode();
             if (!_activeObjects.Contains(instanceId))
             {
                 Debug.LogWarning($"[ObjectPooler] Double-return prevented for '{obj.name}'.");

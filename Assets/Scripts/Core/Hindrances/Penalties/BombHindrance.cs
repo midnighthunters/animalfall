@@ -1,6 +1,7 @@
 // Task 4.3 — BombHindrance: falls, tapped → bomb event, missed → deactivate
 using UnityEngine;
 using AnimalFall.Managers;
+using AnimalFall.Core.Animals;
 
 namespace AnimalFall.Core.Hindrances.Penalties
 {
@@ -35,7 +36,25 @@ namespace AnimalFall.Core.Hindrances.Penalties
         public void OnTapped()
         {
             if (!_isActive) return;
-            GameEvents.OnBombTapped?.Invoke(transform.position);
+
+            Vector3 explosionPosition = transform.position;
+            var animalsOnScreen = new System.Collections.Generic.List<Animal>(ActiveAnimalRegistry.All);
+
+            GameEvents.OnBombTapped?.Invoke(explosionPosition);
+
+            for (int i = 0; i < animalsOnScreen.Count; i++)
+            {
+                Animal animal = animalsOnScreen[i];
+                if (animal != null &&
+                    animal.gameObject.activeInHierarchy &&
+                    !animal.IsCollected &&
+                    animal.Data != null &&
+                    animal.Data.type != AnimalType.Bomb)
+                {
+                    animal.OnCollected();
+                }
+            }
+
             Deactivate();
         }
 

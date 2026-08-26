@@ -24,7 +24,20 @@ namespace AnimalFall.Effects
         [SerializeField] private GameObject _missFlashPrefab;
 
         private readonly Dictionary<int, Stack<ParticleSystem>> _burstPools = new Dictionary<int, Stack<ParticleSystem>>();
+        private readonly Stack<SpriteRenderer> _fragmentPool = new Stack<SpriteRenderer>(24);
+        private readonly Dictionary<Sprite, Sprite[]> _fragmentSprites = new Dictionary<Sprite, Sprite[]>();
         private Transform _vfxRoot;
+        private Material _particleMaterial;
+        private int _burstSystemCount;
+        private int _activeFragments;
+
+        private const int MaxBurstSystems = 8;
+        private const int MaxActiveFragments = 24;
+
+        private static readonly ParticleSystem.Burst[] ConfettiBurst = { new ParticleSystem.Burst(0f, 8) };
+        private static readonly ParticleSystem.Burst[] SparkleBurst = { new ParticleSystem.Burst(0f, 10) };
+        private static readonly ParticleSystem.Burst[] RingBurst = { new ParticleSystem.Burst(0f, 8) };
+        private static readonly ParticleSystem.Burst[] FeatherBurst = { new ParticleSystem.Burst(0f, 6) };
 
         private static readonly Color[] SpeciesColors =
         {
@@ -32,7 +45,7 @@ namespace AnimalFall.Effects
             new Color(1.00f, 0.85f, 0.25f),           // Chicken — gold
             new Color(0.55f, 0.35f, 0.15f),           // Dog — brown
             new Color(0.75f, 0.80f, 0.90f),           // Cow — silver
-            new Color(1.00f, 0.55f, 0.75f),           // Cat — pink
+            new Color(1.00f, 0.55f, 0.75f),           // Panda — pink
             new Color(0.55f, 0.35f, 0.20f),           // Monkey
             new Color(1.00f, 0.55f, 0.70f),           // Pig
             new Color(0.95f, 0.95f, 1.00f),           // Rabbit
@@ -51,6 +64,9 @@ namespace AnimalFall.Effects
 
             _vfxRoot = new GameObject("RuntimeVFX").transform;
             _vfxRoot.SetParent(transform, false);
+
+            Shader particleShader = Shader.Find("Sprites/Default");
+            if (particleShader != null) _particleMaterial = new Material(particleShader);
         }
 
         private void OnEnable()
@@ -67,9 +83,23 @@ namespace AnimalFall.Effects
             GameEvents.OnAnimalMissed    -= SpawnMissFlash;
         }
 
+        private void OnDestroy()
+        {
+            if (_particleMaterial != null) Destroy(_particleMaterial);
+            foreach (Sprite[] pieces in _fragmentSprites.Values)
+            {
+                if (pieces == null) continue;
+                for (int i = 0; i < pieces.Length; i++)
+                    if (pieces[i] != null) Destroy(pieces[i]);
+            }
+        }
+
         private void SpawnCollectEffect(AnimalSpecies species, AnimalType type, Vector3 worldPos)
         {
-            // Prefer custom burst so every species feels unique
+            // Break the collected animal sprite into six small, short-lived pieces.
+            SpawnSpriteFragments(species, worldPos);
+
+            // Keep a restrained particle accent behind the fragments.
             SpawnSpeciesBurst(species, type, worldPos);
 
             // Optional legacy prefab if assigned
@@ -105,28 +135,28 @@ namespace AnimalFall.Effects
             switch (style)
             {
                 case 0: // confetti burst
-                    main.startSpeed = new ParticleSystem.MinMaxCurve(2.5f, 5.5f);
-                    main.startSize  = new ParticleSystem.MinMaxCurve(0.12f, 0.28f);
-                    emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 18) });
+                    main.startSpeed = new ParticleSystem.MinMaxCurve(0.8f, 2.0f);
+                    main.startSize  = new ParticleSystem.MinMaxCurve(0.05f, 0.12f);
+                    emission.SetBursts(ConfettiBurst);
                     shape.shapeType = ParticleSystemShapeType.Circle;
                     break;
                 case 1: // star sparkle
-                    main.startSpeed = new ParticleSystem.MinMaxCurve(1.2f, 3.2f);
-                    main.startSize  = new ParticleSystem.MinMaxCurve(0.08f, 0.2f);
-                    emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 24) });
+                    main.startSpeed = new ParticleSystem.MinMaxCurve(0.7f, 1.8f);
+                    main.startSize  = new ParticleSystem.MinMaxCurve(0.04f, 0.10f);
+                    emission.SetBursts(SparkleBurst);
                     shape.shapeType = ParticleSystemShapeType.Sphere;
                     break;
                 case 2: // ring pop
-                    main.startSpeed = new ParticleSystem.MinMaxCurve(3.5f, 4.5f);
-                    main.startSize  = new ParticleSystem.MinMaxCurve(0.1f, 0.22f);
-                    emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 16) });
+                    main.startSpeed = new ParticleSystem.MinMaxCurve(0.9f, 2.1f);
+                    main.startSize  = new ParticleSystem.MinMaxCurve(0.05f, 0.11f);
+                    emission.SetBursts(RingBurst);
                     shape.shapeType = ParticleSystemShapeType.Circle;
                     shape.radius = 0.15f;
                     break;
                 default: // soft feathers
-                    main.startSpeed = new ParticleSystem.MinMaxCurve(0.8f, 2.0f);
-                    main.startSize  = new ParticleSystem.MinMaxCurve(0.15f, 0.35f);
-                    emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 12) });
+                    main.startSpeed = new ParticleSystem.MinMaxCurve(0.5f, 1.4f);
+                    main.startSize  = new ParticleSystem.MinMaxCurve(0.06f, 0.14f);
+                    emission.SetBursts(FeatherBurst);
                     shape.shapeType = ParticleSystemShapeType.Cone;
                     break;
             }
@@ -134,47 +164,88 @@ namespace AnimalFall.Effects
             ps.Clear(true);
             ps.Play(true);
 
-            // Expanding shock ring (simple sprite-less scale pulse via temp GO)
-            SpawnShockRing(worldPos, c);
-
             StartCoroutine(RecycleBurst(ps, 1.1f, style));
         }
 
-        private void SpawnShockRing(Vector3 pos, Color color)
+        private void SpawnSpriteFragments(AnimalSpecies species, Vector3 worldPos)
         {
-            var go = new GameObject("ShockRing");
-            go.transform.SetParent(_vfxRoot, false);
-            go.transform.position = pos;
-            var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = CreateCircleSprite();
-            sr.color = new Color(color.r, color.g, color.b, 0.65f);
-            sr.sortingOrder = 20;
-            go.transform.localScale = Vector3.one * 0.15f;
+            Sprite source = ImageLibrary.GetAnimalSprite(species);
+            if (source == null) return;
+            Sprite[] pieces = GetFragmentSprites(source);
+            if (pieces == null) return;
 
-            var seq = DOTween.Sequence().SetId(go);
-            seq.Join(go.transform.DOScale(1.6f, 0.35f).SetEase(Ease.OutQuad));
-            seq.Join(sr.DOFade(0f, 0.35f));
-            seq.OnComplete(() => Destroy(go));
+            float largest = Mathf.Max(source.bounds.size.x, source.bounds.size.y);
+            float normalisedScale = largest > 0.001f ? 1.45f / largest : 0.65f;
+            const int columns = 3;
+            const int rows = 2;
+
+            for (int i = 0; i < pieces.Length && _activeFragments < MaxActiveFragments; i++)
+            {
+                SpriteRenderer sr;
+                if (_fragmentPool.Count > 0)
+                {
+                    sr = _fragmentPool.Pop();
+                }
+                else
+                {
+                    var fragment = new GameObject("SpriteFragment");
+                    fragment.transform.SetParent(_vfxRoot, false);
+                    sr = fragment.AddComponent<SpriteRenderer>();
+                    sr.sortingOrder = 24;
+                }
+
+                int column = i % columns;
+                int row = i / columns;
+                Vector2 localOffset = new Vector2(
+                    (column - (columns - 1) * 0.5f) * source.bounds.size.x / columns,
+                    (row - (rows - 1) * 0.5f) * source.bounds.size.y / rows) * normalisedScale;
+
+                _activeFragments++;
+                GameObject go = sr.gameObject;
+                go.SetActive(true);
+                sr.sprite = pieces[i];
+                sr.color = Color.white;
+                go.transform.position = worldPos + (Vector3)localOffset;
+                go.transform.rotation = Quaternion.identity;
+                go.transform.localScale = Vector3.one * normalisedScale;
+
+                Vector2 outward = localOffset.sqrMagnitude > 0.001f ? localOffset.normalized : Random.insideUnitCircle.normalized;
+                Vector3 end = go.transform.position + (Vector3)(outward * Random.Range(0.28f, 0.52f)) + Vector3.up * 0.08f;
+
+                DOTween.Kill(go);
+                var sequence = DOTween.Sequence().SetId(go);
+                sequence.Join(go.transform.DOMove(end, 0.38f).SetEase(Ease.OutQuad));
+                sequence.Join(go.transform.DORotate(new Vector3(0f, 0f, Random.Range(-100f, 100f)), 0.38f));
+                sequence.Join(sr.DOFade(0f, 0.38f));
+                sequence.OnComplete(() =>
+                {
+                    go.SetActive(false);
+                    _fragmentPool.Push(sr);
+                    _activeFragments = Mathf.Max(0, _activeFragments - 1);
+                });
+            }
         }
 
-        private static Sprite _circleSprite;
-        private static Sprite CreateCircleSprite()
+        private Sprite[] GetFragmentSprites(Sprite source)
         {
-            if (_circleSprite != null) return _circleSprite;
-            const int size = 64;
-            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
-            tex.filterMode = FilterMode.Bilinear;
-            float r = size * 0.5f;
-            for (int y = 0; y < size; y++)
-            for (int x = 0; x < size; x++)
+            if (_fragmentSprites.TryGetValue(source, out Sprite[] cached)) return cached;
+
+            const int columns = 3;
+            const int rows = 2;
+            cached = new Sprite[columns * rows];
+            Rect rect = source.rect;
+            float width = rect.width / columns;
+            float height = rect.height / rows;
+            for (int row = 0; row < rows; row++)
+            for (int column = 0; column < columns; column++)
             {
-                float d = Vector2.Distance(new Vector2(x, y), new Vector2(r, r));
-                float a = Mathf.Clamp01(1f - Mathf.Abs(d - r * 0.72f) / (r * 0.18f));
-                tex.SetPixel(x, y, new Color(1f, 1f, 1f, a));
+                Rect pieceRect = new Rect(rect.x + column * width, rect.y + row * height, width, height);
+                Sprite piece = Sprite.Create(source.texture, pieceRect, new Vector2(0.5f, 0.5f), source.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+                piece.name = $"{source.name}_piece_{row}_{column}";
+                cached[row * columns + column] = piece;
             }
-            tex.Apply();
-            _circleSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 32f);
-            return _circleSprite;
+            _fragmentSprites[source] = cached;
+            return cached;
         }
 
         private ParticleSystem GetOrCreateBurst(int style)
@@ -191,6 +262,8 @@ namespace AnimalFall.Effects
                 if (reused != null) return reused;
             }
 
+            if (_burstSystemCount >= MaxBurstSystems) return null;
+
             var go = new GameObject($"PopBurst_{style}");
             go.transform.SetParent(_vfxRoot, false);
             var ps = go.AddComponent<ParticleSystem>();
@@ -201,7 +274,7 @@ namespace AnimalFall.Effects
             main.duration = 0.5f;
             main.startLifetime = 0.55f;
             main.gravityModifier = 0.6f;
-            main.maxParticles = 40;
+            main.maxParticles = 24;
             main.simulationSpace = ParticleSystemSimulationSpace.World;
 
             var emission = ps.emission;
@@ -220,8 +293,10 @@ namespace AnimalFall.Effects
             sizeOverLife.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0f, 1f, 1f, 0f));
 
             var renderer = go.GetComponent<ParticleSystemRenderer>();
-            renderer.material = new Material(Shader.Find("Sprites/Default"));
+            if (_particleMaterial != null) renderer.sharedMaterial = _particleMaterial;
             renderer.sortingOrder = 25;
+
+            _burstSystemCount++;
 
             return ps;
         }
@@ -241,12 +316,9 @@ namespace AnimalFall.Effects
 
         private void SpawnExplosionEffect(Vector3 worldPos)
         {
-            // Red/orange bomb burst
+            // Compact bomb accent only. The large explosion prefab is intentionally
+            // omitted so the effect never covers the play field.
             SpawnSpeciesBurst(AnimalSpecies.None, AnimalType.Bomb, worldPos);
-
-            if (VFXRefs.ExplosionBam == null || ObjectPooler.Instance == null) return;
-            var go = ObjectPooler.Instance.SpawnFromPool(VFXRefs.ExplosionBam, worldPos, Quaternion.identity, transform);
-            if (go != null) StartCoroutine(ReturnAfter(go, 1.5f));
         }
 
         private void SpawnMissFlash()

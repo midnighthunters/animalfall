@@ -133,6 +133,11 @@ namespace AnimalFall.MegaShooter.Editor
                 MegaWaveData wave = level.waves[i];
                 if (wave == null) { errors.Add($"{label}: wave {i + 1} is null."); continue; }
                 if (wave.waveNumber != i + 1) errors.Add($"{label}: wave numbers must be sequential.");
+                if (wave.completionCondition == MegaWaveCompletion.SurviveDuration && wave.surviveDuration <= 0f)
+                    errors.Add($"{label}: survival wave {i + 1} needs a positive survive duration.");
+                if (wave.completionCondition == MegaWaveCompletion.DefeatPriorityTargets &&
+                    (wave.spawnGroups == null || !wave.spawnGroups.Any(group => group != null && group.priorityTarget)))
+                    errors.Add($"{label}: priority wave {i + 1} needs at least one priority target.");
                 if (wave.maximumSimultaneousEnemies > level.maximumActiveEnemies)
                     errors.Add($"{label}: wave {i + 1} cap exceeds the level active-enemy cap.");
                 if (wave.spawnGroups == null || wave.spawnGroups.Length == 0) errors.Add($"{label}: wave {i + 1} has no spawn groups.");

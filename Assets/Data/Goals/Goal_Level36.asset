@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084a9e723419b444e9545cf7ffc13a30, type: 3}
+  m_Script: {fileID: 11500000, guid: ffc7149dc097e3e4da8ff19b4b9fe368, type: 3}
   m_Name: Goal_Level36
   m_EditorClassIdentifier: 
   _targets:

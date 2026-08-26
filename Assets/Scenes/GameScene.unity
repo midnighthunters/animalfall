@@ -239,8 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecee51c0cfb755a40b21b9627f02bf41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 1654796343}
-  _audioManager: {fileID: 650301962}
 --- !u!1 &104599053
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +334,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -613,6 +612,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -878,6 +878,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1041,6 +1042,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1306,6 +1308,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1415,6 +1418,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1490,6 +1494,7 @@ GameObject:
   - component: {fileID: 237644879}
   - component: {fileID: 237644878}
   - component: {fileID: 237644877}
+  - component: {fileID: 237644884}
   m_Layer: 0
   m_Name: "[UI \u2014 GameCanvas]"
   m_TagString: Untagged
@@ -1509,18 +1514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8176bd2f26d45f7468905a40e49c4e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 1196618347}
-  _titleText: {fileID: 213547047}
-  _subtitleText: {fileID: 194320173}
-  _canvasGroup: {fileID: 1196618349}
-  _panel: {fileID: 997834268}
-  _primaryButton: {fileID: 1803181482}
-  _primaryButtonLabel: {fileID: 223372904}
-  _homeButton: {fileID: 782078685}
-  _winTitle: LEVEL CLEARED!
-  _winSubtitle: Every animal is safe
-  _loseTitle: TIME'S UP!
-  _loseSubtitle: "So close \u2014 give it another try"
 --- !u!114 &237644878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,9 +1526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68153b3fea5caf64b8526b466bb8f5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 691132139}
-  _countdownText: {fileID: 166096274}
-  _canvasGroup: {fileID: 691132140}
 --- !u!114 &237644879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,16 +1538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05166bd817d8b649a3851cc7456e74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bottomBar: {fileID: 1011421875}
-  _bottomBarBg: {fileID: 1011421873}
-  _goalsRow: {fileID: 1619986145}
-  _timerText: {fileID: 176170766}
-  _timerRing: {fileID: 0}
-  _goalChipPrefab: {fileID: 0}
-  _timerNormal: {r: 1, g: 1, b: 1, a: 1}
-  _timerWarning: {r: 1, g: 0.35, b: 0.3, a: 1}
-  _barColor: {r: 1, g: 1, b: 1, a: 1}
-  _countColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &237644880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1616,6 +1596,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1643,6 +1624,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &237644884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237644876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e1a096eaa254143b70c8f21499de2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.UI.GameHUD
+  _bottomBar: {fileID: 1011421875}
+  _bottomBarBg: {fileID: 1011421873}
+  _goalsRow: {fileID: 0}
+  _timerText: {fileID: 176170766}
+  _timerRing: {fileID: 1807543511}
+  _goalChipPrefab: {fileID: 0}
+  _timerNormal: {r: 1, g: 1, b: 1, a: 1}
+  _timerWarning: {r: 1, g: 0.35, b: 0.3, a: 1}
+  _barColor: {r: 0.12, g: 0.14, b: 0.2, a: 0.92}
+  _countColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!21 &277741627
 Material:
   serializedVersion: 8
@@ -1817,6 +1820,7 @@ GameObject:
   m_IsActive: 0
 --- !u!212 &291411533
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1835,6 +1839,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1856,9 +1862,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -537287130225544826, guid: 821e8ead4671954498da494154379250, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1867,9 +1875,9 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 15.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!4 &291411534
 Transform:
   m_ObjectHideFlags: 0
@@ -2454,7 +2462,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -2462,6 +2469,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,11 +2512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984b027e4a8a8e941a6c72a42985daca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelDatabase: {fileID: 11400000, guid: 769de9562e9174549b0176739cc13670, type: 2}
-  _gameManager: {fileID: 1383431111}
-  _levelNumber: 1
-  _jumpOnGameSceneStart: 0
-  _allowInReleaseBuild: 0
 --- !u!4 &529749045
 Transform:
   m_ObjectHideFlags: 0
@@ -2536,9 +2539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3678caa5b9c8348a9e0c43c34f7b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controller: {fileID: 529749044}
-  _levelNumber: 13
-  _startOnPlay: 0
 --- !u!1 &596408376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2835,8 +2835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6872d71b51810a444af64010b8d0ad2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfxClips: []
-  _bgmSource: {fileID: 0}
 --- !u!1 &665718974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,6 +2930,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2985,6 +2984,7 @@ GameObject:
   - component: {fileID: 691132143}
   - component: {fileID: 691132142}
   - component: {fileID: 691132140}
+  - component: {fileID: 691132144}
   m_Layer: 0
   m_Name: CountdownOverlay
   m_TagString: Untagged
@@ -3062,6 +3062,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691132139}
   m_CullTransparentMesh: 1
+--- !u!114 &691132144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691132139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c381a2b65de80a54bb5966cc40393f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.UI.CountdownController
+  _root: {fileID: 691132139}
+  _countdownText: {fileID: 166096274}
+  _canvasGroup: {fileID: 691132140}
 --- !u!1 &749744339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 944274926}
   - component: {fileID: 944274927}
+  - component: {fileID: 944274928}
   m_Layer: 0
   m_Name: ObjectPooler
   m_TagString: Untagged
@@ -3470,6 +3486,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eaa49f79ad7cbf4aa235c542fcffa33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &944274928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944274925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd190e895dfec24e8c9ff005cf8f937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.ObjectPooler
 --- !u!1 &996737471
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3593,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3773,6 +3802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1013387408}
   - component: {fileID: 1013387409}
+  - component: {fileID: 1013387410}
   m_Layer: 0
   m_Name: HindranceManager
   m_TagString: Untagged
@@ -3807,14 +3837,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6785f5927c936904398b48c990a43320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1013387410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013387407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b265cfbdd2daa5f4c8a2155f4335c3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Managers.HindranceManager
   _hindranceContainer: {fileID: 142612748}
   _registry: {fileID: 11400000, guid: a7c3c7700dfbeb248862b181ce02f67a, type: 2}
   _gameManager: {fileID: 1383431111}
-  _envEffects: {fileID: 891033822}
-  _screenEffects: {fileID: 1378552058}
-  _audioManager: {fileID: 650301962}
-  _livesManager: {fileID: 1570806569}
-  _inputManager: {fileID: 2105224004}
+  _envEffects: {fileID: 0}
+  _screenEffects: {fileID: 0}
+  _audioManager: {fileID: 0}
+  _livesManager: {fileID: 0}
+  _inputManager: {fileID: 0}
 --- !u!1 &1112866345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3966,7 +4008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303d460eca0d0d147ba8dde30b7f3d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerUps: []
 --- !u!1 &1196618347
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,6 +4463,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4606,10 +4648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2d84e9fb30d344088113f17e43b0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inkOverlayPrefab: {fileID: 7005161321155989568, guid: f5a1ab31d45d7c84d8b7a6fb5b79c91e, type: 3}
-  _stormGradientPrefab: {fileID: 2190088663812416087, guid: 6cf33fa68494cd747b0c8be8b9476d8b, type: 3}
-  _flashbangPrefab: {fileID: 4166406235680161853, guid: 76f34d86d1d84804585152ddde477541, type: 3}
-  _borderFlashPrefab: {fileID: 514526389976382221, guid: e808ad624886d9146bfcb02199445d02, type: 3}
 --- !u!1 &1383431109
 GameObject:
   m_ObjectHideFlags: 0
@@ -4620,6 +4658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383431110}
   - component: {fileID: 1383431111}
+  - component: {fileID: 1383431112}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4651,26 +4690,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1383431109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba313c6bd4876e348900accebf22dbd6, type: 3}
+  m_Script: {fileID: 11500000, guid: bedf654f8d3fcd84fae134b33c5f643c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1498966826}
-  _hindranceManager: {fileID: 1013387409}
+  _spawner: {fileID: 1498966827}
+  _hindranceManager: {fileID: 1013387410}
   _scoreManager: {fileID: 1654796343}
   _comboManager: {fileID: 61891111}
   _audioManager: {fileID: 650301962}
   _powerUpManager: {fileID: 1195096722}
   _livesManager: {fileID: 1570806569}
-  _inputManager: {fileID: 2105224004}
+  _inputManager: {fileID: 2105224005}
   _megaLevelController: {fileID: 1569665184}
   _camera: {fileID: 519420031}
   _envEffects: {fileID: 891033822}
   _goalTracker: {fileID: 1925018652}
-  _hud: {fileID: 237644879}
-  _countdown: {fileID: 237644878}
+  _hud: {fileID: 237644884}
+  _countdown: {fileID: 1383431112}
   _victoryOverlay: {fileID: 237644877}
   _autoStartLevel: {fileID: 11400000, guid: 930cceee37a6e7b4a95f949a35b4da93, type: 2}
   _plainBackground: {r: 0.55, g: 0.78, b: 0.95, a: 1}
+--- !u!114 &1383431112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383431109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c381a2b65de80a54bb5966cc40393f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.UI.CountdownController
+  _root: {fileID: 691132139}
+  _countdownText: {fileID: 166096274}
+  _canvasGroup: {fileID: 691132140}
 --- !u!1 &1386843506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,6 +5029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1498966825}
   - component: {fileID: 1498966826}
+  - component: {fileID: 1498966827}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -5015,15 +5070,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d70951289f7d1e44aa3597e404b73d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1498966827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498966824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cebf434e3f9b44bb5ed2cbba8153d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Animals.Spawner
   _animalPrefab: {fileID: 1805842714932202384, guid: 902682e62637c3d49912cd608376e590, type: 3}
-  _animalContainer: {fileID: 142612748}
-  _spawnPoints:
-  - {fileID: 878229310}
-  - {fileID: 1360576130}
-  - {fileID: 1846672387}
-  - {fileID: 1251278634}
-  - {fileID: 1112866346}
-  - {fileID: 1719351737}
+  _animalContainer: {fileID: 0}
+  _spawnPoints: []
 --- !u!1 &1499827572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,9 +5126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499827572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22fdd0ff9745b1b4eac80bbba4c19cb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c3d94cc661bc7f4f8a55131e2e39e2e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Effects.EffectsController
   _battleEffectWhitePrefab: {fileID: 4250298743439401460, guid: 3a6b03ffc35c04d409ed1ed3069aff10, type: 3}
   _explosionBamPrefab: {fileID: 8367907410985086596, guid: ed2b04cc4632aef47afb73d562d1860b, type: 3}
   _explosionZapPrefab: {fileID: 6520436353736122353, guid: c38b1d001d3d4fa4fb7c2589f741cd7c, type: 3}
@@ -5245,7 +5306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def73f030e24fd640889440aa63363c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileContainer: {fileID: 142612748}
 --- !u!1 &1570806567
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,16 +5471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e900b22673eac49b15b47c6573a895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelDatabase: {fileID: 11400000, guid: 769de9562e9174549b0176739cc13670, type: 2}
-  _objectPooler: {fileID: 944274927}
-  _animalPrefab: {fileID: 1805842714932202384, guid: 902682e62637c3d49912cd608376e590, type: 3}
-  _battleEffectWhitePrefab: {fileID: 4250298743439401460, guid: 59a401aa57bc68c46af52c5dc34818fe, type: 3}
-  _explosionBamPrefab: {fileID: 8367907410985086596, guid: d7480cdbe98465d4886845b6c03d16b8, type: 3}
-  _explosionZapPrefab: {fileID: 6520436353736122353, guid: b5f9ce02e7480f54fb58ebe905c6cf29, type: 3}
-  _floatingTextPrefab: {fileID: 0}
-  _gameSceneName: GameScene
-  _megaShooterSceneName: MegaShooterScene
-  _mainSceneName: MainScene
 --- !u!4 &1654108436
 Transform:
   m_ObjectHideFlags: 0
@@ -6034,6 +6084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105224003}
   - component: {fileID: 2105224004}
+  - component: {fileID: 2105224005}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -6068,6 +6119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab2c6fd09900da4ca763e460d1f4a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2105224005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105224002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a407760f646b6e04c891e74ed3249a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Managers.InputManager
 --- !u!1 &2127368812
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92adf75a16bf845ab71f72a2fc7822, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
   m_Name: Hindrance_18_MirrorMode
   m_EditorClassIdentifier: 
   hindranceType: 18
   prefab: {fileID: 7973368176020759339, guid: 3b733fca425f621438a0af630cfcde3b, type: 3}
-  icon: {fileID: -956643558, guid: e5253f9161c618c4880b0ebd191581b1, type: 3}
+  icon: {fileID: 21300000, guid: c0e996f718d8561479a10a0e4830d9b4, type: 3}
   unlockLevel: 37
   displayName: Mirror Mode
   effectDescription: Counter the Mirror Mode!
@@ -34,10 +34,7 @@ MonoBehaviour:
   debugShowcaseOnly: 0
   tutorialInstruction: Counter the Mirror Mode!
   stateSprites:
-  - {fileID: 53261236, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1763574747, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: -250372012, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
-  - {fileID: 1136297405, guid: 08596f139b842874aa8b2aed1eb0d5f5, type: 3}
+  - {fileID: 21300000, guid: c0e996f718d8561479a10a0e4830d9b4, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

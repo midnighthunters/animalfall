@@ -16,6 +16,8 @@ namespace AnimalFall.Managers
         public static Action<Vector3>             OnBombTapped;
         public static Action                      OnAnimalMissed;
         public static Action                      OnCursedSkullTapped;
+        public static Action<Animal>              OnIceBroken;
+        public static Action<Animal>              OnBubblePopped;
 
         // ── Level flow ─────────────────────────────────────────────────────────
         public static Action<int>  OnLevelStarted;
@@ -54,6 +56,8 @@ namespace AnimalFall.Managers
             OnBombTapped        = null;
             OnAnimalMissed      = null;
             OnCursedSkullTapped = null;
+            OnIceBroken         = null;
+            OnBubblePopped      = null;
             OnLevelStarted      = null;
             OnLevelWon          = null;
             OnLevelFailed       = null;
