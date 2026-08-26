@@ -5085,6 +5085,8 @@ MonoBehaviour:
   _animalPrefab: {fileID: 1805842714932202384, guid: 902682e62637c3d49912cd608376e590, type: 3}
   _animalContainer: {fileID: 0}
   _spawnPoints: []
+  _spawnLaneCount: 6
+  _spawnClearance: 1.65
 --- !u!1 &1499827572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5129,9 +5131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3d94cc661bc7f4f8a55131e2e39e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Effects.EffectsController
-  _battleEffectWhitePrefab: {fileID: 4250298743439401460, guid: 3a6b03ffc35c04d409ed1ed3069aff10, type: 3}
-  _explosionBamPrefab: {fileID: 8367907410985086596, guid: ed2b04cc4632aef47afb73d562d1860b, type: 3}
-  _explosionZapPrefab: {fileID: 6520436353736122353, guid: c38b1d001d3d4fa4fb7c2589f741cd7c, type: 3}
+  _battleEffectWhitePrefab: {fileID: 0}
+  _explosionBamPrefab: {fileID: 0}
+  _explosionZapPrefab: {fileID: 0}
   _missFlashPrefab: {fileID: 0}
 --- !u!1 &1531953926
 GameObject:

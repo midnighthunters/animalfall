@@ -6,6 +6,7 @@ using DG.Tweening;
 using AnimalFall.Core;
 using AnimalFall.Core.Animals;
 using AnimalFall.Managers;
+using AnimalFall.Utils;
 
 namespace AnimalFall.Effects
 {
