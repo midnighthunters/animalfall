@@ -66,9 +66,15 @@ namespace AnimalFall.UI
             {
                 _currentLevel = _save.GetHighestUnlockedLevel();
 
+                int totalLevels = LevelManager.Instance != null ? LevelManager.Instance.TotalLevels : 0;
+                if (totalLevels > 0)
+                    _currentLevel = Mathf.Clamp(_currentLevel, 0, totalLevels - 1);
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 int debugLevel = PlayerPrefs.GetInt("AnimalFall.DebugLevel", -1);
-                if (debugLevel >= 0 && LevelManager.Instance != null && LevelManager.Instance.GetLevelData(debugLevel) != null)
+                // A debug jump may start an unplayed level, but it must never keep overriding
+                // the newly saved progress after that level has been completed.
+                if (debugLevel > _currentLevel && LevelManager.Instance != null && LevelManager.Instance.GetLevelData(debugLevel) != null)
                     _currentLevel = debugLevel;
 #endif
 

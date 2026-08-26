@@ -156,9 +156,9 @@ namespace AnimalFall.Managers
 
             if (won)
             {
-                GameEvents.OnLevelWon?.Invoke();
                 if (_currentLevel != null)
                     LevelManager.Instance?.LevelSuccess(_currentLevel.LevelNumber - 1);
+                GameEvents.OnLevelWon?.Invoke();
             }
             else
             {

@@ -1,4 +1,3 @@
-// Task 6.7 — LevelManager: DontDestroyOnLoad, scene loading, pool pre-warm
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using AnimalFall.Core;
@@ -37,6 +36,8 @@ namespace AnimalFall.Managers
             Instance = this;
             DontDestroyOnLoad(gameObject);  // ONLY MonoBehaviour with DDOL
         }
+
+        private void Start() => ResolveSaveService();
 
         public void Init(SaveService save) => _save = save;
 
@@ -105,11 +106,31 @@ namespace AnimalFall.Managers
 
         public void LevelSuccess(int levelIndex)
         {
-            if (_save == null) return;
-            int nextLevel = levelIndex + 1;
+            if (!ResolveSaveService())
+            {
+                Debug.LogError("[LevelManager] Cannot save level progress because no SaveService is available.");
+                return;
+            }
+
+            // Selection is database-indexed, so prefer it over the authored LevelNumber.
+            int completedLevelIndex = _currentLevelIndex >= 0 ? _currentLevelIndex : levelIndex;
+            if (completedLevelIndex < 0 || completedLevelIndex >= TotalLevels)
+            {
+                Debug.LogError($"[LevelManager] Cannot save completion for invalid level index {completedLevelIndex}.");
+                return;
+            }
+
+            // Keep the menu on a valid playable level after the final level is completed.
+            int nextLevel = Mathf.Min(completedLevelIndex + 1, TotalLevels - 1);
             if (nextLevel > _save.GetHighestUnlockedLevel())
                 _save.SetHighestUnlockedLevel(nextLevel);
-            _save.SaveAll();
+        }
+
+        private bool ResolveSaveService()
+        {
+            if (_save != null) return true;
+            _save = FindFirstObjectByType<SaveService>();
+            return _save != null;
         }
 
         public void LevelFailed()
