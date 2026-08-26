@@ -23,11 +23,17 @@ namespace AnimalFall.Managers
             Instance = this;
         }
 
+        private void Start()
+        {
+            // All active Awake methods finish before Start, so this avoids the bootstrap-order race.
+            Init(FindFirstObjectByType<SaveService>());
+        }
+
         public void Init(SaveService save)
         {
             _save = save;
             int storedLives = save?.GetLives() ?? MAX_LIVES;
-            long nextUTC    = save?.GetNextLifeUTC() ?? 0L;
+            long nextUTC = save?.GetNextLifeUTC() ?? 0L;
 
             // Offline catch-up
             double offlineMins = (DateTime.UtcNow - DateTimeOffset.FromUnixTimeSeconds(nextUTC).UtcDateTime).TotalMinutes;
@@ -35,20 +41,29 @@ namespace AnimalFall.Managers
             {
                 storedLives = ComputeOfflineLives(storedLives, offlineMins);
                 save?.SetLives(storedLives);
+                save?.SaveAll();
             }
 
             _currentLives = Mathf.Clamp(storedLives, 0, MAX_LIVES);
-            if (_currentLives < MAX_LIVES) StartRegenTimer();
+            if (_currentLives < MAX_LIVES)
+            {
+                StartRegenTimer();
+            }
+            else
+            {
+                _timerRunning = false;
+                _regenTimer = 0f;
+            }
         }
 
-        public bool HasLives()   => _currentLives > 0;
-        public int  CurrentLives => _currentLives;
+        public bool HasLives() => _currentLives > 0;
+        public int CurrentLives => _currentLives;
 
         public void UseLife()
         {
             if (_currentLives <= 0) return;
             _currentLives--;
-            _save?.SetLives(_currentLives);
+            SaveCurrentLives();
             if (_currentLives < MAX_LIVES && !_timerRunning) StartRegenTimer();
         }
 
@@ -56,7 +71,25 @@ namespace AnimalFall.Managers
         {
             if (_currentLives >= MAX_LIVES) return;
             _currentLives++;
-            _save?.SetLives(_currentLives);
+            SaveCurrentLives();
+        }
+
+        /// <summary>Restores the player to the life cap and persists the result immediately.</summary>
+        public void Refill()
+        {
+            _currentLives = MAX_LIVES;
+            _timerRunning = false;
+            _regenTimer = 0f;
+            SaveCurrentLives();
+        }
+
+        private void SaveCurrentLives()
+        {
+            if (_save == null) _save = FindFirstObjectByType<SaveService>();
+            if (_save == null) return;
+
+            _save.SetLives(_currentLives);
+            _save.SaveAll();
         }
 
         /// <summary>Property-testable pure function (P9).</summary>

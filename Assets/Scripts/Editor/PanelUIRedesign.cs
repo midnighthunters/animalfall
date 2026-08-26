@@ -210,14 +210,24 @@ namespace AnimalFall.Editor
             var timerText = CreateText("TimerText", timerFace.transform, "60", 52f, Color.white, _headingFont);
             SetFixed(timerText.rectTransform, new Vector2(124f, 76f), new Vector2(0.5f, 0.5f), new Vector2(0f, -13f));
 
-            var hint = CreateText("GoalHint", bar.transform, "RESCUE", 20f,
+            // Compact active target summary on the left side of the timer panel.
+            var targetSummary = CreateRect("TargetSummary", bar.transform);
+            SetFixed(targetSummary, new Vector2(300f, 54f), new Vector2(0f, 1f), new Vector2(130f, -28f));
+
+            var targetIcon = CreateImage("TargetIcon", targetSummary, null, Color.white, false);
+            SetFixed(targetIcon.rectTransform, new Vector2(42f, 42f), new Vector2(0f, 0.5f), new Vector2(24f, 0f));
+            targetIcon.preserveAspect = true;
+
+            var targetText = CreateText("TargetText", targetSummary, "TARGET", 22f,
                 new Color(0.78f, 0.92f, 1f, 1f), _bodyFont, TextAlignmentOptions.Left);
-            SetFixed(hint.rectTransform, new Vector2(210f, 34f), new Vector2(0f, 1f), new Vector2(130f, -23f));
+            SetFixed(targetText.rectTransform, new Vector2(228f, 46f), new Vector2(0f, 0.5f), new Vector2(164f, 0f));
 
             var hud = canvasObject.AddComponent<GameHUD>();
             SetPrivate(hud, "_bottomBar", bar.rectTransform);
             SetPrivate(hud, "_bottomBarBg", bar);
             SetPrivate(hud, "_goalsRow", goals.transform);
+            SetPrivate(hud, "_targetIcon", targetIcon);
+            SetPrivate(hud, "_targetText", targetText);
             SetPrivate(hud, "_timerText", timerText);
             SetPrivate(hud, "_timerRing", null);
             SetPrivate(hud, "_barColor", Color.white);

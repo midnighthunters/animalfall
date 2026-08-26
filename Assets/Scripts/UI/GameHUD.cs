@@ -17,6 +17,8 @@ namespace AnimalFall.UI
         [SerializeField] private RectTransform _bottomBar;
         [SerializeField] private Image _bottomBarBg;
         [SerializeField] private Transform _goalsRow;
+        [SerializeField] private Image _targetIcon;
+        [SerializeField] private TextMeshProUGUI _targetText;
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private Image _timerRing;
         [SerializeField] private GameObject _goalChipPrefab;
@@ -31,6 +33,7 @@ namespace AnimalFall.UI
         private float _totalTime = 60f;
         private bool _warningActive;
         private bool _goalBound;
+        private GoalData _summaryGoal;
 
         private class GoalChip
         {
@@ -41,11 +44,12 @@ namespace AnimalFall.UI
             public Image Check;
         }
 
-        public void Setup(LevelData level)
+public void Setup(LevelData level)
         {
             ImageLibrary.LoadAll();
             _totalTime = level != null ? level.TimeLimit : 60f;
             _warningActive = false;
+            _summaryGoal = level != null ? level.Goal : null;
 
             if (_bottomBarBg != null) _bottomBarBg.color = _barColor;
             if (_timerText != null)
@@ -56,7 +60,8 @@ namespace AnimalFall.UI
             if (_timerRing != null) _timerRing.fillAmount = 1f;
 
             EnsureBottomLayout();
-            BuildGoalChips(level?.Goal);
+            BuildGoalChips(_summaryGoal);
+            UpdateTargetSummary();
         }
 
         /// <summary>
@@ -156,6 +161,57 @@ namespace AnimalFall.UI
                 CreateChip(t.species, t.count);
             }
         }
+
+private void UpdateTargetSummary()
+        {
+            if (_targetIcon == null && _targetText == null) return;
+
+            AnimalSpecies displayedSpecies = AnimalSpecies.None;
+            int remaining = 0;
+            int target = 0;
+            var targets = _summaryGoal != null ? _summaryGoal.Targets : null;
+            GoalTracker tracker = GoalTracker.Instance;
+
+            if (targets != null)
+            {
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    var goalTarget = targets[i];
+                    if (goalTarget.species == AnimalSpecies.None || goalTarget.count <= 0) continue;
+
+                    int goalRemaining = tracker != null
+                        ? tracker.GetRemaining(goalTarget.species)
+                        : goalTarget.count;
+                    if (goalRemaining <= 0) continue;
+
+                    displayedSpecies = goalTarget.species;
+                    remaining = goalRemaining;
+                    target = tracker != null ? tracker.GetTarget(displayedSpecies) : goalTarget.count;
+                    if (target <= 0) target = goalTarget.count;
+                    break;
+                }
+            }
+
+            bool hasTarget = displayedSpecies != AnimalSpecies.None;
+            if (_targetIcon != null)
+            {
+                _targetIcon.gameObject.SetActive(hasTarget);
+                if (hasTarget)
+                {
+                    _targetIcon.sprite = ImageLibrary.GetAnimalSprite(displayedSpecies);
+                    _targetIcon.preserveAspect = true;
+                    _targetIcon.color = Color.white;
+                }
+            }
+
+            if (_targetText != null)
+            {
+                _targetText.gameObject.SetActive(hasTarget);
+                if (hasTarget)
+                    _targetText.text = $"{displayedSpecies.ToString().ToUpperInvariant()} {remaining}/{target}";
+            }
+        }
+
 
         private void CreateChip(AnimalSpecies species, int count)
         {
@@ -310,33 +366,36 @@ namespace AnimalFall.UI
                 _timerRing.fillAmount = Mathf.Clamp01(t / _totalTime);
         }
 
-        private void OnGoalProgress(AnimalSpecies species, int remaining, int target)
+private void OnGoalProgress(AnimalSpecies species, int remaining, int target)
         {
-            if (!_chips.TryGetValue(species, out var chip) || chip == null) return;
-
-            if (chip.Count != null)
+            if (_chips.TryGetValue(species, out GoalChip chip) && chip != null)
             {
-                chip.Count.text = remaining.ToString();
-                DOTween.Kill(chip.Count.transform);
-                chip.Count.transform.localScale = Vector3.one;
-                chip.Count.transform.DOPunchScale(Vector3.one * 0.35f, 0.28f, 6, 0.6f)
-                    .SetId(chip.Count.transform);
-            }
-
-            if (remaining <= 0)
-            {
-                if (chip.Count != null) chip.Count.gameObject.SetActive(false);
-                if (chip.Check != null)
+                if (chip.Count != null)
                 {
-                    chip.Check.gameObject.SetActive(true);
-                    chip.Check.transform.localScale = Vector3.zero;
-                    chip.Check.transform.DOScale(1f, 0.35f).SetEase(Ease.OutBack);
+                    chip.Count.text = remaining.ToString();
+                    DOTween.Kill(chip.Count.transform);
+                    chip.Count.transform.localScale = Vector3.one;
+                    chip.Count.transform.DOPunchScale(Vector3.one * 0.35f, 0.28f, 6, 0.6f)
+                        .SetId(chip.Count.transform);
                 }
-                if (chip.Group != null)
-                    chip.Group.DOFade(0.55f, 0.35f);
-                if (chip.Root != null)
-                    chip.Root.transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 4, 0.5f);
+
+                if (remaining <= 0)
+                {
+                    if (chip.Count != null) chip.Count.gameObject.SetActive(false);
+                    if (chip.Check != null)
+                    {
+                        chip.Check.gameObject.SetActive(true);
+                        chip.Check.transform.localScale = Vector3.zero;
+                        chip.Check.transform.DOScale(1f, 0.35f).SetEase(Ease.OutBack);
+                    }
+                    if (chip.Group != null)
+                        chip.Group.DOFade(0.55f, 0.35f);
+                    if (chip.Root != null)
+                        chip.Root.transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 4, 0.5f);
+                }
             }
+
+            UpdateTargetSummary();
         }
 
         private void OnTimerWarning()
