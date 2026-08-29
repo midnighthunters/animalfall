@@ -43,6 +43,7 @@ namespace AnimalFall.UI
 
         private SaveService _save;
         private float       _totalTime;
+        private int         _displayedTimerSecond = int.MinValue;
 
         // ── Setup ─────────────────────────────────────────────────────────────
 
@@ -50,6 +51,7 @@ namespace AnimalFall.UI
         {
             _save      = save;
             _totalTime = level.TimeLimit;
+            _displayedTimerSecond = int.MinValue;
 
             if (_staticCanvas  != null) _staticCanvas.sortingOrder  = 0;
             if (_dynamicCanvas != null) _dynamicCanvas.sortingOrder  = 1;
@@ -89,8 +91,12 @@ namespace AnimalFall.UI
         {
             if (GameManager.Instance != null && _timerText != null)
             {
-                float t = GameManager.Instance.RemainingTime;
-                _timerText.text = Mathf.CeilToInt(t).ToString();
+                int second = Mathf.CeilToInt(GameManager.Instance.RemainingTime);
+                if (second != _displayedTimerSecond)
+                {
+                    _displayedTimerSecond = second;
+                    _timerText.text = second.ToString();
+                }
             }
         }
 

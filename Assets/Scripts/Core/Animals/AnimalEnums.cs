@@ -1,11 +1,11 @@
 // Task 2.1 — AnimalEnums: 13 species, full type / pattern / result enums
 namespace AnimalFall.Core.Animals
 {
-    /// <summary>12 playable animal species (None = unassigned).</summary>
+    /// <summary>13 playable animal species (None = unassigned).</summary>
     public enum AnimalSpecies
     {
         None, Chicken, Dog, Cow, Panda, Monkey,
-        Pig, Rabbit, Penguin, Owl, Mouse, Zebra, Duck
+        Pig, Rabbit, Penguin, Owl, Mouse, Zebra, Duck, Raccoon
     }
 
     /// <summary>Controls special tap and movement behaviour.</summary>

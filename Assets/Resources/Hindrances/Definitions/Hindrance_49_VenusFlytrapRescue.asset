@@ -15,32 +15,35 @@ MonoBehaviour:
   hindranceType: 49
   prefab: {fileID: 6422440449743379676, guid: 7b3259956682d5143925cfa2f9190075, type: 3}
   icon: {fileID: 21300000, guid: 62537f0634e44684580f4cfb0ad732db, type: 3}
-  unlockLevel: 99
-  displayName: Venus Flytrap Rescue
-  effectDescription: Tap left and right!
+  unlockLevel: 36
+  displayName: Thorn Plant
+  effectDescription: It periodically stretches out and snatches an animal.
   category: 8
   baseWeight: 1
   difficultyTier: 0
-  minDuration: 4
-  maxDuration: 8
+  minDuration: 5
+  maxDuration: 14
   maxSimultaneous: 1
-  cooldown: 12
+  cooldown: 11
   compatibilityTags: 80
   exclusionTags: 80
-  inputMode: 1
+  inputMode: 0
   targetScope: 1
   normalLevelEligible: 1
   megaLevelEligible: 0
   debugShowcaseOnly: 0
-  tutorialInstruction: Tap left and right!
+  tutorialInstruction: The thorn plant is hunting!
   stateSprites:
-  - {fileID: 21300000, guid: 62537f0634e44684580f4cfb0ad732db, type: 3}
+  - {fileID: -7749953075354045515, guid: 0bcd2bc0272f6e04eb688a0340b20f13, type: 3}
+  - {fileID: 7312256412430890177, guid: 0bcd2bc0272f6e04eb688a0340b20f13, type: 3}
+  - {fileID: -4215831414817827779, guid: 0bcd2bc0272f6e04eb688a0340b20f13, type: 3}
+  - {fileID: 1645142981779893781, guid: 0bcd2bc0272f6e04eb688a0340b20f13, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}
   completionSfx: {fileID: 0}
   telegraphDuration: 0.75
   interactionWindow: 5
-  requiredInteractions: 4
+  requiredInteractions: 1
   primaryValue: 1
   secondaryValue: 0

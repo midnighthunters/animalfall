@@ -9,11 +9,6 @@ namespace AnimalFall.MegaShooter
         void OnMegaDespawned();
     }
 
-    public sealed class MegaPoolMember : MonoBehaviour
-    {
-        [System.NonSerialized] public GameObject SourcePrefab;
-    }
-
     public sealed class MegaObjectPools : MonoBehaviour
     {
         public static MegaObjectPools Instance { get; private set; }
@@ -79,7 +74,11 @@ namespace AnimalFall.MegaShooter
         {
             if (instance == null) return;
             int id = instance.GetHashCode();
-            if (!_active.Remove(id)) return;
+            // A scene transition or an interrupted pool warm-up can leave an object
+            // out of the active lookup.  It must still be disabled: leaving it alive
+            // means an off-screen enemy keeps moving and firing forever.
+            bool wasTracked = _active.Remove(id);
+            if (!wasTracked && !instance.activeSelf) return;
 
             Notify(instance, false);
             instance.SetActive(false);
@@ -107,16 +106,20 @@ namespace AnimalFall.MegaShooter
             MegaPoolMember member = instance.GetComponent<MegaPoolMember>();
             if (member == null) member = instance.AddComponent<MegaPoolMember>();
             member.SourcePrefab = prefab;
+            member.CachePoolables();
             instance.SetActive(false);
             return instance;
         }
 
         private static void Notify(GameObject instance, bool spawned)
         {
-            MonoBehaviour[] behaviours = instance.GetComponents<MonoBehaviour>();
-            for (int i = 0; i < behaviours.Length; i++)
+            MegaPoolMember member = instance.GetComponent<MegaPoolMember>();
+            if (member == null) return;
+            IMegaPoolable[] poolables = member.Poolables;
+            for (int i = 0; i < poolables.Length; i++)
             {
-                if (behaviours[i] is not IMegaPoolable poolable) continue;
+                IMegaPoolable poolable = poolables[i];
+                if (poolable == null) continue;
                 if (spawned) poolable.OnMegaSpawned();
                 else poolable.OnMegaDespawned();
             }

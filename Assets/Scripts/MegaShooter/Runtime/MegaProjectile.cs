@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace AnimalFall.MegaShooter
 {
@@ -11,6 +12,7 @@ namespace AnimalFall.MegaShooter
         private SpriteRenderer _renderer;
         private SpriteRenderer _glowRenderer;
         private CircleCollider2D _collider;
+        private Rigidbody2D _body;
         private Vector2 _direction;
         private Transform _homingTarget;
         private float _damage;
@@ -22,18 +24,31 @@ namespace AnimalFall.MegaShooter
         private bool _nearMissResolved;
         private bool _registered;
         private bool _reflectableOverride = true;
+        private readonly HashSet<Object> _hitTargets = new HashSet<Object>();
+        private readonly Collider2D[] _overlapBuffer = new Collider2D[16];
+        private ContactFilter2D _overlapFilter;
 
         public MegaFaction Faction => _faction;
         public bool IsReflectable => _data != null && _data.reflectable && _reflectableOverride;
+        public Vector2 Direction => _direction;
+        public float Damage => _damage;
+        public float Speed => _speed;
 
         private void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<CircleCollider2D>();
             _collider.isTrigger = true;
+            _body = GetComponent<Rigidbody2D>();
+            if (_body == null) _body = gameObject.AddComponent<Rigidbody2D>();
+            _body.bodyType = RigidbodyType2D.Kinematic;
+            _body.gravityScale = 0f;
+            _body.useFullKinematicContacts = true;
+            _overlapFilter = new ContactFilter2D { useTriggers = true };
+            _overlapFilter.SetLayerMask(Physics2D.AllLayers);
             GameObject glow = new GameObject("ProjectileGlow");
             glow.transform.SetParent(transform, false);
-            glow.transform.localScale = Vector3.one * 1.65f;
+            glow.transform.localScale = Vector3.one * 1.28f;
             _glowRenderer = glow.AddComponent<SpriteRenderer>();
             _glowRenderer.sortingOrder = _renderer.sortingOrder - 1;
         }
@@ -45,6 +60,7 @@ namespace AnimalFall.MegaShooter
             _data = data;
             _faction = faction;
             _direction = direction.sqrMagnitude > 0.001f ? direction.normalized : Vector2.up;
+            if (faction == MegaFaction.Enemy) _direction = MegaShooterGameManager.ForceDownward(_direction);
             _damage = Mathf.Max(0f, damage);
             _speed = Mathf.Max(0.1f, data.speed * speedMultiplier);
             _life = Mathf.Max(0.1f, data.lifetime);
@@ -55,11 +71,12 @@ namespace AnimalFall.MegaShooter
             _age = 0f;
             _enteredNearRadius = false;
             _nearMissResolved = false;
+            _hitTargets.Clear();
             _renderer.sprite = data.sprite;
             _renderer.color = faction == MegaFaction.Player ? data.playerColor : data.enemyColor;
             _glowRenderer.sprite = data.sprite;
             Color glowColor = _renderer.color;
-            glowColor.a = 0.22f;
+            glowColor.a = 0.14f;
             _glowRenderer.color = glowColor;
             _collider.radius = data.colliderRadius;
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
@@ -74,11 +91,14 @@ namespace AnimalFall.MegaShooter
             float scale = _faction == MegaFaction.Enemy ? _game.HostileTimeScale : 1f;
             float dt = Time.deltaTime * scale;
             _age += dt;
+            Vector2 previousPosition = transform.position;
 
             if (_data.motion == MegaProjectileMotion.Homing && _homingTarget != null)
             {
                 Vector2 desired = ((Vector2)_homingTarget.position - (Vector2)transform.position).normalized;
+                if (_faction == MegaFaction.Enemy) desired = MegaShooterGameManager.ForceDownward(desired);
                 _direction = Vector2.Lerp(_direction, desired, Mathf.Clamp01(_data.homingStrength * dt)).normalized;
+                if (_faction == MegaFaction.Enemy) _direction = MegaShooterGameManager.ForceDownward(_direction);
             }
             else if (_data.motion == MegaProjectileMotion.Sine)
             {
@@ -89,10 +109,17 @@ namespace AnimalFall.MegaShooter
             {
                 _direction = Vector2.down;
             }
+            else if (_data.motion == MegaProjectileMotion.StationaryMine)
+            {
+                // Mines remain slow hazards, but never hover or travel upward.
+                _direction = Vector2.down;
+            }
 
-            if (_data.motion != MegaProjectileMotion.StationaryMine)
-                transform.position += (Vector3)(_direction * (_speed * dt));
+            transform.position += (Vector3)(_direction * (_speed * dt));
 
+            if (ResolveSweptPlayerHit(previousPosition, transform.position)) return;
+            ResolveOverlappingHit();
+            if (!gameObject.activeSelf) return;
             TrackNearMiss();
             if (_age >= _life || !_game.IsInsideDespawnBounds(transform.position))
                 Despawn();
@@ -113,25 +140,81 @@ namespace AnimalFall.MegaShooter
         }
 
         private void OnTriggerEnter2D(Collider2D other)
+            => ResolveHit(other);
+
+        // Kinematic bodies report trigger callbacks only on fixed physics steps.
+        // Checking the projectile's overlap after its movement prevents a fast
+        // shot from visually crossing an enemy without registering its damage.
+        private void ResolveOverlappingHit()
         {
+            int overlapCount = Physics2D.OverlapCircle(
+                transform.position, Mathf.Max(0.02f, _collider.radius), _overlapFilter, _overlapBuffer);
+            for (int i = 0; i < overlapCount; i++)
+            {
+                Collider2D overlap = _overlapBuffer[i];
+                if (overlap == null || overlap == _collider) continue;
+                if (ResolveHit(overlap)) return;
+            }
+        }
+
+        private bool ResolveSweptPlayerHit(Vector2 from, Vector2 to)
+        {
+            if (_faction != MegaFaction.Enemy || _game == null || _game.Player == null) return false;
+            Vector2 segment = to - from;
+            float segmentLengthSqr = segment.sqrMagnitude;
+            float t = segmentLengthSqr > 0.000001f
+                ? Mathf.Clamp01(Vector2.Dot((Vector2)_game.Player.transform.position - from, segment) / segmentLengthSqr)
+                : 0f;
+            Vector2 closest = from + segment * t;
+            float projectileRadius = _collider.radius * Mathf.Max(
+                Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
+            float hitRadius = Mathf.Max(0.04f, projectileRadius) + _game.Player.HitboxRadius;
+            if (((Vector2)_game.Player.transform.position - closest).sqrMagnitude > hitRadius * hitRadius) return false;
+            return HitPlayer(_game.Player);
+        }
+
+        private bool ResolveHit(Collider2D other)
+        {
+            if (other == null) return false;
             if (_faction == MegaFaction.Player)
             {
                 MegaEnemyController enemy = other.GetComponent<MegaEnemyController>();
-                if (enemy != null && enemy.TakeDamage(_damage)) { SpawnImpact(); ConsumePierce(); return; }
+                if (enemy != null && HitEnemy(enemy)) return true;
                 MegaBossController boss = other.GetComponent<MegaBossController>();
-                if (boss != null && boss.TakeDamage(_damage)) { SpawnImpact(); ConsumePierce(); }
+                if (boss != null && HitBoss(boss)) return true;
             }
             else
             {
                 SuperAnimalController player = other.GetComponent<SuperAnimalController>();
-                if (player != null)
-                {
-                    _nearMissResolved = true;
-                    player.TakeDamage(Mathf.CeilToInt(_damage));
-                    SpawnImpact();
-                    Despawn();
-                }
+                if (player != null && HitPlayer(player)) return true;
             }
+            return false;
+        }
+
+        private bool HitEnemy(MegaEnemyController enemy)
+        {
+            if (!_hitTargets.Add(enemy) || !enemy.TakeDamage(_damage)) return false;
+            SpawnImpact();
+            ConsumePierce();
+            return true;
+        }
+
+        private bool HitBoss(MegaBossController boss)
+        {
+            if (!_hitTargets.Add(boss) || !boss.TakeDamage(_damage)) return false;
+            SpawnImpact();
+            ConsumePierce();
+            return true;
+        }
+
+        private bool HitPlayer(SuperAnimalController player)
+        {
+            if (!_hitTargets.Add(player)) return false;
+            _nearMissResolved = true;
+            player.TakeDamage(Mathf.Max(1, Mathf.RoundToInt(_damage)));
+            SpawnImpact();
+            Despawn();
+            return true;
         }
 
         public bool Reflect(Vector2 direction)
@@ -144,7 +227,7 @@ namespace AnimalFall.MegaShooter
             _damage = Mathf.Max(_damage, 20f);
             _renderer.color = _data.playerColor;
             Color glowColor = _data.playerColor;
-            glowColor.a = 0.22f;
+            glowColor.a = 0.14f;
             _glowRenderer.color = glowColor;
             _nearMissResolved = true;
             return true;

@@ -15,6 +15,20 @@ namespace AnimalFall.MegaShooter
     public enum MegaCounterType { SkyBarrage, MirageCounter, ShellReflector, ClawDash, GravitySmash, TimeEye, SpectrumShift, MeteorRam, RoyalFan, SolarRoar }
     public enum MegaPickupType { Health, CounterEnergy, Shield, WeaponBoost }
     public enum MegaEnvironmentEvent { None, SlowField, AsteroidDrift, TimeRift, MovingBarriers }
+    public enum MegaVillainArchetype
+    {
+        None,
+        VenomEmperor,
+        AdmiralInkstorm,
+        Ironhorn,
+        CaptainChomper,
+        GeneralSmash,
+        EmperorSting,
+        CrocCommander,
+        DoomPuffer,
+        QueenWebula,
+        CosmicDraconis
+    }
 
     [Serializable]
     public sealed class MegaStatBars
@@ -81,13 +95,20 @@ namespace AnimalFall.MegaShooter
     {
         public string attackName = "Volley";
         public MegaWeaponPattern pattern = MegaWeaponPattern.FixedSpread;
+        public ProjectileData projectile;
         [Range(0.01f, 10f)] public float weight = 1f;
         [Min(0.85f)] public float telegraphTime = 0.85f;
         [Range(1, 24)] public int projectileCount = 3;
         [Range(0f, 180f)] public float spreadDegrees = 35f;
+        [Range(1, 5)] public int volleyCount = 1;
+        [Min(0.05f)] public float volleyInterval = 0.16f;
         public bool aimed;
         public bool reflectable = true;
         public bool clearsBulletsBeforeAttack;
+        [Range(0.15f, 1f)] public float playerMovementMultiplier = 1f;
+        [Min(0f)] public float playerEffectDuration;
+        [Range(0f, 0.85f)] public float screenObscureStrength;
+        public Color muzzleColor = new Color(1f, 0.16f, 0.04f, 1f);
     }
 
     [Serializable]
@@ -106,6 +127,7 @@ namespace AnimalFall.MegaShooter
         public bool usesWeakPoint;
         public Vector2 weakPointOffset;
         [Min(0f)] public float transitionDuration = 1f;
+        [Min(0.25f)] public float bossScaleMultiplier = 1f;
         public Color phaseTint = Color.white;
         [Range(0f, 1f)] public float cameraShake = 0.25f;
         public string warningText;

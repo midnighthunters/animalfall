@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b995e5511928cc140a456df57b41d4a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
   m_Name: Boss_01_Scrap_Wasp
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_01
   displayName: Scrap Wasp
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
@@ -31,7 +31,7 @@ MonoBehaviour:
   - healthThreshold: 1
     movementPattern: 3
     attacks:
-    - attackName: AIMED PULSE
+    - attackName: PREDATOR LOCK
       pattern: 1
       weight: 1
       telegraphTime: 0.9
@@ -40,8 +40,8 @@ MonoBehaviour:
       aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: THREE-LANE VOLLEY
-      pattern: 2
+    - attackName: DARK HALO
+      pattern: 4
       weight: 0.75
       telegraphTime: 0.95
       projectileCount: 3
@@ -66,7 +66,7 @@ MonoBehaviour:
   - healthThreshold: 0.5
     movementPattern: 9
     attacks:
-    - attackName: SAFE-LANE FAN
+    - attackName: ROYAL FAN
       pattern: 2
       weight: 1
       telegraphTime: 0.9
@@ -75,8 +75,8 @@ MonoBehaviour:
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: THREE-LANE VOLLEY
-      pattern: 2
+    - attackName: VENOM FIELD
+      pattern: 5
       weight: 0.75
       telegraphTime: 0.95
       projectileCount: 4

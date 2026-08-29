@@ -8,10 +8,10 @@ namespace AnimalFall.Utils
     public static class ImageLibrary
     {
         // ── Animal sprites (indexed by AnimalSpecies) ─────────────────────────
-        private static readonly Sprite[] _animalSprites = new Sprite[13]; // indices 0-12 match AnimalSpecies enum
+        private static readonly Sprite[] _animalSprites = new Sprite[14]; // indices 0-13 match AnimalSpecies enum
 
         // ── Hindrance sprites ─────────────────────────────────────────────────
-        private static readonly Sprite[] _hindranceSprites = new Sprite[51]; // indices 0-50 match HindranceType enum
+        private static readonly Sprite[] _hindranceSprites = new Sprite[56]; // indices 0-55 match HindranceType enum
 
         // ── UI / Panel sprites ────────────────────────────────────────────────
         private static Sprite _panel;
@@ -82,7 +82,7 @@ namespace AnimalFall.Utils
         private static void LoadAnimalSprites()
         {
             // AnimalSpecies enum: None(0), Chicken(1), Dog(2), Cow(3), Panda(4),
-            //   Monkey(5), Pig(6), Rabbit(7), Penguin(8), Owl(9), Mouse(10), Zebra(11), Duck(12)
+            //   Monkey(5), Pig(6), Rabbit(7), Penguin(8), Owl(9), Mouse(10), Zebra(11), Duck(12), Raccoon(13)
             // Actual files present: CHICKEN, DOG2, ELEPHANT, MONKEY2, PANDA2, PENGUIN, PIG2
             // Map each species to the closest available sprite; share sprites for missing ones.
             string[] paths = new string[]
@@ -100,6 +100,7 @@ namespace AnimalFall.Utils
                 "icons/animals/DOG2",           // 10 = Mouse → Dog    (reuse)
                 "icons/animals/MONKEY2",        // 11 = Zebra → Monkey (reuse)
                 "icons/animals/CHICKEN",        // 12 = Duck  → Chicken (reuse)
+                "icons/animals/RACOON",         // 13 = Raccoon  ✓ (source filename uses one C)
             };
 
             for (int i = 1; i < paths.Length; i++)

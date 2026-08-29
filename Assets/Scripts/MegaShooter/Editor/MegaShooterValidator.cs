@@ -75,8 +75,10 @@ namespace AnimalFall.MegaShooter.Editor
             if (level.backgroundLayers == null || level.backgroundLayers.Length < 4 || level.backgroundLayers.Any(sprite => sprite == null))
                 errors.Add($"{label}: four non-null parallax background layers are required.");
             if (level.vfxProfile == null) errors.Add($"{label}: VFX profile is missing.");
-            if (level.boss == null) errors.Add($"{label}: boss data is missing.");
-            else ValidateBoss(label, level.boss, errors);
+            bool shouldHaveBoss = level.gameLevelNumber % 10 == 0;
+            if (shouldHaveBoss && level.boss == null) errors.Add($"{label}: every tenth level must end with its mega villain.");
+            else if (!shouldHaveBoss && level.boss != null) errors.Add($"{label}: army-only mega levels must not spawn a boss.");
+            else if (level.boss != null) ValidateBoss(label, level.boss, errors);
             if (level.waves == null || level.waves.Length == 0) errors.Add($"{label}: no waves are authored.");
             else ValidateWaves(label, level, errors);
             if (level.maximumHostileProjectiles > 120) errors.Add($"{label}: hostile projectile cap exceeds 120.");
@@ -90,7 +92,7 @@ namespace AnimalFall.MegaShooter.Editor
                 warnings.Add($"{label}: ordinary-enemy TTK estimate {estimate.OrdinaryEnemyTtkSeconds:0.00}s is outside 0.25–5s.");
             if (estimate.EliteEnemyTtkSeconds > 12f)
                 warnings.Add($"{label}: elite TTK estimate {estimate.EliteEnemyTtkSeconds:0.0}s exceeds 12s.");
-            if (estimate.BossPhaseTtkSeconds < 8f || estimate.BossPhaseTtkSeconds > 28f)
+            if (level.boss != null && (estimate.BossPhaseTtkSeconds < 8f || estimate.BossPhaseTtkSeconds > 28f))
                 warnings.Add($"{label}: boss phase TTK estimate {estimate.BossPhaseTtkSeconds:0.0}s is outside 8–28s.");
             if (estimate.SustainedProjectileDensity > level.maximumHostileProjectiles)
                 errors.Add($"{label}: estimated sustained projectile density {estimate.SustainedProjectileDensity:0} exceeds cap {level.maximumHostileProjectiles}.");
@@ -103,6 +105,12 @@ namespace AnimalFall.MegaShooter.Editor
         private static void ValidateBoss(string label, BossShipData boss, List<string> errors)
         {
             if (boss.prefab == null || boss.sprite == null) errors.Add($"{label}: boss prefab or sprite is missing.");
+            else if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(boss.prefab) > 0)
+                errors.Add($"{label}: boss prefab contains a missing script component.");
+            if (boss.archetype == MegaVillainArchetype.None) errors.Add($"{label}: boss archetype is not assigned.");
+            string bossArtPath = AssetDatabase.GetAssetPath(boss.sprite);
+            if (string.IsNullOrEmpty(bossArtPath) || !bossArtPath.StartsWith(MegaVillainRosterGenerator.VillainArtRoot + "/villains/", StringComparison.Ordinal))
+                errors.Add($"{label}: boss is not using the mapped villain artwork.");
             if (boss.baseHitPoints <= 0f) errors.Add($"{label}: boss HP must be positive.");
             if (boss.phases == null || boss.phases.Length < 2) errors.Add($"{label}: boss needs at least two phases.");
             else
@@ -118,6 +126,10 @@ namespace AnimalFall.MegaShooter.Editor
                     else foreach (BossAttackPattern attack in phase.attacks)
                     {
                         if (attack == null) { errors.Add($"{label}: phase {i + 1} contains a null attack."); continue; }
+                        if (attack.projectile == null || attack.projectile.sprite == null)
+                            errors.Add($"{label}: {attack.attackName} has no authored villain projectile/VFX sprite.");
+                        else if (attack.projectile.damage <= 0f)
+                            errors.Add($"{label}: {attack.attackName} must deal positive damage.");
                         if (attack.telegraphTime < .85f) errors.Add($"{label}: {attack.attackName} telegraph is below 0.85s.");
                         if (attack.projectileCount > 24) errors.Add($"{label}: {attack.attackName} exceeds 24 projectiles per volley.");
                     }
@@ -146,7 +158,17 @@ namespace AnimalFall.MegaShooter.Editor
                     if (group == null || group.enemy == null) { errors.Add($"{label}: wave {i + 1} contains a null enemy group."); continue; }
                     if (group.enemy.prefab == null || group.enemy.sprite == null || group.enemy.projectile == null)
                         errors.Add($"{label}: enemy '{group.enemy.displayName}' is missing prefab, sprite, or projectile data.");
+                    else if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(group.enemy.prefab) > 0)
+                        errors.Add($"{label}: enemy '{group.enemy.displayName}' prefab contains a missing script component.");
+                    string armyArtPath = group.enemy.sprite != null ? AssetDatabase.GetAssetPath(group.enemy.sprite) : string.Empty;
+                    if (string.IsNullOrEmpty(armyArtPath) || !armyArtPath.StartsWith(MegaVillainRosterGenerator.VillainArtRoot + "/army/", StringComparison.Ordinal))
+                        errors.Add($"{label}: enemy '{group.enemy.displayName}' is not using mapped army artwork.");
                     if (group.enemy.telegraphTime < .85f) errors.Add($"{label}: enemy '{group.enemy.displayName}' telegraph is below 0.85s.");
+                    if (group.enemy.speed <= 0f) errors.Add($"{label}: enemy '{group.enemy.displayName}' must move continuously.");
+                    if (group.enemy.projectile != null && group.enemy.projectile.damage <= 0f)
+                        errors.Add($"{label}: enemy '{group.enemy.displayName}' projectile must deal positive damage.");
+                    if (group.enemy.colliderSize.x <= 0f || group.enemy.colliderSize.y <= 0f)
+                        errors.Add($"{label}: enemy '{group.enemy.displayName}' collider size must be positive.");
                     if (group.count <= 0) errors.Add($"{label}: wave {i + 1} has a non-positive group count.");
                     totalEnemies += Mathf.Max(0, group.count);
                 }

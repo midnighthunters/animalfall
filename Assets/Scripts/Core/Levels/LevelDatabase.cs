@@ -145,16 +145,22 @@ namespace AnimalFall.Data
             return "Storm Peaks";
         }
 
-        private static int GetMaxHindrances(int n)
+private static int GetMaxHindrances(int n)
         {
             if (n <= 10) return 1;
             if (n <= 25) return 2;
-            if (n <= 40) return 3;
+            if (n <= 39) return 2;
+            if (n == 40) return 3;
             return Mathf.Min(5, 3 + (n - 40) / 3);
         }
 
         private static HindranceConfig[] BuildHindranceConfigs(int n)
         {
+            // Levels 26-39 introduce the three late-game set pieces while rotating
+            // familiar hazards back in. Other post-21 levels remain unchanged.
+            if (n >= 26 && n <= 39) return BuildLevel26To39Hindrances(n);
+            if (n > 21) return System.Array.Empty<HindranceConfig>();
+
             // Unlock schedule (Req 9.1)
             System.Collections.Generic.List<HindranceConfig> list =
                 new System.Collections.Generic.List<HindranceConfig>();
@@ -187,6 +193,35 @@ namespace AnimalFall.Data
 
             return list.ToArray();
         }
+
+private static HindranceConfig[] BuildLevel26To39Hindrances(int level)
+        {
+            HindranceConfig Config(HindranceType type, float weight) =>
+                new HindranceConfig { type = type, weight = weight, initialDelay = 0f };
+
+            // Mega-shooter levels keep their dedicated rules and no normal hindrances.
+            if (level == 30 || level == 35) return System.Array.Empty<HindranceConfig>();
+
+            switch (level)
+            {
+                case 26: return new[] { Config(HindranceType.SpringMushroomBumpers, 1.4f), Config(HindranceType.WindGust, 0.8f), Config(HindranceType.BubbleShield, 0.7f) };
+                case 27: return new[] { Config(HindranceType.SpringMushroomBumpers, 1.3f), Config(HindranceType.Bomb, 0.8f), Config(HindranceType.FallingLeaves, 0.8f) };
+                case 28: return new[] { Config(HindranceType.SpringMushroomBumpers, 1.3f), Config(HindranceType.IceCube, 0.8f), Config(HindranceType.ThiefBird, 0.7f) };
+                case 29: return new[] { Config(HindranceType.SpringMushroomBumpers, 1.2f), Config(HindranceType.InkSquid, 0.8f), Config(HindranceType.AlarmClock, 0.8f) };
+
+                case 31: return new[] { Config(HindranceType.PorcupinePulse, 1.4f), Config(HindranceType.WindGust, 0.8f), Config(HindranceType.BubbleShield, 0.7f) };
+                case 32: return new[] { Config(HindranceType.PorcupinePulse, 1.3f), Config(HindranceType.Bomb, 0.8f), Config(HindranceType.FallingLeaves, 0.8f) };
+                case 33: return new[] { Config(HindranceType.PorcupinePulse, 1.2f), Config(HindranceType.SpringMushroomBumpers, 0.9f), Config(HindranceType.KnightHelmet, 0.7f) };
+                case 34: return new[] { Config(HindranceType.PorcupinePulse, 1.2f), Config(HindranceType.IceCube, 0.8f), Config(HindranceType.StormCloud, 0.7f) };
+
+                case 36: return new[] { Config(HindranceType.VenusFlytrapRescue, 1.4f), Config(HindranceType.WindGust, 0.8f), Config(HindranceType.BubbleShield, 0.7f) };
+                case 37: return new[] { Config(HindranceType.VenusFlytrapRescue, 1.3f), Config(HindranceType.SpringMushroomBumpers, 0.9f), Config(HindranceType.FallingLeaves, 0.8f) };
+                case 38: return new[] { Config(HindranceType.VenusFlytrapRescue, 1.2f), Config(HindranceType.PorcupinePulse, 0.9f), Config(HindranceType.Bomb, 0.8f) };
+                case 39: return new[] { Config(HindranceType.VenusFlytrapRescue, 1.2f), Config(HindranceType.SpringMushroomBumpers, 0.9f), Config(HindranceType.InkSquid, 0.8f) };
+                default: return System.Array.Empty<HindranceConfig>();
+            }
+        }
+
 #endif
     }
 }

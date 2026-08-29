@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab501b055f0637342b1069105e49c977, type: 3}
+  m_Name: admiral_inkstorm_03
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.EnemyShipData
+  stableId: admiral_inkstorm_army_3
+  displayName: Abyss Angler
+  prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
+  sprite: {fileID: 9070428968714009684, guid: 4b7db431ca6d64b48b97754556c903c8, type: 3}
+  weaponIcon: {fileID: 3975059572695951870, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  shadow: {fileID: 0}
+  visualScale: 0.4
+  colliderSize: {x: 0.93999994, y: 0.8}
+  hitPoints: 45
+  contactDamage: 1
+  speed: 2.46
+  score: 245
+  movementPattern: 3
+  weaponPattern: 7
+  projectile: {fileID: 11400000, guid: 81d5fe40cac5fd741bf084844614de02, type: 2}
+  fireInterval: 2.5349998
+  initialFireDelay: 1.39
+  telegraphTime: 0.95
+  deathVFX: {fileID: 0}
+  hitVFX: {fileID: 0}
+  fireAudio: {fileID: 0}
+  deathAudio: {fileID: 0}
+  pickupChance: 0.08
+  poolingKey: admiral_inkstorm_army_3
+  priorityTarget: 1
+  splitsOnDeath: 0
+  shieldsNearby: 0
+  repairsNearby: 0

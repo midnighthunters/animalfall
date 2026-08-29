@@ -34,7 +34,7 @@ namespace AnimalFall.MegaShooter
         private void FireVolley()
         {
             _volleyIndex++;
-            _game.SpawnEffect(_weapon.muzzleVFX != null ? _weapon.muzzleVFX : _game.VFXProfile?.hitSparkPrefab,
+            _game.SpawnEffect(_weapon.muzzleVFX != null ? _weapon.muzzleVFX : _game.VFXProfile?.playerMuzzlePrefab,
                 (Vector2)transform.position + Vector2.up * 0.48f,
                 new Color(0.2f, 0.95f, 1f, 0.8f), 0.28f, 0.14f);
             int count = Mathf.Max(1, _weapon.projectileCount);

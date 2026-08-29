@@ -26,15 +26,12 @@ MonoBehaviour:
   _spawnVariance: 0.15
   _maxOnScreen: 7
   _hindrances:
-  - type: 6
+  - type: 54
     weight: 1
     initialDelay: 0
-  - type: 5
-    weight: 1
-    initialDelay: 0
-  _hindranceSpawnInterval: 7
-  _hindranceInitialDelay: 5
-  _maxHindrancesActive: 2
+  _hindranceSpawnInterval: 10
+  _hindranceInitialDelay: 10
+  _maxHindrancesActive: 1
   _wrongTapTimePenalty: 0.7838384
   _wrongTapScorePenalty: 14
   _bombTimePenalty: 2.2626262

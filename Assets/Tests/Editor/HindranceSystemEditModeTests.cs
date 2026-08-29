@@ -29,15 +29,82 @@ namespace AnimalFall.Tests.Editor
                 "ConveyorClouds", "CrumblingPerches", "PendulumVines", "SeesawBranch", "CarouselNests",
                 "TrapdoorClouds", "RollingLog", "AcornHail", "WindmillGate", "LanternSpotlight",
                 "EclipseSilhouettes", "MemoryFog", "ColourWashRain", "TimerMoth", "GoalSwapMonkey",
-                "BeeSwarmGuard", "PorcupinePulse", "VenusFlytrapRescue", "RaccoonCoinHeist"
+                "BeeSwarmGuard", "PorcupinePulse", "VenusFlytrapRescue", "RaccoonCoinHeist",
+                "DogHelmet", "Octopus", "SpiderGun", "Pufferfish", "FrogSnatcher"
             };
 
-            Assert.That(Enum.GetValues(typeof(HindranceType)).Length, Is.EqualTo(51));
-            for (int id = 0; id <= 50; id++)
+            Assert.That(Enum.GetValues(typeof(HindranceType)).Length, Is.EqualTo(56));
+            for (int id = 0; id <= 55; id++)
             {
                 Assert.That(Enum.GetName(typeof(HindranceType), id), Is.EqualTo(expected[id]), $"Stable ID {id}");
                 Assert.That((int)(HindranceType)id, Is.EqualTo(id));
             }
+        }
+
+        [Test]
+        public void LevelTwentyOneUsesRequestedAnimalsAndFrogSnatcher()
+        {
+            LevelData level = AssetDatabase.LoadAssetAtPath<LevelData>(
+                "Assets/Levels/LevelData/Level_21.asset");
+            Assert.That(level, Is.Not.Null);
+            CollectionAssert.AreEqual(new[]
+            {
+                AnimalFall.Core.Animals.AnimalSpecies.Dog,
+                AnimalFall.Core.Animals.AnimalSpecies.Pig,
+                AnimalFall.Core.Animals.AnimalSpecies.Monkey,
+                AnimalFall.Core.Animals.AnimalSpecies.Raccoon
+            }, level.SpawnPool.Select(animal => animal.species).ToArray());
+            CollectionAssert.AreEqual(new[]
+            {
+                AnimalFall.Core.Animals.AnimalSpecies.Dog,
+                AnimalFall.Core.Animals.AnimalSpecies.Pig,
+                AnimalFall.Core.Animals.AnimalSpecies.Monkey,
+                AnimalFall.Core.Animals.AnimalSpecies.Raccoon
+            }, level.Goal.Targets.Select(target => target.species).ToArray());
+            Assert.That(level.Hindrances.Length, Is.EqualTo(1));
+            Assert.That(level.Hindrances[0].type, Is.EqualTo(HindranceType.FrogSnatcher));
+
+            HindranceRegistry registry = AssetDatabase.LoadAssetAtPath<HindranceRegistry>(RegistryPath);
+            HindranceData frog = registry.GetData(HindranceType.FrogSnatcher);
+            Assert.That(frog, Is.Not.Null);
+            Assert.That(frog.prefab.GetComponent<AnimalFall.Core.Hindrances.New.FrogSnatcherHindrance>(),
+                Is.Not.Null);
+            Assert.That(frog.stateSprites, Has.Length.EqualTo(3));
+        }
+
+        [Test]
+        public void LevelFourteenSchedulesVisiblePufferfishEveryTenSeconds()
+        {
+            LevelData level = AssetDatabase.LoadAssetAtPath<LevelData>(
+                "Assets/Levels/LevelData/Level_14.asset");
+            Assert.That(level, Is.Not.Null);
+            Assert.That(level.Hindrances, Has.Length.EqualTo(1));
+            Assert.That(level.Hindrances[0].type, Is.EqualTo(HindranceType.Pufferfish));
+            Assert.That(level.HindranceInitialDelay, Is.EqualTo(10f));
+            Assert.That(level.HindranceSpawnInterval, Is.EqualTo(10f));
+            Assert.That(level.MaxHindrancesActive, Is.EqualTo(1));
+
+            HindranceRegistry registry = AssetDatabase.LoadAssetAtPath<HindranceRegistry>(RegistryPath);
+            HindranceData definition = registry.GetData(HindranceType.Pufferfish);
+            var pufferfish = definition.prefab.GetComponent<
+                AnimalFall.Core.Hindrances.EnvironmentMods.PufferfishHindrance>();
+            Assert.That(pufferfish, Is.Not.Null);
+
+            var serialized = new SerializedObject(pufferfish);
+            Assert.That(serialized.FindProperty("_visibleLifetime").floatValue, Is.LessThan(10f));
+            Assert.That(serialized.FindProperty("_viewportHeight").floatValue,
+                Is.InRange(0.1f, 1f));
+            Assert.That(serialized.FindProperty("_fallSpeed").floatValue, Is.GreaterThan(0f));
+            Assert.That(serialized.FindProperty("_deflatedScaleMultiplier").floatValue,
+                Is.LessThan(1f));
+
+            SpriteRenderer renderer = definition.prefab.GetComponent<SpriteRenderer>();
+            CircleCollider2D collider = definition.prefab.GetComponent<CircleCollider2D>();
+            Assert.That(renderer, Is.Not.Null);
+            Assert.That(collider, Is.Not.Null);
+            Assert.That(collider.radius,
+                Is.GreaterThanOrEqualTo(Mathf.Max(renderer.sprite.bounds.size.x,
+                    renderer.sprite.bounds.size.y) * 0.5f));
         }
 
         [Test]
@@ -107,6 +174,60 @@ namespace AnimalFall.Tests.Editor
                 Assert.That(first, Is.Not.Null, $"{type} needs a normal-level first encounter");
                 Assert.That(first.IsMegaLevel, Is.False, first.name);
                 Assert.That(first.Hindrances.Length, Is.EqualTo(1), $"{type} first encounter must be isolated");
+            }
+        }
+
+        [Test]
+        public void AnimalHindranceFlowsAreIsolatedAcrossDistinctLevels()
+        {
+            HindranceType[] flows =
+            {
+                HindranceType.Octopus, HindranceType.SpiderGun, HindranceType.Pufferfish
+            };
+
+            HindranceRegistry registry = AssetDatabase.LoadAssetAtPath<HindranceRegistry>(RegistryPath);
+            Assert.That(registry, Is.Not.Null);
+
+            LevelData[] levels = AssetDatabase.FindAssets("t:LevelData", new[] { "Assets/Levels" })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<LevelData>)
+                .Where(level => level != null && level.LevelNumber > 0)
+                .OrderBy(level => level.LevelNumber)
+                .ToArray();
+            Assert.That(levels, Is.Not.Empty);
+
+            var firstEncounters = new Dictionary<HindranceType, int>();
+            foreach (HindranceType flow in flows)
+            {
+                // Flow must be a real, spawnable, tappable definition.
+                HindranceData data = registry.GetData(flow);
+                Assert.That(data, Is.Not.Null, $"{flow} missing registry definition");
+                Assert.That(data.prefab, Is.Not.Null, $"{flow} missing prefab");
+                Assert.That(data.prefab.GetComponent<IPointerTapTarget>(), Is.Not.Null, $"{flow} prefab is not tappable");
+                Assert.That(data.normalLevelEligible, Is.True, $"{flow} must be normal-level eligible");
+
+                LevelData first = levels.FirstOrDefault(level =>
+                    level.Hindrances != null && level.Hindrances.Any(config => config.type == flow));
+                Assert.That(first, Is.Not.Null, $"{flow} needs a normal-level first encounter");
+                Assert.That(first.IsMegaLevel, Is.False, $"{flow} first encounter cannot be a Mega level");
+                Assert.That(first.Hindrances.Length, Is.EqualTo(1), $"{flow} first encounter must be isolated");
+                firstEncounters[flow] = first.LevelNumber;
+            }
+
+            // Each flow debuts in a different level.
+            Assert.That(firstEncounters.Values.Distinct().Count(), Is.EqualTo(flows.Length),
+                "Octopus, Spider Gun and Pufferfish must debut in different levels");
+
+            // Do not overclutter: never stack all three animal flows in one level,
+            // and any level using them keeps a small simultaneous-active cap.
+            foreach (LevelData level in levels)
+            {
+                if (level.Hindrances == null) continue;
+                int flowCount = level.Hindrances.Count(config => flows.Contains(config.type));
+                Assert.That(flowCount, Is.LessThanOrEqualTo(2), $"{level.name} stacks too many animal flows ({flowCount})");
+                if (flowCount > 0)
+                    Assert.That(level.MaxHindrancesActive, Is.LessThanOrEqualTo(2),
+                        $"{level.name} allows too many simultaneous hindrances");
             }
         }
 

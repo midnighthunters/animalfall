@@ -32,6 +32,9 @@ namespace AnimalFall.Effects
             var go = SpawnOverlay(_inkOverlayPrefab);
             if (go == null) return;
 
+            var renderer = go.GetComponent<SpriteRenderer>();
+            if (renderer != null) renderer.color = Color.white;
+
             // Disable raycast blocking
             var img = go.GetComponent<UnityEngine.UI.Graphic>();
             if (img != null) img.raycastTarget = false;

@@ -186,16 +186,17 @@ namespace AnimalFall.Managers
             CancelTutorialPause();
             _hud?.ResetWarning();
 
-            // Plain solid background
+            // Solid fallback colour sits behind the world background sprite.
             if (_camera != null)
             {
                 DOTween.Kill(_camera);
                 _camera.backgroundColor = _plainBackground;
             }
 
-            // Disable world background sprites if present
+            // Keep the world background sprite visible during play so the scene
+            // matches what is shown in the editor.
             var worldBg = GameObject.Find("WorldBackground");
-            if (worldBg != null) worldBg.SetActive(false);
+            if (worldBg != null) worldBg.SetActive(true);
 
             _goalTracker?.Setup(level.Goal);
             if (_goalTracker != null)

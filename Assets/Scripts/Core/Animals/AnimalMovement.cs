@@ -31,13 +31,18 @@ namespace AnimalFall.Core.Animals
         private Vector3 _baseScale;
         private Vector2 _externalVelocity;
         private object _attachmentOwner;
+        private bool _forceExit;
         private float _releaseProtectionUntil;
+        private int _separationPhase;
+        private float _separationSpeed;
 
         private Animal _animal;
 
         private void Awake()
         {
             _animal = GetComponent<Animal>();
+            _separationPhase = Mathf.Abs(
+                System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this)) % 3;
             RecalcBounds();
             _cachedScreenWidth  = Screen.width;
             _cachedScreenHeight = Screen.height;
@@ -45,6 +50,16 @@ namespace AnimalFall.Core.Animals
 
         public void Configure(AnimalData data, LevelData level)
         {
+            // Pool/test creation can configure the movement in the same frame that
+            // its Animal component is attached. Resolve it lazily so a valid tap
+            // target is never left half-initialized by component Awake order.
+            if (_animal == null) _animal = GetComponent<Animal>();
+            if (_animal == null)
+            {
+                enabled = false;
+                return;
+            }
+
             _pattern     = data.movementPattern;
             _speed       = Random.Range(data.speedMin, data.speedMax) * FallSpeedMultiplier;
             _zigzagAmp   = data.zigzagAmplitude;
@@ -60,7 +75,9 @@ namespace AnimalFall.Core.Animals
             _baseScale   = Vector3.one * _animal.CurrentScale;
             _externalVelocity = Vector2.zero;
             _attachmentOwner = null;
+            _forceExit = false;
             _releaseProtectionUntil = 0f;
+            _separationSpeed = 0f;
             transform.localScale = _baseScale;
             transform.rotation = Quaternion.identity;
             enabled = true;
@@ -90,8 +107,25 @@ namespace AnimalFall.Core.Animals
             _externalVelocity = Vector2.ClampMagnitude(_externalVelocity + impulse, 5f);
         }
 
+        /// <summary>Launches the animal beyond the visible playfield without counting it as a missed catch.</summary>
+        public void LaunchOutOfScreen(Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f) direction = Vector2.right;
+            _attachmentOwner = null;
+            _fallSuspended = false;
+            _forceExit = true;
+            _externalVelocity = direction.normalized * 9f;
+            _releaseProtectionUntil = Time.time + 0.15f;
+        }
+
         private void Update()
         {
+            if (_animal == null)
+            {
+                _animal = GetComponent<Animal>();
+                if (_animal == null) { enabled = false; return; }
+            }
+
             if (_cachedScreenWidth != Screen.width || _cachedScreenHeight != Screen.height)
             {
                 RecalcBounds();
@@ -229,7 +263,11 @@ namespace AnimalFall.Core.Animals
             if (!float.IsNaN(pendingTeleportX)) pos.x = pendingTeleportX;
             dx += _externalVelocity.x * dt;
             dy += _externalVelocity.y * dt;
-            dx += CalculateHorizontalSeparation(dt);
+            // Separation is the only O(n^2) part of normal-level movement. Spread
+            // those scans across three frames, then reuse the resulting velocity.
+            if ((Time.frameCount + _separationPhase) % 3 == 0)
+                _separationSpeed = CalculateHorizontalSeparationSpeed();
+            dx += _separationSpeed * dt;
             _externalVelocity = Vector2.MoveTowards(_externalVelocity, Vector2.zero, 3.5f * dt);
             pos.x += dx;
             pos.y += dy;
@@ -240,7 +278,7 @@ namespace AnimalFall.Core.Animals
                     _moveDirX = -_moveDirX;
             }
 
-            pos.x = Mathf.Clamp(pos.x, _screenLeft + 0.25f, _screenRight - 0.25f);
+            if (!_forceExit) pos.x = Mathf.Clamp(pos.x, _screenLeft + 0.25f, _screenRight - 0.25f);
             transform.position = pos;
 
             // Tilt for non-spinning patterns
@@ -254,7 +292,8 @@ namespace AnimalFall.Core.Animals
             // everything else exits the bottom. A small margin avoids popping while visible.
             bool exitedBottom = pos.y < _screenBottom - 0.6f;
             bool exitedTop    = pos.y > _screenTop + 0.6f;
-            if ((exitedBottom || exitedTop) && Time.time >= _releaseProtectionUntil)
+            bool exitedSide   = _forceExit && (pos.x < _screenLeft - 0.6f || pos.x > _screenRight + 0.6f);
+            if ((exitedBottom || exitedTop || exitedSide) && Time.time >= _releaseProtectionUntil)
             {
                 // Only count a miss when the animal fell past the bottom (was catchable).
                 if (exitedBottom) GameEvents.OnAnimalMissed?.Invoke();
@@ -262,7 +301,7 @@ namespace AnimalFall.Core.Animals
             }
         }
 
-        private float CalculateHorizontalSeparation(float dt)
+        private float CalculateHorizontalSeparationSpeed()
         {
             float push = 0f;
             Vector3 position = transform.position;
@@ -281,10 +320,10 @@ namespace AnimalFall.Core.Animals
                     ? Mathf.Sign(delta.x)
                     : (System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this) <
                        System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(other) ? -1f : 1f);
-                push += direction * (SeparationDistance - absX) * SeparationStrength * dt;
+                push += direction * (SeparationDistance - absX) * SeparationStrength;
             }
 
-            return Mathf.Clamp(push, -3.5f * dt, 3.5f * dt);
+            return Mathf.Clamp(push, -3.5f, 3.5f);
         }
 
         private void RecalcBounds()

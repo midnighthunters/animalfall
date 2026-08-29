@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Goal_Level21
   m_EditorClassIdentifier: 
   _targets:
-  - species: 4
-    count: 4
-  - species: 1
-    count: 3
   - species: 2
+    count: 3
+  - species: 6
+    count: 3
+  - species: 5
+    count: 3
+  - species: 13
     count: 3

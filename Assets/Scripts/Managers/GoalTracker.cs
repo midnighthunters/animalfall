@@ -46,12 +46,16 @@ namespace AnimalFall.Managers
             {
                 var t = goal.Targets[i];
                 if (t.species == AnimalSpecies.None || t.count <= 0) continue;
-                _remaining[t.species] = t.count;
-                _targets[t.species]   = t.count;
-                OnGoalProgress?.Invoke(t.species, t.count, t.count);
+                // Goals are keyed by species. Accumulate repeated authored entries
+                // instead of replacing an earlier target and ending the level too soon.
+                int current = _remaining.TryGetValue(t.species, out int value) ? value : 0;
+                _remaining[t.species] = current + t.count;
+                _targets[t.species] = current + t.count;
             }
 
             _initialized = _remaining.Count > 0;
+            foreach (var target in _remaining)
+                OnGoalProgress?.Invoke(target.Key, target.Value, _targets[target.Key]);
         }
 
         public IReadOnlyDictionary<AnimalSpecies, int> Remaining => _remaining;
@@ -76,7 +80,7 @@ namespace AnimalFall.Managers
             if (from == AnimalSpecies.None) return false;
 
             AnimalSpecies to = AnimalSpecies.None;
-            for (int id = 1; id <= 12; id++)
+            for (int id = 1; id <= (int)AnimalSpecies.Raccoon; id++)
             {
                 AnimalSpecies candidate = (AnimalSpecies)id;
                 if (candidate != from && spawner.ContainsSpecies(candidate)) { to = candidate; break; }

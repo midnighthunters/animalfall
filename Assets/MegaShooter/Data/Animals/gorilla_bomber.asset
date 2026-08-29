@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1fcf27ad5a78943b275c4ada2ec641, type: 3}
+  m_Script: {fileID: 11500000, guid: bc6009bf936ad6d41902f380349c7149, type: 3}
   m_Name: gorilla_bomber
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.SuperAnimalData
   stableId: gorilla_bomber
   displayName: Gorilla Bomber
   portrait: {fileID: -469804741, guid: 377c4dc929e66da4e9646ec661dbc4c4, type: 3}

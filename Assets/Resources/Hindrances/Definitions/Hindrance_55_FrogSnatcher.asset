@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_55_FrogSnatcher
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 55
+  prefab: {fileID: 8688020346032489187, guid: c694224dc3cc2f547bed3beddef7177c, type: 3}
+  icon: {fileID: -4682725004825781077, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  unlockLevel: 21
+  displayName: Frog Snatcher
+  effectDescription: The frog periodically catches and removes a falling animal.
+  category: 8
+  baseWeight: 1
+  difficultyTier: 2
+  minDuration: 60
+  maxDuration: 75
+  maxSimultaneous: 1
+  cooldown: 60
+  compatibilityTags: 64
+  exclusionTags: 64
+  inputMode: 0
+  targetScope: 1
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Watch out for the frog's tongue!
+  stateSprites:
+  - {fileID: 6999146183814660703, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  - {fileID: -4682725004825781077, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  - {fileID: -7774217850690031510, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.42
+  interactionWindow: 0
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

@@ -6,6 +6,9 @@ namespace AnimalFall.MegaShooter
     public sealed class MegaVFXProfile : ScriptableObject
     {
         public GameObject hitSparkPrefab;
+        public GameObject playerMuzzlePrefab;
+        public GameObject enemyMuzzlePrefab;
+        public GameObject bossMuzzlePrefab;
         public GameObject explosionPrefab;
         public GameObject eliteExplosionPrefab;
         public GameObject warningPrefab;

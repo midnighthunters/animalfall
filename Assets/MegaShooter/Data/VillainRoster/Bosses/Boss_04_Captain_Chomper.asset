@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
+  m_Name: Boss_04_Captain_Chomper
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
+  stableId: captain_chomper
+  displayName: "Shark \u2014 Captain Chomper"
+  archetype: 4
+  prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
+  sprite: {fileID: -6843682573086588049, guid: 256eeedefb981ae45a1ca6832a255da1, type: 3}
+  weaponIcon: {fileID: -1499788451389146327, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 0.55
+  colliderSize: {x: 2.255, y: 1.625}
+  baseHitPoints: 3950
+  movementBounds:
+    serializedVersion: 2
+    x: -3.45
+    y: 3.7
+    width: 6.9
+    height: 2.8
+  score: 9300
+  entranceDuration: 2
+  phases:
+  - healthThreshold: 1
+    movementPattern: 9
+    attacks:
+    - attackName: HOMING TORPEDOES
+      pattern: 1
+      projectile: {fileID: 11400000, guid: f307302a3b3cc1a438bbbf1f9eb162a3, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 3
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 1
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    - attackName: SPINNING TEETH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 20115d94bc52a864f8eca26f2de4bfb6, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 3
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    - attackName: MINI SHARK DRONES
+      pattern: 8
+      projectile: {fileID: 11400000, guid: 9079f0691c5d5144da726aaae146d524, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 5
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    attackInterval: 2.035
+    projectileSpeedMultiplier: 1
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1
+    bossScaleMultiplier: 1
+    phaseTint: {r: 0.848, g: 0.9392, b: 1, a: 1}
+    cameraShake: 0.18
+    warningText: CAPTAIN CHOMPER ONLINE
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.5
+    movementPattern: 6
+    attacks:
+    - attackName: HOMING TORPEDOES
+      pattern: 1
+      projectile: {fileID: 11400000, guid: f307302a3b3cc1a438bbbf1f9eb162a3, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 4
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 1
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    - attackName: SPINNING TEETH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 20115d94bc52a864f8eca26f2de4bfb6, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 4
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    - attackName: MINI SHARK DRONES
+      pattern: 8
+      projectile: {fileID: 11400000, guid: 9079f0691c5d5144da726aaae146d524, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 6
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+    attackInterval: 1.855
+    projectileSpeedMultiplier: 1.09
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1
+    bossScaleMultiplier: 1.045
+    phaseTint: {r: 0.639, g: 0.8556, b: 1, a: 1}
+    cameraShake: 0.31
+    warningText: PHASE 2
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  entranceVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  deathVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  entranceAudio: {fileID: 0}
+  deathAudio: {fileID: 0}

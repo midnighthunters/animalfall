@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5761feee7ed6ca44d9c30b2324bcc5a6, type: 3}
+  m_Script: {fileID: 11500000, guid: e1ff0878159fef84db494c4e960d366a, type: 3}
   m_Name: DefaultMegaVFX
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaVFXProfile
   hitSparkPrefab: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  playerMuzzlePrefab: {fileID: 8189018788746820014, guid: 6c49ef6152b84104980b1dd70da66685, type: 3}
+  enemyMuzzlePrefab: {fileID: 2695307991788809160, guid: 02ead8c8ac6c37c4e8a826e026863880, type: 3}
+  bossMuzzlePrefab: {fileID: 8301814755830262288, guid: 152dfcfad78c32045a8d3133b713048f, type: 3}
   explosionPrefab: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
   eliteExplosionPrefab: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
   warningPrefab: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}

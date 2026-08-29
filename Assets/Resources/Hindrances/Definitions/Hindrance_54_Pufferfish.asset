@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_54_Pufferfish
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 54
+  prefab: {fileID: 4085629850329922408, guid: 27ca36aece3699142a9e3682b48dd0f2, type: 3}
+  icon: {fileID: 4866182238925101983, guid: ab702cce87f9bd744a9e3f5f7b0796a2, type: 3}
+  unlockLevel: 11
+  displayName: Pufferfish
+  effectDescription: Tap it before it rushes.
+  category: 3
+  baseWeight: 1
+  difficultyTier: 1
+  minDuration: 5
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 9
+  compatibilityTags: 8
+  exclusionTags: 8
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Tap it before it rushes.
+  stateSprites:
+  - {fileID: 4866182238925101983, guid: ab702cce87f9bd744a9e3f5f7b0796a2, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 5
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

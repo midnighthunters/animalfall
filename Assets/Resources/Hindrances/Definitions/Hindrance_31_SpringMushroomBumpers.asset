@@ -15,26 +15,27 @@ MonoBehaviour:
   hindranceType: 31
   prefab: {fileID: 1515915859075486386, guid: 9bba23cdea364ab40b2a869202efc37d, type: 3}
   icon: {fileID: 21300000, guid: 77cecb39c1d91bd43a4fcea05d3d3ed5, type: 3}
-  unlockLevel: 63
-  displayName: Spring Mushroom Bumpers
-  effectDescription: Counter the Spring Mushroom Bumpers!
+  unlockLevel: 26
+  displayName: Spring Mushroom
+  effectDescription: Animals that touch it bounce back and fly off-screen.
   category: 6
   baseWeight: 1
   difficultyTier: 0
-  minDuration: 4
-  maxDuration: 8
+  minDuration: 5
+  maxDuration: 9
   maxSimultaneous: 1
-  cooldown: 12
-  compatibilityTags: 0
-  exclusionTags: 0
-  inputMode: 1
+  cooldown: 9
+  compatibilityTags: 8
+  exclusionTags: 8
+  inputMode: 0
   targetScope: 2
   normalLevelEligible: 1
   megaLevelEligible: 0
   debugShowcaseOnly: 0
-  tutorialInstruction: Counter the Spring Mushroom Bumpers!
+  tutorialInstruction: Watch the spring mushroom!
   stateSprites:
-  - {fileID: 21300000, guid: 77cecb39c1d91bd43a4fcea05d3d3ed5, type: 3}
+  - {fileID: 357749872346554099, guid: a3726f26afeacd644aebe97f15094955, type: 3}
+  - {fileID: -5258563328673448698, guid: a3726f26afeacd644aebe97f15094955, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}

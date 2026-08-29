@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6686929890932418666}
   - component: {fileID: 4829977636564764958}
   - component: {fileID: 5551229765522877308}
-  - component: {fileID: 2256540290881614717}
+  - component: {fileID: 7864338561532192627}
   m_Layer: 0
   m_Name: Hindrance_48_PorcupinePulse
   m_TagString: Untagged
@@ -81,14 +81,14 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 31
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d75854d7192f14a409af88f821e9b85d, type: 3}
+  m_Sprite: {fileID: -8008371771090467732, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.6899996, y: 7.243535}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,8 +129,8 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.72
---- !u!114 &2256540290881614717
+  m_Radius: 3.1528997
+--- !u!114 &7864338561532192627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,10 +139,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6991298533726115919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be38e12ad95a5243b0553286c50905e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2140abb86ada1fb47a629802db4d0677, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.New.PorcupineHindrance
   _maxLifetimeSeconds: 14
-  _type: 48
-  _duration: 7
-  _requiredInteractions: 1
+  _spikedSprite: {fileID: -8008371771090467732, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
+  _noSpikesSprite: {fileID: -7314271896790312256, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
+  _spikeSprite: {fileID: -3562472613985181281, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
+  _viewportHeight: 0.64
+  _displayScale: 0.18
+  _spikeScale: 0.07
+  _spikeTravelDuration: 0.42
+  _untappedLifetime: 7

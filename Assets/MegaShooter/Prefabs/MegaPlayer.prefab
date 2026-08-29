@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6144433662052787302}
   - component: {fileID: 5995922399674985566}
   - component: {fileID: 7141299049899068791}
-  - component: {fileID: 3279777357957666899}
-  - component: {fileID: 9199916523107052514}
-  - component: {fileID: 3378419583243789881}
-  - component: {fileID: 258060056110923307}
+  - component: {fileID: 4793642591095411825}
+  - component: {fileID: 1661033277903509275}
+  - component: {fileID: 381034735078193716}
+  - component: {fileID: 7061459197327582929}
   m_Layer: 0
   m_Name: MegaPlayer
   m_TagString: Untagged
@@ -40,6 +40,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6144433662052787302
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -58,6 +59,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,9 +82,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 715fe2e285713a54eb3797af14dc9292, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -91,8 +96,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!58 &5995922399674985566
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3279777357957666899
+--- !u!114 &4793642591095411825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,10 +170,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7870004125585698930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6d3a4fb2eb9db63419a334c105576a10, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9199916523107052514
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaPoolMember
+--- !u!114 &1661033277903509275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,10 +182,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7870004125585698930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1c72e07f47b52e43b29c936b8c31603, type: 3}
+  m_Script: {fileID: 11500000, guid: e5987435d1165c148a1893ca00879e2b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3378419583243789881
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.SuperAnimalController
+--- !u!114 &381034735078193716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,10 +194,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7870004125585698930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 445e5f3ffc25c6c4199c9f37fa7de159, type: 3}
+  m_Script: {fileID: 11500000, guid: a55afd85c8e95284faff6b1aa309feef, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &258060056110923307
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.AutoWeaponController
+--- !u!114 &7061459197327582929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,6 +206,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7870004125585698930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a617a9eaf048e449af559220b90434, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bfb846d2d8878c429e77634b4d4fa62, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaCounterController

@@ -15,32 +15,34 @@ MonoBehaviour:
   hindranceType: 48
   prefab: {fileID: 6991298533726115919, guid: 2b95c6281e0fe3245b876d23b70b58cf, type: 3}
   icon: {fileID: 21300000, guid: d75854d7192f14a409af88f821e9b85d, type: 3}
-  unlockLevel: 97
-  displayName: Porcupine Pulse
-  effectDescription: Counter the Porcupine Pulse!
+  unlockLevel: 31
+  displayName: Porcupine
+  effectDescription: Tap it to fire spikes at every animal on screen.
   category: 8
   baseWeight: 1
   difficultyTier: 0
-  minDuration: 4
-  maxDuration: 8
+  minDuration: 5
+  maxDuration: 9
   maxSimultaneous: 1
-  cooldown: 12
+  cooldown: 9
   compatibilityTags: 64
   exclusionTags: 64
   inputMode: 1
-  targetScope: 1
+  targetScope: 0
   normalLevelEligible: 1
   megaLevelEligible: 0
   debugShowcaseOnly: 0
-  tutorialInstruction: Counter the Porcupine Pulse!
+  tutorialInstruction: Tap the porcupine!
   stateSprites:
-  - {fileID: 21300000, guid: d75854d7192f14a409af88f821e9b85d, type: 3}
+  - {fileID: -8008371771090467732, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
+  - {fileID: -7314271896790312256, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
+  - {fileID: -3562472613985181281, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
   activationSfx: {fileID: 0}
   successSfx: {fileID: 0}
   blockedSfx: {fileID: 0}
   completionSfx: {fileID: 0}
   telegraphDuration: 0.75
-  interactionWindow: 5
+  interactionWindow: 7
   requiredInteractions: 1
   primaryValue: 1
   secondaryValue: 0

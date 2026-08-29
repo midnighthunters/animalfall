@@ -41,6 +41,12 @@ namespace AnimalFall.UI
         [SerializeField] private Image _petsTabIcon;
         [SerializeField] private Image _shopTabIcon;
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        [Header("Debug")]
+        [Tooltip("One-based level shown by the Main Scene while testing. Set to 0 to use saved progress only.")]
+        [SerializeField, Min(0)] private int _debugStartLevel;
+#endif
+
         private SaveService _save;
         private int _currentLevel;
         private GameObject _noLivesPopup;
@@ -71,7 +77,9 @@ namespace AnimalFall.UI
                     _currentLevel = Mathf.Clamp(_currentLevel, 0, totalLevels - 1);
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-                int debugLevel = PlayerPrefs.GetInt("AnimalFall.DebugLevel", -1);
+                int debugLevel = Mathf.Max(
+                    PlayerPrefs.GetInt("AnimalFall.DebugLevel", -1),
+                    _debugStartLevel - 1);
                 // A debug jump may start an unplayed level, but it must never keep overriding
                 // the newly saved progress after that level has been completed.
                 if (debugLevel > _currentLevel && LevelManager.Instance != null && LevelManager.Instance.GetLevelData(debugLevel) != null)

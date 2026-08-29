@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65acd4603e0ea2341bf715f160f1a4b7, type: 3}
+  m_Name: captain_chomper_special
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.ProjectileData
+  stableId: captain_chomper_special
+  prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
+  sprite: {fileID: -1499788451389146327, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  motion: 1
+  speed: 7.4399996
+  damage: 1
+  lifetime: 6
+  colliderRadius: 0.12
+  homingStrength: 2.18
+  sineAmplitude: 0
+  sineFrequency: 0
+  reflectable: 1
+  playerColor: {r: 0.18, g: 0.92, b: 1, a: 1}
+  enemyColor: {r: 0.05, g: 0.62, b: 1, a: 1}
+  impactVFX: {fileID: 0}
+  trailVFX: {fileID: 0}
+  impactAudio: {fileID: 0}
+  poolingKey: captain_chomper_special

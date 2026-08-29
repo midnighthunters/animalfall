@@ -18,21 +18,20 @@ MonoBehaviour:
   _timeLimit: 63.030304
   _goal: {fileID: 11400000, guid: 751530b9c00372046b800053b3221e47, type: 2}
   _spawnPool:
-  - {fileID: 11400000, guid: acdfc60a3ea343b4d917861654ab672c, type: 2}
-  - {fileID: 11400000, guid: 096241694917a1a49ab89b04d1c5c5ee, type: 2}
   - {fileID: 11400000, guid: 78664353021660343aa248d258e75741, type: 2}
-  - {fileID: 11400000, guid: 92c5f856634c4ea499f177d4f3271c33, type: 2}
-  - {fileID: 11400000, guid: 4dee5e7fd0334844bb3475dd4d2712df, type: 2}
+  - {fileID: 11400000, guid: b29f74b4c62945743ac511106e063224, type: 2}
+  - {fileID: 11400000, guid: 8c5dcab498953414783fedc586715717, type: 2}
+  - {fileID: 11400000, guid: eaa6c36d625db3445b96b87576ef620b, type: 2}
   _spawnInterval: 0.6792929
   _spawnVariance: 0.15
   _maxOnScreen: 7
   _hindrances:
-  - type: 10
+  - type: 55
     weight: 1
     initialDelay: 0
-  _hindranceSpawnInterval: 7
-  _hindranceInitialDelay: 5
-  _maxHindrancesActive: 2
+  _hindranceSpawnInterval: 30
+  _hindranceInitialDelay: 2.5
+  _maxHindrancesActive: 1
   _wrongTapTimePenalty: 0.8828283
   _wrongTapScorePenalty: 16
   _bombTimePenalty: 2.4040403

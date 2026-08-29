@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab501b055f0637342b1069105e49c977, type: 3}
+  m_Name: general_smash_02
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.EnemyShipData
+  stableId: general_smash_army_2
+  displayName: Meteor Raider
+  prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
+  sprite: {fileID: 7406105541468094581, guid: 73344ff856f41a242adb7d2d870c902f, type: 3}
+  weaponIcon: {fileID: -5039132156621874023, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  shadow: {fileID: 0}
+  visualScale: 0.4
+  colliderSize: {x: 0.85999995, y: 0.73}
+  hitPoints: 52
+  contactDamage: 1
+  speed: 2.42
+  score: 305
+  movementPattern: 2
+  weaponPattern: 1
+  projectile: {fileID: 11400000, guid: b859ed62776022a4c8e94b978793ce7b, type: 2}
+  fireInterval: 2.25
+  initialFireDelay: 1.27
+  telegraphTime: 0.85
+  deathVFX: {fileID: 0}
+  hitVFX: {fileID: 0}
+  fireAudio: {fileID: 0}
+  deathAudio: {fileID: 0}
+  pickupChance: 0.035
+  poolingKey: general_smash_army_2
+  priorityTarget: 0
+  splitsOnDeath: 0
+  shieldsNearby: 0
+  repairsNearby: 0

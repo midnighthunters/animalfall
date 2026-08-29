@@ -145,27 +145,31 @@ namespace AnimalFall.Core
         {
             var tag = obj.GetComponent<PoolTag>();
             if (tag == null) tag = obj.AddComponent<PoolTag>();
-            var sr = obj.GetComponent<SpriteRenderer>();
+            bool firstInitialization = !tag.Initialized;
             if (!tag.Initialized)
             {
                 tag.Initialized = true;
                 tag.OriginalLocalScale = obj.transform.localScale;
                 tag.OriginalLocalRotation = obj.transform.localRotation;
-                tag.OriginalSpriteColor = sr != null ? sr.color : Color.white;
             }
+            // Non-serialized caches are rebuilt after a domain reload.
+            if (tag.Behaviours == null || tag.Behaviours.Length == 0)
+                tag.CacheComponents(obj);
+            if (firstInitialization)
+                tag.OriginalSpriteColor = tag.SpriteRenderer != null ? tag.SpriteRenderer.color : Color.white;
             DOTween.Kill(obj);
             obj.transform.localScale = tag.OriginalLocalScale;
             obj.transform.localRotation = tag.OriginalLocalRotation;
-            if (sr != null) sr.color = tag.OriginalSpriteColor;
-            Collider2D[] colliders = obj.GetComponents<Collider2D>();
+            if (tag.SpriteRenderer != null) tag.SpriteRenderer.color = tag.OriginalSpriteColor;
+            Collider2D[] colliders = tag.Colliders;
             for (int i = 0; i < colliders.Length; i++) colliders[i].enabled = true;
-            Rigidbody2D body = obj.GetComponent<Rigidbody2D>();
+            Rigidbody2D body = tag.Body;
             if (body != null)
             {
                 body.linearVelocity = Vector2.zero;
                 body.angularVelocity = 0f;
             }
-            var behaviours = obj.GetComponents<MonoBehaviour>();
+            MonoBehaviour[] behaviours = tag.Behaviours;
             for (int i = 0; i < behaviours.Length; i++)
             {
                 if (behaviours[i] != null)
@@ -183,5 +187,17 @@ namespace AnimalFall.Core
         public Vector3 OriginalLocalScale;
         public Quaternion OriginalLocalRotation;
         public Color OriginalSpriteColor = Color.white;
+        [System.NonSerialized] public Collider2D[] Colliders = System.Array.Empty<Collider2D>();
+        [System.NonSerialized] public MonoBehaviour[] Behaviours = System.Array.Empty<MonoBehaviour>();
+        [System.NonSerialized] public SpriteRenderer SpriteRenderer;
+        [System.NonSerialized] public Rigidbody2D Body;
+
+        public void CacheComponents(GameObject owner)
+        {
+            Colliders = owner.GetComponents<Collider2D>();
+            Behaviours = owner.GetComponents<MonoBehaviour>();
+            SpriteRenderer = owner.GetComponent<SpriteRenderer>();
+            Body = owner.GetComponent<Rigidbody2D>();
+        }
     }
 }

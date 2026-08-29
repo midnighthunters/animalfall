@@ -59,7 +59,16 @@ namespace AnimalFall.Core.Hindrances
         BeeSwarmGuard         = 47,
         PorcupinePulse        = 48,
         VenusFlytrapRescue    = 49,
-        RaccoonCoinHeist      = 50
+        RaccoonCoinHeist      = 50,
+
+        // Level 11–19 animal hindrances
+        DogHelmet            = 51,
+        Octopus              = 52,
+        SpiderGun            = 53,
+        Pufferfish           = 54,
+
+        // Level 21 set-piece hindrance
+        FrogSnatcher         = 55
     }
 
     public enum HindranceCategory

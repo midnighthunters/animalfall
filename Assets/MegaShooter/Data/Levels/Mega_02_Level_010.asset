@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da51f9745b7f274a982cf839595dce2, type: 3}
+  m_Script: {fileID: 11500000, guid: f19b8a7db535f4b48ab86d9e7a4a2f2b, type: 3}
   m_Name: Mega_02_Level_010
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaLevelData
   gameLevelNumber: 10
-  displayTitle: Crossfire Patrol
+  displayTitle: "Venom Emperor \u2014 Showdown"
   megaSequenceIndex: 2
-  description: 'Mega 2: Crossfire Patrol. Clear 4 authored waves, master readable
-    telegraphs, then defeat Twin-Core Raider.'
+  description: "Break the Venom Emperor army formations, then defeat King Cobra \u2014
+    Venom Emperor."
   backgroundLayers:
   - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
   - {fileID: 21300000, guid: 521e85c63721aa44bb169521afa501b5, type: 3}
@@ -27,17 +27,26 @@ MonoBehaviour:
   - 0.24
   - 0.42
   - 0.68
-  backgroundSpeed: 0.47
-  backgroundColor: {r: 0.015, g: 0.07, b: 0.16, a: 1}
-  accentColor: {r: 0.95, g: 0.82, b: 0.25, a: 1}
-  introImage: {fileID: 0}
-  bossWarningText: "WARNING \u2014 TWIN-CORE RAIDER APPROACHING"
+  backgroundSpeed: 0.468
+  backgroundColor: {r: 0.031320002, g: 0.096300006, b: 0.055224, a: 0.6228}
+  accentColor: {r: 0.3, g: 1, b: 0.08, a: 1}
+  introImage: {fileID: 3618328923101007780, guid: 62bf4410ad3ce2c408d93aa1399986a6, type: 3}
+  bossWarningText: "WARNING \u2014 VENOM EMPEROR APPROACHING"
   featuredAnimal: {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
+  - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}
+  - {fileID: 11400000, guid: c059f591d1769794d9133e74549624dd, type: 2}
+  - {fileID: 11400000, guid: 4894b27f3f6026341803a6eebd58a256, type: 2}
+  - {fileID: 11400000, guid: f9ee3ff31d62cb24ab7f07ed17596381, type: 2}
+  - {fileID: 11400000, guid: e3a33d22d7b1bb943b225c96567f2dba, type: 2}
+  - {fileID: 11400000, guid: 1b27ee2a429685843aaf30251140dd0f, type: 2}
+  - {fileID: 11400000, guid: 3274ca3d08999b14180abe8b1e442c26, type: 2}
+  - {fileID: 11400000, guid: 4ef98d0e068cbe54d8d5ae15e3e81aa2, type: 2}
+  - {fileID: 11400000, guid: 92f4401d2484fa842a00649a099f0a01, type: 2}
   startingHealth: 5
   movementSpeedMultiplier: 1
-  playerPowerMultiplier: 1.06
+  playerPowerMultiplier: 1.055
   invulnerabilityDuration: 1
   counterChargeMultiplier: 1
   cameraBounds:
@@ -53,24 +62,24 @@ MonoBehaviour:
     width: 8.5
     height: 6.3
   safeUiMargins: {x: 0.2, y: 1.2, z: 0.2, w: 1.15}
-  scrollSpeed: 0.715
+  scrollSpeed: 0.714
   bottomProjectileExclusion: 1.4
   waves:
-  - waveName: Teach
+  - waveName: Vanguard Formation
     waveNumber: 1
     startDelay: 1
-    completionDelay: 0.8
-    warningBanner: V-FORMATION FIGHTER
+    completionDelay: 0.85
+    warningBanner: VENOM EMPEROR ARMY INBOUND
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 4
-      formation: 1
+    - enemy: {fileID: 11400000, guid: 523c9887e82d1874392980e8f615f149, type: 2}
+      count: 3
+      formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.44099998
-      columns: 4
+      cadence: 0.42200002
+      columns: 3
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -78,15 +87,31 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 070312f51697ebe40bbba2b45b6a2bdb, type: 2}
+    - enemy: {fileID: 11400000, guid: 577efb516a50e0c45804103ec4f3c1e6, type: 2}
       count: 2
-      formation: 2
+      formation: 0
       spawnPath: 1
       startDelay: 0
-      cadence: 0.44099998
+      cadence: 0.42200002
       columns: 2
       rows: 1
-      spacing: 0.9
+      spacing: 1
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 142dfae16586c02448060a223521a1af, type: 2}
+      count: 1
+      formation: 3
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.42200002
+      columns: 2
+      rows: 1
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -102,21 +127,21 @@ MonoBehaviour:
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Reinforcement Wing
     waveNumber: 2
-    startDelay: 0.6
-    completionDelay: 0.8
+    startDelay: 0.65
+    completionDelay: 0.85
     warningBanner: 
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 070312f51697ebe40bbba2b45b6a2bdb, type: 2}
-      count: 4
-      formation: 2
+    - enemy: {fileID: 11400000, guid: 577efb516a50e0c45804103ec4f3c1e6, type: 2}
+      count: 3
+      formation: 0
       spawnPath: 1
       startDelay: 0
-      cadence: 0.44099998
-      columns: 4
+      cadence: 0.42200002
+      columns: 3
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -124,15 +149,15 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+    - enemy: {fileID: 11400000, guid: 142dfae16586c02448060a223521a1af, type: 2}
       count: 2
       formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.44099998
+      cadence: 0.42200002
       columns: 2
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -140,29 +165,29 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
+    healthMultiplier: 1.035
     speedMultiplier: 1.025
     fireRateMultiplier: 1
-    scoreMultiplier: 1.04
+    scoreMultiplier: 1.07
     maximumSimultaneousEnemies: 6
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Elite Army Finale
     waveNumber: 3
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
+    startDelay: 0.65
+    completionDelay: 0.85
+    warningBanner: "ELITE FORMATION \u2014 CLEAR THE SKY"
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+    - enemy: {fileID: 11400000, guid: 142dfae16586c02448060a223521a1af, type: 2}
       count: 3
       formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.44099998
+      cadence: 0.42200002
       columns: 3
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -170,15 +195,15 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 070312f51697ebe40bbba2b45b6a2bdb, type: 2}
+    - enemy: {fileID: 11400000, guid: 523c9887e82d1874392980e8f615f149, type: 2}
       count: 2
-      formation: 4
+      formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.44099998
+      cadence: 0.42200002
       columns: 2
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -186,61 +211,15 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
+    healthMultiplier: 1.07
     speedMultiplier: 1.05
     fireRateMultiplier: 1
-    scoreMultiplier: 1.08
+    scoreMultiplier: 1.14
     maximumSimultaneousEnemies: 6
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Test
-    waveNumber: 4
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
-    spawnGroups:
-    - enemy: {fileID: 11400000, guid: 070312f51697ebe40bbba2b45b6a2bdb, type: 2}
-      count: 3
-      formation: 4
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.44099998
-      columns: 3
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 2
-      formation: 5
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.44099998
-      columns: 2
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    healthMultiplier: 1
-    speedMultiplier: 1.075
-    fireRateMultiplier: 1
-    scoreMultiplier: 1.12
-    maximumSimultaneousEnemies: 6
-    environmentEvent: 0
-    completionCondition: 0
-    surviveDuration: 0
-  boss: {fileID: 11400000, guid: c1d9ea8271c3e21499cf8ab8151cb878, type: 2}
+  boss: {fileID: 11400000, guid: ba082c9f5599f0b4dbe96260833ee8af, type: 2}
   bossOverrides:
     healthMultiplier: 1
     attackIntervalMultiplier: 1
@@ -248,23 +227,23 @@ MonoBehaviour:
     dropCriticalHealthPickup: 0
     healthPickupBossThreshold: 0.5
     playerCriticalHealthThreshold: 0.35
-  enemyHealthMultiplier: 0.9
+  enemyHealthMultiplier: 0.88
   enemyDamageMultiplier: 1
-  enemyProjectileSpeedMultiplier: 0.72
-  ordinaryEnemyFireInterval: 2.25
+  enemyProjectileSpeedMultiplier: 0.695
+  ordinaryEnemyFireInterval: 2.2749999
   enemyFireIntervalMultiplier: 1
-  spawnCadenceMultiplier: 0.982
+  spawnCadenceMultiplier: 0.984
   maximumActiveEnemies: 6
   maximumHostileProjectiles: 28
-  targetEnemyCount: 22
-  scoreMultiplier: 1.05
+  targetEnemyCount: 16
+  scoreMultiplier: 1.045
   comboTimeout: 2
   nearMissScore: 27
   counterScore: 265
-  parTime: 92
-  coinReward: 125
+  parTime: 132
+  coinReward: 135
   arcadeTokenReward: 3
-  unlockReward: 
+  unlockReward: Venom Emperor
   vfxProfile: {fileID: 11400000, guid: 1a923faa316340d43b6140c35c9c3ffe, type: 2}
   cameraShakeScale: 1
   flashScale: 1
@@ -278,5 +257,5 @@ MonoBehaviour:
     counterReady: {fileID: 0}
     counterActivate: {fileID: 0}
     victory: {fileID: 0}
-  deterministicSeed: 5098
+  deterministicSeed: 5198
   randomizeSeed: 0

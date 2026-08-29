@@ -1,0 +1,300 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
+  m_Name: Boss_10_Cosmic_Draconis
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
+  stableId: cosmic_draconis
+  displayName: "Dragon \u2014 Cosmic Draconis"
+  archetype: 10
+  prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
+  sprite: {fileID: -3306091100957424793, guid: 7dda478d8e3c50140a7f54ee8bd6f0ed, type: 3}
+  weaponIcon: {fileID: -6635782518697459388, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 0.55
+  colliderSize: {x: 2.4650002, y: 1.775}
+  baseHitPoints: 9050
+  movementBounds:
+    serializedVersion: 2
+    x: -3.45
+    y: 3.7
+    width: 6.9
+    height: 2.8
+  score: 15900
+  entranceDuration: 2.8
+  phases:
+  - healthThreshold: 1
+    movementPattern: 6
+    attacks:
+    - attackName: PLASMA BREATH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 80ea6de98dc6d8845b94116db809147e, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 3
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: METEOR SHOWER
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 054bdde2a592129438292da013e39752, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 3
+      spreadDegrees: 58
+      volleyCount: 3
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: COSMIC ASCENSION
+      pattern: 4
+      projectile: {fileID: 11400000, guid: b04a54dcf3008a649890cb9468f20382, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 10
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    attackInterval: 1.705
+    projectileSpeedMultiplier: 1
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1.35
+    bossScaleMultiplier: 1
+    phaseTint: {r: 1, g: 0.8528, b: 0.8816, a: 1}
+    cameraShake: 0.18
+    warningText: COSMIC DRACONIS ONLINE
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.75
+    movementPattern: 3
+    attacks:
+    - attackName: PLASMA BREATH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 80ea6de98dc6d8845b94116db809147e, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 4
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: METEOR SHOWER
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 054bdde2a592129438292da013e39752, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 4
+      spreadDegrees: 58
+      volleyCount: 4
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: COSMIC ASCENSION
+      pattern: 4
+      projectile: {fileID: 11400000, guid: b04a54dcf3008a649890cb9468f20382, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 12
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    attackInterval: 1.5250001
+    projectileSpeedMultiplier: 1.09
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1.35
+    bossScaleMultiplier: 1.22
+    phaseTint: {r: 1, g: 0.78533334, b: 0.82733333, a: 1}
+    cameraShake: 0.22333334
+    warningText: "COSMIC DRACONIS \u2014 SECOND FORM"
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.5
+    movementPattern: 6
+    attacks:
+    - attackName: PLASMA BREATH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 80ea6de98dc6d8845b94116db809147e, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 5
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: METEOR SHOWER
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 054bdde2a592129438292da013e39752, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 5
+      spreadDegrees: 58
+      volleyCount: 5
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: COSMIC ASCENSION
+      pattern: 4
+      projectile: {fileID: 11400000, guid: b04a54dcf3008a649890cb9468f20382, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 14
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    attackInterval: 1.345
+    projectileSpeedMultiplier: 1.1800001
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1.35
+    bossScaleMultiplier: 1.44
+    phaseTint: {r: 1, g: 0.71786666, b: 0.77306664, a: 1}
+    cameraShake: 0.26666668
+    warningText: PHASE 3
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.25
+    movementPattern: 3
+    attacks:
+    - attackName: PLASMA BREATH
+      pattern: 2
+      projectile: {fileID: 11400000, guid: 80ea6de98dc6d8845b94116db809147e, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 6
+      spreadDegrees: 86
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: METEOR SHOWER
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 054bdde2a592129438292da013e39752, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 6
+      spreadDegrees: 58
+      volleyCount: 5
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    - attackName: COSMIC ASCENSION
+      pattern: 4
+      projectile: {fileID: 11400000, guid: b04a54dcf3008a649890cb9468f20382, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 16
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 0
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.08, b: 0.26, a: 1}
+    attackInterval: 1.1650001
+    projectileSpeedMultiplier: 1.27
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1.35
+    bossScaleMultiplier: 1.66
+    phaseTint: {r: 1, g: 0.6504, b: 0.7188, a: 1}
+    cameraShake: 0.31
+    warningText: PHASE 4
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  entranceVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  deathVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  entranceAudio: {fileID: 0}
+  deathAudio: {fileID: 0}

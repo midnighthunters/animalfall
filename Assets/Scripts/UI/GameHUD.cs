@@ -1,4 +1,4 @@
-// GameHUD — clean bottom bar: goal chips (left) + timer (center). No top bar.
+// GameHUD — reference-style bottom HUD built from Resources/icons/bottom_panel.
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ using AnimalFall.Utils;
 
 namespace AnimalFall.UI
 {
+    [ExecuteAlways]
     public class GameHUD : MonoBehaviour
     {
         [Header("Bottom Bar")]
@@ -35,6 +36,12 @@ namespace AnimalFall.UI
         private bool _goalBound;
         private GoalData _summaryGoal;
 
+        private const string BottomPanelResource = "icons/bottom_panel";
+        private static Texture2D _bottomPanelTexture;
+        private static readonly Dictionary<string, Sprite> _bottomPanelSprites =
+            new Dictionary<string, Sprite>();
+        private int _displayedTimerSecond = int.MinValue;
+
         private class GoalChip
         {
             public GameObject Root;
@@ -44,14 +51,22 @@ namespace AnimalFall.UI
             public Image Check;
         }
 
-public void Setup(LevelData level)
+        public void Setup(LevelData level)
         {
             ImageLibrary.LoadAll();
             _totalTime = level != null ? level.TimeLimit : 60f;
+            _displayedTimerSecond = int.MinValue;
             _warningActive = false;
             _summaryGoal = level != null ? level.Goal : null;
+            _countColor = new Color(0.25f, 0.10f, 0.48f, 1f);
 
-            if (_bottomBarBg != null) _bottomBarBg.color = _barColor;
+            BuildReferenceBottomPanel();
+
+            if (_bottomBarBg != null)
+            {
+                _bottomBarBg.sprite = null;
+                _bottomBarBg.color = Color.clear;
+            }
             if (_timerText != null)
             {
                 _timerText.color = _timerNormal;
@@ -72,62 +87,62 @@ public void Setup(LevelData level)
         {
             if (_bottomBar == null) return;
 
-            // Compact floating bar with breathing room from the screen edges.
-            _bottomBar.anchorMin = new Vector2(0.04f, 0f);
-            _bottomBar.anchorMax = new Vector2(0.96f, 0f);
+            // Match the reference composition: goal card, central counter and
+            // three circular boosters spanning the full lower edge.
+            _bottomBar.anchorMin = new Vector2(0f, 0f);
+            _bottomBar.anchorMax = new Vector2(1f, 0f);
             _bottomBar.pivot = new Vector2(0.5f, 0f);
-            _bottomBar.sizeDelta = new Vector2(0f, 190f);
-            _bottomBar.anchoredPosition = new Vector2(0f, 18f);
+            _bottomBar.sizeDelta = new Vector2(0f, 184f);
+            _bottomBar.anchoredPosition = new Vector2(0f, 12f);
 
-            // Goals row: left side only (0 → 0.42), never reaches center timer
+            // Goal chips live inside the cream area of the purple goal card.
             if (_goalsRow != null)
             {
                 var goalsRt = _goalsRow as RectTransform ?? _goalsRow.GetComponent<RectTransform>();
                 if (goalsRt != null)
                 {
-                    // Detach from any parent layout that forces expand
                     var parentLe = goalsRt.GetComponent<LayoutElement>();
-                    if (parentLe != null) Destroy(parentLe);
+                    if (parentLe != null) SafeDestroy(parentLe);
 
-                    goalsRt.SetParent(_bottomBar, false);
-                    goalsRt.anchorMin = new Vector2(0.04f, 0.10f);
-                    goalsRt.anchorMax = new Vector2(0.42f, 0.90f);
+                    Transform goalCard = _bottomBar.Find("GoalCard");
+                    goalsRt.SetParent(goalCard != null ? goalCard : _bottomBar, false);
+                    goalsRt.anchorMin = new Vector2(0.035f, 0.04f);
+                    goalsRt.anchorMax = new Vector2(0.965f, 0.73f);
                     goalsRt.offsetMin = Vector2.zero;
                     goalsRt.offsetMax = Vector2.zero;
-                    goalsRt.pivot = new Vector2(0f, 0.5f);
+                    goalsRt.pivot = new Vector2(0.5f, 0.5f);
                 }
 
                 var hlg = _goalsRow.GetComponent<HorizontalLayoutGroup>();
                 if (hlg == null) hlg = _goalsRow.gameObject.AddComponent<HorizontalLayoutGroup>();
-                hlg.childAlignment = TextAnchor.MiddleLeft;
-                hlg.spacing = 12f;
-                hlg.padding = new RectOffset(8, 8, 4, 4);
+                hlg.childAlignment = TextAnchor.MiddleCenter;
+                hlg.spacing = 4f;
+                hlg.padding = new RectOffset(4, 4, 0, 0);
                 hlg.childForceExpandWidth = false;
                 hlg.childForceExpandHeight = false;
                 hlg.childControlWidth = true;
                 hlg.childControlHeight = true;
             }
 
-            // Timer: fixed absolute center of bottom bar
+            // Counter sits between the goal card and booster cluster.
             if (_timerText != null)
             {
-                var timerSlot = _timerText.transform.parent; // TimerInner
+                var timerSlot = _timerText.transform.parent;
                 if (timerSlot != null && timerSlot.parent != null)
                 {
-                    // Prefer TimerSlot (parent of TimerInner)
-                    var slot = timerSlot.parent; // TimerSlot
+                    var slot = timerSlot.parent;
                     var slotRt = slot as RectTransform ?? slot.GetComponent<RectTransform>();
                     if (slotRt != null)
                     {
                         var le = slotRt.GetComponent<LayoutElement>();
-                        if (le != null) Destroy(le);
+                        if (le != null) SafeDestroy(le);
 
                         slotRt.SetParent(_bottomBar, false);
-                        slotRt.anchorMin = new Vector2(0.5f, 0.5f);
-                        slotRt.anchorMax = new Vector2(0.5f, 0.5f);
+                        slotRt.anchorMin = new Vector2(0.5f, 0f);
+                        slotRt.anchorMax = new Vector2(0.5f, 0f);
                         slotRt.pivot = new Vector2(0.5f, 0.5f);
-                        slotRt.sizeDelta = new Vector2(150f, 150f);
-                        slotRt.anchoredPosition = Vector2.zero;
+                        slotRt.sizeDelta = new Vector2(205f, 124f);
+                        slotRt.anchoredPosition = new Vector2(20f, 76f);
                     }
                 }
             }
@@ -144,13 +159,158 @@ public void Setup(LevelData level)
             }
         }
 
+        private void BuildReferenceBottomPanel()
+        {
+            if (_bottomBar == null) return;
+
+            _bottomPanelTexture = _bottomPanelTexture != null
+                ? _bottomPanelTexture
+                : Resources.Load<Texture2D>(BottomPanelResource);
+
+            if (_bottomPanelTexture == null)
+            {
+                Debug.LogWarning($"[GameHUD] Missing spritesheet Resources/{BottomPanelResource}.png");
+                return;
+            }
+
+            // Coordinates use Unity's bottom-left texture origin.
+            Sprite goalPanel = AtlasSprite("goal_panel", new Rect(70f, 788f, 770f, 290f));
+            Sprite counterPanel = AtlasSprite("counter_panel", new Rect(855f, 786f, 535f, 292f));
+            Sprite boosterFrame = AtlasSprite("booster_frame", new Rect(290f, 514f, 280f, 280f));
+
+            Image goalCard = EnsureImage("GoalCard", _bottomBar, goalPanel);
+            SetFixed(goalCard.rectTransform, new Vector2(430f, 162f), new Vector2(0f, 0f),
+                new Vector2(18f, 10f), new Vector2(0f, 0f));
+            goalCard.preserveAspect = false;
+
+            TextMeshProUGUI goalLabel = EnsureText("GoalLabel", goalCard.transform);
+            SetFixed(goalLabel.rectTransform, new Vector2(360f, 42f), new Vector2(0.5f, 1f),
+                new Vector2(0f, -2f), new Vector2(0.5f, 1f));
+            goalLabel.text = "GOAL";
+            goalLabel.fontSize = 27f;
+            goalLabel.fontStyle = FontStyles.Bold;
+            goalLabel.alignment = TextAlignmentOptions.Center;
+            goalLabel.color = Color.white;
+            goalLabel.raycastTarget = false;
+
+            if (_targetIcon != null && _targetIcon.transform.parent != null)
+                _targetIcon.transform.parent.gameObject.SetActive(false);
+            if (_targetText != null && _targetText.transform.parent != null)
+                _targetText.transform.parent.gameObject.SetActive(false);
+
+            if (_timerText != null)
+            {
+                Transform timerFaceTransform = _timerText.transform.parent;
+                Image timerFace = timerFaceTransform != null
+                    ? timerFaceTransform.GetComponent<Image>()
+                    : null;
+                if (timerFace != null)
+                {
+                    timerFace.sprite = counterPanel;
+                    timerFace.color = Color.white;
+                    timerFace.type = Image.Type.Simple;
+                    timerFace.preserveAspect = false;
+                }
+
+                Transform timeLabel = timerFaceTransform != null ? timerFaceTransform.Find("TimeLabel") : null;
+                if (timeLabel != null) timeLabel.gameObject.SetActive(false);
+
+                RectTransform textRt = _timerText.rectTransform;
+                textRt.anchorMin = textRt.anchorMax = new Vector2(0.5f, 0.5f);
+                textRt.pivot = new Vector2(0.5f, 0.5f);
+                textRt.sizeDelta = new Vector2(170f, 96f);
+                textRt.anchoredPosition = new Vector2(0f, -2f);
+                _timerText.fontSize = 72f;
+                _timerText.fontStyle = FontStyles.Bold;
+                _timerText.alignment = TextAlignmentOptions.Center;
+                _timerText.color = Color.white;
+
+                Shadow shadow = _timerText.GetComponent<Shadow>();
+                if (shadow == null) shadow = _timerText.gameObject.AddComponent<Shadow>();
+                shadow.effectColor = new Color(0.18f, 0.03f, 0.34f, 0.72f);
+                shadow.effectDistance = new Vector2(0f, -4f);
+            }
+
+            BuildBooster("BoosterBomb", -330f, boosterFrame,
+                AtlasSprite("bomb", new Rect(324f, 0f, 267f, 259f)), 80f);
+            BuildBooster("BoosterRainbow", -200f, boosterFrame,
+                AtlasSprite("rainbow", new Rect(611f, 15f, 247f, 232f)), 82f);
+            BuildBooster("BoosterRocket", -70f, boosterFrame,
+                AtlasSprite("rocket", new Rect(881f, 17f, 249f, 230f)), 84f);
+        }
+
+        private void BuildBooster(string name, float x, Sprite frame, Sprite icon, float iconSize)
+        {
+            Image button = EnsureImage(name, _bottomBar, frame);
+            SetFixed(button.rectTransform, new Vector2(120f, 120f), new Vector2(1f, 0f),
+                new Vector2(x, 16f), new Vector2(0.5f, 0f));
+            button.preserveAspect = true;
+
+            Image iconImage = EnsureImage("Icon", button.transform, icon);
+            SetFixed(iconImage.rectTransform, new Vector2(iconSize, iconSize), new Vector2(0.5f, 0.5f),
+                Vector2.zero, new Vector2(0.5f, 0.5f));
+            iconImage.preserveAspect = true;
+        }
+
+        private static Image EnsureImage(string name, Transform parent, Sprite sprite)
+        {
+            Transform existing = parent.Find(name);
+            GameObject go = existing != null
+                ? existing.gameObject
+                : new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            if (existing == null) go.transform.SetParent(parent, false);
+
+            Image image = go.GetComponent<Image>();
+            if (image == null) image = go.AddComponent<Image>();
+            image.sprite = sprite;
+            image.color = Color.white;
+            image.raycastTarget = false;
+            return image;
+        }
+
+        private static TextMeshProUGUI EnsureText(string name, Transform parent)
+        {
+            Transform existing = parent.Find(name);
+            GameObject go = existing != null
+                ? existing.gameObject
+                : new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            if (existing == null) go.transform.SetParent(parent, false);
+
+            TextMeshProUGUI text = go.GetComponent<TextMeshProUGUI>();
+            if (text == null) text = go.AddComponent<TextMeshProUGUI>();
+            ApplyDefaultFont(text);
+            return text;
+        }
+
+        private static void SetFixed(RectTransform rt, Vector2 size, Vector2 anchor,
+            Vector2 position, Vector2 pivot)
+        {
+            rt.anchorMin = rt.anchorMax = anchor;
+            rt.pivot = pivot;
+            rt.sizeDelta = size;
+            rt.anchoredPosition = position;
+            rt.localScale = Vector3.one;
+        }
+
+        private static Sprite AtlasSprite(string key, Rect rect)
+        {
+            if (_bottomPanelSprites.TryGetValue(key, out Sprite cached) && cached != null)
+                return cached;
+
+            Sprite sprite = Sprite.Create(_bottomPanelTexture, rect, new Vector2(0.5f, 0.5f), 100f,
+                0u, SpriteMeshType.FullRect);
+            sprite.name = "bottom_panel_" + key;
+            _bottomPanelSprites[key] = sprite;
+            return sprite;
+        }
+
         private void BuildGoalChips(GoalData goal)
         {
             _chips.Clear();
             if (_goalsRow == null) return;
 
             for (int i = _goalsRow.childCount - 1; i >= 0; i--)
-                Destroy(_goalsRow.GetChild(i).gameObject);
+                SafeDestroy(_goalsRow.GetChild(i).gameObject);
 
             if (goal == null || goal.Targets == null) return;
 
@@ -231,7 +391,7 @@ private void UpdateTargetSummary()
 
             if (chip.Icon != null)
             {
-                chip.Icon.sprite = ImageLibrary.GetAnimalSprite(species);
+                chip.Icon.sprite = GetGoalPortrait(species) ?? ImageLibrary.GetAnimalSprite(species);
                 chip.Icon.preserveAspect = true;
                 chip.Icon.color = Color.white;
             }
@@ -247,6 +407,25 @@ private void UpdateTargetSummary()
             if (chip.Check != null) chip.Check.gameObject.SetActive(false);
 
             _chips[species] = chip;
+        }
+
+        private static Sprite GetGoalPortrait(AnimalSpecies species)
+        {
+            if (_bottomPanelTexture == null) return null;
+
+            switch (species)
+            {
+                case AnimalSpecies.Penguin:
+                    return AtlasSprite("portrait_penguin", new Rect(78f, 242f, 279f, 343f));
+                case AnimalSpecies.Pig:
+                    return AtlasSprite("portrait_pig", new Rect(397f, 242f, 306f, 300f));
+                case AnimalSpecies.Dog:
+                    return AtlasSprite("portrait_dog", new Rect(1056f, 238f, 316f, 301f));
+                case AnimalSpecies.Raccoon:
+                    return AtlasSprite("portrait_raccoon", new Rect(720f, 238f, 310f, 315f));
+                default:
+                    return null;
+            }
         }
 
         private static void ApplyDefaultFont(TextMeshProUGUI tmp)
@@ -267,13 +446,13 @@ private void UpdateTargetSummary()
             go.transform.SetParent(parent, false);
 
             var rt = go.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(96f, 136f);
+            rt.sizeDelta = new Vector2(92f, 106f);
 
             var le = go.GetComponent<LayoutElement>();
-            le.preferredWidth = 96f;
-            le.preferredHeight = 136f;
-            le.minWidth = 88f;
-            le.minHeight = 128f;
+            le.preferredWidth = 92f;
+            le.preferredHeight = 106f;
+            le.minWidth = 76f;
+            le.minHeight = 98f;
             le.flexibleWidth = 0f;
             le.flexibleHeight = 0f;
 
@@ -286,8 +465,8 @@ private void UpdateTargetSummary()
             iconRt.anchorMin = new Vector2(0.5f, 1f);
             iconRt.anchorMax = new Vector2(0.5f, 1f);
             iconRt.pivot = new Vector2(0.5f, 1f);
-            iconRt.anchoredPosition = new Vector2(0f, -4f);
-            iconRt.sizeDelta = new Vector2(78f, 78f);
+            iconRt.anchoredPosition = new Vector2(0f, 2f);
+            iconRt.sizeDelta = new Vector2(68f, 72f);
             var iconImg = icon.GetComponent<Image>();
             iconImg.raycastTarget = false;
             iconImg.preserveAspect = true;
@@ -299,11 +478,11 @@ private void UpdateTargetSummary()
             countRt.anchorMin = new Vector2(0.5f, 0f);
             countRt.anchorMax = new Vector2(0.5f, 0f);
             countRt.pivot = new Vector2(0.5f, 0f);
-            countRt.anchoredPosition = new Vector2(0f, 6f);
-            countRt.sizeDelta = new Vector2(96f, 44f);
+            countRt.anchoredPosition = Vector2.zero;
+            countRt.sizeDelta = new Vector2(92f, 38f);
             var tmp = count.GetComponent<TextMeshProUGUI>();
             tmp.alignment = TextAlignmentOptions.Center;
-            tmp.fontSize = 38f;
+            tmp.fontSize = 31f;
             tmp.fontStyle = FontStyles.Bold;
             tmp.color = Color.white;
             tmp.enableAutoSizing = false;
@@ -311,34 +490,85 @@ private void UpdateTargetSummary()
             tmp.raycastTarget = false;
             ApplyDefaultFont(tmp);
 
-            // Check mark (hidden until complete)
-            var check = new GameObject("Check", typeof(RectTransform), typeof(Image));
-            check.transform.SetParent(go.transform, false);
-            var checkRt = check.GetComponent<RectTransform>();
-            checkRt.anchorMin = new Vector2(0.55f, 0.60f);
-            checkRt.anchorMax = new Vector2(0.95f, 0.98f);
-            checkRt.offsetMin = checkRt.offsetMax = Vector2.zero;
-            var checkImg = check.GetComponent<Image>();
-            checkImg.color = new Color(0.3f, 0.95f, 0.45f, 1f);
-            checkImg.raycastTarget = false;
-            check.SetActive(false);
-
             return go;
         }
 
         private void OnEnable()
         {
+            if (!Application.isPlaying)
+            {
+                // Editor preview: build the same styled panel players see at runtime.
+                BuildEditorPreview();
+                return;
+            }
+
             BindGoalTracker();
             GameEvents.OnTimerWarning += OnTimerWarning;
         }
 
         private void OnDisable()
         {
+            if (!Application.isPlaying) return;
             UnbindGoalTracker();
             GameEvents.OnTimerWarning -= OnTimerWarning;
         }
 
-        private void Start() => BindGoalTracker();
+        private void Start()
+        {
+            if (!Application.isPlaying) return;
+            BindGoalTracker();
+        }
+
+        /// <summary>
+        /// Rebuilds the reference bottom panel in the editor (no play mode) so the HUD
+        /// shown in edit mode matches what appears during play. Pulls a representative
+        /// goal from Level 1 for the chip preview.
+        /// </summary>
+        private void BuildEditorPreview()
+        {
+            if (Application.isPlaying || _bottomBar == null) return;
+
+            ImageLibrary.LoadAll();
+            _countColor = new Color(0.25f, 0.10f, 0.48f, 1f);
+            _totalTime = 60f;
+            _summaryGoal = FindPreviewGoal();
+
+            BuildReferenceBottomPanel();
+
+            if (_bottomBarBg != null)
+            {
+                _bottomBarBg.sprite = null;
+                _bottomBarBg.color = Color.clear;
+            }
+            if (_timerText != null)
+            {
+                _timerText.color = _timerNormal;
+                _timerText.text = Mathf.CeilToInt(_totalTime).ToString();
+            }
+            if (_timerRing != null) _timerRing.fillAmount = 1f;
+
+            EnsureBottomLayout();
+            BuildGoalChips(_summaryGoal);
+            UpdateTargetSummary();
+        }
+
+        private GoalData FindPreviewGoal()
+        {
+#if UNITY_EDITOR
+            var level = UnityEditor.AssetDatabase.LoadAssetAtPath<LevelData>(
+                "Assets/Levels/LevelData/Level_01.asset");
+            if (level != null) return level.Goal;
+#endif
+            return _summaryGoal;
+        }
+
+        /// <summary>Destroy that works in both play mode and the editor preview.</summary>
+        private static void SafeDestroy(Object obj)
+        {
+            if (obj == null) return;
+            if (Application.isPlaying) Destroy(obj);
+            else DestroyImmediate(obj);
+        }
 
         private void BindGoalTracker()
         {
@@ -360,7 +590,12 @@ private void UpdateTargetSummary()
             if (GameManager.Instance.State != GameState.Running) return;
 
             float t = Mathf.Max(0f, GameManager.Instance.RemainingTime);
-            _timerText.text = Mathf.CeilToInt(t).ToString();
+            int second = Mathf.CeilToInt(t);
+            if (second != _displayedTimerSecond)
+            {
+                _displayedTimerSecond = second;
+                _timerText.text = second.ToString();
+            }
 
             if (_timerRing != null && _totalTime > 0.01f)
                 _timerRing.fillAmount = Mathf.Clamp01(t / _totalTime);
@@ -381,7 +616,12 @@ private void OnGoalProgress(AnimalSpecies species, int remaining, int target)
 
                 if (remaining <= 0)
                 {
-                    if (chip.Count != null) chip.Count.gameObject.SetActive(false);
+                    if (chip.Count != null)
+                    {
+                        chip.Count.gameObject.SetActive(true);
+                        chip.Count.text = "✓";
+                        chip.Count.color = new Color(0.18f, 0.66f, 0.25f, 1f);
+                    }
                     if (chip.Check != null)
                     {
                         chip.Check.gameObject.SetActive(true);

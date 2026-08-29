@@ -22,8 +22,8 @@ MonoBehaviour:
   _spawnVariance: 0.10343434
   _maxOnScreen: 6
   _hindrances: []
-  _hindranceSpawnInterval: 8.974748
-  _hindranceInitialDelay: 7.121212
+  _hindranceSpawnInterval: 7
+  _hindranceInitialDelay: 4.5
   _maxHindrancesActive: 1
   _wrongTapTimePenalty: 1.0101011
   _wrongTapScorePenalty: 19

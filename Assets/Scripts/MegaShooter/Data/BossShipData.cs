@@ -8,9 +8,11 @@ namespace AnimalFall.MegaShooter
     {
         public string stableId;
         public string displayName;
+        public MegaVillainArchetype archetype;
         public GameObject prefab;
         public Sprite sprite;
         public Sprite weaponIcon;
+        [Range(0.2f, 1f)] public float visualScale = 0.55f;
         public Vector2 colliderSize = new Vector2(2.2f, 1.4f);
         [Min(1f)] public float baseHitPoints = 1200f;
         public Rect movementBounds = new Rect(-3.4f, 2.5f, 6.8f, 2.5f);

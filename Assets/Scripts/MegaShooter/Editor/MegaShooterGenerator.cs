@@ -180,6 +180,15 @@ namespace AnimalFall.MegaShooter.Editor
         public static void GenerateOrUpdateMegaLevelsOnly()
         {
             EnsureFolders();
+            Sprite fallback = LoadSprite($"{ArtRoot}/Projectiles/bolt.png");
+            Material warningMaterial = GetOrCreateWarningMaterial();
+            CreatePlayerPrefab(fallback);
+            CreateEnemyPrefab(fallback, warningMaterial);
+            CreateBossPrefab(fallback);
+            CreateProjectilePrefab(fallback);
+            CreatePickupPrefab(LoadSprite($"{ArtRoot}/Pickups/health.png"));
+            CreateEffectPrefab(LoadSprite($"{ArtRoot}/Projectiles/orb.png"));
+
             GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{PrefabRoot}/MegaPlayer.prefab");
             GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{PrefabRoot}/MegaEnemy.prefab");
             GameObject bossPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{PrefabRoot}/MegaBoss.prefab");
@@ -189,11 +198,11 @@ namespace AnimalFall.MegaShooter.Editor
             ProjectileData[] projectiles = GenerateProjectileData(projectilePrefab);
             WeaponData[] weapons = GenerateWeaponData(projectiles);
             SuperAnimalData[] animals = GenerateAnimalData(playerPrefab, weapons);
-            EnemyShipData[] enemies = GenerateEnemyData(enemyPrefab, projectiles);
             MegaVFXProfile vfx = GenerateVfxProfile(effectPrefab);
-            BossShipData[] bosses = GenerateBossData(bossPrefab, effectPrefab);
             Sprite[] backgrounds = LoadBackgrounds();
-            ApplyMegaLevelArtwork(animals, weapons, enemies, bosses, projectiles);
+            ApplyMegaLevelArtwork(animals, weapons, Array.Empty<EnemyShipData>(), Array.Empty<BossShipData>(), projectiles);
+            MegaLevelData[] megaLevels = MegaVillainRosterGenerator.Generate(enemyPrefab, bossPrefab,
+                projectilePrefab, effectPrefab, animals, backgrounds, vfx);
 
             LevelDatabase database = AssetDatabase.LoadAssetAtPath<LevelDatabase>(LevelDatabasePath);
             if (database == null)
@@ -208,7 +217,7 @@ namespace AnimalFall.MegaShooter.Editor
             for (int i = 0; i < MegaCount; i++)
             {
                 int gameLevel = (i + 1) * 5;
-                MegaLevelData mega = GenerateMegaLevel(i, animals, enemies, bosses[i], backgrounds, vfx);
+                MegaLevelData mega = megaLevels[i];
                 int slot = gameLevel - 1;
                 LevelData levelAsset = expanded[slot];
                 if (levelAsset == null)
@@ -226,8 +235,7 @@ namespace AnimalFall.MegaShooter.Editor
                     expanded[slot] = levelAsset;
                 }
 
-                MegaLevelData assigned = levelAsset.MegaShooterData != null ? levelAsset.MegaShooterData : mega;
-                levelAsset.SetMegaShooter(LevelMode.MegaShooter, assigned);
+                levelAsset.SetMegaShooter(LevelMode.MegaShooter, mega);
                 EditorUtility.SetDirty(levelAsset);
             }
 
@@ -598,12 +606,8 @@ namespace AnimalFall.MegaShooter.Editor
             }
 
             if (data.featuredAnimal == null) data.featuredAnimal = animals[Mathf.Min(9, i / 2)];
-            if (data.allowedAnimals == null || data.allowedAnimals.Length == 0)
-            {
-                int allowedCount = Mathf.Min(10, i / 2 + 1);
-                data.allowedAnimals = new SuperAnimalData[allowedCount];
-                Array.Copy(animals, data.allowedAnimals, allowedCount);
-            }
+            data.allowedAnimals = new SuperAnimalData[animals.Length];
+            Array.Copy(animals, data.allowedAnimals, animals.Length);
             if (data.backgroundLayers == null || data.backgroundLayers.Length == 0)
                 data.backgroundLayers = new[] { backgrounds[BackgroundIndex(i)], backgrounds[BackgroundIndex(i)], backgrounds[BackgroundIndex(i)], backgrounds[BackgroundIndex(i)] };
             if (data.backgroundLayerSpeeds == null || data.backgroundLayerSpeeds.Length == 0)
@@ -763,7 +767,8 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreatePlayerPrefab(Sprite sprite)
         {
             string path = $"{PrefabRoot}/MegaPlayer.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(SuperAnimalController),
+                    typeof(AutoWeaponController), typeof(MegaCounterController))) return;
             GameObject go = CreatePhysicsSprite("MegaPlayer", sprite, true, false);
             go.AddComponent<MegaPoolMember>();
             go.AddComponent<SuperAnimalController>();
@@ -775,7 +780,7 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreateEnemyPrefab(Sprite sprite, Material warningMaterial)
         {
             string path = $"{PrefabRoot}/MegaEnemy.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaEnemyController))) return;
             GameObject go = CreatePhysicsSprite("MegaEnemy", sprite, false, true);
             go.AddComponent<MegaPoolMember>();
             go.AddComponent<MegaEnemyController>();
@@ -793,7 +798,7 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreateBossPrefab(Sprite sprite)
         {
             string path = $"{PrefabRoot}/MegaBoss.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaBossController))) return;
             GameObject go = CreatePhysicsSprite("MegaBoss", sprite, false, true);
             go.transform.localScale = Vector3.one * 1.8f;
             go.AddComponent<MegaPoolMember>();
@@ -804,7 +809,7 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreateProjectilePrefab(Sprite sprite)
         {
             string path = $"{PrefabRoot}/MegaProjectile.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaProjectile))) return;
             GameObject go = CreatePhysicsSprite("MegaProjectile", sprite, true, false, true);
             go.transform.localScale = Vector3.one * .42f;
             go.AddComponent<MegaPoolMember>();
@@ -815,7 +820,7 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreatePickupPrefab(Sprite sprite)
         {
             string path = $"{PrefabRoot}/MegaPickup.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaPickupController))) return;
             GameObject go = CreatePhysicsSprite("MegaPickup", sprite, true, false, true);
             go.transform.localScale = Vector3.one * .55f;
             go.AddComponent<MegaPoolMember>();
@@ -826,13 +831,25 @@ namespace AnimalFall.MegaShooter.Editor
         private static void CreateEffectPrefab(Sprite sprite)
         {
             string path = $"{PrefabRoot}/MegaEffect.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaTimedPoolEffect))) return;
             GameObject go = new GameObject("MegaEffect");
             SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
             renderer.sprite = sprite; renderer.sortingOrder = 15; renderer.color = new Color(.3f, .95f, 1f, .8f);
             go.AddComponent<MegaPoolMember>();
             go.AddComponent<MegaTimedPoolEffect>();
             SavePrefab(go, path);
+        }
+
+        private static bool PrefabHasComponents(string path, params Type[] requiredComponents)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (prefab == null) return false;
+            if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(prefab) > 0) return false;
+            for (int i = 0; i < requiredComponents.Length; i++)
+            {
+                if (prefab.GetComponent(requiredComponents[i]) == null) return false;
+            }
+            return true;
         }
 
         private static GameObject CreatePhysicsSprite(string name, Sprite sprite, bool circle, bool box, bool triggerOnly = false)
@@ -1030,12 +1047,90 @@ namespace AnimalFall.MegaShooter.Editor
         }
 
         [MenuItem("Tools/Animal Fall/Mega Shooter/Generate Dedicated Scene")]
-        public static void GenerateMegaShooterScene()
+        public static void GenerateMegaShooterScene() => GenerateMegaShooterScene(false);
+
+        [MenuItem("Tools/Animal Fall/Mega Shooter/Rebuild Dedicated Scene")]
+        public static void RebuildMegaShooterScene() => GenerateMegaShooterScene(true);
+
+        [MenuItem("Tools/Animal Fall/Mega Shooter/Simplify Scene To Countdown Only")]
+        public static void SimplifySceneToCountdownOnly()
+        {
+            Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            MegaHUD hud = UnityEngine.Object.FindFirstObjectByType<MegaHUD>();
+            if (hud == null || hud.countdownText == null)
+            {
+                Debug.LogError("[MegaShooterGenerator] A countdown text is required before simplifying the scene.");
+                return;
+            }
+
+            for (int i = hud.transform.childCount - 1; i >= 0; i--)
+            {
+                Transform child = hud.transform.GetChild(i);
+                if (child.gameObject != hud.countdownText.gameObject)
+                    UnityEngine.Object.DestroyImmediate(child.gameObject);
+            }
+
+            Transform flashOverlay = hud.transform.parent.Find("ReducedFlashOverlay");
+            if (flashOverlay != null)
+                UnityEngine.Object.DestroyImmediate(flashOverlay.gameObject);
+            MegaCameraEffects cameraEffects = UnityEngine.Object.FindFirstObjectByType<MegaCameraEffects>();
+            if (cameraEffects != null)
+                SetObjectReference(cameraEffects, "_flashOverlay", null);
+
+            hud.healthText = null;
+            hud.waveText = null;
+            hud.scoreText = null;
+            hud.bossHealthFill = null;
+            hud.bossHealthRoot = null;
+            hud.bossNameText = null;
+            hud.counterFill = null;
+            hud.counterButton = null;
+            hud.animalPortrait = null;
+            hud.pauseButton = null;
+            hud.bannerText = null;
+            hud.bannerRoot = null;
+            hud.selectionRoot = null;
+            hud.selectionTitle = null;
+            hud.selectionDescription = null;
+            hud.selectionPortrait = null;
+            hud.selectionWeaponIcon = null;
+            hud.villainOnePortrait = null;
+            hud.villainTwoPortrait = null;
+            hud.villainOneWeaponIcon = null;
+            hud.villainTwoWeaponIcon = null;
+            hud.bossPortrait = null;
+            hud.bossWeaponIcon = null;
+            hud.selectionLockText = null;
+            hud.previousAnimalButton = null;
+            hud.nextAnimalButton = null;
+            hud.startButton = null;
+            hud.pauseRoot = null;
+            hud.resumeButton = null;
+            hud.retryButton = null;
+            hud.quitButton = null;
+            hud.resultRoot = null;
+            hud.resultTitle = null;
+            hud.resultSummary = null;
+            hud.resultRetryButton = null;
+            hud.resultQuitButton = null;
+            hud.unlockRoot = null;
+            hud.unlockText = null;
+            hud.unlockContinueButton = null;
+            hud.countdownText.gameObject.SetActive(false);
+
+            EditorUtility.SetDirty(hud);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("[MegaShooterGenerator] Simplified MegaShooterScene to the countdown only.");
+        }
+
+        private static void GenerateMegaShooterScene(bool forceRebuild)
         {
             EnsureFolders();
-            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null)
+            if (!forceRebuild && AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null)
             {
                 EnsureSceneInBuildSettings();
+                SimplifySceneToCountdownOnly();
                 Debug.Log("[MegaShooterGenerator] MegaShooterScene already exists; preserved existing scene wiring.");
                 return;
             }
@@ -1087,11 +1182,7 @@ namespace AnimalFall.MegaShooter.Editor
             MegaHUD hud = safeArea.AddComponent<MegaHUD>();
             BuildHud(hud, safeRect);
 
-            Image flash = CreatePanel(canvas.transform, "ReducedFlashOverlay", new Color(1f, 1f, 1f, 0f), Vector2.zero, Vector2.one);
-            flash.raycastTarget = false;
-            flash.gameObject.SetActive(false);
             SetObjectReference(cameraEffects, "_camera", camera);
-            SetObjectReference(cameraEffects, "_flashOverlay", flash);
 
             GameObject eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
 
@@ -1109,12 +1200,16 @@ namespace AnimalFall.MegaShooter.Editor
             EditorSceneManager.SaveScene(scene, ScenePath);
             EnsureSceneInBuildSettings();
             Selection.activeObject = managerGo;
-            Debug.Log($"[MegaShooterGenerator] Created and wired {ScenePath}.");
+            Debug.Log($"[MegaShooterGenerator] {(forceRebuild ? "Rebuilt" : "Created")} and wired {ScenePath}.");
         }
 
         [MenuItem("Tools/Animal Fall/Mega Shooter/Revamp Mega Scene Presentation")]
         public static void RevampMegaScenePresentation()
         {
+            SimplifySceneToCountdownOnly();
+            return;
+
+#pragma warning disable CS0162
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             Canvas canvas = UnityEngine.Object.FindFirstObjectByType<Canvas>();
             MegaHUD hud = UnityEngine.Object.FindFirstObjectByType<MegaHUD>();
@@ -1243,6 +1338,7 @@ namespace AnimalFall.MegaShooter.Editor
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
             Debug.Log("[MegaShooterGenerator] Revamped only MegaShooterScene with megalevel icons and threat preview panels.");
+#pragma warning restore CS0162
         }
 
         private static Image EnsureImage(Transform parent, string name, Sprite sprite, Vector2 anchorMin, Vector2 anchorMax)
@@ -1315,34 +1411,8 @@ namespace AnimalFall.MegaShooter.Editor
         private static void BuildHud(MegaHUD hud, RectTransform safeRoot)
         {
             Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            hud.healthText = CreateText(safeRoot, "Health", "HP 5/5", font, 34, TextAnchor.MiddleLeft, new Vector2(20, -20), new Vector2(280, 70), new Vector2(0, 1));
-            hud.waveText = CreateText(safeRoot, "Wave", "WAVE 1/3", font, 38, TextAnchor.MiddleCenter, new Vector2(-170, -20), new Vector2(340, 70), new Vector2(.5f, 1));
-            hud.scoreText = CreateText(safeRoot, "Score", "0", font, 28, TextAnchor.MiddleCenter, new Vector2(-140, -88), new Vector2(280, 54), new Vector2(.5f, 1));
-            hud.pauseButton = CreateButton(safeRoot, "PauseButton", "Ⅱ", font, new Vector2(-108, -20), new Vector2(88, 70), new Vector2(1, 1), new Color(.18f, .32f, .55f, .95f));
-            hud.animalPortrait = CreateImage(safeRoot, "AnimalPortrait", LoadSprite($"{ArtRoot}/Portraits/eagle_striker_portrait.png"), new Vector2(22, 22), new Vector2(108, 108), new Vector2(0, 0));
-
-            hud.counterButton = CreateButton(safeRoot, "CounterButton", "COUNTER", font, new Vector2(-228, 24), new Vector2(204, 130), new Vector2(1, 0), new Color(.08f, .32f, .48f, .96f));
-            hud.counterFill = CreateImage(hud.counterButton.transform, "CounterFill", null, Vector2.zero, Vector2.zero, new Vector2(.5f, .5f));
-            RectTransform counterFillRect = hud.counterFill.rectTransform; Stretch(counterFillRect); counterFillRect.SetAsFirstSibling();
-            hud.counterFill.type = Image.Type.Filled; hud.counterFill.fillMethod = Image.FillMethod.Radial360; hud.counterFill.fillAmount = 0f; hud.counterFill.color = new Color(.2f, .9f, 1f, .55f); hud.counterFill.raycastTarget = false;
-
-            GameObject bossRoot = CreatePanel(safeRoot, "BossHealthRoot", new Color(.04f, .05f, .12f, .88f), new Vector2(.16f, .84f), new Vector2(.84f, .95f)).gameObject;
-            hud.bossHealthRoot = bossRoot;
-            hud.bossNameText = CreateText(bossRoot.transform, "BossName", "BOSS", font, 28, TextAnchor.MiddleCenter, new Vector2(0, -4), new Vector2(0, 46), new Vector2(.5f, 1));
-            hud.bossHealthFill = CreateImage(bossRoot.transform, "BossHealth", null, new Vector2(18, 14), new Vector2(-36, 28), Vector2.zero);
-            RectTransform bossFillRect = hud.bossHealthFill.rectTransform; bossFillRect.anchorMin = new Vector2(0, 0); bossFillRect.anchorMax = new Vector2(1, 0); bossFillRect.pivot = new Vector2(.5f, 0); bossFillRect.offsetMin = new Vector2(18, 12); bossFillRect.offsetMax = new Vector2(-18, 38);
-            hud.bossHealthFill.type = Image.Type.Filled; hud.bossHealthFill.fillMethod = Image.FillMethod.Horizontal; hud.bossHealthFill.color = new Color(1f, .2f, .28f);
-            bossRoot.SetActive(false);
-
-            hud.bannerRoot = CreatePanel(safeRoot, "Banner", new Color(.1f, .03f, .08f, .86f), new Vector2(0, .43f), new Vector2(1, .57f)).gameObject;
-            hud.bannerText = CreateText(hud.bannerRoot.transform, "BannerText", "WARNING", font, 44, TextAnchor.MiddleCenter, Vector2.zero, Vector2.zero, new Vector2(.5f, .5f));
-            Stretch(hud.bannerText.rectTransform); hud.bannerRoot.SetActive(false);
             hud.countdownText = CreateText(safeRoot, "Countdown", "3", font, 96, TextAnchor.MiddleCenter, Vector2.zero, new Vector2(420, 180), new Vector2(.5f, .5f));
             hud.countdownText.gameObject.SetActive(false);
-
-            BuildSelection(hud, safeRoot, font);
-            BuildPause(hud, safeRoot, font);
-            BuildResults(hud, safeRoot, font);
         }
 
         private static void BuildSelection(MegaHUD hud, RectTransform root, Font font)

@@ -1,0 +1,234 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
+  m_Name: Boss_08_Doom_Puffer
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
+  stableId: doom_puffer
+  displayName: "Pufferfish \u2014 Doom Puffer"
+  archetype: 8
+  prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
+  sprite: {fileID: -5053489831369976603, guid: 45a04d71e6107cb4a90a47c8384fcafe, type: 3}
+  weaponIcon: {fileID: -7353613653143852761, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 0.55
+  colliderSize: {x: 2.395, y: 1.7249999}
+  baseHitPoints: 7350
+  movementBounds:
+    serializedVersion: 2
+    x: -3.45
+    y: 3.7
+    width: 6.9
+    height: 2.8
+  score: 13700
+  entranceDuration: 2
+  phases:
+  - healthThreshold: 1
+    movementPattern: 3
+    attacks:
+    - attackName: SPIKE STORM
+      pattern: 4
+      projectile: {fileID: 11400000, guid: f76920b43de0ca845b3d52450399860a, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 10
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: DOOM INFLATION
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 1db45eb0f3ea31442898fe3575db3fef, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 3
+      spreadDegrees: 58
+      volleyCount: 3
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: FULL-SCREEN SPINE RING
+      pattern: 4
+      projectile: {fileID: 11400000, guid: 904557290a7ebd44abe386612873fb52, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 10
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 1
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    attackInterval: 1.815
+    projectileSpeedMultiplier: 1
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1
+    bossScaleMultiplier: 0.62
+    phaseTint: {r: 0.8464, g: 0.9872, b: 0.9712, a: 1}
+    cameraShake: 0.18
+    warningText: DOOM PUFFER ONLINE
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.6666667
+    movementPattern: 7
+    attacks:
+    - attackName: SPIKE STORM
+      pattern: 4
+      projectile: {fileID: 11400000, guid: f76920b43de0ca845b3d52450399860a, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 12
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: DOOM INFLATION
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 1db45eb0f3ea31442898fe3575db3fef, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 4
+      spreadDegrees: 58
+      volleyCount: 4
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: FULL-SCREEN SPINE RING
+      pattern: 4
+      projectile: {fileID: 11400000, guid: 904557290a7ebd44abe386612873fb52, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 12
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 1
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    attackInterval: 1.635
+    projectileSpeedMultiplier: 1.09
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1
+    bossScaleMultiplier: 1.18
+    phaseTint: {r: 0.7408, g: 0.9784, b: 0.9514, a: 1}
+    cameraShake: 0.245
+    warningText: PHASE 2
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  - healthThreshold: 0.33333334
+    movementPattern: 7
+    attacks:
+    - attackName: SPIKE STORM
+      pattern: 4
+      projectile: {fileID: 11400000, guid: f76920b43de0ca845b3d52450399860a, type: 2}
+      weight: 1.15
+      telegraphTime: 0.92
+      projectileCount: 14
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: DOOM INFLATION
+      pattern: 3
+      projectile: {fileID: 11400000, guid: 1db45eb0f3ea31442898fe3575db3fef, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 5
+      spreadDegrees: 58
+      volleyCount: 5
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    - attackName: FULL-SCREEN SPINE RING
+      pattern: 4
+      projectile: {fileID: 11400000, guid: 904557290a7ebd44abe386612873fb52, type: 2}
+      weight: 1
+      telegraphTime: 0.92
+      projectileCount: 14
+      spreadDegrees: 58
+      volleyCount: 1
+      volleyInterval: 0.16
+      aimed: 0
+      reflectable: 1
+      clearsBulletsBeforeAttack: 1
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
+    attackInterval: 1.455
+    projectileSpeedMultiplier: 1.1800001
+    projectileDamageOverride: 0
+    addGroups: []
+    vulnerableDuration: 6
+    invulnerableDuration: 0
+    usesWeakPoint: 0
+    weakPointOffset: {x: 0, y: 0}
+    transitionDuration: 1
+    bossScaleMultiplier: 1.4399999
+    phaseTint: {r: 0.6352, g: 0.9696, b: 0.9316, a: 1}
+    cameraShake: 0.31
+    warningText: PHASE 3
+    transitionVFX: {fileID: 0}
+    transitionAudio: {fileID: 0}
+  entranceVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  deathVFX: {fileID: 5490906454098709024, guid: f14feaa5a16ed9d4bbe205ae3f74cee9, type: 3}
+  entranceAudio: {fileID: 0}
+  deathAudio: {fileID: 0}

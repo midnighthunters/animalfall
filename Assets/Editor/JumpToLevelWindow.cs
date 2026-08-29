@@ -153,7 +153,7 @@ namespace AnimalFall.EditorTools
             ApplySelection();
         }
 
-private void ApplySelection()
+        private void ApplySelection()
         {
             _displayLevel = Mathf.Clamp(_displayLevel, MinLevel, MaxLevel);
             EditorPrefs.SetInt(SelectedLevelKey, _displayLevel);
@@ -161,21 +161,37 @@ private void ApplySelection()
             PlayerPrefs.Save();
 
             JumpToLevel launcher = FindLauncher();
-            if (launcher == null)
+            LevelJumpController controller = FindController(launcher);
+            bool updatedLauncher = SetLevelNumber(launcher, _displayLevel);
+            bool updatedController = SetLevelNumber(controller, _displayLevel);
+
+            if (!updatedLauncher && !updatedController)
             {
                 _status = $"Saved Level {_displayLevel}. Open GameScene to apply it to [Debug] Level Jump.";
                 Repaint();
                 return;
             }
 
-            SerializedObject serialized = new SerializedObject(launcher);
-            SerializedProperty levelProperty = serialized.FindProperty("_levelNumber");
-            if (levelProperty != null)
-                levelProperty.intValue = _displayLevel;
-            serialized.ApplyModifiedProperties();
-            EditorSceneManager.MarkSceneDirty(launcher.gameObject.scene);
-            _status = $"Set [Debug] Level Jump and MainScene debug level to Level {_displayLevel}.";
+            if (launcher != null)
+                EditorSceneManager.MarkSceneDirty(launcher.gameObject.scene);
+            if (controller != null && (launcher == null || controller.gameObject.scene != launcher.gameObject.scene))
+                EditorSceneManager.MarkSceneDirty(controller.gameObject.scene);
+
+            _status = $"Set the GameScene level jump and MainScene debug level to Level {_displayLevel}.";
             Repaint();
+        }
+
+        private static bool SetLevelNumber(Object target, int level)
+        {
+            if (target == null) return false;
+
+            SerializedObject serialized = new SerializedObject(target);
+            SerializedProperty levelProperty = serialized.FindProperty("_levelNumber");
+            if (levelProperty == null) return false;
+
+            levelProperty.intValue = level;
+            serialized.ApplyModifiedProperties();
+            return true;
         }
 
         private void StartSelectedLevel()
@@ -218,6 +234,14 @@ private void ApplySelection()
         {
             GameObject debugObject = GameObject.Find("[Debug] Level Jump");
             return debugObject != null ? debugObject.GetComponent<JumpToLevel>() : null;
+        }
+
+        private static LevelJumpController FindController(JumpToLevel launcher)
+        {
+            if (launcher != null && launcher.Controller != null)
+                return launcher.Controller;
+
+            return Object.FindFirstObjectByType<LevelJumpController>();
         }
     }
 }

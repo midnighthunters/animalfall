@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff9ecb80a5bf104184dcac6b8d30261, type: 3}
+  m_Script: {fileID: 11500000, guid: 65acd4603e0ea2341bf715f160f1a4b7, type: 3}
   m_Name: shell_plasma
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.ProjectileData
   stableId: shell_plasma
   prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
   sprite: {fileID: -7888296697152109952, guid: b9325e241d638d84aa9fa139216b327a, type: 3}

@@ -267,6 +267,9 @@ namespace AnimalFall.Effects
 
             var go = new GameObject($"PopBurst_{style}");
             go.transform.SetParent(_vfxRoot, false);
+            // Configure the particle system while inactive so Unity cannot start it
+            // before duration and the other main-module settings are applied.
+            go.SetActive(false);
             var ps = go.AddComponent<ParticleSystem>();
 
             var main = ps.main;

@@ -18,8 +18,20 @@ namespace AnimalFall.Core.Animals
 
         /// <summary>Target on-screen size (world units) for an animal's largest dimension.
         /// Every species is normalised to this so no animal looks bigger/smaller than another.</summary>
-        public const float TargetWorldSize = 1.35f;
-        public const float EarlyLevelTargetWorldSize = 1.75f;
+        public const float TargetWorldSize = 1.12f;
+
+        /// <summary>Highest level number that still counts as an "easy start" level.</summary>
+        public const int EarlyLevelMaxNumber = 4;
+
+        /// <summary>Early levels (1..EarlyLevelMaxNumber) render animals larger so they are
+        /// easier to see and tap, easing new players in.</summary>
+        public const float EarlyLevelSizeMultiplier = 1.4f;
+
+        /// <summary>
+        /// Animals in the visual reference occupy about 18% of the portrait playfield width.
+        /// Deriving the world size from the camera keeps that footprint stable on different phones.
+        /// </summary>
+        private const float TargetViewportWidth = 0.18f;
 
         /// <summary>Per-instance normalised scale, computed from the current sprite in SetupForPool.
         /// Movement, pop and pool-reset logic all read this instead of the flat IdealScale.</summary>
@@ -33,6 +45,7 @@ namespace AnimalFall.Core.Animals
         public int   HelmetLayers      { get; set; }
         public bool  IsIceFrozen       { get; set; }
         public bool  IsBubble          { get; set; }
+        public bool  IsDogHelmeted     { get; set; }
         public float GhostAlpha        { get; set; } = 1f;
         public float PairedTimer       { get; set; }
         public int   CurrentShield     { get; set; }
@@ -45,22 +58,29 @@ namespace AnimalFall.Core.Animals
         private Rigidbody2D    _rb;
         private Coroutine      _lifetimeCoroutine;
         private bool           _isReturned;
+        private float          _targetWorldSize = TargetWorldSize;
 
         private static readonly System.Collections.Generic.Dictionary<float, WaitForSeconds>
             _waitCache = new System.Collections.Generic.Dictionary<float, WaitForSeconds>();
 
         private void Awake()
         {
-            _sr       = GetComponent<SpriteRenderer>();
-            _col      = GetComponent<BoxCollider2D>();
+            CacheComponents();
+        }
+
+        private void CacheComponents()
+        {
+            if (_sr == null) _sr = GetComponent<SpriteRenderer>();
+            if (_col == null) _col = GetComponent<BoxCollider2D>();
             if (_col == null) _col = gameObject.AddComponent<BoxCollider2D>();
             _col.isTrigger = true;
-            _movement = GetComponent<AnimalMovement>();
-            _rb       = GetComponent<Rigidbody2D>();
+            if (_movement == null) _movement = GetComponent<AnimalMovement>();
+            if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         }
 
         public void SetupForPool(AnimalData data, LevelData level)
         {
+            CacheComponents();
             if (_lifetimeCoroutine != null) { StopCoroutine(_lifetimeCoroutine); _lifetimeCoroutine = null; }
 
             _isReturned   = false;
@@ -70,13 +90,14 @@ namespace AnimalFall.Core.Animals
             HelmetLayers  = 0;
             IsIceFrozen   = false;
             IsBubble      = false;
+            IsDogHelmeted = false;
             GhostAlpha    = 1f;
             PairedTimer   = 0f;
             CurrentShield = data.shieldHP;
             ExclusiveOwner = null;
             Data          = data;
 
-            // Ensure colliders participate in Physics2D queries
+            // Ensure colliders participate in Physics2D queries.
             if (_rb != null)
             {
                 _rb.bodyType = RigidbodyType2D.Kinematic;
@@ -84,20 +105,69 @@ namespace AnimalFall.Core.Animals
                 _rb.gravityScale = 0f;
             }
 
-            _sr.sprite = ImageLibrary.GetAnimalSprite(data.species);
+            _targetWorldSize = GetResponsiveTargetWorldSize();
+
+            // Early levels start easy: make animals noticeably bigger so they are
+            // simple to see and tap for new players.
+            if (level != null && level.LevelNumber >= 1 && level.LevelNumber <= EarlyLevelMaxNumber)
+                _targetWorldSize *= EarlyLevelSizeMultiplier;
+
+            Sprite displaySprite = ImageLibrary.GetAnimalSprite(data.species);
+
+            // Frozen Pig and Bubble Monkey are level-wide rules. If their hindrance
+            // is configured for the level, every matching animal (including future
+            // pooled spawns) receives the special sprite and two-tap state.
+            if (data.species == AnimalSpecies.Pig && LevelHasHindrance(level, HindranceType.IceCube))
+            {
+                Sprite frozenPig = Resources.Load<Sprite>("icons/hindrances/frozen_pig");
+                if (frozenPig != null)
+                {
+                    displaySprite = frozenPig;
+                    IsIceFrozen = true;
+                }
+                else
+                {
+                    Debug.LogWarning("[Animal] Missing frozen_pig sprite.");
+                }
+            }
+            else if (data.species == AnimalSpecies.Monkey && LevelHasHindrance(level, HindranceType.BubbleShield))
+            {
+                Sprite bubbleMonkey = Resources.Load<Sprite>("icons/hindrances/bubble_monkey");
+                if (bubbleMonkey != null)
+                {
+                    displaySprite = bubbleMonkey;
+                    IsBubble = true;
+                }
+                else
+                {
+                    Debug.LogWarning("[Animal] Missing bubble_monkey sprite.");
+                }
+            }
+
+            if (data.species == AnimalSpecies.Dog && LevelHasHindrance(level, HindranceType.DogHelmet))
+            {
+                Sprite dogHelmet = Resources.Load<Sprite>("icons/hindrances/dog_helmet");
+                if (dogHelmet != null)
+                {
+                    displaySprite = dogHelmet;
+                    IsDogHelmeted = true;
+                }
+                else
+                {
+                    Debug.LogWarning("[Animal] Missing dog_helmet sprite.");
+                }
+            }
+
+            _sr.sprite = displaySprite;
             if (_sr.sprite == null)
                 Debug.LogWarning($"[Animal] Null sprite for species {data.species}.");
             _sr.color = Color.white;
             _sr.sortingOrder = 5;
 
-            // Normalise scale so every species renders at a consistent on-screen size,
-            // regardless of source resolution / aspect ratio (fixes "some big, some small").
-            float targetWorldSize = level != null && level.LevelNumber >= 1 && level.LevelNumber <= 4
-                ? EarlyLevelTargetWorldSize
-                : TargetWorldSize;
-            CurrentScale = ComputeNormalisedScale(_sr.sprite, targetWorldSize);
+            // Normalize the selected display sprite so special variants keep the
+            // same on-screen footprint as normal animals.
+            CurrentScale = ComputeNormalisedScale(_sr.sprite, _targetWorldSize);
 
-            // Fit collider to sprite so taps feel fair
             if (_col != null && _sr.sprite != null)
             {
                 _col.size = _sr.sprite.bounds.size * 0.85f;
@@ -116,16 +186,17 @@ namespace AnimalFall.Core.Animals
         public void SetDisplaySprite(Sprite sprite)
         {
             if (_sr == null) _sr = GetComponent<SpriteRenderer>();
-            _sr.sprite = sprite != null ? sprite : ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
+            _sr.sprite = sprite != null
+                ? sprite
+                : ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
+            CurrentScale = ComputeNormalisedScale(_sr.sprite, _targetWorldSize);
+            transform.localScale = Vector3.one * CurrentScale;
             FitColliderToDisplaySprite();
         }
 
         public void RestoreDisplaySprite()
         {
-            if (_sr == null) _sr = GetComponent<SpriteRenderer>();
-            _sr.sprite = ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
-            transform.localScale = Vector3.one * CurrentScale;
-            FitColliderToDisplaySprite();
+            SetDisplaySprite(ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None));
         }
 
         private void FitColliderToDisplaySprite()
@@ -148,6 +219,16 @@ namespace AnimalFall.Core.Animals
             return targetWorldSize / largest;
         }
 
+        private static float GetResponsiveTargetWorldSize()
+        {
+            Camera camera = Camera.main;
+            if (camera == null || !camera.orthographic || camera.aspect <= 0f)
+                return TargetWorldSize;
+
+            float viewportWorldWidth = camera.orthographicSize * 2f * camera.aspect;
+            return viewportWorldWidth * TargetViewportWidth;
+        }
+
         public bool TryClaimExclusive(object owner)
         {
             if (owner == null || (ExclusiveOwner != null && !ReferenceEquals(ExclusiveOwner, owner))) return false;
@@ -168,6 +249,14 @@ namespace AnimalFall.Core.Animals
             {
                 gate.OnBlockedTap(this);
                 return TapResult.HindranceBlocked;
+            }
+
+            if (IsDogHelmeted)
+            {
+                IsDogHelmeted = false;
+                RestoreDisplaySprite();
+                GameEvents.OnSfxRequested?.Invoke(SfxType.ShieldHit);
+                return TapResult.ShieldBroken;
             }
 
             if (IsIceFrozen)
@@ -327,6 +416,21 @@ namespace AnimalFall.Core.Animals
             seq.Append(_sr.DOColor(Color.yellow, 0.08f));
             seq.Append(_sr.DOColor(Color.white, 0.08f));
             seq.SetLoops(2, LoopType.Yoyo);
+        }
+
+
+        private static bool LevelHasHindrance(LevelData level, HindranceType type)
+        {
+            HindranceConfig[] configs = level != null ? level.Hindrances : null;
+            if (configs == null) return false;
+
+            for (int i = 0; i < configs.Length; i++)
+            {
+                if (configs[i] != null && configs[i].type == type)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

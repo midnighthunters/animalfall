@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5304171071981277783}
   - component: {fileID: 4304544079927495597}
   - component: {fileID: 7798272478648252986}
-  - component: {fileID: 5397850386009748736}
-  - component: {fileID: 2085695068680405075}
+  - component: {fileID: 2383264764436504862}
+  - component: {fileID: 6836070521253346673}
   m_Layer: 0
   m_Name: MegaPickup
   m_TagString: Untagged
@@ -38,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5304171071981277783
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -56,6 +57,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,9 +80,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 41431a637b0f10a4dac752a90121f99d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -89,8 +94,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!58 &4304544079927495597
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -154,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5397850386009748736
+--- !u!114 &2383264764436504862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7639797906202085456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6d3a4fb2eb9db63419a334c105576a10, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2085695068680405075
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaPoolMember
+--- !u!114 &6836070521253346673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,6 +180,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7639797906202085456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827b2000765ae9141be5e3316c039502, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ac0c626ac55ea947a88b7b19dd454e9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaPickupController

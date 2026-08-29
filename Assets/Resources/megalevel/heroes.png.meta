@@ -264,9 +264,9 @@ TextureImporter:
       name: heroes_12
       rect:
         serializedVersion: 2
-        x: 882
+        x: 900
         y: 84
-        width: 319
+        width: 301
         height: 420
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -330,9 +330,9 @@ TextureImporter:
       name: heroes_19
       rect:
         serializedVersion: 2
-        x: 329
+        x: 338
         y: 100
-        width: 319
+        width: 310
         height: 386
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

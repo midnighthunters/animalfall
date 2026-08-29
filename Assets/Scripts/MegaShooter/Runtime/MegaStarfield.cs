@@ -22,12 +22,11 @@ namespace AnimalFall.MegaShooter
                     _layers[i].sprite = sprite;
                     _layers[i].color = Color.Lerp(level.backgroundColor, Color.white, 0.18f + i * 0.09f);
                 }
-                float authored = level.backgroundLayerSpeeds != null && i < level.backgroundLayerSpeeds.Length
-                    ? level.backgroundLayerSpeeds[i]
-                    : 0.25f + i * 0.2f;
-                _speeds[i] = authored * Mathf.Max(0.05f, level.scrollSpeed);
+                // Mega backgrounds are intentionally static.  Keep the authored
+                // layer sprites/colors, but never move them during gameplay.
+                _speeds[i] = 0f;
             }
-            _running = true;
+            _running = false;
         }
 
         private void Update()

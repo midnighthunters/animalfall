@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8688020346032489187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8447906097812878905}
+  - component: {fileID: 3415711465326027118}
+  m_Layer: 0
+  m_Name: Hindrance_55_FrogSnatcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8447906097812878905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688020346032489187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3415711465326027118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688020346032489187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d04ce8d77c0b5e498abee2d4c610768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.New.FrogSnatcherHindrance
+  _maxLifetimeSeconds: 90
+  _baseSprite: {fileID: 6999146183814660703, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  _frogSprite: {fileID: -4682725004825781077, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  _tongueSprite: {fileID: -7774217850690031510, guid: c3993ac5f24025e47ad6a3d48438e54f, type: 3}
+  _viewportAnchor: {x: 0.16, y: 0.15}
+  _mouthLocalPosition: {x: 0.35, y: 0.57}
+  _baseScale: 0.22
+  _frogScale: 0.17
+  _firstCaptureDelay: 2.4
+  _minCaptureInterval: 3.5
+  _maxCaptureInterval: 5.5
+  _telegraphDuration: 0.42
+  _extendDuration: 0.24
+  _holdDuration: 0.16
+  _retractDuration: 0.38

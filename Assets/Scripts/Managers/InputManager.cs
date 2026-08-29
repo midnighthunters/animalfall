@@ -22,11 +22,19 @@ namespace AnimalFall.Managers
         private bool    _inputBlocked;
         private readonly Collider2D[] _hits = new Collider2D[16];
         private ContactFilter2D _contactFilter;
+        private bool _contactFilterConfigured;
 
         private void Awake()
         {
+            EnsureContactFilter();
+        }
+
+        private void EnsureContactFilter()
+        {
+            if (_contactFilterConfigured) return;
             _contactFilter = new ContactFilter2D { useTriggers = true };
             _contactFilter.SetLayerMask(Physics2D.AllLayers);
+            _contactFilterConfigured = true;
         }
 
         public void SetMagnetOffset(Vector2 offset) => MagnetOffset = offset;
@@ -119,10 +127,17 @@ namespace AnimalFall.Managers
                 return;
             }
 
-            if (_pendingAnimal != null && !_pendingAnimal.IsCollected)
+            // Use the object that was under the initial press whenever possible.
+            // Falling animals can move between pointer-down and pointer-up, so fall
+            // back to the release position rather than silently discarding the tap.
+            Animal animal = _pendingAnimal;
+            if (animal == null || animal.Data == null || animal.IsCollected)
+                animal = GetAnimalAtScreenPos(screenEndPos);
+
+            if (animal != null && animal.Data != null && !animal.IsCollected)
             {
-                var result = _pendingAnimal.HandleTap();
-                HandleTapResult(result, _pendingAnimal);
+                var result = animal.HandleTap();
+                HandleTapResult(result, animal);
             }
             _gestureTarget?.OnPointerUp(pointerEvent, false);
             ClearPointer();
@@ -133,7 +148,14 @@ namespace AnimalFall.Managers
             if (_inputBlocked || Camera.main == null) return;
             Vector2 screen = Camera.main.WorldToScreenPoint(worldPosition);
             IPointerTapTarget target = GetBestTapTarget(screen);
-            target?.TryHandleTap(new WorldPointerEvent(screen, worldPosition, Vector2.zero, 0f, true));
+            if (target != null && target.TryHandleTap(new WorldPointerEvent(screen, worldPosition, Vector2.zero, 0f, true)))
+                return;
+
+            // Synthetic taps are used by interaction rules and automated checks.
+            // They must follow the same animal-collection route as a real tap.
+            Animal animal = GetAnimalAtScreenPos(screen);
+            if (animal != null && animal.Data != null && !animal.IsCollected)
+                HandleTapResult(animal.HandleTap(), animal);
         }
 
         private WorldPointerEvent BuildEvent(Vector2 screen, Vector2 delta, float duration)
@@ -195,6 +217,7 @@ namespace AnimalFall.Managers
         private int GetHits(Vector2 screenPos)
         {
             if (Camera.main == null) return 0;
+            EnsureContactFilter();
             return Physics2D.OverlapPoint(GetWorldPos(screenPos), _contactFilter, _hits);
         }
 
@@ -229,8 +252,11 @@ namespace AnimalFall.Managers
             for (int i = 0; i < count; i++)
             {
                 Animal animal = _hits[i] != null ? _hits[i].GetComponent<Animal>() : null;
-                if (animal == null) continue;
-                int order = _hits[i].GetComponent<SpriteRenderer>()?.sortingOrder ?? 0;
+                if (animal == null && _hits[i] != null) animal = _hits[i].GetComponentInParent<Animal>();
+                if (animal == null || animal.Data == null || animal.IsCollected) continue;
+                SpriteRenderer renderer = _hits[i].GetComponent<SpriteRenderer>()
+                    ?? _hits[i].GetComponentInParent<SpriteRenderer>();
+                int order = renderer != null ? renderer.sortingOrder : 0;
                 if (order > bestOrder) { best = animal; bestOrder = order; }
             }
             return best;

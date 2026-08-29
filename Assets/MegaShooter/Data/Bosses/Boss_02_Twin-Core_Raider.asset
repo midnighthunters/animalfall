@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b995e5511928cc140a456df57b41d4a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
   m_Name: Boss_02_Twin-Core_Raider
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_02
   displayName: Twin-Core Raider
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
@@ -31,17 +31,17 @@ MonoBehaviour:
   - healthThreshold: 1
     movementPattern: 3
     attacks:
-    - attackName: AIMED PULSE
-      pattern: 1
+    - attackName: ROYAL FAN
+      pattern: 2
       weight: 1
       telegraphTime: 0.9
       projectileCount: 1
       spreadDegrees: 60
-      aimed: 1
+      aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: THREE-LANE VOLLEY
-      pattern: 2
+    - attackName: VENOM FIELD
+      pattern: 5
       weight: 0.75
       telegraphTime: 0.948
       projectileCount: 3
@@ -66,8 +66,8 @@ MonoBehaviour:
   - healthThreshold: 0.5
     movementPattern: 9
     attacks:
-    - attackName: SAFE-LANE FAN
-      pattern: 2
+    - attackName: TRIPLE REND
+      pattern: 3
       weight: 1
       telegraphTime: 0.9
       projectileCount: 3
@@ -75,15 +75,15 @@ MonoBehaviour:
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: THREE-LANE VOLLEY
-      pattern: 2
+    - attackName: CORE LANCE
+      pattern: 6
       weight: 0.75
       telegraphTime: 0.948
       projectileCount: 4
       spreadDegrees: 105
-      aimed: 0
-      reflectable: 1
-      clearsBulletsBeforeAttack: 0
+      aimed: 1
+      reflectable: 0
+      clearsBulletsBeforeAttack: 1
     attackInterval: 2.105
     projectileSpeedMultiplier: 1.06
     projectileDamageOverride: 0

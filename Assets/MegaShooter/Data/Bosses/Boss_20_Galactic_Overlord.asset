@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b995e5511928cc140a456df57b41d4a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f3041e4bc37b1244922ff1fffdd6161, type: 3}
   m_Name: Boss_20_Galactic_Overlord
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_20
   displayName: Galactic Overlord
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
@@ -31,22 +31,22 @@ MonoBehaviour:
   - healthThreshold: 1
     movementPattern: 3
     attacks:
-    - attackName: AIMED PULSE
-      pattern: 1
+    - attackName: DARK HALO
+      pattern: 4
       weight: 1
       telegraphTime: 0.9
       projectileCount: 1
       spreadDegrees: 60
-      aimed: 1
+      aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: TELEGRAPHED CROSS
-      pattern: 4
+    - attackName: DEATH MARK
+      pattern: 7
       weight: 0.75
       telegraphTime: 0.912
       projectileCount: 12
       spreadDegrees: 105
-      aimed: 0
+      aimed: 1
       reflectable: 0
       clearsBulletsBeforeAttack: 0
     attackInterval: 1.395
@@ -66,8 +66,8 @@ MonoBehaviour:
   - healthThreshold: 0.8
     movementPattern: 9
     attacks:
-    - attackName: SAFE-LANE FAN
-      pattern: 2
+    - attackName: VENOM FIELD
+      pattern: 5
       weight: 1
       telegraphTime: 0.9
       projectileCount: 3
@@ -75,8 +75,8 @@ MonoBehaviour:
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: TELEGRAPHED CROSS
-      pattern: 4
+    - attackName: SWARM GATE
+      pattern: 8
       weight: 0.75
       telegraphTime: 0.912
       projectileCount: 13
@@ -101,22 +101,22 @@ MonoBehaviour:
   - healthThreshold: 0.6
     movementPattern: 3
     attacks:
-    - attackName: AIMED PULSE
-      pattern: 1
+    - attackName: CORE LANCE
+      pattern: 6
       weight: 1
       telegraphTime: 0.9
       projectileCount: 5
       spreadDegrees: 76
       aimed: 1
-      reflectable: 1
-      clearsBulletsBeforeAttack: 0
-    - attackName: TELEGRAPHED CROSS
-      pattern: 4
+      reflectable: 0
+      clearsBulletsBeforeAttack: 1
+    - attackName: PREDATOR LOCK
+      pattern: 1
       weight: 0.75
       telegraphTime: 0.912
       projectileCount: 14
       spreadDegrees: 105
-      aimed: 0
+      aimed: 1
       reflectable: 0
       clearsBulletsBeforeAttack: 0
     attackInterval: 1.1949999
@@ -136,17 +136,17 @@ MonoBehaviour:
   - healthThreshold: 0.4
     movementPattern: 9
     attacks:
-    - attackName: SAFE-LANE FAN
-      pattern: 2
+    - attackName: DEATH MARK
+      pattern: 7
       weight: 1
       telegraphTime: 0.9
       projectileCount: 7
       spreadDegrees: 84
-      aimed: 0
+      aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: TELEGRAPHED CROSS
-      pattern: 4
+    - attackName: ROYAL FAN
+      pattern: 2
       weight: 0.75
       telegraphTime: 0.912
       projectileCount: 15
@@ -171,17 +171,17 @@ MonoBehaviour:
   - healthThreshold: 0.2
     movementPattern: 3
     attacks:
-    - attackName: AIMED PULSE
-      pattern: 1
+    - attackName: SWARM GATE
+      pattern: 8
       weight: 1
       telegraphTime: 0.9
       projectileCount: 9
       spreadDegrees: 92
-      aimed: 1
+      aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
-    - attackName: TELEGRAPHED CROSS
-      pattern: 4
+    - attackName: TRIPLE REND
+      pattern: 3
       weight: 0.75
       telegraphTime: 0.912
       projectileCount: 16
@@ -198,7 +198,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
-    phaseTint: {r: 1, g: 0.62, b: 0.7112003, a: 1}
+    phaseTint: {r: 1, g: 0.62, b: 0.7112002, a: 1}
     cameraShake: 0.26
     warningText: PHASE 5
     transitionVFX: {fileID: 0}

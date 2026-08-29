@@ -27,10 +27,13 @@ namespace AnimalFall.Effects
         /// <summary>Computed — no field needed.</summary>
         public bool IsWindActive => WindForce.sqrMagnitude > 0.01f;
 
-        private readonly Dictionary<object, Vector2> _windOwners = new Dictionary<object, Vector2>();
-        private readonly HashSet<object> _zeroGravityOwners = new HashSet<object>();
-        private readonly Dictionary<object, Vector3> _blackHoleOwners = new Dictionary<object, Vector3>();
-        private readonly HashSet<object> _mirrorOwners = new HashSet<object>();
+        // Unity can restore a component after a scene/domain transition without
+        // recreating its non-serialized collection fields. Keep these mutable so
+        // ClearAll can rebuild them safely before a new level begins.
+        private Dictionary<object, Vector2> _windOwners = new Dictionary<object, Vector2>();
+        private HashSet<object> _zeroGravityOwners = new HashSet<object>();
+        private Dictionary<object, Vector3> _blackHoleOwners = new Dictionary<object, Vector3>();
+        private HashSet<object> _mirrorOwners = new HashSet<object>();
 
         public HindranceEffectToken AddWind(object owner, Vector2 force)
         {
@@ -74,6 +77,7 @@ namespace AnimalFall.Effects
         /// <summary>Called on level start and end.</summary>
         public void ClearAll()
         {
+            EnsureOwnerCollections();
             IsZeroGravityActive   = false;
             WindForce             = Vector2.zero;
             IsBlackHoleActive     = false;
@@ -84,6 +88,14 @@ namespace AnimalFall.Effects
             _zeroGravityOwners.Clear();
             _blackHoleOwners.Clear();
             _mirrorOwners.Clear();
+        }
+
+        private void EnsureOwnerCollections()
+        {
+            if (_windOwners == null) _windOwners = new Dictionary<object, Vector2>();
+            if (_zeroGravityOwners == null) _zeroGravityOwners = new HashSet<object>();
+            if (_blackHoleOwners == null) _blackHoleOwners = new Dictionary<object, Vector3>();
+            if (_mirrorOwners == null) _mirrorOwners = new HashSet<object>();
         }
     }
 }

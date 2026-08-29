@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da51f9745b7f274a982cf839595dce2, type: 3}
+  m_Script: {fileID: 11500000, guid: f19b8a7db535f4b48ab86d9e7a4a2f2b, type: 3}
   m_Name: Mega_17_Level_085
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.MegaLevelData
   gameLevelNumber: 85
-  displayTitle: Aurora Storm
+  displayTitle: "Queen Webula \u2014 Army Assault"
   megaSequenceIndex: 17
-  description: 'Mega 17: Aurora Storm. Clear 9 authored waves, master readable telegraphs,
-    then defeat Aurora Wing.'
+  description: "Defeat the three specialist wings serving Spider \u2014 Queen Webula.
+    No boss enters this mission."
   backgroundLayers:
   - {fileID: 21300000, guid: 195dcb77ca2f62847b2e6d3bb6671d1f, type: 3}
   - {fileID: 21300000, guid: 195dcb77ca2f62847b2e6d3bb6671d1f, type: 3}
@@ -27,11 +27,11 @@ MonoBehaviour:
   - 0.24
   - 0.42
   - 0.68
-  backgroundSpeed: 0.77
-  backgroundColor: {r: 0.08, g: 0.025, b: 0.16, a: 1}
-  accentColor: {r: 0.85, g: 0.22, b: 0.72, a: 1}
-  introImage: {fileID: 0}
-  bossWarningText: "WARNING \u2014 AURORA WING APPROACHING"
+  backgroundSpeed: 0.738
+  backgroundColor: {r: 0.08265601, g: 0.020124, b: 0.1314, a: 0.6228}
+  accentColor: {r: 0.92, g: 0.08, b: 1, a: 1}
+  introImage: {fileID: 5973511233939165664, guid: ef4bded836574e242ba773c30e7e0cfe, type: 3}
+  bossWarningText: 
   featuredAnimal: {fileID: 11400000, guid: 4ef98d0e068cbe54d8d5ae15e3e81aa2, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
@@ -43,9 +43,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b27ee2a429685843aaf30251140dd0f, type: 2}
   - {fileID: 11400000, guid: 3274ca3d08999b14180abe8b1e442c26, type: 2}
   - {fileID: 11400000, guid: 4ef98d0e068cbe54d8d5ae15e3e81aa2, type: 2}
+  - {fileID: 11400000, guid: 92f4401d2484fa842a00649a099f0a01, type: 2}
   startingHealth: 5
   movementSpeedMultiplier: 1
-  playerPowerMultiplier: 1.96
+  playerPowerMultiplier: 1.88
   invulnerabilityDuration: 1
   counterChargeMultiplier: 1
   cameraBounds:
@@ -61,44 +62,60 @@ MonoBehaviour:
     width: 8.5
     height: 6.3
   safeUiMargins: {x: 0.2, y: 1.2, z: 0.2, w: 1.15}
-  scrollSpeed: 0.94
+  scrollSpeed: 0.924
   bottomProjectileExclusion: 1.4
   waves:
-  - waveName: Teach
+  - waveName: Vanguard Formation
     waveNumber: 1
     startDelay: 1
-    completionDelay: 0.8
-    warningBanner: V-FORMATION FIGHTER
+    completionDelay: 0.85
+    warningBanner: QUEEN WEBULA ARMY INBOUND
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+    - enemy: {fileID: 11400000, guid: 2a001fa1b0e9cfa489ff3199063e478c, type: 2}
       count: 6
       formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.306
+      cadence: 0.302
       columns: 6
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
+    - enemy: {fileID: 11400000, guid: 0c47cba479b92eb4581f9eabd22458d4, type: 2}
       count: 4
-      formation: 3
+      formation: 6
       spawnPath: 1
       startDelay: 0
-      cadence: 0.306
+      cadence: 0.302
       columns: 4
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 2
+      formation: 1
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.302
+      columns: 2
+      rows: 1
+      spacing: 1
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
@@ -106,403 +123,283 @@ MonoBehaviour:
     speedMultiplier: 1
     fireRateMultiplier: 1
     scoreMultiplier: 1
-    maximumSimultaneousEnemies: 14
+    maximumSimultaneousEnemies: 11
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Reinforcement Wing
     waveNumber: 2
-    startDelay: 0.6
-    completionDelay: 0.8
+    startDelay: 0.65
+    completionDelay: 0.85
     warningBanner: 
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 5
-      formation: 3
+    - enemy: {fileID: 11400000, guid: 0c47cba479b92eb4581f9eabd22458d4, type: 2}
+      count: 6
+      formation: 6
       spawnPath: 1
       startDelay: 0
-      cadence: 0.306
-      columns: 5
+      cadence: 0.302
+      columns: 6
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
       count: 4
-      formation: 4
+      formation: 1
       spawnPath: 2
       startDelay: 0
-      cadence: 0.306
+      cadence: 0.302
       columns: 4
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 2
+      formation: 4
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.302
+      columns: 2
+      rows: 1
+      spacing: 1
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0.15200001
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1.035
     speedMultiplier: 1.025
     fireRateMultiplier: 1
-    scoreMultiplier: 1.04
-    maximumSimultaneousEnemies: 14
-    environmentEvent: 0
+    scoreMultiplier: 1.07
+    maximumSimultaneousEnemies: 11
+    environmentEvent: 3
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Reinforcement Wing
     waveNumber: 3
-    startDelay: 0.6
-    completionDelay: 0.8
+    startDelay: 0.65
+    completionDelay: 0.85
     warningBanner: 
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 5
-      formation: 4
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 6
+      formation: 1
       spawnPath: 2
       startDelay: 0
-      cadence: 0.306
-      columns: 5
+      cadence: 0.302
+      columns: 6
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
+    - enemy: {fileID: 11400000, guid: 2a001fa1b0e9cfa489ff3199063e478c, type: 2}
       count: 4
-      formation: 5
+      formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.306
+      cadence: 0.302
       columns: 4
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 2
+      formation: 0
+      spawnPath: 1
+      startDelay: 0
+      cadence: 0.302
+      columns: 2
+      rows: 1
+      spacing: 1
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0.15200001
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1.07
     speedMultiplier: 1.05
     fireRateMultiplier: 1
-    scoreMultiplier: 1.08
-    maximumSimultaneousEnemies: 14
+    scoreMultiplier: 1.14
+    maximumSimultaneousEnemies: 11
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Reinforcement Wing
     waveNumber: 4
-    startDelay: 0.6
-    completionDelay: 0.8
+    startDelay: 0.65
+    completionDelay: 0.85
     warningBanner: 
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 5
-      formation: 5
+    - enemy: {fileID: 11400000, guid: 2a001fa1b0e9cfa489ff3199063e478c, type: 2}
+      count: 6
+      formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.306
-      columns: 5
+      cadence: 0.302
+      columns: 6
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
+    - enemy: {fileID: 11400000, guid: 0c47cba479b92eb4581f9eabd22458d4, type: 2}
       count: 4
-      formation: 6
-      spawnPath: 0
+      formation: 0
+      spawnPath: 1
       startDelay: 0
-      cadence: 0.306
+      cadence: 0.302
       columns: 4
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 2
+      formation: 3
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.302
+      columns: 2
+      rows: 1
+      spacing: 1
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0.15200001
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    healthMultiplier: 1.105
     speedMultiplier: 1.075
     fireRateMultiplier: 1
-    scoreMultiplier: 1.12
-    maximumSimultaneousEnemies: 14
+    scoreMultiplier: 1.21
+    maximumSimultaneousEnemies: 11
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  - waveName: Practice
+  - waveName: Elite Army Finale
     waveNumber: 5
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
+    startDelay: 0.65
+    completionDelay: 0.85
+    warningBanner: "ELITE FORMATION \u2014 CLEAR THE SKY"
     spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 5
-      formation: 6
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.306
-      columns: 5
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 4
+    - enemy: {fileID: 11400000, guid: 0c47cba479b92eb4581f9eabd22458d4, type: 2}
+      count: 6
       formation: 0
       spawnPath: 1
       startDelay: 0
-      cadence: 0.306
-      columns: 4
+      cadence: 0.302
+      columns: 6
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
-    speedMultiplier: 1.1
-    fireRateMultiplier: 1
-    scoreMultiplier: 1.16
-    maximumSimultaneousEnemies: 14
-    environmentEvent: 1
-    completionCondition: 0
-    surviveDuration: 0
-  - waveName: Practice
-    waveNumber: 6
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
-    spawnGroups:
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 5
-      formation: 0
-      spawnPath: 1
-      startDelay: 0
-      cadence: 0.306
-      columns: 5
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 4
-      formation: 1
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 3
+      formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.306
-      columns: 4
+      cadence: 0.302
+      columns: 3
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
+      eliteChance: 0.15200001
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    healthMultiplier: 1
-    speedMultiplier: 1.125
-    fireRateMultiplier: 1
-    scoreMultiplier: 1.2
-    maximumSimultaneousEnemies: 14
-    environmentEvent: 0
-    completionCondition: 0
-    surviveDuration: 0
-  - waveName: Practice
-    waveNumber: 7
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
-    spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 5
-      formation: 1
-      spawnPath: 2
-      startDelay: 0
-      cadence: 0.306
-      columns: 5
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 4
+    - enemy: {fileID: 11400000, guid: 3a0d85264d1a7244dbdb4a5b1c415fe6, type: 2}
+      count: 2
       formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.306
-      columns: 4
+      cadence: 0.302
+      columns: 2
       rows: 1
-      spacing: 0.9
+      spacing: 1
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    healthMultiplier: 1
-    speedMultiplier: 1.15
-    fireRateMultiplier: 1
-    scoreMultiplier: 1.24
-    maximumSimultaneousEnemies: 14
-    environmentEvent: 0
-    completionCondition: 0
-    surviveDuration: 0
-  - waveName: Practice
-    waveNumber: 8
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
-    spawnGroups:
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 5
-      formation: 2
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.306
-      columns: 5
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 4
-      formation: 3
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.306
-      columns: 4
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    healthMultiplier: 1
-    speedMultiplier: 1.175
-    fireRateMultiplier: 1
-    scoreMultiplier: 1.28
-    maximumSimultaneousEnemies: 14
-    environmentEvent: 0
-    completionCondition: 0
-    surviveDuration: 0
-  - waveName: Test
-    waveNumber: 9
-    startDelay: 0.6
-    completionDelay: 0.8
-    warningBanner: 
-    spawnGroups:
-    - enemy: {fileID: 11400000, guid: 9705f5db9661b9545887ab559c5bbee7, type: 2}
-      count: 5
-      formation: 3
-      spawnPath: 0
-      startDelay: 0
-      cadence: 0.306
-      columns: 5
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: c74035c39540fa04e942372584a351b1, type: 2}
-      count: 4
-      formation: 4
-      spawnPath: 1
-      startDelay: 0
-      cadence: 0.306
-      columns: 4
-      rows: 1
-      spacing: 0.9
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0.19999999
-      explicitElite: 0
+      eliteChance: 0.15200001
+      explicitElite: 1
       pickupDropOverride: 0
       priorityTarget: 1
-    healthMultiplier: 1
-    speedMultiplier: 1.2
+    healthMultiplier: 1.14
+    speedMultiplier: 1.1
     fireRateMultiplier: 1
-    scoreMultiplier: 1.3199999
-    maximumSimultaneousEnemies: 14
+    scoreMultiplier: 1.28
+    maximumSimultaneousEnemies: 11
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
-  boss: {fileID: 11400000, guid: 3677bdeb0faeef145894fa219688736e, type: 2}
+  boss: {fileID: 0}
   bossOverrides:
-    healthMultiplier: 1
+    healthMultiplier: 1.28
     attackIntervalMultiplier: 1
     projectileSpeedMultiplier: 1
     dropCriticalHealthPickup: 0
     healthPickupBossThreshold: 0.5
     playerCriticalHealthThreshold: 0.35
-  enemyHealthMultiplier: 2.72
+  enemyHealthMultiplier: 2.83
   enemyDamageMultiplier: 1.15
-  enemyProjectileSpeedMultiplier: 1.56
-  ordinaryEnemyFireInterval: 0.98
+  enemyProjectileSpeedMultiplier: 1.37
+  ordinaryEnemyFireInterval: 1.1499999
   enemyFireIntervalMultiplier: 1
-  spawnCadenceMultiplier: 0.712
-  maximumActiveEnemies: 14
-  maximumHostileProjectiles: 106
-  targetEnemyCount: 82
-  scoreMultiplier: 1.8
+  spawnCadenceMultiplier: 0.74399996
+  maximumActiveEnemies: 11
+  maximumHostileProjectiles: 88
+  targetEnemyCount: 59
+  scoreMultiplier: 1.72
   comboTimeout: 2
   nearMissScore: 57
   counterScore: 490
-  parTime: 196
-  coinReward: 500
-  arcadeTokenReward: 6
-  unlockReward: Peacock Aurora
+  parTime: 194
+  coinReward: 510
+  arcadeTokenReward: 7
+  unlockReward: 
   vfxProfile: {fileID: 11400000, guid: 1a923faa316340d43b6140c35c9c3ffe, type: 2}
   cameraShakeScale: 1
   flashScale: 1
@@ -516,5 +413,5 @@ MonoBehaviour:
     counterReady: {fileID: 0}
     counterActivate: {fileID: 0}
     victory: {fileID: 0}
-  deterministicSeed: 6553
+  deterministicSeed: 6653
   randomizeSeed: 0

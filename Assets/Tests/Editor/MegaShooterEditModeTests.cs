@@ -39,7 +39,7 @@ namespace AnimalFall.Tests.Editor
                 Assert.That(level.IsValidMegaNumber, Is.True, level.name);
                 Assert.That(level.waves, Is.Not.Null.And.Not.Empty, level.name);
                 Assert.That(level.waves.All(wave => wave != null && wave.spawnGroups != null && wave.spawnGroups.Length > 0), Is.True, level.name);
-                Assert.That(level.boss, Is.Not.Null, level.name);
+                Assert.That(level.boss != null, Is.EqualTo(level.gameLevelNumber % 10 == 0), level.name);
                 Assert.That(level.enemyHealthMultiplier, Is.GreaterThan(0f), level.name);
                 Assert.That(level.enemyProjectileSpeedMultiplier, Is.GreaterThan(0f), level.name);
                 Assert.That(level.ordinaryEnemyFireInterval, Is.GreaterThanOrEqualTo(.85f), level.name);
@@ -75,10 +75,24 @@ namespace AnimalFall.Tests.Editor
         }
 
         [Test]
+        public void EveryMegaLevelIncludesEveryHeroFromTheHeroSpriteSheet()
+        {
+            SuperAnimalData[] animals = LoadAssets<SuperAnimalData>(MegaShooterGenerator.DataRoot + "/Animals");
+            Sprite[] heroSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/megalevel/heroes.png")
+                .OfType<Sprite>().ToArray();
+
+            Assert.That(animals.Length, Is.EqualTo(heroSprites.Length), "Every sliced hero needs a Super Animal asset.");
+            CollectionAssert.AreEquivalent(heroSprites, animals.Select(animal => animal.shipSprite).ToArray());
+            foreach (MegaLevelData level in _levels)
+                CollectionAssert.AreEquivalent(animals, level.allowedAnimals, level.name);
+        }
+
+        [Test]
         public void BossThresholdsAreStrictlyDescendingAndReferencesAreComplete()
         {
             foreach (MegaLevelData level in _levels)
             {
+                if (level.boss == null) continue;
                 Assert.That(level.boss.prefab, Is.Not.Null, level.name);
                 Assert.That(level.boss.sprite, Is.Not.Null, level.name);
                 Assert.That(level.boss.phases.Length, Is.GreaterThanOrEqualTo(2), level.name);
@@ -86,6 +100,98 @@ namespace AnimalFall.Tests.Editor
                     Assert.That(level.boss.phases[i].healthThreshold, Is.LessThan(level.boss.phases[i - 1].healthThreshold), level.name);
                 Assert.That(level.allowedAnimals.All(a => a != null && a.playerPrefab != null && a.primaryWeapon != null && a.primaryWeapon.projectile != null), Is.True, level.name);
                 Assert.That(level.waves.SelectMany(w => w.spawnGroups).All(g => g != null && g.enemy != null && g.enemy.prefab != null && g.enemy.projectile != null && g.enemy.sprite != null), Is.True, level.name);
+            }
+        }
+
+        [Test]
+        public void ArmyAndBossCadenceMatchesTenVillainChapters()
+        {
+            string[] expected =
+            {
+                "Venom Emperor", "Admiral Inkstorm", "Ironhorn", "Captain Chomper", "General Smash",
+                "Emperor Sting", "Croc Commander", "Doom Puffer", "Queen Webula", "Cosmic Draconis"
+            };
+            for (int chapter = 0; chapter < expected.Length; chapter++)
+            {
+                MegaLevelData armyLevel = _levels[chapter * 2];
+                MegaLevelData bossLevel = _levels[chapter * 2 + 1];
+                Assert.That(armyLevel.boss, Is.Null, armyLevel.name);
+                Assert.That(bossLevel.boss, Is.Not.Null, bossLevel.name);
+                Assert.That(armyLevel.displayTitle, Does.Contain(expected[chapter]));
+                Assert.That(bossLevel.boss.displayName, Does.Contain(expected[chapter]));
+                CollectionAssert.AreEquivalent(
+                    armyLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.enemy.sprite).Distinct().ToArray(),
+                    bossLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.enemy.sprite).Distinct().ToArray());
+                Assert.That(armyLevel.waves.SelectMany(w => w.spawnGroups)
+                    .All(g => AssetDatabase.GetAssetPath(g.enemy.sprite).Contains("megalevelhindrances/army/")), Is.True);
+                Assert.That(AssetDatabase.GetAssetPath(bossLevel.boss.sprite), Does.Contain("megalevelhindrances/villains/"));
+            }
+        }
+
+        [Test]
+        public void VillainsUseAuthoredAttackProjectilesAndDistinctMuzzleVfx()
+        {
+            MegaVFXProfile vfx = _levels[0].vfxProfile;
+            Assert.That(vfx.playerMuzzlePrefab, Is.Not.Null);
+            Assert.That(vfx.enemyMuzzlePrefab, Is.Not.Null);
+            Assert.That(vfx.bossMuzzlePrefab, Is.Not.Null);
+            Assert.That(vfx.playerMuzzlePrefab, Is.Not.EqualTo(vfx.enemyMuzzlePrefab));
+            Assert.That(vfx.enemyMuzzlePrefab, Is.Not.EqualTo(vfx.bossMuzzlePrefab));
+            foreach (MegaLevelData level in _levels.Where(level => level.boss != null))
+                Assert.That(level.boss.phases.SelectMany(phase => phase.attacks)
+                    .All(attack => attack.projectile != null && attack.projectile.sprite != null), Is.True, level.name);
+        }
+
+        [Test]
+        public void HostileDirectionsAreAlwaysDownward()
+        {
+            Vector2[] samples = { Vector2.up, Vector2.right, Vector2.left, new Vector2(.2f, .9f), Vector2.zero };
+            foreach (Vector2 sample in samples)
+            {
+                Vector2 constrained = MegaShooterGameManager.ForceDownward(sample);
+                Assert.That(constrained.y, Is.LessThan(-0.1f));
+                Assert.That(constrained.sqrMagnitude, Is.EqualTo(1f).Within(0.001f));
+            }
+        }
+
+        [Test]
+        public void MegaCombatUsesRequestedHitCounts()
+        {
+            Assert.That(SuperAnimalController.VillainHitsToDefeat, Is.EqualTo(3));
+            Assert.That(MegaEnemyController.HitsToDefeat, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void MegaPrefabsHaveNoMissingScriptsAndGameplaySizesArePositive()
+        {
+            string[] prefabPaths =
+            {
+                "Assets/MegaShooter/Prefabs/MegaPlayer.prefab",
+                "Assets/MegaShooter/Prefabs/MegaEnemy.prefab",
+                "Assets/MegaShooter/Prefabs/MegaBoss.prefab",
+                "Assets/MegaShooter/Prefabs/MegaProjectile.prefab",
+                "Assets/MegaShooter/Prefabs/MegaPickup.prefab",
+                "Assets/MegaShooter/Prefabs/MegaEffect.prefab",
+                "Assets/MegaShooter/Prefabs/MegaPlayerMuzzle.prefab",
+                "Assets/MegaShooter/Prefabs/MegaEnemyMuzzle.prefab",
+                "Assets/MegaShooter/Prefabs/MegaBossMuzzle.prefab"
+            };
+            foreach (string path in prefabPaths)
+            {
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                Assert.That(prefab, Is.Not.Null, path);
+                Assert.That(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(prefab), Is.EqualTo(0), path);
+                Assert.That(prefab.transform.localScale.x, Is.GreaterThan(0f), path);
+            }
+            foreach (MegaLevelData level in _levels)
+            {
+                foreach (EnemySpawnGroup group in level.waves.SelectMany(w => w.spawnGroups))
+                {
+                    Assert.That(group.enemy.speed, Is.GreaterThan(0f), level.name);
+                    Assert.That(group.enemy.colliderSize.x, Is.GreaterThan(0f), level.name);
+                    Assert.That(group.enemy.colliderSize.y, Is.GreaterThan(0f), level.name);
+                    Assert.That(group.enemy.projectile.damage, Is.GreaterThan(0f), level.name);
+                }
             }
         }
 

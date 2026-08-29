@@ -30,7 +30,7 @@ namespace AnimalFall.Debugging
 
             _sb.AppendLine("=== HINDRANCE TEST HARNESS ===");
 
-            for (int id = 1; id <= 50; id++)
+            for (int id = 1; id <= (int)HindranceType.FrogSnatcher; id++)
             {
                 var type = (HindranceType)id;
                 string result = TestOne(type, registry, hm, parent);

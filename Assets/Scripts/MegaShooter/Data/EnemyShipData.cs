@@ -11,6 +11,7 @@ namespace AnimalFall.MegaShooter
         public Sprite sprite;
         public Sprite weaponIcon;
         public Sprite shadow;
+        [Range(0.2f, 1f)] public float visualScale = 0.4f;
         public Vector2 colliderSize = new Vector2(0.6f, 0.6f);
         [Min(1f)] public float hitPoints = 30f;
         [Min(0f)] public float contactDamage = 1f;

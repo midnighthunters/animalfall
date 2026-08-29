@@ -166,7 +166,15 @@ namespace AnimalFall.Managers
             for (int i = 0; i < _configs.Length; i++)
             {
                 HindranceConfig candidateConfig = _configs[i];
-                if (candidateConfig == null || candidateConfig.weight <= 0f || candidateConfig.type == _lastType) continue;
+                // IceCube and BubbleShield are level-wide animal rules handled during spawn.
+                if (candidateConfig != null &&
+                    (candidateConfig.type == HindranceType.IceCube || candidateConfig.type == HindranceType.BubbleShield || candidateConfig.type == HindranceType.DogHelmet))
+                    continue;
+
+                // Avoid immediate repeats when there are alternatives, but allow a
+                // single-hindrance level (such as Level 14) to run on its cadence.
+                if (candidateConfig == null || candidateConfig.weight <= 0f ||
+                    (_configs.Length > 1 && candidateConfig.type == _lastType)) continue;
                 if (Time.time - _levelStartTime < candidateConfig.initialDelay) continue;
                 if (_cooldownUntil.TryGetValue(candidateConfig.type, out float until) && Time.time < until) continue;
                 if (!_registry.TryGetData(candidateConfig.type, out HindranceData candidate) || candidate == null || candidate.prefab == null) continue;

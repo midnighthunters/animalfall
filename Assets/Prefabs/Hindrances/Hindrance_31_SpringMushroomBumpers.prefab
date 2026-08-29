@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3270978306644028905}
   - component: {fileID: 6502435889385346506}
   - component: {fileID: 8841812714141220491}
-  - component: {fileID: 8985173054140861392}
+  - component: {fileID: 5793281746359833185}
   m_Layer: 0
   m_Name: Hindrance_31_SpringMushroomBumpers
   m_TagString: Untagged
@@ -81,14 +81,14 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 28
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 77cecb39c1d91bd43a4fcea05d3d3ed5, type: 3}
+  m_Sprite: {fileID: -5258563328673448698, guid: a3726f26afeacd644aebe97f15094955, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -128,9 +128,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.72
---- !u!114 &8985173054140861392
+  m_Offset: {x: 0, y: -0.15}
+  m_Radius: 2.88
+--- !u!114 &5793281746359833185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,9 +139,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515915859075486386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac6d3a2a4a9fb940afe2aa4748c113b, type: 3}
+  m_Script: {fileID: 11500000, guid: 718b42a4d13673e4db39bd09903e3038, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.New.SpringMushroomHindrance
   _maxLifetimeSeconds: 14
-  _type: 31
-  _duration: 7
+  _pressedSprite: {fileID: 357749872346554099, guid: a3726f26afeacd644aebe97f15094955, type: 3}
+  _openedSprite: {fileID: -5258563328673448698, guid: a3726f26afeacd644aebe97f15094955, type: 3}
+  _viewportHeight: 0.36
+  _displayScale: 0.23
+  _visibleLifetime: 9
+  _compressionDuration: 0.1
+  _reboundDuration: 0.18
