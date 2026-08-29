@@ -5,6 +5,8 @@ namespace AnimalFall.MegaShooter
     [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
     public sealed class MegaEnemyController : MonoBehaviour, IMegaPoolable
     {
+        public const int HitsToDefeat = 1;
+
         private EnemyShipData _data;
         private EnemySpawnGroup _group;
         private MegaWaveData _wave;
@@ -13,6 +15,7 @@ namespace AnimalFall.MegaShooter
         private MegaWaveDirector _director;
         private SpriteRenderer _renderer;
         private BoxCollider2D _collider;
+        private Rigidbody2D _body;
         private LineRenderer _warningLine;
         private Vector3 _spawnPosition;
         private float _health;
@@ -25,9 +28,14 @@ namespace AnimalFall.MegaShooter
         private bool _registered;
         private bool _telegraphing;
         private bool _elite;
+        private Vector3 _baseScale;
+        private float _halfWidth;
+        private float _halfHeight;
 
         public bool IsPriority => _group != null && (_group.priorityTarget || (_data != null && _data.priorityTarget));
         public float Health => _health;
+        public float DownwardSpeed => _speed;
+        public bool IsMovingDownward => _speed > 0f;
 
         private void Awake()
         {
@@ -35,7 +43,13 @@ namespace AnimalFall.MegaShooter
             _collider = GetComponent<BoxCollider2D>();
             if (_collider == null) _collider = gameObject.AddComponent<BoxCollider2D>();
             _collider.isTrigger = true;
+            _body = GetComponent<Rigidbody2D>();
+            if (_body == null) _body = gameObject.AddComponent<Rigidbody2D>();
+            _body.bodyType = RigidbodyType2D.Kinematic;
+            _body.gravityScale = 0f;
+            _body.useFullKinematicContacts = true;
             _warningLine = GetComponentInChildren<LineRenderer>(true);
+            _baseScale = transform.localScale;
         }
 
         public void Configure(EnemyShipData data, EnemySpawnGroup group, MegaWaveData wave, MegaLevelData level,
@@ -49,13 +63,20 @@ namespace AnimalFall.MegaShooter
             _director = director;
             _elite = elite;
             _renderer.sprite = data.sprite;
+            transform.localScale = _baseScale * Mathf.Clamp(data.visualScale, 0.2f, 1f);
             _baseColor = elite ? new Color(1f, 0.72f, 0.25f, 1f) : Color.white;
             _renderer.color = _baseColor;
             _collider.size = data.colliderSize;
+            Vector3 scale = transform.lossyScale;
+            _halfWidth = Mathf.Max(0.2f, data.colliderSize.x * Mathf.Abs(scale.x) * 0.5f);
+            _halfHeight = Mathf.Max(0.2f, data.colliderSize.y * Mathf.Abs(scale.y) * 0.5f);
             _health = data.hitPoints * level.enemyHealthMultiplier * wave.healthMultiplier * (elite ? 1.8f : 1f);
             float overrideSpeed = group.movementSpeedOverride > 0f ? group.movementSpeedOverride : data.speed;
-            _speed = overrideSpeed * wave.speedMultiplier;
-            _fireTimer = Mathf.Max(0f, data.initialFireDelay);
+            // Keep army ships readable and dodgeable across every mega tier.
+            _speed = Mathf.Clamp(overrideSpeed * wave.speedMultiplier * 0.62f, 0.65f, 1.85f);
+            // Stagger each ship's first shot.  Groups no longer release a full
+            // screen of bullets at exactly the same instant.
+            _fireTimer = Mathf.Max(0.75f, data.initialFireDelay) + _game.NextRandom01() * 1.15f;
             _age = 0f;
             _telegraphRemaining = 0f;
             _telegraphing = false;
@@ -76,7 +97,8 @@ namespace AnimalFall.MegaShooter
             Move(dt);
             UpdateWeapon(dt);
 
-            if (!_game.IsInsideEnemyBounds(transform.position))
+            Rect bounds = _level.cameraBounds;
+            if (transform.position.y < bounds.yMin - _halfHeight)
                 Despawn(false);
         }
 
@@ -84,36 +106,33 @@ namespace AnimalFall.MegaShooter
         {
             MegaMovementPattern pattern = _data.movementPattern;
             float x = transform.position.x;
-            float y = transform.position.y;
+            float y = transform.position.y - _speed * dt;
             switch (pattern)
             {
                 case MegaMovementPattern.Sine:
                     x = _spawnPosition.x + Mathf.Sin(_age * 2.2f) * 1.25f;
-                    y -= _speed * dt;
                     break;
                 case MegaMovementPattern.ZigZag:
                     x = _spawnPosition.x + Mathf.PingPong(_age * _speed, 2.6f) - 1.3f;
-                    y -= _speed * 0.55f * dt;
                     break;
                 case MegaMovementPattern.Hover:
                 case MegaMovementPattern.Orbit:
                     x = _spawnPosition.x + Mathf.Sin(_age * 1.4f) * 1.4f;
-                    y = Mathf.Max(_spawnPosition.y - 2.2f, y - _speed * dt);
                     break;
                 case MegaMovementPattern.Rammer:
                 case MegaMovementPattern.Dive:
-                    y -= _speed * (_age > Mathf.Max(0.85f, _data.telegraphTime) ? 2.4f : 0.35f) * dt;
+                    y -= _speed * (_age > Mathf.Max(0.85f, _data.telegraphTime) ? 1.4f : 0.55f) * dt;
                     break;
                 case MegaMovementPattern.SideSweep:
                     x += Mathf.Sign(_spawnPosition.x == 0f ? 1f : -_spawnPosition.x) * _speed * dt;
-                    y -= _speed * 0.2f * dt;
                     break;
                 case MegaMovementPattern.Stationary:
                     break;
                 default:
-                    y -= _speed * dt;
                     break;
             }
+            Rect bounds = _level.cameraBounds;
+            x = Mathf.Clamp(x, bounds.xMin + _halfWidth, bounds.xMax - _halfWidth);
             transform.position = new Vector3(x, y, 0f);
         }
 
@@ -153,8 +172,15 @@ namespace AnimalFall.MegaShooter
 
         private void FireNow()
         {
+            if (!_game.TryBeginOrdinaryEnemyVolley())
+            {
+                _fireTimer = 0.3f + _game.NextRandom01() * 0.25f;
+                return;
+            }
             MegaWeaponPattern pattern = EffectiveWeaponPattern;
-            int count = pattern == MegaWeaponPattern.Radial ? 8 : pattern == MegaWeaponPattern.Burst ? 3 : pattern == MegaWeaponPattern.FixedSpread ? 3 : 1;
+            _game.SpawnEffect(_game.VFXProfile?.enemyMuzzlePrefab ?? _game.VFXProfile?.warningPrefab,
+                transform.position, _data.projectile.enemyColor, _elite ? 0.62f : 0.46f, 0.2f);
+            int count = pattern == MegaWeaponPattern.Radial ? 4 : pattern == MegaWeaponPattern.Burst ? 2 : pattern == MegaWeaponPattern.FixedSpread ? 2 : 1;
             for (int i = 0; i < count; i++)
             {
                 Vector2 direction;
@@ -167,11 +193,12 @@ namespace AnimalFall.MegaShooter
 
                 _game.SpawnProjectile(_data.projectile, MegaFaction.Enemy, transform.position, direction,
                     _data.projectile.damage * _level.enemyDamageMultiplier,
-                    _level.enemyProjectileSpeedMultiplier, 0,
+                    _level.enemyProjectileSpeedMultiplier * _game.HostileProjectileSpeedScale, 0,
                     pattern == MegaWeaponPattern.AimedSingle ? _game.Player?.transform : null);
             }
-            _fireTimer = Mathf.Max(_level.ordinaryEnemyFireInterval,
-                _data.fireInterval * _level.enemyFireIntervalMultiplier * _wave.fireRateMultiplier);
+            _fireTimer = Mathf.Max(3.5f,
+                _data.fireInterval * _level.enemyFireIntervalMultiplier * _wave.fireRateMultiplier * 1.35f)
+                * _game.HostileFireIntervalScale;
         }
 
         private void UpdateWarningLine()
@@ -186,12 +213,10 @@ namespace AnimalFall.MegaShooter
         public bool TakeDamage(float amount)
         {
             if (_data == null || amount <= 0f) return false;
-            _health -= amount;
-            _hitGlowRemaining = 0.14f;
-            _renderer.color = new Color(1f, 0.08f, 0.08f, 1f);
-            _game.SpawnEffect(_game.VFXProfile?.hitSparkPrefab, transform.position,
-                new Color(1f, 0.08f, 0.04f, 0.95f), _elite ? 0.75f : 0.55f, 0.25f);
-            if (_health <= 0f) Despawn(true);
+            // Army ships are intentionally one-hit targets. Boss durability is
+            // handled separately by MegaBossController.
+            _health = 0f;
+            Despawn(true);
             return true;
         }
 
@@ -208,7 +233,7 @@ namespace AnimalFall.MegaShooter
         {
             SuperAnimalController player = other.GetComponent<SuperAnimalController>();
             if (player == null || _data == null) return;
-            player.TakeDamage(Mathf.CeilToInt(_data.contactDamage * _level.enemyDamageMultiplier));
+            player.TakeDamage(Mathf.Max(1, Mathf.RoundToInt(_data.contactDamage * _level.enemyDamageMultiplier)));
             if (_data.movementPattern == MegaMovementPattern.Rammer || _data.movementPattern == MegaMovementPattern.Dive)
                 Despawn(false);
         }
@@ -246,6 +271,7 @@ namespace AnimalFall.MegaShooter
         {
             Unregister(false);
             if (_warningLine != null) _warningLine.gameObject.SetActive(false);
+            transform.localScale = _baseScale;
             _renderer.color = Color.white;
             _data = null;
             _group = null;

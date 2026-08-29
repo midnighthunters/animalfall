@@ -11,6 +11,12 @@ namespace AnimalFall.MegaShooter
 {
     public sealed class MegaShooterGameManager : MonoBehaviour
     {
+#if UNITY_EDITOR
+        // Editor-only play-mode audit hooks. They are never set by shipped gameplay.
+        public static MegaLevelData RuntimeTestLevelOverride;
+        public static bool RuntimeTestFastStart;
+#endif
+
         [Header("Scene References")]
         public Camera worldCamera;
         public MegaObjectPools pools;
@@ -49,6 +55,11 @@ namespace AnimalFall.MegaShooter
         private float _elapsed;
         private float _hostileTimeScale = 1f;
         private int _hostileScaleVersion;
+        private int _effectFrame = -1;
+        private int _effectsThisFrame;
+        private float _nextOrdinaryEnemyVolley;
+        private float _ordinaryVolleyInterval = 0.8f;
+        private float _earlyMegaEase;
         private bool _ended;
         private MegaShooterState _stateBeforePause;
         private System.Random _random;
@@ -63,7 +74,20 @@ namespace AnimalFall.MegaShooter
         public float NearMissOuterRadius => 0.48f;
         public float HostileTimeScale => _hostileTimeScale;
         public bool IsCombatFrozen => State == MegaShooterState.Intro || State == MegaShooterState.Countdown || State == MegaShooterState.WaveTransition || State == MegaShooterState.BossWarning || State == MegaShooterState.Won || State == MegaShooterState.Lost || State == MegaShooterState.Paused;
-        public bool IsPlayerAutoFireActive => State == MegaShooterState.Wave || State == MegaShooterState.Boss;
+        // The hero only auto-fires when there is actually something to shoot at:
+        // an active wave with living army ships, or a boss that is still alive.
+        // This stops the endless firing during spawn gaps and after the sky is clear.
+        public bool IsPlayerAutoFireActive =>
+            (State == MegaShooterState.Wave && ActiveEnemyCount > 0) ||
+            (State == MegaShooterState.Boss && Boss != null);
+
+        // Relief applied to the opening mega missions (0 = full difficulty).
+        // Slower enemy fire, slower bullets, gentler swarms and spawn pacing.
+        public float HostileFireIntervalScale => 1f + _earlyMegaEase * 1.15f;
+        public float HostileProjectileSpeedScale => 1f - _earlyMegaEase * 0.28f;
+        public float SpawnCadenceScale => 1f + _earlyMegaEase * 0.9f;
+        public int EffectiveMaxActiveEnemies(int levelCap, int waveCap)
+            => Mathf.Max(2, Mathf.RoundToInt(Mathf.Min(levelCap, waveCap) * (1f - _earlyMegaEase * 0.45f)));
         public bool IsWaveRunning => State == MegaShooterState.Wave;
         public bool CanAdvanceCombat => !_ended && State != MegaShooterState.Lost && State != MegaShooterState.Won;
         public int ActiveEnemyCount => _enemies.Count;
@@ -103,7 +127,13 @@ namespace AnimalFall.MegaShooter
             Time.timeScale = 1f;
             LevelManager levelManager = LevelManager.Instance;
             _levelAsset = levelManager != null ? levelManager.CurrentLevel : null;
-            _level = _levelAsset != null && _levelAsset.IsConfiguredMegaShooter ? _levelAsset.MegaShooterData : debugLevel;
+            MegaLevelData editorOverride = null;
+#if UNITY_EDITOR
+            editorOverride = RuntimeTestLevelOverride;
+            if (editorOverride != null) debugLevel = editorOverride;
+#endif
+            _level = editorOverride != null ? editorOverride
+                : _levelAsset != null && _levelAsset.IsConfiguredMegaShooter ? _levelAsset.MegaShooterData : debugLevel;
             if (_level == null)
             {
                 Debug.LogError("[MegaShooter] No configured MegaLevelData selected.");
@@ -120,6 +150,12 @@ namespace AnimalFall.MegaShooter
 
             ActiveSeed = _level.randomizeSeed ? System.Environment.TickCount : _level.deterministicSeed;
             _random = new System.Random(ActiveSeed);
+            // The first mega missions (sequence 1-3, i.e. game levels 5/10/15) get the
+            // strongest relief; it tapers to zero by sequence 6 so later levels are untouched.
+            int megaSequence = Mathf.Max(1, _level.megaSequenceIndex);
+            _earlyMegaEase = Mathf.Clamp01((6f - megaSequence) / 6f);
+            _nextOrdinaryEnemyVolley = 0f;
+            _ordinaryVolleyInterval = 0.8f * HostileFireIntervalScale;
             Camera.main?.gameObject.SetActive(true);
             if (worldCamera == null) worldCamera = Camera.main;
             if (worldCamera != null)
@@ -130,11 +166,12 @@ namespace AnimalFall.MegaShooter
             }
 
             hud.Bind(this);
-            ConfigureMissionPreview();
             cameraEffects?.Configure(_level.vfxProfile);
             starfield?.Configure(_level);
             debugOverlay?.Configure(this);
-            if (debugOverlay != null) debugOverlay.enabled = showDebugOverlay || Debug.isDebugBuild;
+            // Mega levels are intentionally gameplay-only while active: no debug panel
+            // or diagnostic text should cover the combat lane, even in development builds.
+            if (debugOverlay != null) debugOverlay.enabled = false;
             PrewarmPools();
             SetupSelection();
         }
@@ -175,25 +212,44 @@ namespace AnimalFall.MegaShooter
                 return;
             }
 
-            if (_level.featuredAnimal != null && _save != null)
-            {
-                bool newlyUnlocked = _save.UnlockSuperAnimal(_level.featuredAnimal.stableId);
-                if (newlyUnlocked && _save.ConsumeSuperAnimalCelebration(_level.featuredAnimal.stableId))
-                    hud.ShowUnlock(_level.featuredAnimal);
-            }
+            // Mega levels now begin just like normal levels: choose the saved animal when
+            // possible, otherwise use the level's featured animal, then immediately count in.
+            if (_level.featuredAnimal != null)
+                _save?.UnlockSuperAnimal(_level.featuredAnimal.stableId);
 
             string selectedId = _save?.GetSelectedSuperAnimalId();
-            _selectionIndex = 0;
+            _selectedAnimal = null;
             for (int i = 0; i < roster.Length; i++)
             {
                 if (roster[i] != null && roster[i].stableId == selectedId && IsAnimalUnlocked(roster[i]))
                 {
-                    _selectionIndex = i;
+                    _selectedAnimal = roster[i];
                     break;
                 }
-                if (roster[i] == _level.featuredAnimal && IsAnimalUnlocked(roster[i])) _selectionIndex = i;
+                if (_selectedAnimal == null && roster[i] == _level.featuredAnimal && IsAnimalUnlocked(roster[i]))
+                    _selectedAnimal = roster[i];
+                if (_selectedAnimal == null && IsAnimalUnlocked(roster[i]))
+                    _selectedAnimal = roster[i];
             }
-            UpdateSelectionUI();
+
+            if (_selectedAnimal == null || _selectedAnimal.playerPrefab == null)
+            {
+                Debug.LogError($"[MegaShooter] {_level.name} has no playable Super Animal.");
+                return;
+            }
+
+            _save?.SetSelectedSuperAnimalId(_selectedAnimal.stableId);
+            hud.HideSelection();
+            SpawnPlayer();
+#if UNITY_EDITOR
+            if (RuntimeTestFastStart)
+            {
+                waveDirector.Configure(this, _level);
+                waveDirector.Begin();
+                return;
+            }
+#endif
+            StartCoroutine(CountdownRoutine());
         }
 
         public void SelectAnimal(int direction)
@@ -257,6 +313,11 @@ namespace AnimalFall.MegaShooter
         public void AllWavesCompleted()
         {
             if (_ended) return;
+            if (_level.boss == null)
+            {
+                StartCoroutine(VictoryRoutine());
+                return;
+            }
             StartCoroutine(BossWarningRoutine());
         }
 
@@ -273,7 +334,10 @@ namespace AnimalFall.MegaShooter
                 FailLevel();
                 yield break;
             }
-            GameObject go = pools.Spawn(_level.boss.prefab, new Vector3(0f, _level.cameraBounds.yMax + 2f, 0f), Quaternion.identity, enemyContainer);
+            // Spawn the boss inside the top edge; its entrance animation must remain
+            // visible instead of approaching from outside the camera.
+            GameObject go = pools.Spawn(_level.boss.prefab,
+                new Vector3(0f, _level.cameraBounds.yMax - 1.25f, 0f), Quaternion.identity, enemyContainer);
             go.GetComponent<MegaBossController>()?.Configure(_level.boss, _level, this);
         }
 
@@ -392,16 +456,52 @@ namespace AnimalFall.MegaShooter
             bool reflectableOverride = true)
         {
             if (data == null || data.prefab == null || pools == null) return null;
-            if (faction == MegaFaction.Enemy && _hostileProjectiles.Count >= Mathf.Min(120, _level.maximumHostileProjectiles)) return null;
+            if (faction == MegaFaction.Enemy && _hostileProjectiles.Count >= Mathf.Min(24, _level.maximumHostileProjectiles)) return null;
+            if (faction == MegaFaction.Enemy)
+            {
+                direction = ForceDownward(direction);
+                speedMultiplier = Mathf.Min(speedMultiplier, 0.78f);
+            }
+            damage = Mathf.Max(0.1f, damage);
             GameObject go = pools.Spawn(data.prefab, position, Quaternion.identity, projectileContainer);
             MegaProjectile projectile = go.GetComponent<MegaProjectile>();
             projectile?.Configure(data, faction, direction, damage, speedMultiplier, pierce, homingTarget, this, reflectableOverride);
             return projectile;
         }
 
+        /// <summary>Limits the combined fire rate of ordinary enemies in mega waves.</summary>
+        public bool TryBeginOrdinaryEnemyVolley()
+        {
+            if (IsCombatFrozen || Time.time < _nextOrdinaryEnemyVolley) return false;
+            _nextOrdinaryEnemyVolley = Time.time + _ordinaryVolleyInterval;
+            return true;
+        }
+
+        /// <summary>Hostile shots in mega levels always travel toward the player lane.</summary>
+        public static Vector2 ForceDownward(Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f) return Vector2.down;
+            direction.Normalize();
+            if (direction.y > -0.12f) direction.y = -0.12f;
+            return direction.normalized;
+        }
+
         public void SpawnEffect(GameObject prefab, Vector2 position, Color color, float scale = 1f, float duration = 0.45f)
         {
             if (prefab == null || pools == null) return;
+            if (_effectFrame != Time.frameCount)
+            {
+                _effectFrame = Time.frameCount;
+                _effectsThisFrame = 0;
+            }
+            bool transient = duration <= 0.3f;
+            if (transient && _effectsThisFrame >= 8) return;
+            _effectsThisFrame++;
+            if (transient)
+            {
+                scale = Mathf.Min(scale, 0.72f);
+                duration = Mathf.Min(duration, 0.22f);
+            }
             GameObject effect = pools.Spawn(prefab, position, Quaternion.identity, projectileContainer);
             effect.transform.localScale = Vector3.one * Mathf.Max(0.05f, scale);
             MegaTimedPoolEffect timed = effect.GetComponent<MegaTimedPoolEffect>();
@@ -560,12 +660,22 @@ namespace AnimalFall.MegaShooter
                 }
             }
             AddPrefab(_level.boss?.prefab, 1);
+            BossPhaseData[] bossPhases = _level.boss?.phases;
+            for (int p = 0; bossPhases != null && p < bossPhases.Length; p++)
+            {
+                BossAttackPattern[] attacks = bossPhases[p]?.attacks;
+                for (int a = 0; attacks != null && a < attacks.Length; a++)
+                    AddPrefab(attacks[a]?.projectile?.prefab, _level.maximumHostileProjectiles);
+            }
             AddPrefab(defaultEnemyProjectile?.prefab, _level.maximumHostileProjectiles);
             AddPrefab(pickupPrefab, 5);
             MegaVFXProfile vfx = _level.vfxProfile;
             if (vfx != null)
             {
                 AddPrefab(vfx.hitSparkPrefab, 18);
+                AddPrefab(vfx.playerMuzzlePrefab, 12);
+                AddPrefab(vfx.enemyMuzzlePrefab, 12);
+                AddPrefab(vfx.bossMuzzlePrefab, 8);
                 AddPrefab(vfx.explosionPrefab, 10);
                 AddPrefab(vfx.eliteExplosionPrefab, 4);
                 AddPrefab(vfx.warningPrefab, 4);

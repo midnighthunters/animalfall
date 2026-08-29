@@ -11,6 +11,7 @@ namespace AnimalFall.MegaShooter
         private MegaShooterGameManager _game;
         private SpriteRenderer _renderer;
         private BoxCollider2D _collider;
+        private Rigidbody2D _body;
         private float _maxHealth;
         private float _health;
         private float _attackTimer;
@@ -22,6 +23,13 @@ namespace AnimalFall.MegaShooter
         private bool _registered;
         private Coroutine _hitGlowRoutine;
         private Color _phaseColor = Color.white;
+        private Vector3 _baseScale;
+        private float _visualScale;
+
+        // Uniform shrink applied to every mega villain so bosses stay readable.
+        private const float BossSizeScale = 0.66f;
+        // Ceiling on per-phase growth so later phases never balloon off-screen.
+        private const float MaxPhaseScaleMultiplier = 1.15f;
 
         public int PhaseIndex => _phaseIndex;
         public float HealthNormalized => _maxHealth > 0f ? _health / _maxHealth : 0f;
@@ -32,6 +40,12 @@ namespace AnimalFall.MegaShooter
             _collider = GetComponent<BoxCollider2D>();
             if (_collider == null) _collider = gameObject.AddComponent<BoxCollider2D>();
             _collider.isTrigger = true;
+            _body = GetComponent<Rigidbody2D>();
+            if (_body == null) _body = gameObject.AddComponent<Rigidbody2D>();
+            _body.bodyType = RigidbodyType2D.Kinematic;
+            _body.gravityScale = 0f;
+            _body.useFullKinematicContacts = true;
+            _baseScale = transform.localScale;
         }
 
         public void Configure(BossShipData data, MegaLevelData level, MegaShooterGameManager game)
@@ -47,13 +61,17 @@ namespace AnimalFall.MegaShooter
             _game = game;
             _renderer.sprite = data.sprite;
             _renderer.color = Color.white;
+            // Mega villains were oversized and dominated the arena. Keep them clearly
+            // the biggest ship on screen, but small enough to read and dodge around.
+            _visualScale = Mathf.Clamp(data.visualScale, 0.2f, 1f) * BossSizeScale;
+            transform.localScale = _baseScale * _visualScale;
             _phaseColor = Color.white;
             _collider.size = data.colliderSize;
             _maxHealth = data.baseHitPoints * level.bossOverrides.healthMultiplier;
             _health = _maxHealth;
             _phaseIndex = 0;
             _age = 0f;
-            _attackTimer = 1f;
+            _attackTimer = 2.2f;
             _pendingOverflow = 0f;
             _transitioning = false;
             _damageLocked = !skipEntrance;
@@ -69,8 +87,10 @@ namespace AnimalFall.MegaShooter
 
         private IEnumerator EntranceRoutine()
         {
-            Vector3 target = new Vector3(0f, _data.movementBounds.yMax - 0.4f, 0f);
-            Vector3 start = new Vector3(0f, _level.cameraBounds.yMax + 2f, 0f);
+            float halfHeight = Mathf.Max(0.35f, _collider.bounds.extents.y);
+            float visibleTop = _level.cameraBounds.yMax - halfHeight - 0.2f;
+            Vector3 target = new Vector3(0f, Mathf.Min(_data.movementBounds.yMax - 0.4f, visibleTop), 0f);
+            Vector3 start = new Vector3(0f, visibleTop, 0f);
             transform.position = start;
             float duration = Mathf.Max(0.1f, _data.entranceDuration);
             for (float t = 0f; t < duration; t += Time.deltaTime)
@@ -95,7 +115,9 @@ namespace AnimalFall.MegaShooter
             if (_attackTimer <= 0f && !_transitioning)
             {
                 FireAttack(phase);
-                _attackTimer = Mathf.Max(0.25f, phase.attackInterval * _level.bossOverrides.attackIntervalMultiplier);
+                _attackTimer = Mathf.Max(2.2f,
+                    phase.attackInterval * _level.bossOverrides.attackIntervalMultiplier * 1.3f)
+                    * _game.HostileFireIntervalScale;
             }
         }
 
@@ -106,14 +128,14 @@ namespace AnimalFall.MegaShooter
             float y = bounds.center.y;
             float horizontal = bounds.width * 0.42f;
             float vertical = bounds.height * 0.34f;
-            float pace = 0.65f + _phaseIndex * 0.08f;
+            float pace = 0.44f + _phaseIndex * 0.05f;
 
             switch (phase.movementPattern)
             {
                 case MegaMovementPattern.Stationary:
                     break;
                 case MegaMovementPattern.SideSweep:
-                    x = bounds.xMin + Mathf.PingPong(_age * (1.1f + _phaseIndex * 0.06f), bounds.width);
+                    x = bounds.xMin + Mathf.PingPong(_age * (0.72f + _phaseIndex * 0.04f), bounds.width);
                     y += Mathf.Sin(_age * 1.6f) * vertical;
                     break;
                 case MegaMovementPattern.Orbit:
@@ -121,7 +143,7 @@ namespace AnimalFall.MegaShooter
                     y += Mathf.Sin(_age * pace * 1.35f) * vertical;
                     break;
                 case MegaMovementPattern.ZigZag:
-                    x = bounds.xMin + Mathf.PingPong(_age * (1.35f + _phaseIndex * 0.06f), bounds.width);
+                    x = bounds.xMin + Mathf.PingPong(_age * (0.86f + _phaseIndex * 0.04f), bounds.width);
                     y += Mathf.PingPong(_age * .7f, vertical * 2f) - vertical;
                     break;
                 case MegaMovementPattern.Dive:
@@ -137,7 +159,16 @@ namespace AnimalFall.MegaShooter
                     break;
             }
 
-            transform.position = new Vector3(Mathf.Clamp(x, bounds.xMin, bounds.xMax), Mathf.Clamp(y, bounds.yMin, bounds.yMax), 0f);
+            Rect camera = _level.cameraBounds;
+            float halfWidth = Mathf.Max(0.35f, _collider.bounds.extents.x);
+            float halfHeight = Mathf.Max(0.35f, _collider.bounds.extents.y);
+            float visibleMinX = Mathf.Max(bounds.xMin, camera.xMin + halfWidth + 0.15f);
+            float visibleMaxX = Mathf.Min(bounds.xMax, camera.xMax - halfWidth - 0.15f);
+            float visibleMinY = Mathf.Max(bounds.yMin, camera.yMin + halfHeight + 0.15f);
+            float visibleMaxY = Mathf.Min(bounds.yMax, camera.yMax - halfHeight - 0.15f);
+            transform.position = new Vector3(
+                Mathf.Clamp(x, visibleMinX, visibleMaxX),
+                Mathf.Clamp(y, visibleMinY, visibleMaxY), 0f);
         }
 
         private BossPhaseData CurrentPhase
@@ -163,11 +194,18 @@ namespace AnimalFall.MegaShooter
             _game.Hud?.ShowBanner(attack.attackName);
             yield return new WaitForSeconds(Mathf.Max(0.85f, attack.telegraphTime));
 
-            ProjectileData projectile = _game.DefaultEnemyProjectile;
+            ProjectileData projectile = attack.projectile != null ? attack.projectile : _game.DefaultEnemyProjectile;
             if (projectile == null) yield break;
             if (attack.clearsBulletsBeforeAttack) _game.ClearOrReflectHostileProjectiles(false);
-            int count = Mathf.Clamp(attack.projectileCount, 1, 24);
-            int volleys = attack.pattern == MegaWeaponPattern.Burst ? 3 : 1;
+            _game.SpawnEffect(_game.VFXProfile?.bossMuzzlePrefab ?? _game.VFXProfile?.warningPrefab,
+                transform.position, attack.muzzleColor, 1.1f, 0.28f);
+            if (_game.Player != null && attack.playerEffectDuration > 0f && attack.playerMovementMultiplier < 1f)
+                _game.Player.ApplyMovementModifier(attack.playerMovementMultiplier, attack.playerEffectDuration);
+            if (attack.screenObscureStrength > 0f)
+                _game.CameraEffects?.Flash(new Color(.025f, 0f, .08f, 1f), attack.screenObscureStrength,
+                    Mathf.Max(.35f, attack.playerEffectDuration));
+            int count = Mathf.Clamp(attack.projectileCount, 1, 8);
+            int volleys = Mathf.Clamp(attack.volleyCount > 1 ? attack.volleyCount : attack.pattern == MegaWeaponPattern.Burst ? 2 : 1, 1, 3);
             for (int volley = 0; volley < volleys; volley++)
             {
                 for (int i = 0; i < count; i++)
@@ -189,12 +227,14 @@ namespace AnimalFall.MegaShooter
                     float damage = phase.projectileDamageOverride > 0f ? phase.projectileDamageOverride : projectile.damage;
                     float mechanismSpeed = attack.pattern == MegaWeaponPattern.Mine ? 0.18f
                         : attack.pattern == MegaWeaponPattern.Sniper || attack.pattern == MegaWeaponPattern.Laser ? 1.6f : 1f;
+                    Transform homingTarget = projectile.motion == MegaProjectileMotion.Homing || attack.aimed
+                        ? _game.Player?.transform : null;
                     _game.SpawnProjectile(projectile, MegaFaction.Enemy, transform.position, direction,
                         damage * _level.enemyDamageMultiplier,
-                        _level.enemyProjectileSpeedMultiplier * phase.projectileSpeedMultiplier * _level.bossOverrides.projectileSpeedMultiplier * mechanismSpeed,
-                        0, attack.aimed ? _game.Player?.transform : null, attack.reflectable);
+                        _level.enemyProjectileSpeedMultiplier * phase.projectileSpeedMultiplier * _level.bossOverrides.projectileSpeedMultiplier * mechanismSpeed * _game.HostileProjectileSpeedScale,
+                        0, homingTarget, attack.reflectable);
                 }
-                if (volley > 1 && volley < volleys - 1) yield return new WaitForSeconds(0.16f);
+                if (volley < volleys - 1) yield return new WaitForSeconds(Mathf.Max(.05f, attack.volleyInterval));
             }
         }
 
@@ -230,6 +270,7 @@ namespace AnimalFall.MegaShooter
             BossPhaseData phase = CurrentPhase;
             _phaseColor = phase.phaseTint;
             _renderer.color = _phaseColor;
+            transform.localScale = _baseScale * _visualScale * Mathf.Clamp(phase.bossScaleMultiplier, .25f, MaxPhaseScaleMultiplier);
             _game.SpawnEffect(phase.transitionVFX != null ? phase.transitionVFX : _game.VFXProfile?.warningPrefab,
                 transform.position, new Color(1f, 0.08f, 0.12f, 1f), 2.2f, 0.85f);
             _game.ClearOrReflectHostileProjectiles(false);
@@ -289,6 +330,8 @@ namespace AnimalFall.MegaShooter
             _registered = false;
             _renderer.color = Color.white;
             _phaseColor = Color.white;
+            transform.localScale = _baseScale;
+            _visualScale = 1f;
             _data = null;
             _level = null;
             _game = null;
