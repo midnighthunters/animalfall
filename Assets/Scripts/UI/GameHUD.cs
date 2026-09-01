@@ -91,6 +91,25 @@ namespace AnimalFall.UI
             EnsureBottomLayout();
             BuildGoalChips(_summaryGoal);
             UpdateTargetSummary();
+
+            // Initialize booster counts display
+            if (_boosterManager != null)
+            {
+                // Assign booster sprites
+                var bombSprite = AtlasSprite("bomb", new Rect(324f, 0f, 267f, 259f));
+                var rainbowSprite = AtlasSprite("rainbow", new Rect(611f, 15f, 247f, 232f));
+                var rocketSprite = AtlasSprite("rocket", new Rect(881f, 17f, 249f, 230f));
+
+                // Use reflection to set the private sprite fields
+                var managerType = _boosterManager.GetType();
+                managerType.GetField("_bombSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(_boosterManager, bombSprite);
+                managerType.GetField("_rainbowSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(_boosterManager, rainbowSprite);
+                managerType.GetField("_rocketSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(_boosterManager, rocketSprite);
+
+                UpdateBoosterCount(BoosterType.Bomb, _boosterManager.BombCount);
+                UpdateBoosterCount(BoosterType.Rainbow, _boosterManager.RainbowCount);
+                UpdateBoosterCount(BoosterType.Rocket, _boosterManager.RocketCount);
+            }
         }
 
         /// <summary>
@@ -387,22 +406,38 @@ namespace AnimalFall.UI
 
         private void OnEnable()
         {
+            // Booster events
             if (_boosterManager != null)
             {
                 _boosterManager.OnBoosterCountChanged += UpdateBoosterCount;
                 _boosterManager.OnBoosterSelected += HighlightBooster;
                 _boosterManager.OnBoosterDeselected += ClearBoosterHighlight;
             }
+
+            if (!Application.isPlaying)
+            {
+                // Editor preview: build the same styled panel players see at runtime.
+                BuildEditorPreview();
+                return;
+            }
+
+            BindGoalTracker();
+            GameEvents.OnTimerWarning += OnTimerWarning;
         }
 
         private void OnDisable()
         {
+            // Booster events
             if (_boosterManager != null)
             {
                 _boosterManager.OnBoosterCountChanged -= UpdateBoosterCount;
                 _boosterManager.OnBoosterSelected -= HighlightBooster;
                 _boosterManager.OnBoosterDeselected -= ClearBoosterHighlight;
             }
+
+            if (!Application.isPlaying) return;
+            UnbindGoalTracker();
+            GameEvents.OnTimerWarning -= OnTimerWarning;
         }
 
         private static Image EnsureImage(string name, Transform parent, Sprite sprite)
@@ -644,26 +679,6 @@ private void UpdateTargetSummary()
             ApplyDefaultFont(tmp);
 
             return go;
-        }
-
-        private void OnEnable()
-        {
-            if (!Application.isPlaying)
-            {
-                // Editor preview: build the same styled panel players see at runtime.
-                BuildEditorPreview();
-                return;
-            }
-
-            BindGoalTracker();
-            GameEvents.OnTimerWarning += OnTimerWarning;
-        }
-
-        private void OnDisable()
-        {
-            if (!Application.isPlaying) return;
-            UnbindGoalTracker();
-            GameEvents.OnTimerWarning -= OnTimerWarning;
         }
 
         private void Start()
