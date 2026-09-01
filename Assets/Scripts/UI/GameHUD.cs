@@ -30,7 +30,11 @@ namespace AnimalFall.UI
         [SerializeField] private Color _barColor = new Color(0.12f, 0.14f, 0.2f, 0.92f);
         [SerializeField] private Color _countColor = Color.white;
 
+        [Header("Boosters")]
+        [SerializeField] private BoosterManager _boosterManager;
+
         private readonly Dictionary<AnimalSpecies, GoalChip> _chips = new Dictionary<AnimalSpecies, GoalChip>();
+        private readonly Dictionary<BoosterType, BoosterButton> _boosterButtons = new Dictionary<BoosterType, BoosterButton>();
         private float _totalTime = 60f;
         private bool _warningActive;
         private bool _goalBound;
@@ -49,6 +53,16 @@ namespace AnimalFall.UI
             public TextMeshProUGUI Count;
             public CanvasGroup Group;
             public Image Check;
+        }
+
+        private class BoosterButton
+        {
+            public GameObject Root;
+            public Button Button;
+            public Image Icon;
+            public Image Frame;
+            public TextMeshProUGUI CountText;
+            public BoosterType Type;
         }
 
         public void Setup(LevelData level)
@@ -231,25 +245,164 @@ namespace AnimalFall.UI
                 shadow.effectDistance = new Vector2(0f, -4f);
             }
 
-            BuildBooster("BoosterBomb", -330f, boosterFrame,
+            BuildBooster("BoosterBomb", BoosterType.Bomb, -330f, boosterFrame,
                 AtlasSprite("bomb", new Rect(324f, 0f, 267f, 259f)), 80f);
-            BuildBooster("BoosterRainbow", -200f, boosterFrame,
+            BuildBooster("BoosterRainbow", BoosterType.Rainbow, -200f, boosterFrame,
                 AtlasSprite("rainbow", new Rect(611f, 15f, 247f, 232f)), 82f);
-            BuildBooster("BoosterRocket", -70f, boosterFrame,
+            BuildBooster("BoosterRocket", BoosterType.Rocket, -70f, boosterFrame,
                 AtlasSprite("rocket", new Rect(881f, 17f, 249f, 230f)), 84f);
         }
 
-        private void BuildBooster(string name, float x, Sprite frame, Sprite icon, float iconSize)
+        private void BuildBooster(string name, BoosterType type, float x, Sprite frame, Sprite icon, float iconSize)
         {
-            Image button = EnsureImage(name, _bottomBar, frame);
-            SetFixed(button.rectTransform, new Vector2(120f, 120f), new Vector2(1f, 0f),
+            Image frameImage = EnsureImage(name, _bottomBar, frame);
+            SetFixed(frameImage.rectTransform, new Vector2(120f, 120f), new Vector2(1f, 0f),
                 new Vector2(x, 16f), new Vector2(0.5f, 0f));
-            button.preserveAspect = true;
+            frameImage.preserveAspect = true;
+            frameImage.raycastTarget = true; // Enable raycasting for button
 
-            Image iconImage = EnsureImage("Icon", button.transform, icon);
+            // Add Button component
+            Button button = frameImage.gameObject.GetComponent<Button>();
+            if (button == null) button = frameImage.gameObject.AddComponent<Button>();
+            button.transition = Selectable.Transition.ColorTint;
+            
+            ColorBlock colors = button.colors;
+            colors.normalColor = Color.white;
+            colors.highlightedColor = new Color(1f, 1f, 0.7f, 1f);
+            colors.pressedColor = new Color(0.8f, 0.8f, 0.8f, 1f);
+            colors.selectedColor = new Color(1f, 1f, 0.5f, 1f);
+            colors.disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            button.colors = colors;
+
+            // Wire up click event
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => OnBoosterClicked(type));
+
+            // Icon
+            Image iconImage = EnsureImage("Icon", frameImage.transform, icon);
             SetFixed(iconImage.rectTransform, new Vector2(iconSize, iconSize), new Vector2(0.5f, 0.5f),
                 Vector2.zero, new Vector2(0.5f, 0.5f));
             iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+
+            // Count text (positioned at bottom-right corner)
+            TextMeshProUGUI countText = EnsureText("CountText", frameImage.transform);
+            SetFixed(countText.rectTransform, new Vector2(50f, 40f), new Vector2(1f, 0f),
+                new Vector2(-5f, 5f), new Vector2(1f, 0f));
+            countText.fontSize = 28;
+            countText.fontStyle = FontStyles.Bold;
+            countText.color = Color.white;
+            countText.alignment = TextAlignmentOptions.BottomRight;
+            countText.text = "3";
+            
+            // Add outline for better visibility
+            var outline = countText.gameObject.GetComponent<UnityEngine.UI.Outline>();
+            if (outline == null) outline = countText.gameObject.AddComponent<UnityEngine.UI.Outline>();
+            outline.effectColor = new Color(0f, 0f, 0f, 0.8f);
+            outline.effectDistance = new Vector2(2f, -2f);
+
+            // Store reference
+            var boosterBtn = new BoosterButton
+            {
+                Root = frameImage.gameObject,
+                Button = button,
+                Frame = frameImage,
+                Icon = iconImage,
+                CountText = countText,
+                Type = type
+            };
+            _boosterButtons[type] = boosterBtn;
+        }
+
+        private void OnBoosterClicked(BoosterType type)
+        {
+            if (_boosterManager == null)
+            {
+                Debug.LogWarning("[GameHUD] BoosterManager reference not set!");
+                return;
+            }
+
+            _boosterManager.SelectBooster(type);
+        }
+
+        /// <summary>
+        /// Update booster count display and button interactability.
+        /// </summary>
+        public void UpdateBoosterCount(BoosterType type, int count)
+        {
+            if (!_boosterButtons.TryGetValue(type, out var btn)) return;
+
+            btn.CountText.text = count.ToString();
+            btn.Button.interactable = count > 0;
+
+            // Fade out if count is 0
+            if (count <= 0)
+            {
+                btn.Frame.color = new Color(1f, 1f, 1f, 0.5f);
+                btn.Icon.color = new Color(1f, 1f, 1f, 0.5f);
+            }
+            else
+            {
+                btn.Frame.color = Color.white;
+                btn.Icon.color = Color.white;
+            }
+        }
+
+        /// <summary>
+        /// Highlight the selected booster.
+        /// </summary>
+        public void HighlightBooster(BoosterType type)
+        {
+            foreach (var kvp in _boosterButtons)
+            {
+                if (kvp.Key == type)
+                {
+                    // Highlight selected
+                    kvp.Value.Frame.DOKill();
+                    kvp.Value.Frame.transform.DOScale(1.15f, 0.2f).SetEase(Ease.OutBack);
+                    kvp.Value.Frame.DOColor(new Color(1f, 1f, 0.5f, 1f), 0.2f);
+                }
+                else
+                {
+                    // Dim others
+                    kvp.Value.Frame.DOKill();
+                    kvp.Value.Frame.transform.DOScale(1f, 0.2f);
+                    kvp.Value.Frame.DOColor(new Color(0.6f, 0.6f, 0.6f, 1f), 0.2f);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove highlight from all boosters.
+        /// </summary>
+        public void ClearBoosterHighlight()
+        {
+            foreach (var kvp in _boosterButtons)
+            {
+                kvp.Value.Frame.DOKill();
+                kvp.Value.Frame.transform.DOScale(1f, 0.2f);
+                kvp.Value.Frame.DOColor(Color.white, 0.2f);
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (_boosterManager != null)
+            {
+                _boosterManager.OnBoosterCountChanged += UpdateBoosterCount;
+                _boosterManager.OnBoosterSelected += HighlightBooster;
+                _boosterManager.OnBoosterDeselected += ClearBoosterHighlight;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_boosterManager != null)
+            {
+                _boosterManager.OnBoosterCountChanged -= UpdateBoosterCount;
+                _boosterManager.OnBoosterSelected -= HighlightBooster;
+                _boosterManager.OnBoosterDeselected -= ClearBoosterHighlight;
+            }
         }
 
         private static Image EnsureImage(string name, Transform parent, Sprite sprite)

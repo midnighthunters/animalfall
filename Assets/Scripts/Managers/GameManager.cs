@@ -25,6 +25,7 @@ namespace AnimalFall.Managers
         [SerializeField] private ComboManager       _comboManager;
         [SerializeField] private AudioManager       _audioManager;
         [SerializeField] private PowerUpManager     _powerUpManager;
+        [SerializeField] private BoosterManager     _boosterManager;
         [SerializeField] private LivesManager       _livesManager;
         [SerializeField] private InputManager       _inputManager;
         [SerializeField] private MegaLevelController _megaLevelController;
@@ -181,6 +182,7 @@ namespace AnimalFall.Managers
             _scoreManager?.ResetScore();
             _comboManager?.ResetCombo();
             _powerUpManager?.Reset();
+            _boosterManager?.ResetBoosters(3, 3, 3); // Reset with default counts
             _envEffects?.ClearAll();
             ScreenEffects.Instance?.ClearAll();
             CancelTutorialPause();

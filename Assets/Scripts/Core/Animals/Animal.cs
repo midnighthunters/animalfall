@@ -367,7 +367,7 @@ namespace AnimalFall.Core.Animals
             PlayPopAndReturn(true);
         }
 
-        private void PlayPopAndReturn(bool success)
+        public void PlayPopAndReturn(bool success)
         {
             if (_movement != null) _movement.enabled = false;
             DOTween.Kill(gameObject);
