@@ -450,6 +450,10 @@ namespace AnimalFall
             // Create rocket sprite at bottom
             GameObject rocketObj = CreateSpriteObject(_rocketSprite, bottomPos, 1f);
             
+            // Calculate travel time
+            float distance = Vector3.Distance(bottomPos, topPos);
+            float travelTime = distance / _rocketSpeed;
+            
             // Spawn trail VFX
             GameObject trailVFX = null;
             if (_rocketLaunchVFX != null)
@@ -458,10 +462,6 @@ namespace AnimalFall
                 if (trailVFX != null)
                     trailVFX.transform.SetParent(rocketObj.transform);
             }
-
-            // Calculate travel time
-            float distance = Vector3.Distance(bottomPos, topPos);
-            float travelTime = distance / _rocketSpeed;
 
             // Collect animals in the lane
             var animals = new List<Animal>(ActiveAnimalRegistry.All);
