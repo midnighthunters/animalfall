@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 1, g: 0.18, b: 0.03, a: 1}
   introImage: {fileID: 3384815690358442951, guid: fd19c736eda69964fbaf5b9e809342d6, type: 3}
   bossWarningText: "WARNING \u2014 EMPEROR STING APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: e3a33d22d7b1bb943b225c96567f2dba, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

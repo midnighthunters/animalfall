@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 1, g: 0.22, b: 0.04, a: 1}
   introImage: {fileID: 7406105541468094581, guid: 73344ff856f41a242adb7d2d870c902f, type: 3}
   bossWarningText: "WARNING \u2014 GENERAL SMASH APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: f9ee3ff31d62cb24ab7f07ed17596381, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 92f4401d2484fa842a00649a099f0a01, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

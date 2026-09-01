@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 0.05, g: 0.62, b: 1, a: 1}
   introImage: {fileID: -5791708679992500206, guid: 5403117277b271041b02aec998caed1d, type: 3}
   bossWarningText: "WARNING \u2014 CAPTAIN CHOMPER APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: 4894b27f3f6026341803a6eebd58a256, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 3274ca3d08999b14180abe8b1e442c26, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

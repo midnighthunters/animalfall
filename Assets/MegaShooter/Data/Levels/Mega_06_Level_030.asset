@@ -31,7 +31,7 @@ MonoBehaviour:
   accentColor: {r: 1, g: 0.36, b: 0.05, a: 1}
   introImage: {fileID: -3093120251711308205, guid: a1549b39810d7b147a5e2d4d99cc401f, type: 3}
   bossWarningText: "WARNING \u2014 IRONHORN APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: c059f591d1769794d9133e74549624dd, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: e3a33d22d7b1bb943b225c96567f2dba, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 0.04, g: 0.92, b: 0.82, a: 1}
   introImage: {fileID: 8989697006288321378, guid: 2040dcaa9498c7f43b203ad9ade71cfe, type: 3}
   bossWarningText: "WARNING \u2014 DOOM PUFFER APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: 3274ca3d08999b14180abe8b1e442c26, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: e3a33d22d7b1bb943b225c96567f2dba, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

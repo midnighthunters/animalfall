@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 0.3, g: 1, b: 0.08, a: 1}
   introImage: {fileID: 3618328923101007780, guid: 62bf4410ad3ce2c408d93aa1399986a6, type: 3}
   bossWarningText: "WARNING \u2014 VENOM EMPEROR APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

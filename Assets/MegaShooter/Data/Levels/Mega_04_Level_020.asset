@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 0.56, g: 0.12, b: 1, a: 1}
   introImage: {fileID: -1099281778687107254, guid: 4b7db431ca6d64b48b97754556c903c8, type: 3}
   bossWarningText: "WARNING \u2014 ADMIRAL INKSTORM APPROACHING"
-  featuredAnimal: {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 4894b27f3f6026341803a6eebd58a256, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

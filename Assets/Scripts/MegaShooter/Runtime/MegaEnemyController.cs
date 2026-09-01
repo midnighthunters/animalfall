@@ -29,6 +29,8 @@ namespace AnimalFall.MegaShooter
         private bool _telegraphing;
         private bool _elite;
         private Vector3 _baseScale;
+        // Keep army villains smaller so the player has clear sightlines.
+        private const float VillainSizeScale = 0.80f;
         private float _halfWidth;
         private float _halfHeight;
 
@@ -63,7 +65,7 @@ namespace AnimalFall.MegaShooter
             _director = director;
             _elite = elite;
             _renderer.sprite = data.sprite;
-            transform.localScale = _baseScale * Mathf.Clamp(data.visualScale, 0.2f, 1f);
+            transform.localScale = _baseScale * Mathf.Clamp(data.visualScale, 0.2f, 1f) * VillainSizeScale;
             _baseColor = elite ? new Color(1f, 0.72f, 0.25f, 1f) : Color.white;
             _renderer.color = _baseColor;
             _collider.size = data.colliderSize;

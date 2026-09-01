@@ -32,7 +32,7 @@ MonoBehaviour:
   accentColor: {r: 1, g: 0.08, b: 0.26, a: 1}
   introImage: {fileID: -1623957708977046595, guid: ff42a1e42b04bb04d9bb491465851896, type: 3}
   bossWarningText: 
-  featuredAnimal: {fileID: 11400000, guid: 92f4401d2484fa842a00649a099f0a01, type: 2}
+  featuredAnimal: {fileID: 11400000, guid: 4ef98d0e068cbe54d8d5ae15e3e81aa2, type: 2}
   allowedAnimals:
   - {fileID: 11400000, guid: e185727fa42260448a04f87a43e79e32, type: 2}
   - {fileID: 11400000, guid: 666df062b47801942987b6b0c93469e9, type: 2}

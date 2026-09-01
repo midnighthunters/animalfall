@@ -27,7 +27,7 @@ namespace AnimalFall.MegaShooter
         private float _visualScale;
 
         // Uniform shrink applied to every mega villain so bosses stay readable.
-        private const float BossSizeScale = 0.66f;
+        private const float BossSizeScale = 0.56f;
         // Ceiling on per-phase growth so later phases never balloon off-screen.
         private const float MaxPhaseScaleMultiplier = 1.15f;
 

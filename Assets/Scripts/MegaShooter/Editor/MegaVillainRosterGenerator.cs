@@ -410,7 +410,7 @@ namespace AnimalFall.MegaShooter.Editor
             data.reducedEffectsCompatible = true;
             data.deterministicSeed = 5101 + sequenceIndex * 97;
             data.randomizeSeed = false;
-            data.featuredAnimal = animals[Mathf.Min(family, animals.Length - 1)];
+            data.featuredAnimal = animals[sequenceIndex % animals.Length];
             data.allowedAnimals = new SuperAnimalData[animals.Length];
             Array.Copy(animals, data.allowedAnimals, animals.Length);
             if (backgrounds != null && backgrounds.Length > 0)

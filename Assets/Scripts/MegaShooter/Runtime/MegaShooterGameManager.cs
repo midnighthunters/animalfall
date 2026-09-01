@@ -217,19 +217,20 @@ namespace AnimalFall.MegaShooter
             if (_level.featuredAnimal != null)
                 _save?.UnlockSuperAnimal(_level.featuredAnimal.stableId);
 
-            string selectedId = _save?.GetSelectedSuperAnimalId();
-            _selectedAnimal = null;
-            for (int i = 0; i < roster.Length; i++)
+            _selectedAnimal = _level.featuredAnimal;
+            if (!IsAnimalUnlocked(_selectedAnimal) || _selectedAnimal.playerPrefab == null)
             {
-                if (roster[i] != null && roster[i].stableId == selectedId && IsAnimalUnlocked(roster[i]))
+                int start = Mathf.Max(0, _level.megaSequenceIndex - 1) % roster.Length;
+                _selectedAnimal = null;
+                for (int offset = 0; offset < roster.Length; offset++)
                 {
-                    _selectedAnimal = roster[i];
-                    break;
+                    SuperAnimalData candidate = roster[(start + offset) % roster.Length];
+                    if (candidate != null && IsAnimalUnlocked(candidate) && candidate.playerPrefab != null)
+                    {
+                        _selectedAnimal = candidate;
+                        break;
+                    }
                 }
-                if (_selectedAnimal == null && roster[i] == _level.featuredAnimal && IsAnimalUnlocked(roster[i]))
-                    _selectedAnimal = roster[i];
-                if (_selectedAnimal == null && IsAnimalUnlocked(roster[i]))
-                    _selectedAnimal = roster[i];
             }
 
             if (_selectedAnimal == null || _selectedAnimal.playerPrefab == null)

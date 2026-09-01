@@ -111,6 +111,9 @@ namespace AnimalFall.Core.Animals
             // simple to see and tap for new players.
             if (level != null && level.LevelNumber >= 1 && level.LevelNumber <= EarlyLevelMaxNumber)
                 _targetWorldSize *= EarlyLevelSizeMultiplier;
+            // Normal falling-animal levels use a larger 2x touch target; Mega Shooter has its own visuals.
+            if (level == null || !level.IsConfiguredMegaShooter)
+                _targetWorldSize *= 2f;
 
             Sprite displaySprite = ImageLibrary.GetAnimalSprite(data.species);
 
