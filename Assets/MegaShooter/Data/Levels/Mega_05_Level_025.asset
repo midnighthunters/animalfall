@@ -15,8 +15,8 @@ MonoBehaviour:
   gameLevelNumber: 25
   displayTitle: "Ironhorn \u2014 Army Assault"
   megaSequenceIndex: 5
-  description: "Defeat the three specialist wings serving Rhino \u2014 Ironhorn.
-    No boss enters this mission."
+  description: "Break a mixed villain coalition led by Rhino \u2014 Ironhorn. No
+    boss enters this mission."
   backgroundLayers:
   - {fileID: 21300000, guid: 2854ef99344cde549b945a670e525dfc, type: 3}
   - {fileID: 21300000, guid: 2854ef99344cde549b945a670e525dfc, type: 3}
@@ -72,14 +72,14 @@ MonoBehaviour:
     warningBanner: IRONHORN ARMY INBOUND
     spawnGroups:
     - enemy: {fileID: 11400000, guid: 0c03426930660794fa862da124fb06cb, type: 2}
-      count: 5
-      formation: 2
+      count: 6
+      formation: 6
       spawnPath: 0
       startDelay: 0
-      cadence: 0.398
-      columns: 5
+      cadence: 0.14999999
+      columns: 6
       rows: 1
-      spacing: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -87,31 +87,47 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: e6ea69a9873adb3488944c438dcbbe02, type: 2}
-      count: 3
-      formation: 6
-      spawnPath: 1
-      startDelay: 0
-      cadence: 0.398
-      columns: 3
-      rows: 1
-      spacing: 1
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 03b47b1ad3f2a124ca768430ed8d3606, type: 2}
-      count: 2
-      formation: 1
+    - enemy: {fileID: 11400000, guid: 836ce3684388e2744a9a4708173e9169, type: 2}
+      count: 5
+      formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.398
-      columns: 2
+      cadence: 0.14999999
+      columns: 5
       rows: 1
-      spacing: 1
+      spacing: 0.82
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: eec88745b57780f439d878fd1b4fd7b8, type: 2}
+      count: 4
+      formation: 1
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 4
+      rows: 1
+      spacing: 0.82
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: cf57566aae66d4745bdd5a04878c449f, type: 2}
+      count: 1
+      formation: 4
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 3
+      rows: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -123,7 +139,7 @@ MonoBehaviour:
     speedMultiplier: 1
     fireRateMultiplier: 1
     scoreMultiplier: 1
-    maximumSimultaneousEnemies: 7
+    maximumSimultaneousEnemies: 30
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
@@ -134,46 +150,62 @@ MonoBehaviour:
     warningBanner: 
     spawnGroups:
     - enemy: {fileID: 11400000, guid: e6ea69a9873adb3488944c438dcbbe02, type: 2}
-      count: 5
-      formation: 6
-      spawnPath: 1
-      startDelay: 0
-      cadence: 0.398
-      columns: 5
-      rows: 1
-      spacing: 1
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 03b47b1ad3f2a124ca768430ed8d3606, type: 2}
-      count: 3
-      formation: 1
-      spawnPath: 2
-      startDelay: 0
-      cadence: 0.398
-      columns: 3
-      rows: 1
-      spacing: 1
-      normalizedEntry: 0.5
-      movementSpeedOverride: 0
-      firePatternOverride: 0
-      eliteChance: 0
-      explicitElite: 0
-      pickupDropOverride: 0
-      priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 03b47b1ad3f2a124ca768430ed8d3606, type: 2}
-      count: 2
-      formation: 4
+      count: 6
+      formation: 0
       spawnPath: 0
       startDelay: 0
-      cadence: 0.398
-      columns: 2
+      cadence: 0.14999999
+      columns: 6
       rows: 1
-      spacing: 1
+      spacing: 0.92
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: acc0e342f6f93a54f83e28ad7f32e255, type: 2}
+      count: 5
+      formation: 2
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 5
+      rows: 1
+      spacing: 0.82
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 523c9887e82d1874392980e8f615f149, type: 2}
+      count: 4
+      formation: 6
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 4
+      rows: 1
+      spacing: 0.82
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 89d6dbd9bdac1f04fa2f61b2f875605f, type: 2}
+      count: 1
+      formation: 3
+      spawnPath: 2
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 3
+      rows: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -185,7 +217,7 @@ MonoBehaviour:
     speedMultiplier: 1.025
     fireRateMultiplier: 1
     scoreMultiplier: 1.07
-    maximumSimultaneousEnemies: 7
+    maximumSimultaneousEnemies: 30
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
@@ -196,14 +228,14 @@ MonoBehaviour:
     warningBanner: "ELITE FORMATION \u2014 CLEAR THE SKY"
     spawnGroups:
     - enemy: {fileID: 11400000, guid: 03b47b1ad3f2a124ca768430ed8d3606, type: 2}
-      count: 5
+      count: 6
       formation: 1
-      spawnPath: 2
+      spawnPath: 0
       startDelay: 0
-      cadence: 0.398
-      columns: 5
+      cadence: 0.14999999
+      columns: 6
       rows: 1
-      spacing: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -211,15 +243,15 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 0c03426930660794fa862da124fb06cb, type: 2}
-      count: 3
+    - enemy: {fileID: 11400000, guid: 1712952fd9e9b14448d415eb159c9d75, type: 2}
+      count: 5
       formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.398
-      columns: 3
+      cadence: 0.14999999
+      columns: 5
       rows: 1
-      spacing: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -227,15 +259,31 @@ MonoBehaviour:
       explicitElite: 0
       pickupDropOverride: 0
       priorityTarget: 0
-    - enemy: {fileID: 11400000, guid: 03b47b1ad3f2a124ca768430ed8d3606, type: 2}
-      count: 1
+    - enemy: {fileID: 11400000, guid: 89d6dbd9bdac1f04fa2f61b2f875605f, type: 2}
+      count: 4
       formation: 0
-      spawnPath: 1
+      spawnPath: 0
       startDelay: 0
-      cadence: 0.398
-      columns: 2
+      cadence: 0.14999999
+      columns: 4
       rows: 1
-      spacing: 1
+      spacing: 0.92
+      normalizedEntry: 0.5
+      movementSpeedOverride: 0
+      firePatternOverride: 0
+      eliteChance: 0
+      explicitElite: 0
+      pickupDropOverride: 0
+      priorityTarget: 0
+    - enemy: {fileID: 11400000, guid: 14b74f5e0fbb54948a1cf1c4909b7ad6, type: 2}
+      count: 1
+      formation: 2
+      spawnPath: 0
+      startDelay: 0
+      cadence: 0.14999999
+      columns: 3
+      rows: 1
+      spacing: 0.82
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -247,7 +295,7 @@ MonoBehaviour:
     speedMultiplier: 1.05
     fireRateMultiplier: 1
     scoreMultiplier: 1.14
-    maximumSimultaneousEnemies: 7
+    maximumSimultaneousEnemies: 30
     environmentEvent: 0
     completionCondition: 0
     surviveDuration: 0
@@ -265,9 +313,9 @@ MonoBehaviour:
   ordinaryEnemyFireInterval: 2.05
   enemyFireIntervalMultiplier: 1
   spawnCadenceMultiplier: 0.936
-  maximumActiveEnemies: 7
+  maximumActiveEnemies: 30
   maximumHostileProjectiles: 40
-  targetEnemyCount: 29
+  targetEnemyCount: 48
   scoreMultiplier: 1.1800001
   comboTimeout: 2
   nearMissScore: 33

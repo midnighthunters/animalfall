@@ -140,9 +140,16 @@ namespace AnimalFall.Tests.Editor
                 Assert.That(bossLevel.boss, Is.Not.Null, bossLevel.name);
                 Assert.That(armyLevel.displayTitle, Does.Contain(expected[chapter]));
                 Assert.That(bossLevel.boss.displayName, Does.Contain(expected[chapter]));
-                CollectionAssert.AreEquivalent(
-                    armyLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.enemy.sprite).Distinct().ToArray(),
-                    bossLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.enemy.sprite).Distinct().ToArray());
+                EnemyShipData[] armyVillains = armyLevel.waves.SelectMany(w => w.spawnGroups)
+                    .Select(g => g.enemy).Distinct().ToArray();
+                EnemyShipData[] bossVillains = bossLevel.waves.SelectMany(w => w.spawnGroups)
+                    .Select(g => g.enemy).Distinct().ToArray();
+                Assert.That(armyVillains, Has.Length.GreaterThanOrEqualTo(4), armyLevel.name);
+                Assert.That(bossVillains, Has.Length.GreaterThanOrEqualTo(4), bossLevel.name);
+                Assert.That(armyLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.formation).Distinct().Count(),
+                    Is.GreaterThanOrEqualTo(4), armyLevel.name);
+                Assert.That(bossLevel.waves.SelectMany(w => w.spawnGroups).Select(g => g.formation).Distinct().Count(),
+                    Is.GreaterThanOrEqualTo(4), bossLevel.name);
                 Assert.That(armyLevel.waves.SelectMany(w => w.spawnGroups)
                     .All(g => AssetDatabase.GetAssetPath(g.enemy.sprite).Contains("megalevelhindrances/army/")), Is.True);
                 Assert.That(AssetDatabase.GetAssetPath(bossLevel.boss.sprite), Does.Contain("megalevelhindrances/villains/"));

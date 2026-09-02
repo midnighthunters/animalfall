@@ -93,6 +93,7 @@ namespace AnimalFall.MegaShooter.Editor
         {
             EnsureFolders();
             NormalizeArmySheets();
+            NormalizeVillainProjectileSheet();
             Sprite[] weaponSprites = LoadAllSprites(VillainProjectileSpriteSheetPath);
             if (weaponSprites.Length < Ids.Length)
             {
@@ -116,7 +117,7 @@ namespace AnimalFall.MegaShooter.Editor
 
             var levels = new MegaLevelData[20];
             for (int sequence = 0; sequence < levels.Length; sequence++)
-                levels[sequence] = GenerateLevel(sequence, armies[sequence / 2], bosses[sequence / 2],
+                levels[sequence] = GenerateLevel(sequence, armies, bosses[sequence / 2],
                     animals, backgrounds, vfx);
             AssetDatabase.SaveAssets();
             return levels;
@@ -359,10 +360,11 @@ namespace AnimalFall.MegaShooter.Editor
             return patterns[family, attack];
         }
 
-        private static MegaLevelData GenerateLevel(int sequenceIndex, EnemyShipData[] army, BossShipData familyBoss,
+        private static MegaLevelData GenerateLevel(int sequenceIndex, EnemyShipData[][] allArmies, BossShipData familyBoss,
             SuperAnimalData[] animals, Sprite[] backgrounds, MegaVFXProfile vfx)
         {
             int family = sequenceIndex / 2;
+            EnemyShipData[] army = allArmies[family];
             int gameLevel = (sequenceIndex + 1) * 5;
             bool hasBoss = gameLevel % 10 == 0;
             string path = $"{MegaShooterGenerator.DataRoot}/Levels/Mega_{sequenceIndex + 1:D2}_Level_{gameLevel:D3}.asset";
@@ -372,7 +374,7 @@ namespace AnimalFall.MegaShooter.Editor
             data.displayTitle = hasBoss ? $"{Names[family]} — Showdown" : $"{Names[family]} — Army Assault";
             data.description = hasBoss
                 ? $"Break the {Names[family]} army formations, then defeat {Species[family]} — {Names[family]}."
-                : $"Defeat the three specialist wings serving {Species[family]} — {Names[family]}. No boss enters this mission.";
+                : $"Break a mixed villain coalition led by {Species[family]} — {Names[family]}. No boss enters this mission.";
             data.introImage = army.Length > 1 ? army[1].sprite : familyBoss.sprite;
             data.backgroundSpeed = .45f + sequenceIndex * .018f;
             data.backgroundColor = Color.Lerp(new Color(.012f, .025f, .09f), Colors[family] * .18f, .46f);
@@ -393,11 +395,11 @@ namespace AnimalFall.MegaShooter.Editor
             data.ordinaryEnemyFireInterval = Mathf.Max(.9f, 2.35f - sequenceIndex * .075f);
             data.enemyFireIntervalMultiplier = 1f;
             data.spawnCadenceMultiplier = Mathf.Max(.62f, 1f - sequenceIndex * .016f);
-            data.maximumActiveEnemies = Mathf.Clamp(6 + sequenceIndex / 3, 6, 14);
+            data.maximumActiveEnemies = Mathf.Clamp(28 + sequenceIndex / 2, 28, 38);
             data.maximumHostileProjectiles = Mathf.Clamp(24 + sequenceIndex * 4, 24, 100);
-            int targetCount = (hasBoss ? 16 : 19) + family * 5;
+            int targetCount = (hasBoss ? 36 : 42) + family * 3;
             data.targetEnemyCount = targetCount;
-            data.waves = CreateWaves(sequenceIndex, army, targetCount);
+            data.waves = CreateWaves(sequenceIndex, allArmies, targetCount);
             data.boss = hasBoss ? familyBoss : null;
             data.bossWarningText = hasBoss ? $"WARNING — {Names[family].ToUpperInvariant()} APPROACHING" : string.Empty;
             data.bossOverrides.healthMultiplier = 1f + family * .035f;
@@ -431,7 +433,7 @@ namespace AnimalFall.MegaShooter.Editor
             return data;
         }
 
-        private static MegaWaveData[] CreateWaves(int sequenceIndex, EnemyShipData[] army, int targetCount)
+        private static MegaWaveData[] CreateWaves(int sequenceIndex, EnemyShipData[][] allArmies, int targetCount)
         {
             int family = sequenceIndex / 2;
             int waveCount = Mathf.Clamp(3 + family / 3, 3, 6);
@@ -441,17 +443,24 @@ namespace AnimalFall.MegaShooter.Editor
             {
                 int waveTotal = Mathf.CeilToInt(remaining / (float)(waveCount - waveIndex));
                 remaining -= waveTotal;
-                int firstCount = Mathf.CeilToInt(waveTotal * .5f);
-                int secondCount = Mathf.CeilToInt((waveTotal - firstCount) * .6f);
-                int thirdCount = waveTotal - firstCount - secondCount;
+                int firstCount = Mathf.CeilToInt(waveTotal * .34f);
+                int secondCount = Mathf.CeilToInt(waveTotal * .27f);
+                int thirdCount = Mathf.CeilToInt(waveTotal * .22f);
+                int fourthCount = waveTotal - firstCount - secondCount - thirdCount;
+                int allyFamilyA = (family + 1 + waveIndex) % allArmies.Length;
+                int allyFamilyB = (family + 3 + sequenceIndex + waveIndex) % allArmies.Length;
+                int allyFamilyC = (family + 7 + waveIndex * 2) % allArmies.Length;
                 var groups = new List<EnemySpawnGroup>
                 {
-                    CreateGroup(army[waveIndex % 3], firstCount, waveIndex, sequenceIndex, false)
+                    CreateGroup(allArmies[family][waveIndex % 3], firstCount, waveIndex * 4, sequenceIndex, false)
                 };
                 if (secondCount > 0)
-                    groups.Add(CreateGroup(army[(waveIndex + 1) % 3], secondCount, waveIndex + 1, sequenceIndex, false));
+                    groups.Add(CreateGroup(allArmies[allyFamilyA][(waveIndex + 1) % 3], secondCount, waveIndex * 4 + 1, sequenceIndex, false));
                 if (thirdCount > 0)
-                    groups.Add(CreateGroup(army[2], thirdCount, waveIndex + 2, sequenceIndex, waveIndex == waveCount - 1));
+                    groups.Add(CreateGroup(allArmies[allyFamilyB][(waveIndex + 2) % 3], thirdCount, waveIndex * 4 + 2, sequenceIndex, false));
+                if (fourthCount > 0)
+                    groups.Add(CreateGroup(allArmies[allyFamilyC][waveIndex % 3], fourthCount, waveIndex * 4 + 3,
+                        sequenceIndex, waveIndex == waveCount - 1));
                 waves[waveIndex] = new MegaWaveData
                 {
                     waveName = waveIndex == 0 ? "Vanguard Formation" : waveIndex == waveCount - 1 ? "Elite Army Finale" : "Reinforcement Wing",
@@ -465,7 +474,7 @@ namespace AnimalFall.MegaShooter.Editor
                     speedMultiplier = 1f + waveIndex * .025f,
                     fireRateMultiplier = 1f,
                     scoreMultiplier = 1f + waveIndex * .07f,
-                    maximumSimultaneousEnemies = Mathf.Clamp(6 + sequenceIndex / 3, 6, 14),
+                    maximumSimultaneousEnemies = Mathf.Clamp(28 + sequenceIndex / 2, 28, 38),
                     completionCondition = MegaWaveCompletion.DefeatAll,
                     environmentEvent = sequenceIndex >= 10 && waveIndex == 1 ? MegaEnvironmentEvent.TimeRift : MegaEnvironmentEvent.None
                 };
@@ -475,17 +484,24 @@ namespace AnimalFall.MegaShooter.Editor
 
         private static EnemySpawnGroup CreateGroup(EnemyShipData enemy, int count, int wave, int sequence, bool elite)
         {
-            MegaFormationType[] formations = { MegaFormationType.V, MegaFormationType.Arc, MegaFormationType.Line, MegaFormationType.AlternatingSides, MegaFormationType.Grid, MegaFormationType.Mirrored };
+            MegaFormationType[] formations = { MegaFormationType.V, MegaFormationType.Arc, MegaFormationType.Line,
+                MegaFormationType.Grid, MegaFormationType.Mirrored, MegaFormationType.AlternatingSides };
+            MegaFormationType formation = formations[(wave + sequence) % formations.Length];
+            int columns = formation == MegaFormationType.Line ? Mathf.Clamp(count, 3, 9)
+                : formation == MegaFormationType.Grid ? Mathf.Clamp(count, 3, 8)
+                : Mathf.Clamp(count, 3, 7);
             return new EnemySpawnGroup
             {
                 enemy = enemy,
                 count = Mathf.Max(1, count),
-                formation = formations[(wave + sequence) % formations.Length],
-                spawnPath = wave % 3 == 1 ? MegaSpawnPath.Left : wave % 3 == 2 ? MegaSpawnPath.Right : MegaSpawnPath.Top,
-                cadence = Mathf.Max(.18f, .43f - sequence * .008f),
-                columns = Mathf.Clamp(count, 2, 6),
-                rows = Mathf.Max(1, Mathf.CeilToInt(count / 6f)),
-                spacing = 1f,
+                formation = formation,
+                spawnPath = formation == MegaFormationType.AlternatingSides
+                    ? (wave % 2 == 0 ? MegaSpawnPath.Left : MegaSpawnPath.Right)
+                    : MegaSpawnPath.Top,
+                cadence = Mathf.Max(.08f, .16f - sequence * .0025f),
+                columns = columns,
+                rows = Mathf.Max(1, Mathf.CeilToInt(count / (float)columns)),
+                spacing = formation == MegaFormationType.Line ? .92f : .82f,
                 normalizedEntry = .5f,
                 eliteChance = sequence >= 8 ? Mathf.Min(.22f, .04f + sequence * .007f) : 0f,
                 explicitElite = elite,
@@ -543,6 +559,54 @@ namespace AnimalFall.MegaShooter.Editor
                 provider.Apply();
                 importer.SaveAndReimport();
             }
+        }
+
+        // The villain weapon sheet is a 5 x 2 atlas. Keeping its sprite IDs stable
+        // repairs existing ProjectileData references whenever the sheet is reimported.
+        private static void NormalizeVillainProjectileSheet()
+        {
+            TextureImporter importer = AssetImporter.GetAtPath(VillainProjectileSpriteSheetPath) as TextureImporter;
+            if (importer == null) return;
+
+            importer.textureType = TextureImporterType.Sprite;
+            importer.spriteImportMode = SpriteImportMode.Multiple;
+            importer.spritePixelsPerUnit = 100f;
+            importer.mipmapEnabled = false;
+            importer.alphaIsTransparency = true;
+            importer.GetSourceTextureWidthAndHeight(out int width, out int height);
+            if (width <= 0 || height <= 0) return;
+
+            var factories = new SpriteDataProviderFactories();
+            factories.Init();
+            ISpriteEditorDataProvider provider = factories.GetSpriteEditorDataProviderFromObject(importer);
+            provider.InitSpriteEditorDataProvider();
+            SpriteRect[] existing = provider.GetSpriteRects();
+            const int columns = 5;
+            const int rows = 2;
+            var rects = new SpriteRect[columns * rows];
+            float cellWidth = width / (float)columns;
+            float cellHeight = height / (float)rows;
+
+            for (int index = 0; index < rects.Length; index++)
+            {
+                string spriteName = $"villain_weapon_{index}";
+                SpriteRect preserved = existing.FirstOrDefault(rect => rect.name == spriteName);
+                GUID spriteId = preserved != null ? preserved.spriteID : GUID.Generate();
+                int column = index % columns;
+                int row = index / columns;
+                rects[index] = new SpriteRect
+                {
+                    name = spriteName,
+                    rect = new Rect(column * cellWidth, (rows - 1 - row) * cellHeight, cellWidth, cellHeight),
+                    alignment = SpriteAlignment.Center,
+                    pivot = new Vector2(.5f, .5f),
+                    spriteID = spriteId
+                };
+            }
+
+            provider.SetSpriteRects(rects);
+            provider.Apply();
+            importer.SaveAndReimport();
         }
 
         private static GameObject GetOrCreateMuzzle(string name, string spriteName, Color color)

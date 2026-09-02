@@ -21,9 +21,8 @@ namespace AnimalFall.MegaShooter
             if (group == null || group.enemy == null || group.enemy.prefab == null) yield break;
             if (group.startDelay > 0f) yield return new WaitForSeconds(group.startDelay);
 
-            // Enemies arrive rank by rank. A whole column is released, then the
-            // spawner waits before the next rank so the army reads as a formation
-            // instead of a chaotic, wall-to-wall swarm.
+            // Release each rank as a tight visual unit, then leave a short beat so
+            // mixed villain wings stack into readable arcade formations.
             int columns = Mathf.Max(1, group.columns);
             for (int i = 0; i < group.count; i++)
             {
@@ -41,10 +40,10 @@ namespace AnimalFall.MegaShooter
                     controller?.Configure(group.enemy, group, wave, _level, _game, _director, elite);
                 }
 
-                // Tight spacing within a rank, a longer beat between ranks.
+                // Near-simultaneous ships within a rank, with a small rhythmic gap.
                 bool endOfRank = (i + 1) % columns == 0;
                 float baseCadence = Mathf.Max(0.05f, group.cadence * _level.spawnCadenceMultiplier) * _game.SpawnCadenceScale;
-                float cadence = endOfRank ? baseCadence * 2.4f : baseCadence * 0.55f;
+                float cadence = endOfRank ? baseCadence * 1.25f : baseCadence * 0.22f;
                 yield return new WaitForSeconds(cadence);
             }
         }
@@ -56,52 +55,60 @@ namespace AnimalFall.MegaShooter
         private Vector2 GetSpawnPosition(EnemySpawnGroup group, int index)
         {
             Rect bounds = _level.cameraBounds;
-            const float sideInset = 0.9f;
-            const float topInset = 1.1f;
+            const float sideInset = 0.55f;
+            const float topInset = 0.8f;
             const float bottomInset = 0.9f;
             float minX = bounds.xMin + sideInset;
             float maxX = bounds.xMax - sideInset;
             float minY = bounds.yMin + bottomInset;
             float maxY = bounds.yMax - topInset;
 
-            int columns = Mathf.Clamp(group.columns, 1, 6);
+            int columns = Mathf.Clamp(group.columns, 1, 9);
             int column = index % columns;
             int row = index / columns;
-            int columnsThisFormation = Mathf.Min(columns, group.count);
-            float centered = column - (columnsThisFormation - 1) * 0.5f;
+            int columnsThisRow = Mathf.Min(columns, group.count - row * columns);
+            float centered = column - (columnsThisRow - 1) * 0.5f;
 
             // A single readable lane, biased left/right by the spawn path so successive
             // waves approach from alternating flanks without ever leaving the screen.
             float laneCenter = Mathf.Lerp(minX, maxX, group.normalizedEntry);
-            if (group.spawnPath == MegaSpawnPath.Left) laneCenter = Mathf.Lerp(minX, maxX, 0.28f);
-            else if (group.spawnPath == MegaSpawnPath.Right) laneCenter = Mathf.Lerp(minX, maxX, 0.72f);
+            if (group.spawnPath == MegaSpawnPath.Left) laneCenter = Mathf.Lerp(minX, maxX, 0.35f);
+            else if (group.spawnPath == MegaSpawnPath.Right) laneCenter = Mathf.Lerp(minX, maxX, 0.65f);
             else if (group.spawnPath == MegaSpawnPath.Center) laneCenter = (minX + maxX) * 0.5f;
 
-            float spacing = Mathf.Max(0.6f, group.spacing);
-            float rowSpacing = Mathf.Max(0.75f, spacing);
+            float desiredSpacing = Mathf.Max(0.58f, group.spacing);
+            float fitSpacing = (maxX - minX) / Mathf.Max(1, columns - 1);
+            float spacing = Mathf.Min(desiredSpacing, fitSpacing);
+            float rowSpacing = Mathf.Max(0.72f, spacing * 0.92f);
             float x = laneCenter + centered * spacing;
             float y = maxY - row * rowSpacing;
 
             switch (group.formation)
             {
                 case MegaFormationType.V:
-                    y -= Mathf.Abs(centered) * spacing * 0.5f;
+                    y -= Mathf.Abs(centered) * spacing * 0.42f;
                     break;
                 case MegaFormationType.Arc:
-                    y -= (1f - Mathf.Abs(centered) / Mathf.Max(1f, columnsThisFormation * 0.5f)) * spacing * 0.5f;
+                    y -= (1f - Mathf.Abs(centered) / Mathf.Max(1f, columnsThisRow * 0.5f)) * spacing * 0.58f;
                     break;
                 case MegaFormationType.Column:
                     x = laneCenter;
                     y = maxY - index * rowSpacing * 0.8f;
                     break;
                 case MegaFormationType.AlternatingSides:
-                    x = laneCenter + (column % 2 == 0 ? -1f : 1f) * (0.6f + row * 0.15f) * spacing;
+                    x += (row % 2 == 0 ? -0.32f : 0.32f) * spacing;
+                    y -= (column % 2 == 0 ? 0f : 0.22f) * spacing;
                     break;
                 case MegaFormationType.Mirrored:
-                    x = laneCenter + Mathf.Sign(centered == 0f ? 1f : centered) * (0.5f + Mathf.Abs(centered)) * spacing;
+                    x = laneCenter + Mathf.Sign(centered == 0f ? (column % 2 == 0 ? -1f : 1f) : centered)
+                        * (0.35f + Mathf.Abs(centered)) * spacing;
                     break;
                 case MegaFormationType.Line:
+                    y -= Mathf.Abs(centered) * 0.06f;
+                    break;
                 case MegaFormationType.Grid:
+                    if (row % 2 == 1) x += spacing * 0.5f;
+                    break;
                 default:
                     break;
             }

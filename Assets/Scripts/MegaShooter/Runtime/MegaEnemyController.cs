@@ -29,8 +29,11 @@ namespace AnimalFall.MegaShooter
         private bool _telegraphing;
         private bool _elite;
         private Vector3 _baseScale;
-        // Keep army villains smaller so the player has clear sightlines.
-        private const float VillainSizeScale = 0.80f;
+        // Match the reference layout in screen space: regular army villains occupy
+        // about nine percent of the viewport width and elite leaders about thirteen.
+        private const float VillainViewportWidth = 0.09f;
+        private const float EliteViewportWidth = 0.16f;
+        private const float FallbackVillainSizeScale = 0.28f;
         private float _halfWidth;
         private float _halfHeight;
 
@@ -65,7 +68,21 @@ namespace AnimalFall.MegaShooter
             _director = director;
             _elite = elite;
             _renderer.sprite = data.sprite;
-            transform.localScale = _baseScale * Mathf.Clamp(data.visualScale, 0.2f, 1f) * VillainSizeScale;
+            Camera camera = Camera.main;
+            float spriteWidth = data.sprite != null ? data.sprite.bounds.size.x : 0f;
+            if (camera != null && camera.orthographic && spriteWidth > 0.001f)
+            {
+                float viewportWidth = camera.orthographicSize * 2f * camera.aspect;
+                float widthFraction = elite ? EliteViewportWidth : VillainViewportWidth;
+                float visualVariation = Mathf.Clamp(data.visualScale, 0.78f, 1.05f);
+                float screenMatchedScale = viewportWidth * widthFraction * visualVariation / spriteWidth;
+                transform.localScale = _baseScale * Mathf.Max(0.05f, screenMatchedScale);
+            }
+            else
+            {
+                transform.localScale = _baseScale * Mathf.Clamp(data.visualScale, 0.2f, 1f)
+                    * FallbackVillainSizeScale * (elite ? 1.35f : 1f);
+            }
             _baseColor = elite ? new Color(1f, 0.72f, 0.25f, 1f) : Color.white;
             _renderer.color = _baseColor;
             _collider.size = data.colliderSize;

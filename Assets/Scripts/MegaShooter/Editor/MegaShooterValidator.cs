@@ -82,7 +82,8 @@ namespace AnimalFall.MegaShooter.Editor
             if (level.waves == null || level.waves.Length == 0) errors.Add($"{label}: no waves are authored.");
             else ValidateWaves(label, level, errors);
             if (level.maximumHostileProjectiles > 120) errors.Add($"{label}: hostile projectile cap exceeds 120.");
-            if (level.maximumActiveEnemies > 20) errors.Add($"{label}: active enemy cap exceeds 20.");
+            if (level.maximumActiveEnemies < 24) errors.Add($"{label}: active enemy cap is too low for a mega formation.");
+            if (level.maximumActiveEnemies > 40) errors.Add($"{label}: active enemy cap exceeds 40.");
             if (level.ordinaryEnemyFireInterval < .85f) errors.Add($"{label}: ordinary enemy fire interval is below the 0.85s readability floor.");
             if (level.parTime <= 0f) errors.Add($"{label}: par time must be positive.");
             if (level.targetEnemyCount <= 0) errors.Add($"{label}: target enemy count must be positive.");
@@ -140,6 +141,8 @@ namespace AnimalFall.MegaShooter.Editor
         private static void ValidateWaves(string label, MegaLevelData level, List<string> errors)
         {
             int totalEnemies = 0;
+            var distinctVillains = new HashSet<EnemyShipData>();
+            var distinctFormations = new HashSet<MegaFormationType>();
             for (int i = 0; i < level.waves.Length; i++)
             {
                 MegaWaveData wave = level.waves[i];
@@ -156,6 +159,8 @@ namespace AnimalFall.MegaShooter.Editor
                 else foreach (EnemySpawnGroup group in wave.spawnGroups)
                 {
                     if (group == null || group.enemy == null) { errors.Add($"{label}: wave {i + 1} contains a null enemy group."); continue; }
+                    distinctVillains.Add(group.enemy);
+                    distinctFormations.Add(group.formation);
                     if (group.enemy.prefab == null || group.enemy.sprite == null || group.enemy.projectile == null)
                         errors.Add($"{label}: enemy '{group.enemy.displayName}' is missing prefab, sprite, or projectile data.");
                     else if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(group.enemy.prefab) > 0)
@@ -175,6 +180,10 @@ namespace AnimalFall.MegaShooter.Editor
             }
             if (totalEnemies != level.targetEnemyCount)
                 errors.Add($"{label}: authored wave total is {totalEnemies}, expected {level.targetEnemyCount}.");
+            if (distinctVillains.Count < 3)
+                errors.Add($"{label}: mega formations must mix at least three distinct villains.");
+            if (distinctFormations.Count < 3)
+                errors.Add($"{label}: mega waves must use at least three distinct formation patterns.");
         }
 
         private static void ValidateDatabase(MegaLevelData[] levels, List<string> errors)
