@@ -26,8 +26,8 @@ namespace AnimalFall.MegaShooter
         private Vector3 _baseScale;
         private float _visualScale;
 
-        // Uniform shrink applied to every mega villain so bosses stay readable.
-        private const float BossSizeScale = 0.56f;
+        // Scale applied to every mega villain boss (scaled 2x).
+        private const float BossSizeScale = 1.12f;
         // Ceiling on per-phase growth so later phases never balloon off-screen.
         private const float MaxPhaseScaleMultiplier = 1.15f;
 
@@ -197,8 +197,10 @@ namespace AnimalFall.MegaShooter
             ProjectileData projectile = attack.projectile != null ? attack.projectile : _game.DefaultEnemyProjectile;
             if (projectile == null) yield break;
             if (attack.clearsBulletsBeforeAttack) _game.ClearOrReflectHostileProjectiles(false);
+            float bossHalfHeight = Mathf.Max(0.5f, _collider.bounds.extents.y);
+            Vector2 muzzlePosition = (Vector2)transform.position + Vector2.down * (bossHalfHeight * 0.85f);
             _game.SpawnEffect(_game.VFXProfile?.bossMuzzlePrefab ?? _game.VFXProfile?.warningPrefab,
-                transform.position, attack.muzzleColor, 1.1f, 0.28f);
+                muzzlePosition, attack.muzzleColor, 1.1f, 0.28f);
             if (_game.Player != null && attack.playerEffectDuration > 0f && attack.playerMovementMultiplier < 1f)
                 _game.Player.ApplyMovementModifier(attack.playerMovementMultiplier, attack.playerEffectDuration);
             if (attack.screenObscureStrength > 0f)
@@ -215,7 +217,7 @@ namespace AnimalFall.MegaShooter
                         direction = Quaternion.Euler(0f, 0f, i * (360f / count) + volley * 9f) * Vector2.down;
                     else if ((attack.aimed || attack.pattern == MegaWeaponPattern.Sniper || attack.pattern == MegaWeaponPattern.Laser) && _game.Player != null)
                     {
-                        Vector2 aimed = ((Vector2)_game.Player.transform.position - (Vector2)transform.position).normalized;
+                        Vector2 aimed = ((Vector2)_game.Player.transform.position - muzzlePosition).normalized;
                         float microSpread = count > 1 ? -8f + i * 16f / (count - 1) : 0f;
                         direction = Quaternion.Euler(0f, 0f, microSpread) * aimed;
                     }
@@ -229,7 +231,7 @@ namespace AnimalFall.MegaShooter
                         : attack.pattern == MegaWeaponPattern.Sniper || attack.pattern == MegaWeaponPattern.Laser ? 1.6f : 1f;
                     Transform homingTarget = projectile.motion == MegaProjectileMotion.Homing || attack.aimed
                         ? _game.Player?.transform : null;
-                    _game.SpawnProjectile(projectile, MegaFaction.Enemy, transform.position, direction,
+                    _game.SpawnProjectile(projectile, MegaFaction.Enemy, muzzlePosition, direction,
                         damage * _level.enemyDamageMultiplier,
                         _level.enemyProjectileSpeedMultiplier * phase.projectileSpeedMultiplier * _level.bossOverrides.projectileSpeedMultiplier * mechanismSpeed * _game.HostileProjectileSpeedScale,
                         0, homingTarget, attack.reflectable);

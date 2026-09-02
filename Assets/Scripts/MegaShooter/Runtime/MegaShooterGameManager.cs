@@ -379,6 +379,16 @@ namespace AnimalFall.MegaShooter
             GameEvents.OnLevelWon?.Invoke();
             hud.ShowResult(true, _score, stars, _level.coinReward);
             StopCombat();
+            StartCoroutine(AutoExitRoutine());
+        }
+
+        private IEnumerator AutoExitRoutine()
+        {
+            yield return new WaitForSeconds(5.5f);
+            if (State == MegaShooterState.Won)
+            {
+                Quit();
+            }
         }
 
         public void PlayerDefeated()
@@ -457,11 +467,10 @@ namespace AnimalFall.MegaShooter
             bool reflectableOverride = true)
         {
             if (data == null || data.prefab == null || pools == null) return null;
-            if (faction == MegaFaction.Enemy && _hostileProjectiles.Count >= Mathf.Min(24, _level.maximumHostileProjectiles)) return null;
+            if (faction == MegaFaction.Enemy && _hostileProjectiles.Count >= _level.maximumHostileProjectiles) return null;
             if (faction == MegaFaction.Enemy)
             {
                 direction = ForceDownward(direction);
-                speedMultiplier = Mathf.Min(speedMultiplier, 0.78f);
             }
             damage = Mathf.Max(0.1f, damage);
             GameObject go = pools.Spawn(data.prefab, position, Quaternion.identity, projectileContainer);

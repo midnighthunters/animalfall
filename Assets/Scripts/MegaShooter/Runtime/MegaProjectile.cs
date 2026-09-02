@@ -26,6 +26,7 @@ namespace AnimalFall.MegaShooter
         private bool _reflectableOverride = true;
         private readonly HashSet<Object> _hitTargets = new HashSet<Object>();
         private readonly Collider2D[] _overlapBuffer = new Collider2D[16];
+        private readonly RaycastHit2D[] _castBuffer = new RaycastHit2D[16];
         private ContactFilter2D _overlapFilter;
 
         public MegaFaction Faction => _faction;
@@ -48,7 +49,7 @@ namespace AnimalFall.MegaShooter
             _overlapFilter.SetLayerMask(Physics2D.AllLayers);
             GameObject glow = new GameObject("ProjectileGlow");
             glow.transform.SetParent(transform, false);
-            glow.transform.localScale = Vector3.one * 1.28f;
+            glow.transform.localScale = Vector3.one * 1.25f;
             _glowRenderer = glow.AddComponent<SpriteRenderer>();
             _glowRenderer.sortingOrder = _renderer.sortingOrder - 1;
         }
@@ -73,12 +74,12 @@ namespace AnimalFall.MegaShooter
             _nearMissResolved = false;
             _hitTargets.Clear();
             _renderer.sprite = data.sprite;
-            _renderer.color = faction == MegaFaction.Player ? data.playerColor : data.enemyColor;
+            _renderer.color = Color.white;
             _glowRenderer.sprite = data.sprite;
-            Color glowColor = _renderer.color;
-            glowColor.a = 0.14f;
+            Color glowColor = faction == MegaFaction.Player ? data.playerColor : data.enemyColor;
+            glowColor.a = 0.28f;
             _glowRenderer.color = glowColor;
-            _collider.radius = data.colliderRadius;
+            _collider.radius = Mathf.Max(0.24f, data.colliderRadius * 1.5f);
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
             _registered = true;
@@ -111,13 +112,21 @@ namespace AnimalFall.MegaShooter
             }
             else if (_data.motion == MegaProjectileMotion.StationaryMine)
             {
-                // Mines remain slow hazards, but never hover or travel upward.
                 _direction = Vector2.down;
             }
 
             transform.position += (Vector3)(_direction * (_speed * dt));
 
+            // Continuously update rotation to follow velocity vector
+            if (_direction.sqrMagnitude > 0.001f)
+            {
+                float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
+
+            // Continuous swept collision prevents tunneling at high speeds for both player and enemies
             if (ResolveSweptPlayerHit(previousPosition, transform.position)) return;
+            if (ResolveSweptEnemyHit(previousPosition, transform.position)) return;
             ResolveOverlappingHit();
             if (!gameObject.activeSelf) return;
             TrackNearMiss();
@@ -148,13 +157,30 @@ namespace AnimalFall.MegaShooter
         private void ResolveOverlappingHit()
         {
             int overlapCount = Physics2D.OverlapCircle(
-                transform.position, Mathf.Max(0.02f, _collider.radius), _overlapFilter, _overlapBuffer);
+                transform.position, Mathf.Max(0.08f, _collider.radius), _overlapFilter, _overlapBuffer);
             for (int i = 0; i < overlapCount; i++)
             {
                 Collider2D overlap = _overlapBuffer[i];
                 if (overlap == null || overlap == _collider) continue;
                 if (ResolveHit(overlap)) return;
             }
+        }
+
+        private bool ResolveSweptEnemyHit(Vector2 from, Vector2 to)
+        {
+            if (_faction != MegaFaction.Player || _game == null) return false;
+            Vector2 motion = to - from;
+            float dist = motion.magnitude;
+            if (dist < 0.0001f) return false;
+            int hitCount = Physics2D.CircleCast(
+                from, Mathf.Max(0.06f, _collider.radius * 0.45f), motion / dist, _overlapFilter, _castBuffer, dist);
+            for (int i = 0; i < hitCount; i++)
+            {
+                Collider2D col = _castBuffer[i].collider;
+                if (col == null || col == _collider) continue;
+                if (ResolveHit(col)) return true;
+            }
+            return false;
         }
 
         private bool ResolveSweptPlayerHit(Vector2 from, Vector2 to)
@@ -223,11 +249,13 @@ namespace AnimalFall.MegaShooter
             if (_registered) _game?.ChangeProjectileFaction(this, MegaFaction.Enemy, MegaFaction.Player);
             _faction = MegaFaction.Player;
             _direction = direction.sqrMagnitude > 0.001f ? direction.normalized : Vector2.up;
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
             _homingTarget = _game?.NearestEnemyTransform;
             _damage = Mathf.Max(_damage, 20f);
-            _renderer.color = _data.playerColor;
-            Color glowColor = _data.playerColor;
-            glowColor.a = 0.14f;
+            _renderer.color = Color.white;
+            Color glowColor = _data != null ? _data.playerColor : new Color(0.2f, 0.9f, 1f, 1f);
+            glowColor.a = 0.28f;
             _glowRenderer.color = glowColor;
             _nearMissResolved = true;
             return true;

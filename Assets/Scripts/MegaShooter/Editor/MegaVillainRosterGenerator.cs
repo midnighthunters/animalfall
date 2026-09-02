@@ -487,9 +487,9 @@ namespace AnimalFall.MegaShooter.Editor
             MegaFormationType[] formations = { MegaFormationType.V, MegaFormationType.Arc, MegaFormationType.Line,
                 MegaFormationType.Grid, MegaFormationType.Mirrored, MegaFormationType.AlternatingSides };
             MegaFormationType formation = formations[(wave + sequence) % formations.Length];
-            int columns = formation == MegaFormationType.Line ? Mathf.Clamp(count, 3, 9)
-                : formation == MegaFormationType.Grid ? Mathf.Clamp(count, 3, 8)
-                : Mathf.Clamp(count, 3, 7);
+            int columns = formation == MegaFormationType.Line ? Mathf.Clamp(count, 3, 6)
+                : formation == MegaFormationType.Grid ? Mathf.Clamp(count, 2, 5)
+                : Mathf.Clamp(count, 3, 5);
             return new EnemySpawnGroup
             {
                 enemy = enemy,
@@ -498,10 +498,10 @@ namespace AnimalFall.MegaShooter.Editor
                 spawnPath = formation == MegaFormationType.AlternatingSides
                     ? (wave % 2 == 0 ? MegaSpawnPath.Left : MegaSpawnPath.Right)
                     : MegaSpawnPath.Top,
-                cadence = Mathf.Max(.08f, .16f - sequence * .0025f),
+                cadence = Mathf.Max(.14f, .26f - sequence * .003f),
                 columns = columns,
                 rows = Mathf.Max(1, Mathf.CeilToInt(count / (float)columns)),
-                spacing = formation == MegaFormationType.Line ? .92f : .82f,
+                spacing = formation == MegaFormationType.Line ? 1.65f : 1.55f,
                 normalizedEntry = .5f,
                 eliteChance = sequence >= 8 ? Mathf.Min(.22f, .04f + sequence * .007f) : 0f,
                 explicitElite = elite,

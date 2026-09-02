@@ -76,10 +76,10 @@ MonoBehaviour:
       formation: 1
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 5
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -92,10 +92,10 @@ MonoBehaviour:
       formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -108,10 +108,10 @@ MonoBehaviour:
       formation: 0
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.92
+      spacing: 1.65
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -138,10 +138,10 @@ MonoBehaviour:
       formation: 6
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 5
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
       formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -170,10 +170,10 @@ MonoBehaviour:
       formation: 1
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -200,10 +200,10 @@ MonoBehaviour:
       formation: 0
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 5
       rows: 1
-      spacing: 0.92
+      spacing: 1.65
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -216,10 +216,10 @@ MonoBehaviour:
       formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -232,10 +232,10 @@ MonoBehaviour:
       formation: 6
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -262,10 +262,10 @@ MonoBehaviour:
       formation: 1
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -278,10 +278,10 @@ MonoBehaviour:
       formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -294,10 +294,10 @@ MonoBehaviour:
       formation: 0
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.92
+      spacing: 1.65
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -310,10 +310,10 @@ MonoBehaviour:
       formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
-      columns: 3
+      cadence: 0.20599999
+      columns: 2
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -340,10 +340,10 @@ MonoBehaviour:
       formation: 6
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -356,10 +356,10 @@ MonoBehaviour:
       formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -372,10 +372,10 @@ MonoBehaviour:
       formation: 1
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -388,10 +388,10 @@ MonoBehaviour:
       formation: 4
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -418,10 +418,10 @@ MonoBehaviour:
       formation: 0
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 4
       rows: 1
-      spacing: 0.92
+      spacing: 1.65
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -434,10 +434,10 @@ MonoBehaviour:
       formation: 2
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -450,10 +450,10 @@ MonoBehaviour:
       formation: 6
       spawnPath: 0
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0
@@ -466,10 +466,10 @@ MonoBehaviour:
       formation: 3
       spawnPath: 2
       startDelay: 0
-      cadence: 0.114999995
+      cadence: 0.20599999
       columns: 3
       rows: 1
-      spacing: 0.82
+      spacing: 1.55
       normalizedEntry: 0.5
       movementSpeedOverride: 0
       firePatternOverride: 0

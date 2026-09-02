@@ -287,9 +287,94 @@ namespace AnimalFall.MegaShooter
 
         public void ShowPause(bool visible) { }
 
+        private GameObject _resultCardGo;
+
         public void ShowResult(bool won, int score, int stars, int coins)
         {
-            // Results are handled by the normal level flow after the mega scene exits.
+            if (!Application.isPlaying) return;
+            if (_resultCardGo != null) Destroy(_resultCardGo);
+
+            RectTransform overlay = EnsureOverlayRoot();
+            _resultCardGo = new GameObject("MegaResultCard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            RectTransform cardRect = (RectTransform)_resultCardGo.transform;
+            cardRect.SetParent(overlay, false);
+            cardRect.anchorMin = new Vector2(0.08f, 0.22f);
+            cardRect.anchorMax = new Vector2(0.92f, 0.78f);
+            cardRect.offsetMin = Vector2.zero;
+            cardRect.offsetMax = Vector2.zero;
+
+            Image cardBg = _resultCardGo.GetComponent<Image>();
+            cardBg.color = new Color(0.03f, 0.05f, 0.12f, 0.95f);
+
+            // Title Text
+            Text title = CreateOverlayText("ResultTitle", 48, FontStyle.Bold,
+                new Vector2(0.04f, 0.75f), new Vector2(0.96f, 0.95f));
+            title.transform.SetParent(cardRect, false);
+            title.text = won ? "VICTORY!" : "DEFEATED";
+            title.color = won ? new Color(1f, 0.84f, 0.1f, 1f) : new Color(1f, 0.22f, 0.18f, 1f);
+            title.gameObject.SetActive(true);
+
+            // Subtitle
+            Text subtitle = CreateOverlayText("ResultSubtitle", 26, FontStyle.Bold,
+                new Vector2(0.04f, 0.63f), new Vector2(0.96f, 0.75f));
+            subtitle.transform.SetParent(cardRect, false);
+            subtitle.text = won ? "MEGA LEVEL COMPLETED" : "ALL SHIPS LOST";
+            subtitle.color = won ? new Color(0.35f, 0.95f, 1f, 1f) : new Color(0.85f, 0.85f, 0.85f, 1f);
+            subtitle.gameObject.SetActive(true);
+
+            // Stars
+            if (won)
+            {
+                Text starsText = CreateOverlayText("ResultStars", 44, FontStyle.Bold,
+                    new Vector2(0.04f, 0.48f), new Vector2(0.96f, 0.63f));
+                starsText.transform.SetParent(cardRect, false);
+                string starString = (stars >= 1 ? "★ " : "☆ ") + (stars >= 2 ? "★ " : "☆ ") + (stars >= 3 ? "★" : "☆");
+                starsText.text = starString;
+                starsText.color = new Color(1f, 0.82f, 0.1f, 1f);
+                starsText.gameObject.SetActive(true);
+            }
+
+            // Stats
+            Text stats = CreateOverlayText("ResultStats", 28, FontStyle.Normal,
+                new Vector2(0.04f, 0.30f), new Vector2(0.96f, 0.48f));
+            stats.transform.SetParent(cardRect, false);
+            stats.text = won ? $"SCORE: {score:N0}\nCOINS: +{coins}" : $"SCORE: {score:N0}";
+            stats.color = Color.white;
+            stats.gameObject.SetActive(true);
+
+            // Action Button
+            GameObject btnGo = new GameObject("PrimaryActionButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            RectTransform btnRect = (RectTransform)btnGo.transform;
+            btnRect.SetParent(cardRect, false);
+            btnRect.anchorMin = new Vector2(0.18f, 0.08f);
+            btnRect.anchorMax = new Vector2(0.82f, 0.22f);
+            btnRect.offsetMin = Vector2.zero;
+            btnRect.offsetMax = Vector2.zero;
+
+            Image btnImg = btnGo.GetComponent<Image>();
+            btnImg.color = won ? new Color(0.12f, 0.75f, 0.95f, 1f) : new Color(0.92f, 0.25f, 0.2f, 1f);
+
+            Button btn = btnGo.GetComponent<Button>();
+            ColorBlock cb = btn.colors;
+            cb.normalColor = btnImg.color;
+            cb.highlightedColor = btnImg.color * 1.15f;
+            cb.pressedColor = btnImg.color * 0.85f;
+            btn.colors = cb;
+
+            Text btnText = CreateOverlayText("ButtonText", 30, FontStyle.Bold, Vector2.zero, Vector2.one);
+            btnText.transform.SetParent(btnRect, false);
+            btnText.text = won ? "CONTINUE" : "RETRY";
+            btnText.color = Color.white;
+            btnText.gameObject.SetActive(true);
+
+            if (won)
+            {
+                btn.onClick.AddListener(() => _game?.Quit());
+            }
+            else
+            {
+                btn.onClick.AddListener(() => _game?.Retry());
+            }
         }
 
         public void ShowUnlock(SuperAnimalData animal)

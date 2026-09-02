@@ -21,30 +21,36 @@ namespace AnimalFall.MegaShooter
             if (group == null || group.enemy == null || group.enemy.prefab == null) yield break;
             if (group.startDelay > 0f) yield return new WaitForSeconds(group.startDelay);
 
-            // Release each rank as a tight visual unit, then leave a short beat so
-            // mixed villain wings stack into readable arcade formations.
+            // Spawn villains in clean synchronized ranks/patterns so formations (V, Line, Arc, etc.)
+            // appear as a deliberate unit rather than trickling in one-by-one.
             int columns = Mathf.Max(1, group.columns);
-            for (int i = 0; i < group.count; i++)
+            int totalRows = Mathf.CeilToInt(group.count / (float)columns);
+            for (int r = 0; r < totalRows; r++)
             {
+                int startIndex = r * columns;
+                int rankCount = Mathf.Min(columns, group.count - startIndex);
+
                 int cap = _game.EffectiveMaxActiveEnemies(_level.maximumActiveEnemies, wave.maximumSimultaneousEnemies);
-                while (_game.ActiveEnemyCount >= cap && _game.IsWaveRunning)
+                while (_game.ActiveEnemyCount + rankCount > cap && _game.ActiveEnemyCount > 0 && _game.IsWaveRunning)
                     yield return null;
                 if (!_game.IsWaveRunning) yield break;
 
-                Vector2 position = GetSpawnPosition(group, i);
-                GameObject go = MegaObjectPools.Instance.Spawn(group.enemy.prefab, position, Quaternion.Euler(0f, 0f, 180f), transform);
-                if (go != null)
+                for (int c = 0; c < rankCount; c++)
                 {
-                    MegaEnemyController controller = go.GetComponent<MegaEnemyController>();
-                    bool elite = group.explicitElite || _game.NextRandom01() < group.eliteChance;
-                    controller?.Configure(group.enemy, group, wave, _level, _game, _director, elite);
+                    int index = startIndex + c;
+                    Vector2 position = GetSpawnPosition(group, index);
+                    GameObject go = MegaObjectPools.Instance.Spawn(group.enemy.prefab, position, Quaternion.Euler(0f, 0f, 180f), transform);
+                    if (go != null)
+                    {
+                        MegaEnemyController controller = go.GetComponent<MegaEnemyController>();
+                        bool elite = group.explicitElite || _game.NextRandom01() < group.eliteChance;
+                        controller?.Configure(group.enemy, group, wave, _level, _game, _director, elite);
+                    }
                 }
 
-                // Near-simultaneous ships within a rank, with a small rhythmic gap.
-                bool endOfRank = (i + 1) % columns == 0;
-                float baseCadence = Mathf.Max(0.05f, group.cadence * _level.spawnCadenceMultiplier) * _game.SpawnCadenceScale;
-                float cadence = endOfRank ? baseCadence * 1.25f : baseCadence * 0.22f;
-                yield return new WaitForSeconds(cadence);
+                // Distinct cadence between successive formation ranks
+                float baseCadence = Mathf.Max(0.55f, group.cadence * 2.8f * _level.spawnCadenceMultiplier) * _game.SpawnCadenceScale;
+                yield return new WaitForSeconds(baseCadence);
             }
         }
 
@@ -55,7 +61,7 @@ namespace AnimalFall.MegaShooter
         private Vector2 GetSpawnPosition(EnemySpawnGroup group, int index)
         {
             Rect bounds = _level.cameraBounds;
-            const float sideInset = 0.55f;
+            const float sideInset = 0.85f;
             const float topInset = 0.8f;
             const float bottomInset = 0.9f;
             float minX = bounds.xMin + sideInset;
@@ -63,7 +69,7 @@ namespace AnimalFall.MegaShooter
             float minY = bounds.yMin + bottomInset;
             float maxY = bounds.yMax - topInset;
 
-            int columns = Mathf.Clamp(group.columns, 1, 9);
+            int columns = Mathf.Clamp(group.columns, 1, 6);
             int column = index % columns;
             int row = index / columns;
             int columnsThisRow = Mathf.Min(columns, group.count - row * columns);
@@ -76,35 +82,36 @@ namespace AnimalFall.MegaShooter
             else if (group.spawnPath == MegaSpawnPath.Right) laneCenter = Mathf.Lerp(minX, maxX, 0.65f);
             else if (group.spawnPath == MegaSpawnPath.Center) laneCenter = (minX + maxX) * 0.5f;
 
-            float desiredSpacing = Mathf.Max(0.58f, group.spacing);
-            float fitSpacing = (maxX - minX) / Mathf.Max(1, columns - 1);
+            // Spacing sized comfortably for 2x villain ships so formations never overlap
+            float desiredSpacing = Mathf.Max(1.4f, group.spacing);
+            float fitSpacing = (maxX - minX) / Mathf.Max(1, columns);
             float spacing = Mathf.Min(desiredSpacing, fitSpacing);
-            float rowSpacing = Mathf.Max(0.72f, spacing * 0.92f);
+            float rowSpacing = Mathf.Max(1.35f, spacing * 0.95f);
             float x = laneCenter + centered * spacing;
             float y = maxY - row * rowSpacing;
 
             switch (group.formation)
             {
                 case MegaFormationType.V:
-                    y -= Mathf.Abs(centered) * spacing * 0.42f;
+                    y -= Mathf.Abs(centered) * spacing * 0.45f;
                     break;
                 case MegaFormationType.Arc:
-                    y -= (1f - Mathf.Abs(centered) / Mathf.Max(1f, columnsThisRow * 0.5f)) * spacing * 0.58f;
+                    y -= (1f - Mathf.Abs(centered) / Mathf.Max(1f, columnsThisRow * 0.5f)) * spacing * 0.55f;
                     break;
                 case MegaFormationType.Column:
                     x = laneCenter;
-                    y = maxY - index * rowSpacing * 0.8f;
+                    y = maxY - index * rowSpacing * 0.85f;
                     break;
                 case MegaFormationType.AlternatingSides:
-                    x += (row % 2 == 0 ? -0.32f : 0.32f) * spacing;
-                    y -= (column % 2 == 0 ? 0f : 0.22f) * spacing;
+                    x += (row % 2 == 0 ? -0.4f : 0.4f) * spacing;
+                    y -= (column % 2 == 0 ? 0f : 0.3f) * spacing;
                     break;
                 case MegaFormationType.Mirrored:
                     x = laneCenter + Mathf.Sign(centered == 0f ? (column % 2 == 0 ? -1f : 1f) : centered)
-                        * (0.35f + Mathf.Abs(centered)) * spacing;
+                        * (0.45f + Mathf.Abs(centered)) * spacing;
                     break;
                 case MegaFormationType.Line:
-                    y -= Mathf.Abs(centered) * 0.06f;
+                    y -= Mathf.Abs(centered) * 0.08f;
                     break;
                 case MegaFormationType.Grid:
                     if (row % 2 == 1) x += spacing * 0.5f;

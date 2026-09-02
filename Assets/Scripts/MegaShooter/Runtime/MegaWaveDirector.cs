@@ -52,12 +52,30 @@ namespace AnimalFall.MegaShooter
                 }
                 else if (wave.completionCondition == MegaWaveCompletion.DefeatPriorityTargets)
                 {
-                    while ((_activePriorityTargets > 0 || _spawning) && _game.CanAdvanceCombat) yield return null;
+                    while ((_activePriorityTargets > 0 || _spawning) && _game.CanAdvanceCombat)
+                    {
+                        if (!_spawning && _game.ActiveEnemyCount == 0)
+                        {
+                            _activePriorityTargets = 0;
+                            _activeEnemies = 0;
+                            break;
+                        }
+                        yield return null;
+                    }
                     _game.DespawnAllEnemies();
                 }
                 else
                 {
-                    while ((_activeEnemies > 0 || _spawning) && _game.CanAdvanceCombat) yield return null;
+                    while ((_activeEnemies > 0 || _spawning || _game.ActiveEnemyCount > 0) && _game.CanAdvanceCombat)
+                    {
+                        if (!_spawning && _game.ActiveEnemyCount == 0)
+                        {
+                            _activeEnemies = 0;
+                            _activePriorityTargets = 0;
+                            break;
+                        }
+                        yield return null;
+                    }
                 }
 
                 if (!_game.CanAdvanceCombat) yield break;

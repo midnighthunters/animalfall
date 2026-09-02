@@ -30,10 +30,10 @@ namespace AnimalFall.MegaShooter
         private bool _elite;
         private Vector3 _baseScale;
         // Match the reference layout in screen space: regular army villains occupy
-        // about nine percent of the viewport width and elite leaders about thirteen.
-        private const float VillainViewportWidth = 0.09f;
-        private const float EliteViewportWidth = 0.16f;
-        private const float FallbackVillainSizeScale = 0.28f;
+        // about eighteen percent of the viewport width and elite leaders about thirty-two (scaled 2x).
+        private const float VillainViewportWidth = 0.18f;
+        private const float EliteViewportWidth = 0.32f;
+        private const float FallbackVillainSizeScale = 0.56f;
         private float _halfWidth;
         private float _halfHeight;
 
@@ -197,8 +197,9 @@ namespace AnimalFall.MegaShooter
                 return;
             }
             MegaWeaponPattern pattern = EffectiveWeaponPattern;
+            Vector2 muzzlePosition = (Vector2)transform.position + Vector2.down * Mathf.Max(0.2f, _halfHeight * 0.9f);
             _game.SpawnEffect(_game.VFXProfile?.enemyMuzzlePrefab ?? _game.VFXProfile?.warningPrefab,
-                transform.position, _data.projectile.enemyColor, _elite ? 0.62f : 0.46f, 0.2f);
+                muzzlePosition, _data.projectile.enemyColor, _elite ? 0.72f : 0.55f, 0.2f);
             int count = pattern == MegaWeaponPattern.Radial ? 4 : pattern == MegaWeaponPattern.Burst ? 2 : pattern == MegaWeaponPattern.FixedSpread ? 2 : 1;
             for (int i = 0; i < count; i++)
             {
@@ -208,9 +209,9 @@ namespace AnimalFall.MegaShooter
                 else if (pattern == MegaWeaponPattern.FixedSpread || pattern == MegaWeaponPattern.Burst)
                     direction = Quaternion.Euler(0f, 0f, -24f + i * (48f / Mathf.Max(1, count - 1))) * Vector2.down;
                 else
-                    direction = _game.Player != null ? ((Vector2)_game.Player.transform.position - (Vector2)transform.position).normalized : Vector2.down;
+                    direction = _game.Player != null ? ((Vector2)_game.Player.transform.position - muzzlePosition).normalized : Vector2.down;
 
-                _game.SpawnProjectile(_data.projectile, MegaFaction.Enemy, transform.position, direction,
+                _game.SpawnProjectile(_data.projectile, MegaFaction.Enemy, muzzlePosition, direction,
                     _data.projectile.damage * _level.enemyDamageMultiplier,
                     _level.enemyProjectileSpeedMultiplier * _game.HostileProjectileSpeedScale, 0,
                     pattern == MegaWeaponPattern.AimedSingle ? _game.Player?.transform : null);

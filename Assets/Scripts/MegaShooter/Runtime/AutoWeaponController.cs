@@ -45,9 +45,23 @@ namespace AnimalFall.MegaShooter
             {
                 float angle = start + spread * i;
                 Vector2 direction = Quaternion.Euler(0f, 0f, angle) * Vector2.up;
-                Vector2 muzzle = _animal.muzzleOffsets != null && _animal.muzzleOffsets.Length > 0
-                    ? _animal.muzzleOffsets[i % _animal.muzzleOffsets.Length]
-                    : new Vector2(0f, 0.45f);
+                Vector2 muzzle;
+                if (count == 1)
+                {
+                    muzzle = new Vector2(0f, 0.48f);
+                }
+                else if (count == 2)
+                {
+                    muzzle = _animal != null && _animal.muzzleOffsets != null && _animal.muzzleOffsets.Length >= 2
+                        ? _animal.muzzleOffsets[i]
+                        : (i == 0 ? new Vector2(-0.22f, 0.45f) : new Vector2(0.22f, 0.45f));
+                }
+                else
+                {
+                    float offsetFrac = (i / (float)(count - 1)) * 2f - 1f;
+                    muzzle = new Vector2(offsetFrac * 0.32f, 0.48f - Mathf.Abs(offsetFrac) * 0.06f);
+                }
+
                 _game.SpawnProjectile(_weapon.projectile, MegaFaction.Player,
                     (Vector2)transform.position + muzzle, direction,
                     _weapon.damage * _powerScale, 1f,
