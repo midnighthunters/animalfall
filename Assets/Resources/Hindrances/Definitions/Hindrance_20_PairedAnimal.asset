@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 20
   prefab: {fileID: 6119676397679336725, guid: 8e4bbcffa0c48ee42b419a4866904199, type: 3}
-  icon: {fileID: 21300000, guid: 3b82d5d5ee4e9d44c8faed2269a3f006, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 41
   displayName: Paired Animal
   effectDescription: Counter the Paired Animal!

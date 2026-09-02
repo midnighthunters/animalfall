@@ -156,6 +156,9 @@ private static int GetMaxHindrances(int n)
 
         private static HindranceConfig[] BuildHindranceConfigs(int n)
         {
+            if (n >= LateClassicHindranceSchedule.FirstLevel && n <= LateClassicHindranceSchedule.LastLevel)
+                return LateClassicHindranceSchedule.BuildConfigs(n);
+
             // Levels 26-39 introduce the three late-game set pieces while rotating
             // familiar hazards back in. Other post-21 levels remain unchanged.
             if (n >= 26 && n <= 39) return BuildLevel26To39Hindrances(n);
@@ -184,7 +187,6 @@ private static int GetMaxHindrances(int n)
             TryAdd(HindranceType.ZeroGravity,   15,  0.7f);
             TryAdd(HindranceType.IceCube,       18,  1.0f);
             TryAdd(HindranceType.ThiefBird,     18,  0.9f);
-            TryAdd(HindranceType.Tornado,       20,  0.8f);
             TryAdd(HindranceType.BlackHole,     20,  0.6f);
             TryAdd(HindranceType.PairedAnimal,  23,  1.0f);
             TryAdd(HindranceType.MirrorMode,    23,  0.7f);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 48
   prefab: {fileID: 6991298533726115919, guid: 2b95c6281e0fe3245b876d23b70b58cf, type: 3}
-  icon: {fileID: 21300000, guid: d75854d7192f14a409af88f821e9b85d, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 31
   displayName: Porcupine
   effectDescription: Tap it to fire spikes at every animal on screen.

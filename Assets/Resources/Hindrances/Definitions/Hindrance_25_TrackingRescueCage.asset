@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 25
   prefab: {fileID: 7803578485098366638, guid: 55e34c65d3da21f40b3b88856d4a1d61, type: 3}
-  icon: {fileID: 21300000, guid: 56b9adad85cfae44f93f88e4ddc20ea2, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 51
   displayName: Tracking Rescue Cage
   effectDescription: Hold the moving latch!

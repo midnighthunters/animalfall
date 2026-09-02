@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_62_BatSwarm
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 62
+  prefab: {fileID: 9170238039471186532, guid: 35d8ba7b6a475b841985ffa7f1c3df6d, type: 3}
+  icon: {fileID: -697763020151794088, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  unlockLevel: 59
+  displayName: Bat Swarm
+  effectDescription: Ten to twelve bats sweep across and carry away every visible
+    animal.
+  category: 0
+  baseWeight: 0.75
+  difficultyTier: 2
+  minDuration: 6
+  maxDuration: 6
+  maxSimultaneous: 1
+  cooldown: 14
+  compatibilityTags: 72
+  exclusionTags: 0
+  inputMode: 0
+  targetScope: 0
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: The bat swarm takes every animal!
+  stateSprites:
+  - {fileID: -697763020151794088, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  - {fileID: -8072220183094876539, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  - {fileID: 6263388890442168103, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  - {fileID: 8615373810413218145, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  - {fileID: 7801246764459682756, guid: 42e56ea42d3eff6429b5e683aae82ca4, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.35
+  interactionWindow: 6
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

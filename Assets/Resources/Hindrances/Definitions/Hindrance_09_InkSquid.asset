@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 9
   prefab: {fileID: 2342791900332199545, guid: 8b22137941fa7ca44b811246c2b2b734, type: 3}
-  icon: {fileID: 21300000, guid: e71d8f12601de8041ba7edd7554ec655, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 19
   displayName: Ink Squid
   effectDescription: Counter the Ink Squid!

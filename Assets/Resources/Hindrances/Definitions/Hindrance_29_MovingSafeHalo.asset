@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 29
   prefab: {fileID: 1198221529499091872, guid: 0d78d1bde56f67545a320e8d05446961, type: 3}
-  icon: {fileID: 21300000, guid: cb599875e4e52e9409e389067f87e363, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 59
   displayName: Moving Safe Halo
   effectDescription: Counter the Moving Safe Halo!

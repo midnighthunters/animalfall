@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 21
   prefab: {fileID: 4276505295801776761, guid: 3536b96bdafa415468c44a4cd0b417f0, type: 3}
-  icon: {fileID: 21300000, guid: cab8c73c0916ccd46b290ec3f8cf0870, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 43
   displayName: Spiderweb Curtain
   effectDescription: Trace the glowing strand!

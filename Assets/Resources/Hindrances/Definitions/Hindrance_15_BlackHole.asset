@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 15
   prefab: {fileID: 4313321854260021492, guid: d5cbc2ed88b382c4590702f96a4db3ff, type: 3}
-  icon: {fileID: 21300000, guid: 5c3ada1b42bcbe244b698fc346eae954, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 31
   displayName: Black Hole
   effectDescription: Counter the Black Hole!

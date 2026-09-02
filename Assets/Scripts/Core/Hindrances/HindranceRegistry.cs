@@ -18,7 +18,7 @@ namespace AnimalFall.Core.Hindrances
         [SerializeField] private Entry[] _entries;
 
         private readonly Dictionary<HindranceType, HindranceData> _byType =
-            new Dictionary<HindranceType, HindranceData>(56);
+            new Dictionary<HindranceType, HindranceData>(68);
         private bool _built;
 
         public IReadOnlyList<Entry> Entries => _entries;
@@ -72,7 +72,7 @@ namespace AnimalFall.Core.Hindrances
             }
             if (requireAll)
             {
-                for (int id = 1; id <= (int)HindranceType.FrogSnatcher; id++)
+                for (int id = 1; id <= (int)HindranceType.CloudWave; id++)
                     if (!seen.Contains((HindranceType)id)) issues.Add($"Missing type {(HindranceType)id} ({id}).");
             }
             return issues;

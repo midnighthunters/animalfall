@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_61_Fan
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 61
+  prefab: {fileID: 8146342608504340283, guid: 5b378b782f403c74c80694a701a75f23, type: 3}
+  icon: {fileID: 1710981365271166214, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  unlockLevel: 56
+  displayName: Fan
+  effectDescription: Blows animals diagonally upward at 45 degrees.
+  category: 3
+  baseWeight: 0.9
+  difficultyTier: 2
+  minDuration: 9
+  maxDuration: 9
+  maxSimultaneous: 1
+  cooldown: 12
+  compatibilityTags: 8
+  exclusionTags: 0
+  inputMode: 0
+  targetScope: 0
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: The fan blows up and right!
+  stateSprites:
+  - {fileID: 1710981365271166214, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: -6140194772216550832, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: 4582241135641587252, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: -1275865699971971614, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: -4490565764861516063, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: -1341085094223328502, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: -6566412906780946596, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  - {fileID: 7576256181782266695, guid: 881113bbc34c7c941bf03b8a075ccf97, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.35
+  interactionWindow: 9
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

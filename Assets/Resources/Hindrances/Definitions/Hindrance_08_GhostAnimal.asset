@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 8
   prefab: {fileID: 2048846134762998777, guid: 73aca3e79c5d8404aa0dac3733dd1ed0, type: 3}
-  icon: {fileID: 21300000, guid: f550707b817be8245a4d812412340fbb, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 17
   displayName: Ghost Animal
   effectDescription: Counter the Ghost Animal!

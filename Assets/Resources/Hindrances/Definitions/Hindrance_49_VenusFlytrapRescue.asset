@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 49
   prefab: {fileID: 6422440449743379676, guid: 7b3259956682d5143925cfa2f9190075, type: 3}
-  icon: {fileID: 21300000, guid: 62537f0634e44684580f4cfb0ad732db, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 36
   displayName: Thorn Plant
   effectDescription: It periodically stretches out and snatches an animal.

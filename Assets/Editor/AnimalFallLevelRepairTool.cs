@@ -218,6 +218,25 @@ namespace AnimalFall.EditorTools
 
         private static List<HindranceType> BuildLevelHindrances(int levelNumber, int[] unlockLevels)
         {
+            if (levelNumber >= LateClassicHindranceSchedule.FirstLevel &&
+                levelNumber <= LateClassicHindranceSchedule.LastLevel)
+            {
+                var lateTypes = new List<HindranceType>(LateClassicHindranceSchedule.BuildTypes(levelNumber));
+                if (levelNumber >= 63 && levelNumber <= 67 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.PandaJailKey);
+                if (levelNumber >= 68 && levelNumber <= 72 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.Crusher);
+                if (levelNumber >= 73 && levelNumber <= 77 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.GravitySwitch);
+                if (levelNumber >= 81 && levelNumber <= 84 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.BalloonWave);
+                if (levelNumber >= 86 && levelNumber <= 89 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.SlimeGun);
+                if (levelNumber >= 91 && levelNumber <= 94 && levelNumber % 5 != 0)
+                    lateTypes.Insert(0, HindranceType.CloudWave);
+                return lateTypes;
+            }
+
             int unlocked = 0;
             while (unlocked < unlockLevels.Length && unlockLevels[unlocked] <= levelNumber) unlocked++;
             var result = new List<HindranceType>(3);

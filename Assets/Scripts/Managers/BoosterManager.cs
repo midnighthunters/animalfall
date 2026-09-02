@@ -99,11 +99,10 @@ namespace AnimalFall
         /// <summary>
         /// Attempt to select a booster. Returns true if selection succeeded.
         /// </summary>
-        public bool SelectBooster(BoosterType type)
+public bool SelectBooster(BoosterType type)
         {
             if (type == BoosterType.None) return false;
 
-            // Check if we have any of this booster
             int count = GetBoosterCount(type);
             if (count <= 0)
             {
@@ -111,27 +110,27 @@ namespace AnimalFall
                 return false;
             }
 
-            // If already selected, deselect
             if (_selectedBooster == type)
             {
                 DeselectBooster();
                 return false;
             }
 
-            // Select the booster
             _selectedBooster = type;
-            _waitingForTarget = (type == BoosterType.Rainbow || type == BoosterType.Rocket);
+            // Bomb and Rainbow activate from the booster button. Rocket is the only
+            // booster that waits for a lane tap.
+            _waitingForTarget = type == BoosterType.Rocket;
 
-            // Freeze animals when booster is selected
             FreezeAllAnimals();
-
             OnBoosterSelected?.Invoke(type);
-            Debug.Log($"[BoosterManager] Selected {type}. Waiting for target: {_waitingForTarget}");
 
-            // If bomb, activate immediately (no target needed)
             if (type == BoosterType.Bomb)
             {
                 StartCoroutine(ActivateBombDelayed());
+            }
+            else if (type == BoosterType.Rainbow)
+            {
+                ActivateRainbow();
             }
 
             return true;
@@ -179,29 +178,12 @@ namespace AnimalFall
             ActivateBomb();
         }
 
-        private void OnScreenTapped(Vector2 worldPos)
+private void OnScreenTapped(Vector2 worldPos)
         {
-            if (!_waitingForTarget) return;
-
-            // Find the animal at the tapped position
-            Animal targetAnimal = GetAnimalAtPosition(worldPos);
-
-            if (_selectedBooster == BoosterType.Rainbow)
-            {
-                if (targetAnimal != null && targetAnimal.Data != null)
-                {
-                    ActivateRainbow(targetAnimal.Data.species);
-                }
-                else
-                {
-                    Debug.Log("[BoosterManager] Rainbow: No animal at tap position");
-                    DeselectBooster();
-                }
-            }
-            else if (_selectedBooster == BoosterType.Rocket)
-            {
-                ActivateRocket(worldPos.x);
-            }
+            // Rainbow activates directly from its HUD button, so a player never
+            // needs a second tap on an animal. Rocket still uses its target tap.
+            if (!_waitingForTarget || _selectedBooster != BoosterType.Rocket) return;
+            ActivateRocket(worldPos.x);
         }
 
         // ──────────────────────────────────────────────────────────────────
@@ -276,10 +258,12 @@ namespace AnimalFall
                     InstantiateVFX(_bombExplosionVFX, pos, 2f);
                 }
 
-                // Destroy animal
+                // A booster pop is still a collection for goal purposes. Use
+                // the shared collection path so target progress, score, VFX,
+                // and completion checks stay consistent with tapped animals.
                 if (i < animals.Count && animals[i] != null && !animals[i].IsCollected)
                 {
-                    animals[i].PlayPopAndReturn(false);
+                    animals[i].OnCollected();
                 }
 
                 // Remove bomb sprite
@@ -299,7 +283,7 @@ namespace AnimalFall
         // ──────────────────────────────────────────────────────────────────
         // RAINBOW: Sprite moves to center, rotates, animals pulled in
         // ──────────────────────────────────────────────────────────────────
-        private void ActivateRainbow(AnimalSpecies targetSpecies)
+private void ActivateRainbow()
         {
             if (_rainbowCount <= 0)
             {
@@ -310,19 +294,16 @@ namespace AnimalFall
             _rainbowCount--;
             OnBoosterCountChanged?.Invoke(BoosterType.Rainbow, _rainbowCount);
 
-            var animals = new List<Animal>(ActiveAnimalRegistry.All);
-            List<Animal> matchingAnimals = new List<Animal>();
-
-            foreach (var animal in animals)
+            var animals = new List<Animal>();
+            foreach (var animal in ActiveAnimalRegistry.All)
             {
-                if (animal == null || animal.IsCollected) continue;
-                if (animal.Data == null || animal.Data.species != targetSpecies) continue;
-                matchingAnimals.Add(animal);
+                if (animal != null && !animal.IsCollected)
+                    animals.Add(animal);
             }
 
-            if (matchingAnimals.Count == 0)
+            if (animals.Count == 0)
             {
-                Debug.Log($"[BoosterManager] Rainbow: No {targetSpecies} animals found on screen");
+                Debug.Log("[BoosterManager] Rainbow: No animals on screen");
                 UnfreezeAllAnimals();
                 _selectedBooster = BoosterType.None;
                 _waitingForTarget = false;
@@ -330,12 +311,11 @@ namespace AnimalFall
                 return;
             }
 
-            StartCoroutine(RainbowSequence(matchingAnimals, targetSpecies));
+            StartCoroutine(RainbowSequence(animals));
         }
 
-        private IEnumerator RainbowSequence(List<Animal> animals, AnimalSpecies species)
+private IEnumerator RainbowSequence(List<Animal> animals)
         {
-            // Get screen center
             Vector3 centerPos = Vector3.zero;
             if (Camera.main != null)
             {
@@ -343,65 +323,54 @@ namespace AnimalFall
                 centerPos.z = 0f;
             }
 
-            // Create rainbow sprite at center
             GameObject rainbowObj = CreateSpriteObject(_rainbowSprite, centerPos, 0f);
             rainbowObj.transform.localScale = Vector3.zero;
 
-            // Animate rainbow appearing and growing
-            rainbowObj.transform.DOScale(2f, 0.5f).SetEase(Ease.OutBack);
-
-            // Start rotating the rainbow sprite
-            rainbowObj.transform.DORotate(new Vector3(0, 0, 360), _rainbowRotationSpeed / 360f, RotateMode.FastBeyond360)
+            // A tight, fast center animation makes the booster feel immediate
+            // without covering the whole playfield.
+            rainbowObj.transform.DOScale(1.35f, 0.18f).SetEase(Ease.OutBack);
+            rainbowObj.transform.DORotate(new Vector3(0f, 0f, 360f), 0.25f, RotateMode.FastBeyond360)
                 .SetLoops(-1, LoopType.Restart)
                 .SetEase(Ease.Linear);
 
-            yield return new WaitForSeconds(0.3f);
+            if (_rainbowCollectionVFX != null)
+                InstantiateVFX(_rainbowCollectionVFX, centerPos, 0.8f);
 
-            // Pull all matching animals into the rainbow
+            yield return new WaitForSeconds(0.12f);
+
+            const float pullDuration = 0.55f;
             foreach (var animal in animals)
             {
                 if (animal == null || animal.IsCollected) continue;
 
-                // Disable animal movement
                 var movement = animal.GetComponent<AnimalMovement>();
                 if (movement != null) movement.enabled = false;
 
-                // Animate animal moving to center with spiral effect
                 Sequence animalSeq = DOTween.Sequence();
-                animalSeq.Append(animal.transform.DOMove(centerPos, _rainbowPullDuration).SetEase(Ease.InQuad));
-                animalSeq.Join(animal.transform.DOScale(0.3f, _rainbowPullDuration).SetEase(Ease.InQuad));
-                animalSeq.Join(animal.transform.DORotate(new Vector3(0, 0, 720), _rainbowPullDuration, RotateMode.FastBeyond360).SetEase(Ease.InQuad));
-                
-                // Spawn sparkle VFX at animal position
+                animalSeq.Append(animal.transform.DOMove(centerPos, pullDuration).SetEase(Ease.InQuad));
+                animalSeq.Join(animal.transform.DOScale(0.1f, pullDuration).SetEase(Ease.InQuad));
+                animalSeq.Join(animal.transform.DORotate(new Vector3(0f, 0f, 1080f), pullDuration, RotateMode.FastBeyond360).SetEase(Ease.InQuad));
+
                 if (_rainbowCollectionVFX != null)
-                {
-                    InstantiateVFX(_rainbowCollectionVFX, animal.transform.position, 2f);
-                }
+                    InstantiateVFX(_rainbowCollectionVFX, animal.transform.position, 0.8f);
             }
 
-            // Wait for pull animation to complete
-            yield return new WaitForSeconds(_rainbowPullDuration);
+            yield return new WaitForSeconds(pullDuration);
 
-            // Collect all animals
             foreach (var animal in animals)
             {
                 if (animal != null && !animal.IsCollected)
-                {
                     animal.OnCollected();
-                }
             }
 
             GameEvents.OnSfxRequested?.Invoke(SfxType.Collect);
+            rainbowObj.transform.DOKill();
+            rainbowObj.transform.DOScale(0f, 0.15f).SetEase(Ease.InBack);
+            Destroy(rainbowObj, 0.2f);
 
-            // Rainbow sprite shrinks and disappears
-            rainbowObj.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack);
-            Destroy(rainbowObj, 0.4f);
+            Debug.Log($"[BoosterManager] Rainbow activated! Collected {animals.Count} animals");
 
-            Debug.Log($"[BoosterManager] Rainbow activated! Collected {animals.Count} {species} animals");
-
-            yield return new WaitForSeconds(0.3f);
-
-            // Cleanup and unfreeze remaining animals
+            yield return new WaitForSeconds(0.15f);
             UnfreezeAllAnimals();
             _selectedBooster = BoosterType.None;
             _waitingForTarget = false;
@@ -420,7 +389,7 @@ namespace AnimalFall
         // ──────────────────────────────────────────────────────────────────
         // ROCKET: Rocket travels up, destroying animals in its path
         // ──────────────────────────────────────────────────────────────────
-        private void ActivateRocket(float targetX)
+private void ActivateRocket(float targetX)
         {
             if (_rocketCount <= 0)
             {
@@ -428,128 +397,93 @@ namespace AnimalFall
                 return;
             }
 
+            // Consume the target tap immediately so an extra tap cannot launch
+            // another rocket while the zigzag sweep is running.
+            _waitingForTarget = false;
             _rocketCount--;
             OnBoosterCountChanged?.Invoke(BoosterType.Rocket, _rocketCount);
-
             StartCoroutine(RocketSequence(targetX));
         }
 
-        private IEnumerator RocketSequence(float targetX)
+private IEnumerator RocketSequence(float targetX)
         {
-            if (Camera.main == null) yield break;
+            if (Camera.main == null)
+            {
+                DeselectBooster();
+                yield break;
+            }
 
-            // Get bottom and top positions
-            Vector3 bottomPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, -0.1f, 10f));
+            Vector3 bottomPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, -0.12f, 10f));
             bottomPos.x = targetX;
             bottomPos.z = 0f;
 
-            Vector3 topPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 1.2f, 10f));
-            topPos.x = targetX;
+            Vector3 topPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 1.15f, 10f));
             topPos.z = 0f;
 
-            // Create rocket sprite at bottom
-            GameObject rocketObj = CreateSpriteObject(_rocketSprite, bottomPos, 1f);
-            
-            // Calculate travel time
-            float distance = Vector3.Distance(bottomPos, topPos);
-            float travelTime = distance / _rocketSpeed;
-            
-            // Spawn trail VFX
+            GameObject rocketObj = CreateSpriteObject(_rocketSprite, bottomPos, 0.78f);
+
             GameObject trailVFX = null;
             if (_rocketLaunchVFX != null)
             {
-                trailVFX = InstantiateVFX(_rocketLaunchVFX, bottomPos, travelTime + 0.5f);
+                trailVFX = InstantiateVFX(_rocketLaunchVFX, bottomPos, 5f);
                 if (trailVFX != null)
                     trailVFX.transform.SetParent(rocketObj.transform);
             }
 
-            // Collect animals in the lane
-            var animals = new List<Animal>(ActiveAnimalRegistry.All);
-            List<Animal> hitAnimals = new List<Animal>();
-            float halfWidth = _rocketLaneWidth * 0.5f;
-
-            foreach (var animal in animals)
-            {
-                if (animal == null || animal.IsCollected) continue;
-                
-                float animalX = animal.transform.position.x;
-                if (Mathf.Abs(animalX - targetX) <= halfWidth)
-                {
-                    hitAnimals.Add(animal);
-                }
-            }
-
-            // Sort by Y position (bottom to top)
-            hitAnimals.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
-
-            // Animate rocket moving up
-            float elapsedTime = 0f;
-            int currentHitIndex = 0;
-
-            while (elapsedTime < travelTime)
-            {
-                elapsedTime += Time.deltaTime;
-                float t = elapsedTime / travelTime;
-                
-                rocketObj.transform.position = Vector3.Lerp(bottomPos, topPos, t);
-
-                // Check if we've reached any animals
-                while (currentHitIndex < hitAnimals.Count)
-                {
-                    Animal animal = hitAnimals[currentHitIndex];
-                    if (animal == null || animal.IsCollected)
-                    {
-                        currentHitIndex++;
-                        continue;
-                    }
-
-                    // Check if rocket has reached this animal
-                    if (rocketObj.transform.position.y >= animal.transform.position.y - 0.5f)
-                    {
-                        // Spawn explosion at animal
-                        if (_bombExplosionVFX != null)
-                        {
-                            InstantiateVFX(_bombExplosionVFX, animal.transform.position, 1.5f);
-                        }
-
-                        // Destroy animal
-                        animal.PlayPopAndReturn(false);
-                        currentHitIndex++;
-                    }
-                    else
-                    {
-                        break; // Haven't reached this animal yet
-                    }
-                }
-
-                yield return null;
-            }
-
-            // Clean up remaining animals in case any were missed
-            foreach (var animal in hitAnimals)
+            // Every active animal is a target. Sorting bottom-to-top keeps the
+            // sweep readable, while alternating side waypoints creates the zigzag.
+            var hitAnimals = new List<Animal>();
+            foreach (var animal in ActiveAnimalRegistry.All)
             {
                 if (animal != null && !animal.IsCollected)
-                {
-                    animal.PlayPopAndReturn(false);
-                }
+                    hitAnimals.Add(animal);
             }
+            hitAnimals.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
+
+            float leftX = Camera.main.ViewportToWorldPoint(new Vector3(0.14f, 0.5f, 10f)).x;
+            float rightX = Camera.main.ViewportToWorldPoint(new Vector3(0.86f, 0.5f, 10f)).x;
+            bool steerLeft = rocketObj.transform.position.x > 0f;
+
+            foreach (var animal in hitAnimals)
+            {
+                if (animal == null || animal.IsCollected) continue;
+
+                Vector3 animalPos = animal.transform.position;
+                animalPos.z = 0f;
+
+                // Bend to alternate sides before each impact. This gives a
+                // deliberate lightning-bolt path without ever skipping a target.
+                float bendY = Mathf.Lerp(rocketObj.transform.position.y, animalPos.y, 0.5f);
+                Vector3 bendPos = new Vector3(steerLeft ? leftX : rightX, bendY, 0f);
+                steerLeft = !steerLeft;
+
+                if (Vector3.Distance(rocketObj.transform.position, bendPos) > 0.2f)
+                    yield return MoveRocketAlongSegment(rocketObj, bendPos);
+
+                yield return MoveRocketAlongSegment(rocketObj, animalPos);
+
+                if (_bombExplosionVFX != null)
+                    InstantiateVFX(_bombExplosionVFX, animalPos, 0.8f);
+
+                // Count booster-cleared animals toward their species goal.
+                animal.OnCollected();
+            }
+
+            yield return MoveRocketAlongSegment(rocketObj, topPos);
 
             if (hitAnimals.Count > 0)
             {
                 GameEvents.OnSfxRequested?.Invoke(SfxType.Collect);
-                Debug.Log($"[BoosterManager] Rocket activated at X={targetX:F2}! Destroyed {hitAnimals.Count} animals");
+                Debug.Log($"[BoosterManager] Rocket zigzag sweep destroyed {hitAnimals.Count} animals.");
             }
             else
             {
-                Debug.Log($"[BoosterManager] Rocket: No animals in lane at X={targetX:F2}");
+                Debug.Log("[BoosterManager] Rocket: No animals on screen.");
             }
 
-            // Destroy rocket
-            Destroy(rocketObj, 0.2f);
+            Destroy(rocketObj, 0.1f);
+            yield return new WaitForSeconds(0.15f);
 
-            yield return new WaitForSeconds(0.3f);
-
-            // Cleanup and unfreeze
             UnfreezeAllAnimals();
             _selectedBooster = BoosterType.None;
             _waitingForTarget = false;
@@ -624,7 +558,24 @@ namespace AnimalFall
 
             return vfx;
         }
-    }
+    
+
+private IEnumerator MoveRocketAlongSegment(GameObject rocketObj, Vector3 destination)
+        {
+            Vector3 start = rocketObj.transform.position;
+            float distance = Vector3.Distance(start, destination);
+            float duration = Mathf.Clamp(distance / Mathf.Max(_rocketSpeed, 0.01f), 0.07f, 0.22f);
+            float tilt = Mathf.Clamp((destination.x - start.x) * -12f, -38f, 38f);
+
+            Sequence motion = DOTween.Sequence();
+            motion.Join(rocketObj.transform.DOMove(destination, duration).SetEase(Ease.InOutSine));
+            motion.Join(rocketObj.transform.DORotate(new Vector3(0f, 0f, tilt), duration * 0.5f)
+                .SetLoops(2, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine));
+
+            yield return motion.WaitForCompletion();
+        }
+}
 
     public enum BoosterType
     {

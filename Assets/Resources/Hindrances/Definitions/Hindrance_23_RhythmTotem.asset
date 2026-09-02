@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 23
   prefab: {fileID: 4840902070371004901, guid: 14fea9840c1059147b65d811cf992f6b, type: 3}
-  icon: {fileID: 21300000, guid: 41e40147866b880458d5172f84525d6c, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 47
   displayName: Rhythm Totem
   effectDescription: Tap on the green beat!

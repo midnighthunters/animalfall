@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Manta Scout
   prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
   sprite: {fileID: 5335039745264441910, guid: 5403117277b271041b02aec998caed1d, type: 3}
-  weaponIcon: {fileID: -1499788451389146327, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  weaponIcon: {fileID: -8813465039215467975, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   shadow: {fileID: 0}
   visualScale: 0.4
   colliderSize: {x: 0.93999994, y: 0.8}

@@ -21,6 +21,7 @@ namespace AnimalFall.MegaShooter.Editor
         public const string PrefabRoot = Root + "/Prefabs";
         public const string ScenePath = "Assets/Scenes/MegaShooterScene.unity";
         private const string MegaResourceRoot = "Assets/Resources/megalevel";
+        private const string HeroProjectileSpriteSheetPath = "Assets/Resources/icons/projectile.png";
         private const string LevelDatabasePath = "Assets/Levels/LevelDatabase.asset";
         private const int MegaCount = 20;
 
@@ -509,9 +510,10 @@ namespace AnimalFall.MegaShooter.Editor
             Sprite[] heroSprites = LoadAllSprites($"{MegaResourceRoot}/heroes.png");
             Sprite[] villainSprites = LoadAllSprites($"{MegaResourceRoot}/villains.png");
             Sprite[] weaponSprites = LoadAllSprites($"{MegaResourceRoot}/weapons.png");
-            if (heroSprites.Length < 10 || villainSprites.Length < 10 || weaponSprites.Length < 20)
+            Sprite[] heroProjectileSprites = LoadAllSprites(HeroProjectileSpriteSheetPath);
+            if (heroSprites.Length < 10 || villainSprites.Length < 10 || weaponSprites.Length < 20 || heroProjectileSprites.Length < 10)
             {
-                Debug.LogError("[MegaShooterGenerator] Megalevel sprite sheets are not sliced as expected (10 heroes, 10 villains, 20 weapons).");
+                Debug.LogError("[MegaShooterGenerator] Megalevel artwork is not sliced as expected (10 heroes, 10 hero projectiles, 10 villains, and 20 weapon icons).");
                 return;
             }
 
@@ -520,7 +522,9 @@ namespace AnimalFall.MegaShooter.Editor
                 animals[i].shipSprite = heroSprites[i];
                 animals[i].portrait = heroSprites[i];
                 weapons[i].icon = weaponSprites[i];
-                if (weapons[i].projectile != null) weapons[i].projectile.sprite = weaponSprites[i];
+                // Hero shots use the dedicated projectile sheet. Weapon icons remain
+                // on the weapons sheet so HUD presentation stays independent of combat art.
+                if (weapons[i].projectile != null) weapons[i].projectile.sprite = heroProjectileSprites[i];
                 EditorUtility.SetDirty(animals[i]);
                 EditorUtility.SetDirty(weapons[i]);
                 if (weapons[i].projectile != null) EditorUtility.SetDirty(weapons[i].projectile);

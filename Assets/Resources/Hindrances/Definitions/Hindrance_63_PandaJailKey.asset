@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_63_PandaJailKey
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 63
+  prefab: {fileID: 7295878742841310946, guid: c1371aa88a225f04fba8edfdc6b0035f, type: 3}
+  icon: {fileID: 1476153137406550370, guid: ebbe9789879611a4088bec68ae65075e, type: 3}
+  unlockLevel: 63
+  displayName: Panda Jail & Key
+  effectDescription: Tap the key before the panda jail falls away.
+  category: 5
+  baseWeight: 1.6
+  difficultyTier: 2
+  minDuration: 4
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 7
+  compatibilityTags: 64
+  exclusionTags: 2
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Tap the key to free Panda!
+  stateSprites:
+  - {fileID: 1476153137406550370, guid: ebbe9789879611a4088bec68ae65075e, type: 3}
+  - {fileID: 21300000, guid: 1d9019d674010e54199ca15d4c2d04ca, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 4
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

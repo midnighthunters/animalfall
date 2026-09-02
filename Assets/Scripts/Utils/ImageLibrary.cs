@@ -11,7 +11,7 @@ namespace AnimalFall.Utils
         private static readonly Sprite[] _animalSprites = new Sprite[14]; // indices 0-13 match AnimalSpecies enum
 
         // ── Hindrance sprites ─────────────────────────────────────────────────
-        private static readonly Sprite[] _hindranceSprites = new Sprite[56]; // indices 0-55 match HindranceType enum
+        private static readonly Sprite[] _hindranceSprites = new Sprite[69]; // indices 0-68 match stable HindranceType IDs
 
         // ── UI / Panel sprites ────────────────────────────────────────────────
         private static Sprite _panel;

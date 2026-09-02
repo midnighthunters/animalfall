@@ -14,11 +14,11 @@ namespace AnimalFall.Core.Animals
     public class Animal : MonoBehaviour
     {
         /// <summary>Fallback world scale for a portrait ortho camera (~size 5–6).</summary>
-        public const float IdealScale = 0.66f;
+        public const float IdealScale = 0.528f;
 
         /// <summary>Target on-screen size (world units) for an animal's largest dimension.
         /// Every species is normalised to this so no animal looks bigger/smaller than another.</summary>
-        public const float TargetWorldSize = 1.12f;
+        public const float TargetWorldSize = 0.896f;
 
         /// <summary>Highest level number that still counts as an "easy start" level.</summary>
         public const int EarlyLevelMaxNumber = 4;
@@ -28,10 +28,10 @@ namespace AnimalFall.Core.Animals
         public const float EarlyLevelSizeMultiplier = 1.4f;
 
         /// <summary>
-        /// Animals in the visual reference occupy about 18% of the portrait playfield width.
+        /// Animals in the visual reference occupy about 14.4% of the portrait playfield width.
         /// Deriving the world size from the camera keeps that footprint stable on different phones.
         /// </summary>
-        private const float TargetViewportWidth = 0.18f;
+        private const float TargetViewportWidth = 0.144f;
 
         /// <summary>Per-instance normalised scale, computed from the current sprite in SetupForPool.
         /// Movement, pop and pool-reset logic all read this instead of the flat IdealScale.</summary>

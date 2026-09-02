@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 40
   prefab: {fileID: 7031179380660770560, guid: 0e2e034e22e98b74cbf9996c9ae5cace, type: 3}
-  icon: {fileID: 21300000, guid: 8e337479e88e6b3448469ef18b280cd7, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 81
   displayName: Windmill Gate
   effectDescription: Counter the Windmill Gate!

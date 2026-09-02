@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 36
   prefab: {fileID: 2296557627898682592, guid: d6521edac4d10df4aa749a77c4437808, type: 3}
-  icon: {fileID: 21300000, guid: d525314edad03264f994ec9bb0834137, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 73
   displayName: Carousel Nests
   effectDescription: Counter the Carousel Nests!

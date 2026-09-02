@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_67_SlimeGun
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 67
+  prefab: {fileID: 567411371044010234, guid: 618a70a357e023942814450d8cb35178, type: 3}
+  icon: {fileID: -8378475004263928507, guid: 6d6fbdcd6dd3bd844b1c77b79fb5d255, type: 3}
+  unlockLevel: 86
+  displayName: Slime Gun
+  effectDescription: The slime gun shoots and holds animals on screen temporarily.
+  category: 3
+  baseWeight: 1.25
+  difficultyTier: 3
+  minDuration: 7
+  maxDuration: 9
+  maxSimultaneous: 1
+  cooldown: 8
+  compatibilityTags: 72
+  exclusionTags: 72
+  inputMode: 0
+  targetScope: 1
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: "The slime gun is firing \u2014 captured animals are held
+    briefly!"
+  stateSprites:
+  - {fileID: -8378475004263928507, guid: 6d6fbdcd6dd3bd844b1c77b79fb5d255, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 4
+  requiredInteractions: 0
+  primaryValue: 1
+  secondaryValue: 0

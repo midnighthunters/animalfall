@@ -18,6 +18,7 @@ namespace AnimalFall.Effects
         // ── Properties ────────────────────────────────────────────────────────
 
         public bool    IsZeroGravityActive   { get; set; }
+        public bool    IsReverseGravityActive { get; set; }
         public Vector2 WindForce             { get; set; }
         public bool    IsBlackHoleActive     { get; set; }
         public Vector2 BlackHoleCenter       { get; set; }
@@ -32,6 +33,7 @@ namespace AnimalFall.Effects
         // ClearAll can rebuild them safely before a new level begins.
         private Dictionary<object, Vector2> _windOwners = new Dictionary<object, Vector2>();
         private HashSet<object> _zeroGravityOwners = new HashSet<object>();
+        private HashSet<object> _reverseGravityOwners = new HashSet<object>();
         private Dictionary<object, Vector3> _blackHoleOwners = new Dictionary<object, Vector3>();
         private HashSet<object> _mirrorOwners = new HashSet<object>();
 
@@ -45,6 +47,12 @@ namespace AnimalFall.Effects
         {
             _zeroGravityOwners.Add(owner); IsZeroGravityActive = true;
             return new HindranceEffectToken(() => { _zeroGravityOwners.Remove(owner); IsZeroGravityActive = _zeroGravityOwners.Count > 0; });
+        }
+
+        public HindranceEffectToken AddReverseGravity(object owner)
+        {
+            _reverseGravityOwners.Add(owner); IsReverseGravityActive = true;
+            return new HindranceEffectToken(() => { _reverseGravityOwners.Remove(owner); IsReverseGravityActive = _reverseGravityOwners.Count > 0; });
         }
 
         public HindranceEffectToken AddBlackHole(object owner, Vector2 center, float strength)
@@ -63,7 +71,9 @@ namespace AnimalFall.Effects
         {
             Vector2 sum = Vector2.zero;
             foreach (Vector2 force in _windOwners.Values) sum += force;
-            WindForce = Vector2.ClampMagnitude(sum, 4f);
+            // Gusts are deliberately dramatic: a full-strength gust should carry
+            // animals across a meaningful part of the screen before it fades.
+            WindForce = Vector2.ClampMagnitude(sum, 8f);
         }
 
         private void RecalculateBlackHole()
@@ -79,6 +89,7 @@ namespace AnimalFall.Effects
         {
             EnsureOwnerCollections();
             IsZeroGravityActive   = false;
+            IsReverseGravityActive = false;
             WindForce             = Vector2.zero;
             IsBlackHoleActive     = false;
             BlackHoleCenter       = Vector2.zero;
@@ -86,6 +97,7 @@ namespace AnimalFall.Effects
             IsMirrorModeActive    = false;
             _windOwners.Clear();
             _zeroGravityOwners.Clear();
+            _reverseGravityOwners.Clear();
             _blackHoleOwners.Clear();
             _mirrorOwners.Clear();
         }
@@ -94,6 +106,7 @@ namespace AnimalFall.Effects
         {
             if (_windOwners == null) _windOwners = new Dictionary<object, Vector2>();
             if (_zeroGravityOwners == null) _zeroGravityOwners = new HashSet<object>();
+            if (_reverseGravityOwners == null) _reverseGravityOwners = new HashSet<object>();
             if (_blackHoleOwners == null) _blackHoleOwners = new Dictionary<object, Vector3>();
             if (_mirrorOwners == null) _mirrorOwners = new HashSet<object>();
         }

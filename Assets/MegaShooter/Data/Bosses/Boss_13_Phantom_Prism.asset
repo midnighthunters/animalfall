@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_13
   displayName: Phantom Prism
+  archetype: 0
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
   sprite: {fileID: -7285240185506287073, guid: 85571bf05e1a7594e84d7deecdb882a5, type: 3}
   weaponIcon: {fileID: -2600240032574155362, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 2
   colliderSize: {x: 2.7, y: 1.69}
   baseHitPoints: 6200
   movementBounds:
@@ -33,22 +35,36 @@ MonoBehaviour:
     attacks:
     - attackName: VENOM FIELD
       pattern: 5
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 1
       spreadDegrees: 60
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: SWARM GATE
       pattern: 8
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.926
       projectileCount: 9
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.71
     projectileSpeedMultiplier: 1
     projectileDamageOverride: 0
@@ -58,6 +74,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 1, g: 0.62, b: 0.71120006, a: 1}
     cameraShake: 0.16
     warningText: CORE ONLINE
@@ -68,22 +85,36 @@ MonoBehaviour:
     attacks:
     - attackName: CORE LANCE
       pattern: 6
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 3
       spreadDegrees: 68
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 0
       clearsBulletsBeforeAttack: 1
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: PREDATOR LOCK
       pattern: 1
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.926
       projectileCount: 10
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.61
     projectileSpeedMultiplier: 1.06
     projectileDamageOverride: 0
@@ -93,6 +124,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 1, g: 0.77959985, b: 0.62, a: 1}
     cameraShake: 0.185
     warningText: PHASE 2
@@ -103,22 +135,36 @@ MonoBehaviour:
     attacks:
     - attackName: DEATH MARK
       pattern: 7
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 5
       spreadDegrees: 76
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: ROYAL FAN
       pattern: 2
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.926
       projectileCount: 11
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.51
     projectileSpeedMultiplier: 1.12
     projectileDamageOverride: 0
@@ -128,6 +174,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.96960014, g: 1, b: 0.62, a: 1}
     cameraShake: 0.21
     warningText: PHASE 3
@@ -138,22 +185,36 @@ MonoBehaviour:
     attacks:
     - attackName: SWARM GATE
       pattern: 8
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 7
       spreadDegrees: 84
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: TRIPLE REND
       pattern: 3
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.926
       projectileCount: 12
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.41
     projectileSpeedMultiplier: 1.18
     projectileDamageOverride: 0
@@ -163,6 +224,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.71880007, g: 1, b: 0.62, a: 1}
     cameraShake: 0.235
     warningText: PHASE 4

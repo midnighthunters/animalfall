@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 17
   prefab: {fileID: 2968614504017350527, guid: b61d1d93448162d4da96fe13b6460c66, type: 3}
-  icon: {fileID: 21300000, guid: 9e065707660b14445a0005ad236f4076, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 35
   displayName: Magnet Trap
   effectDescription: Counter the Magnet Trap!

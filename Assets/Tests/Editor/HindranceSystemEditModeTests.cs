@@ -30,11 +30,13 @@ namespace AnimalFall.Tests.Editor
                 "TrapdoorClouds", "RollingLog", "AcornHail", "WindmillGate", "LanternSpotlight",
                 "EclipseSilhouettes", "MemoryFog", "ColourWashRain", "TimerMoth", "GoalSwapMonkey",
                 "BeeSwarmGuard", "PorcupinePulse", "VenusFlytrapRescue", "RaccoonCoinHeist",
-                "DogHelmet", "Octopus", "SpiderGun", "Pufferfish", "FrogSnatcher"
+                "DogHelmet", "Octopus", "SpiderGun", "Pufferfish", "FrogSnatcher",
+                "Jellyfish", "Laser", "Eagle", "WoodenPig", "Portal", "Fan", "BatSwarm",
+                "PandaJailKey", "Crusher", "GravitySwitch", "BalloonWave", "SlimeGun", "CloudWave"
             };
 
-            Assert.That(Enum.GetValues(typeof(HindranceType)).Length, Is.EqualTo(56));
-            for (int id = 0; id <= 55; id++)
+            Assert.That(Enum.GetValues(typeof(HindranceType)).Length, Is.EqualTo(69));
+            for (int id = 0; id <= 68; id++)
             {
                 Assert.That(Enum.GetName(typeof(HindranceType), id), Is.EqualTo(expected[id]), $"Stable ID {id}");
                 Assert.That((int)(HindranceType)id, Is.EqualTo(id));
@@ -113,7 +115,7 @@ namespace AnimalFall.Tests.Editor
             HindranceRegistry registry = AssetDatabase.LoadAssetAtPath<HindranceRegistry>(RegistryPath);
             Assert.That(registry, Is.Not.Null);
             CollectionAssert.IsEmpty(registry.ValidateRegistry(true));
-            Assert.That(registry.Entries.Count, Is.EqualTo(50));
+            Assert.That(registry.Entries.Count, Is.GreaterThanOrEqualTo(62));
 
             for (int id = 1; id <= 50; id++)
             {

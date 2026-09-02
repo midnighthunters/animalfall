@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.ProjectileData
   stableId: queen_webula_hazard
   prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
-  sprite: {fileID: -2639032509303485284, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  sprite: {fileID: -1721665535, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   motion: 2
   speed: 9.04
   damage: 1.7

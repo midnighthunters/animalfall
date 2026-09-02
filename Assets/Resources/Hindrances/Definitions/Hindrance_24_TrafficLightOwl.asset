@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 24
   prefab: {fileID: 1206129393737750200, guid: e50a865bffd630049b6b7d7eba3f1935, type: 3}
-  icon: {fileID: 21300000, guid: 17154bdf2eabae84c9b0f5b58dffbf83, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 49
   displayName: Traffic Light Owl
   effectDescription: Counter the Traffic Light Owl!

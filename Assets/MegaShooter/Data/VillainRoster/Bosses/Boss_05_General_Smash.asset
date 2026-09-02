@@ -17,7 +17,7 @@ MonoBehaviour:
   archetype: 5
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
   sprite: {fileID: 6976527141265295760, guid: 3148528b032fa3d4b855d23c2bf453d7, type: 3}
-  weaponIcon: {fileID: -5039132156621874023, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  weaponIcon: {fileID: -528296542710574568, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   visualScale: 0.55
   colliderSize: {x: 2.2900002, y: 1.65}
   baseHitPoints: 4800

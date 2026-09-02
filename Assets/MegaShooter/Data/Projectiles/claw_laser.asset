@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.ProjectileData
   stableId: claw_laser
   prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
-  sprite: {fileID: 698664279297640794, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  sprite: {fileID: -8813465039215467975, guid: a098321dc039dcd40a532a890bfb8218, type: 3}
   motion: 0
   speed: 10
   damage: 5

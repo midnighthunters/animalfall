@@ -5,6 +5,9 @@ namespace AnimalFall.Managers
 {
     public class AudioManager : MonoBehaviour
     {
+        private const string MusicMutedKey = "settings_music_muted";
+        private const string SfxMutedKey = "settings_sfx_muted";
+
         public static AudioManager Instance { get; private set; }
 
         [SerializeField] private AudioClip[] _sfxClips; // indexed by SfxType
@@ -13,12 +16,20 @@ namespace AnimalFall.Managers
         private AudioSource[] _pool;
         private int           _poolSize = 12;
         private int           _lastUsed = 0;
+        private bool          _musicMuted;
+        private bool          _sfxMuted;
+
+        public bool IsMusicMuted => _musicMuted;
+        public bool IsSfxMuted => _sfxMuted;
 
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             BuildPool();
+            _musicMuted = PlayerPrefs.GetInt(MusicMutedKey, 0) == 1;
+            _sfxMuted = PlayerPrefs.GetInt(SfxMutedKey, 0) == 1;
+            ApplyMusicMute();
         }
 
         private void OnEnable()
@@ -58,6 +69,7 @@ namespace AnimalFall.Managers
 
         public void PlaySFX(SfxType type, float pitch = 1f)
         {
+            if (_sfxMuted) return;
             int idx = (int)type;
             if (_sfxClips == null || idx >= _sfxClips.Length || _sfxClips[idx] == null)
                 return; // null clip → silent skip
@@ -65,6 +77,25 @@ namespace AnimalFall.Managers
             var source = BorrowSource();
             source.pitch = pitch;
             source.PlayOneShot(_sfxClips[idx]);
+        }
+
+        public void ToggleMusicMuted() => SetMusicMuted(!_musicMuted);
+
+        public void SetMusicMuted(bool muted)
+        {
+            _musicMuted = muted;
+            PlayerPrefs.SetInt(MusicMutedKey, muted ? 1 : 0);
+            PlayerPrefs.Save();
+            ApplyMusicMute();
+        }
+
+        public void ToggleSfxMuted() => SetSfxMuted(!_sfxMuted);
+
+        public void SetSfxMuted(bool muted)
+        {
+            _sfxMuted = muted;
+            PlayerPrefs.SetInt(SfxMutedKey, muted ? 1 : 0);
+            PlayerPrefs.Save();
         }
 
         // ── Internal ──────────────────────────────────────────────────────────
@@ -79,6 +110,11 @@ namespace AnimalFall.Managers
                 _pool[i] = go.AddComponent<AudioSource>();
                 _pool[i].playOnAwake = false;
             }
+        }
+
+        private void ApplyMusicMute()
+        {
+            if (_bgmSource != null) _bgmSource.mute = _musicMuted;
         }
 
         private AudioSource BorrowSource()

@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_03
   displayName: Mirage Frigate
+  archetype: 0
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
   sprite: {fileID: -199896756958677165, guid: 7576bbd37df80224caf93ca67606bec0, type: 3}
   weaponIcon: {fileID: -2600240032574155362, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 2
   colliderSize: {x: 2.45, y: 1.49}
   baseHitPoints: 1750
   movementBounds:
@@ -33,22 +35,36 @@ MonoBehaviour:
     attacks:
     - attackName: TRIPLE REND
       pattern: 3
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 1
       spreadDegrees: 60
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: CORE LANCE
       pattern: 6
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.946
       projectileCount: 4
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 0
       clearsBulletsBeforeAttack: 1
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 2.16
     projectileSpeedMultiplier: 1
     projectileDamageOverride: 0
@@ -58,6 +74,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 1, g: 0.9848, b: 0.62, a: 1}
     cameraShake: 0.16
     warningText: CORE ONLINE
@@ -68,22 +85,36 @@ MonoBehaviour:
     attacks:
     - attackName: DARK HALO
       pattern: 4
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 3
       spreadDegrees: 68
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: DEATH MARK
       pattern: 7
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.946
       projectileCount: 5
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 2.06
     projectileSpeedMultiplier: 1.06
     projectileDamageOverride: 0
@@ -93,6 +124,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.76440006, g: 1, b: 0.62, a: 1}
     cameraShake: 0.185
     warningText: PHASE 2

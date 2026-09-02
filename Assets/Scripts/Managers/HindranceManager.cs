@@ -233,15 +233,27 @@ namespace AnimalFall.Managers
             }
         }
 
-        private HindranceContext BuildContext() => new HindranceContext
+        private HindranceContext BuildContext()
         {
-            GameManager       = _gameManager,
-            HindranceManager  = this,
-            EnvironmentEffects = _envEffects,
-            ScreenEffects     = _screenEffects,
-            AudioManager      = _audioManager,
-            LivesManager      = _livesManager,
-            InputManager      = _inputManager
-        };
+            // GameScene may have a null/duplicate serialized reference while
+            // the persistent manager from MainScene is still alive.
+            LivesManager lives = _livesManager != null
+                ? _livesManager
+                : LivesManager.Instance;
+            EnvironmentEffects effects = _envEffects != null
+                ? _envEffects
+                : EnvironmentEffects.Instance;
+
+            return new HindranceContext
+            {
+                GameManager        = _gameManager,
+                HindranceManager   = this,
+                EnvironmentEffects = effects,
+                ScreenEffects      = _screenEffects,
+                AudioManager       = _audioManager,
+                LivesManager       = lives,
+                InputManager       = _inputManager
+            };
+        }
     }
 }

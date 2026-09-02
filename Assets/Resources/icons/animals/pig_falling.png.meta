@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: da1d762615cde8c4a862f83a7c250384
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7899732523875512092
+    second: pig_falling_0
+  - first:
+      213: 4965005746253943365
+    second: pig_falling_1
+  - first:
+      213: -2224348560780082151
+    second: pig_falling_2
+  - first:
+      213: -2170626220729252606
+    second: pig_falling_3
+  - first:
+      213: 6638108620744292341
+    second: pig_falling_4
+  - first:
+      213: 2695067495090088048
+    second: pig_falling_5
+  - first:
+      213: 778720216197554408
+    second: pig_falling_6
+  - first:
+      213: 3306919313381596555
+    second: pig_falling_7
+  - first:
+      213: -8504037437333279981
+    second: pig_falling_8
+  - first:
+      213: 7413430061266280168
+    second: pig_falling_9
+  - first:
+      213: 3182309879691455834
+    second: pig_falling_10
+  - first:
+      213: 3722043809718682688
+    second: pig_falling_11
+  - first:
+      213: 8664988141110414887
+    second: pig_falling_12
+  - first:
+      213: -3744585100054961595
+    second: pig_falling_13
+  - first:
+      213: 8467769241015357038
+    second: pig_falling_14
+  - first:
+      213: 1970470166655302665
+    second: pig_falling_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pig_falling_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 947
+        width: 297
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e0dcc5cf138e5290800000000000000
+      internalID: -7899732523875512092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_1
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 946
+        width: 280
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5425d35ab6e37e440800000000000000
+      internalID: 4965005746253943365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_2
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 943
+        width: 284
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9144d02e4c68121e0800000000000000
+      internalID: -2224348560780082151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_3
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 944
+        width: 271
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 205c845e3f260e1e0800000000000000
+      internalID: -2170626220729252606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_4
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 640
+        width: 296
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f7fbefce9c4f1c50800000000000000
+      internalID: 6638108620744292341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_5
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 640
+        width: 280
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 078eb829b9dc66520800000000000000
+      internalID: 2695067495090088048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_6
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 642
+        width: 288
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0eed929e19eca00800000000000000
+      internalID: 778720216197554408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_7
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 647
+        width: 276
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8d1dfe389984ed20800000000000000
+      internalID: 3306919313381596555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 349
+        width: 299
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31b602fc1079bf980800000000000000
+      internalID: -8504037437333279981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_9
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 349
+        width: 292
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ee9af8dc5bc1e660800000000000000
+      internalID: 7413430061266280168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_10
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 349
+        width: 292
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5da93899f5d92c20800000000000000
+      internalID: 3182309879691455834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_11
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 345
+        width: 285
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04449bcef1b57a330800000000000000
+      internalID: 3722043809718682688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_12
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 58
+        width: 295
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ecbd52ec8304870800000000000000
+      internalID: 8664988141110414887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_13
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 56
+        width: 293
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 542e000f0bf880cc0800000000000000
+      internalID: -3744585100054961595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_14
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 56
+        width: 290
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6e03b2b24f838570800000000000000
+      internalID: 8467769241015357038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pig_falling_15
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 56
+        width: 293
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90c7ef33d24885b10800000000000000
+      internalID: 1970470166655302665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pig_falling_0: -7899732523875512092
+      pig_falling_1: 4965005746253943365
+      pig_falling_10: 3182309879691455834
+      pig_falling_11: 3722043809718682688
+      pig_falling_12: 8664988141110414887
+      pig_falling_13: -3744585100054961595
+      pig_falling_14: 8467769241015357038
+      pig_falling_15: 1970470166655302665
+      pig_falling_2: -2224348560780082151
+      pig_falling_3: -2170626220729252606
+      pig_falling_4: 6638108620744292341
+      pig_falling_5: 2695067495090088048
+      pig_falling_6: 778720216197554408
+      pig_falling_7: 3306919313381596555
+      pig_falling_8: -8504037437333279981
+      pig_falling_9: 7413430061266280168
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

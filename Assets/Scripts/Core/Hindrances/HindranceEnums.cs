@@ -68,7 +68,35 @@ namespace AnimalFall.Core.Hindrances
         Pufferfish           = 54,
 
         // Level 21 set-piece hindrance
-        FrogSnatcher         = 55
+        FrogSnatcher         = 55,
+
+        // Classic hazards introduced across normal levels 40-100.
+        // Append-only IDs preserve every previously persisted enum value.
+        Jellyfish            = 56,
+        Laser                = 57,
+        Eagle                = 58,
+        WoodenPig            = 59,
+        Portal               = 60,
+        Fan                  = 61,
+        BatSwarm             = 62,
+
+        // Paired falling interaction used on normal levels 63-67.
+        PandaJailKey         = 63,
+
+        // Opposing crushers close across the playfield and clear caught animals.
+        Crusher              = 64,
+
+        // Tappable switch that reverses the falling direction of animals.
+        GravitySwitch        = 65,
+
+        // A rising balloon wave that attaches to falling animals.
+        BalloonWave          = 66,
+
+        // A goal-panel slime gun that temporarily captures animals.
+        SlimeGun             = 67,
+
+        // A moving group of clouds that sweeps across the playfield.
+        CloudWave            = 68
     }
 
     public enum HindranceCategory

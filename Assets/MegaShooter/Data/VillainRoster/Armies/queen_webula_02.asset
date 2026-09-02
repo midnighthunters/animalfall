@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Silk Mystic
   prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
   sprite: {fileID: 5973511233939165664, guid: ef4bded836574e242ba773c30e7e0cfe, type: 3}
-  weaponIcon: {fileID: -2639032509303485284, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  weaponIcon: {fileID: -1721665535, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   shadow: {fileID: 0}
   visualScale: 0.4
   colliderSize: {x: 0.85999995, y: 0.73}

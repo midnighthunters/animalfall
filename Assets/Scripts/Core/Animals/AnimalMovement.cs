@@ -145,7 +145,8 @@ namespace AnimalFall.Core.Animals
 
             float dx = 0f;
             float gravityScale = env != null && env.IsZeroGravityActive ? 0.18f : 1f;
-            float dy = _fallSuspended ? 0f : -_speed * gravityScale * dt;
+            bool reverseGravity = env != null && env.IsReverseGravityActive;
+            float dy = _fallSuspended ? 0f : (reverseGravity ? _speed : -_speed * gravityScale) * dt;
             float elapsed = Time.time - _spawnTime;
             float tilt = 0f;
             float pendingTeleportX = float.NaN;
@@ -236,6 +237,11 @@ namespace AnimalFall.Core.Animals
                     transform.Rotate(0f, 0f, _spinSpeed * dt);
                     break;
             }
+
+            // The gravity switch takes priority over every normal falling pattern.
+            // It keeps both current and newly spawned animals moving upward.
+            if (reverseGravity && !_fallSuspended)
+                dy = _speed * Mathf.Max(0.55f, gravityScale) * dt;
 
             // Wind / black hole / mirror
             if (env != null && env.IsWindActive)

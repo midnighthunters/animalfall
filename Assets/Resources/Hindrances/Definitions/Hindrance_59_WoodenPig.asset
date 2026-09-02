@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_59_WoodenPig
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 59
+  prefab: {fileID: 4847597264791426282, guid: 0d7c6f123a5a3dd4f8ec5d33cfacb77c, type: 3}
+  icon: {fileID: 7513362354396377679, guid: 35f2df61749486345a94fc361c58c572, type: 3}
+  unlockLevel: 48
+  displayName: Wooden Pig
+  effectDescription: A harmless decoy that ignores taps.
+  category: 1
+  baseWeight: 1.1
+  difficultyTier: 1
+  minDuration: 8
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 8
+  compatibilityTags: 0
+  exclusionTags: 0
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Wooden pigs are decoys.
+  stateSprites:
+  - {fileID: 7513362354396377679, guid: 35f2df61749486345a94fc361c58c572, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.35
+  interactionWindow: 8
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

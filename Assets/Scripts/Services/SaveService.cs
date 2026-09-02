@@ -14,7 +14,7 @@ namespace AnimalFall.Services
         public int   coins                = 0;
         public int   lives                = 5;
         public long  nextLifeUTC          = 0;
-        public bool[] seenHindranceTypes  = new bool[56]; // indexed by stable HindranceType ID 0-55
+        public bool[] seenHindranceTypes  = new bool[69]; // indexed by stable HindranceType ID 0-68
         public string selectedSuperAnimalId = "eagle_striker";
         public List<string> unlockedSuperAnimalIds = new List<string> { "eagle_striker" };
         public int[] megaBestScores = new int[100];
@@ -56,7 +56,7 @@ namespace AnimalFall.Services
             _data.megaBestStars = Grow(_data.megaBestStars, totalLevels);
             _data.megaBestTimes = Grow(_data.megaBestTimes, totalLevels);
             _data.megaCompleted = Grow(_data.megaCompleted, totalLevels);
-            _data.seenHindranceTypes = Grow(_data.seenHindranceTypes, 56);
+            _data.seenHindranceTypes = Grow(_data.seenHindranceTypes, 69);
             if (_data.unlockedSuperAnimalIds == null)
                 _data.unlockedSuperAnimalIds = new List<string>();
             if (!_data.unlockedSuperAnimalIds.Contains("eagle_striker"))

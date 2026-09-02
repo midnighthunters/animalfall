@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_56_Jellyfish
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 56
+  prefab: {fileID: 5678429739387713468, guid: 01089aa3ff0f87e4c8fdae2786b416a4, type: 3}
+  icon: {fileID: 1898918936286717424, guid: 62bfb71e6fba5af439d8b727c4df8174, type: 3}
+  unlockLevel: 40
+  displayName: Jellyfish
+  effectDescription: Tapping it shocks every animal on screen.
+  category: 0
+  baseWeight: 1
+  difficultyTier: 1
+  minDuration: 7
+  maxDuration: 7
+  maxSimultaneous: 1
+  cooldown: 10
+  compatibilityTags: 64
+  exclusionTags: 0
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Don't tap the jellyfish!
+  stateSprites:
+  - {fileID: 1898918936286717424, guid: 62bfb71e6fba5af439d8b727c4df8174, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.35
+  interactionWindow: 7
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

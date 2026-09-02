@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 26
   prefab: {fileID: 6317555175799694511, guid: 41c31c2d1d6d0af459ebcb853f971031, type: 3}
-  icon: {fileID: 21300000, guid: 765c14cdc1656324a8441899a31f2417, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 53
   displayName: Lasso Ring
   effectDescription: Circle the marked animal!

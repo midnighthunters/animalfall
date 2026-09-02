@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 4
   prefab: {fileID: 1504081727841633420, guid: 01117af5309ab6f4b893c3a475642c5d, type: 3}
-  icon: {fileID: 21300000, guid: 041606047a1564148b40d5697d694fba, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 9
   displayName: Thief Bird
   effectDescription: Counter the Thief Bird!

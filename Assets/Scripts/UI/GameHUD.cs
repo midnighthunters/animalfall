@@ -68,6 +68,9 @@ namespace AnimalFall.UI
         public void Setup(LevelData level)
         {
             ImageLibrary.LoadAll();
+            var settingsMenu = GetComponent<InGameSettingsMenu>();
+            if (settingsMenu == null) settingsMenu = gameObject.AddComponent<InGameSettingsMenu>();
+            settingsMenu.Build();
             _totalTime = level != null ? level.TimeLimit : 60f;
             _displayedTimerSecond = int.MinValue;
             _warningActive = false;

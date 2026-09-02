@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 2
   prefab: {fileID: 3811714988966867437, guid: 17d4be0501610e74b8db9347372c1234, type: 3}
-  icon: {fileID: 21300000, guid: 3672438c7a72c90449733c2b0cc3cadd, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 5
   displayName: Alarm Clock
   effectDescription: Counter the Alarm Clock!

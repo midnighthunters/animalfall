@@ -88,6 +88,27 @@ namespace AnimalFall.Tests.Editor
         }
 
         [Test]
+        public void EveryHeroWeaponUsesItsMatchingProjectileSprite()
+        {
+            Sprite[] projectileSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/icons/projectile.png")
+                .OfType<Sprite>()
+                .OrderBy(sprite => int.Parse(sprite.name.Substring(sprite.name.LastIndexOf('_') + 1)))
+                .ToArray();
+            SuperAnimalData[] roster = _levels[0].allowedAnimals;
+
+            Assert.That(projectileSprites, Has.Length.EqualTo(10));
+            Assert.That(roster, Has.Length.EqualTo(projectileSprites.Length));
+            for (int index = 0; index < roster.Length; index++)
+            {
+                SuperAnimalData hero = roster[index];
+                Assert.That(hero, Is.Not.Null, $"Hero slot {index}");
+                Assert.That(hero.primaryWeapon, Is.Not.Null, hero.stableId);
+                Assert.That(hero.primaryWeapon.projectile, Is.Not.Null, hero.stableId);
+                Assert.That(hero.primaryWeapon.projectile.sprite, Is.EqualTo(projectileSprites[index]), hero.stableId);
+            }
+        }
+
+        [Test]
         public void BossThresholdsAreStrictlyDescendingAndReferencesAreComplete()
         {
             foreach (MegaLevelData level in _levels)
@@ -140,6 +161,32 @@ namespace AnimalFall.Tests.Editor
             foreach (MegaLevelData level in _levels.Where(level => level.boss != null))
                 Assert.That(level.boss.phases.SelectMany(phase => phase.attacks)
                     .All(attack => attack.projectile != null && attack.projectile.sprite != null), Is.True, level.name);
+        }
+
+        [Test]
+        public void VillainFamiliesUseTheirMatchingVillainProjectileSprites()
+        {
+            string[] familyIds =
+            {
+                "venom_emperor", "admiral_inkstorm", "ironhorn", "captain_chomper", "general_smash",
+                "emperor_sting", "croc_commander", "doom_puffer", "queen_webula", "cosmic_draconis"
+            };
+            Sprite[] villainSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/megalevel/villain_weapon.png")
+                .OfType<Sprite>()
+                .OrderBy(sprite => int.Parse(sprite.name.Substring(sprite.name.LastIndexOf('_') + 1)))
+                .ToArray();
+            ProjectileData[] projectiles = LoadAssets<ProjectileData>(MegaVillainRosterGenerator.VillainDataRoot + "/Projectiles");
+
+            Assert.That(villainSprites, Has.Length.EqualTo(familyIds.Length));
+            Assert.That(projectiles, Has.Length.EqualTo(familyIds.Length * 3));
+            for (int family = 0; family < familyIds.Length; family++)
+            {
+                ProjectileData[] familyProjectiles = projectiles
+                    .Where(projectile => projectile.stableId.StartsWith(familyIds[family] + "_"))
+                    .ToArray();
+                Assert.That(familyProjectiles, Has.Length.EqualTo(3), familyIds[family]);
+                Assert.That(familyProjectiles.All(projectile => projectile.sprite == villainSprites[family]), Is.True, familyIds[family]);
+            }
         }
 
         [Test]

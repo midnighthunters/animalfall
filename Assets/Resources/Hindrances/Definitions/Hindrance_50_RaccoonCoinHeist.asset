@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 50
   prefab: {fileID: 5417463123266872176, guid: 93dc3725a3a5bdd4aab4c0aedbc2bdaa, type: 3}
-  icon: {fileID: 21300000, guid: d1825af7b0dbc344abf50c7beb45e583, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 99
   displayName: Raccoon Coin Heist
   effectDescription: Tap the bag for coins!

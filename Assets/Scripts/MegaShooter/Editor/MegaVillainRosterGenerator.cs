@@ -16,6 +16,7 @@ namespace AnimalFall.MegaShooter.Editor
     {
         public const string VillainArtRoot = "Assets/Resources/icons/megalevelhindrances";
         public const string VillainDataRoot = MegaShooterGenerator.DataRoot + "/VillainRoster";
+        public const string VillainProjectileSpriteSheetPath = "Assets/Resources/megalevel/villain_weapon.png";
 
         private static readonly string[] Ids =
         {
@@ -92,7 +93,12 @@ namespace AnimalFall.MegaShooter.Editor
         {
             EnsureFolders();
             NormalizeArmySheets();
-            Sprite[] weaponSprites = LoadAllSprites("Assets/Resources/megalevel/weapons.png");
+            Sprite[] weaponSprites = LoadAllSprites(VillainProjectileSpriteSheetPath);
+            if (weaponSprites.Length < Ids.Length)
+            {
+                Debug.LogError($"[MegaVillainRoster] {VillainProjectileSpriteSheetPath} must contain {Ids.Length} sliced villain projectile sprites; found {weaponSprites.Length}.");
+                return Array.Empty<MegaLevelData>();
+            }
             CreateDistinctMuzzleVfx(vfx, effectPrefab);
 
             var projectiles = new ProjectileData[10][];
@@ -100,7 +106,9 @@ namespace AnimalFall.MegaShooter.Editor
             var bosses = new BossShipData[10];
             for (int family = 0; family < 10; family++)
             {
-                Sprite weaponSprite = weaponSprites.Length > 10 + family ? weaponSprites[10 + family] : null;
+                // One dedicated projectile visual per villain family is shared by
+                // its army variants, boss phases, and matching HUD weapon icon.
+                Sprite weaponSprite = weaponSprites[family];
                 projectiles[family] = GenerateProjectiles(family, projectilePrefab, weaponSprite);
                 armies[family] = GenerateArmy(family, enemyPrefab, projectiles[family], weaponSprite);
                 bosses[family] = GenerateBoss(family, bossPrefab, effectPrefab, projectiles[family], weaponSprite);

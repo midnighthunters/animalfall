@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 10
   prefab: {fileID: 1759007775073885932, guid: a324455cc820f3e46ac20e758660cb4d, type: 3}
-  icon: {fileID: 21300000, guid: 5fa362babca7ce64ea102fae742fe251, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 21
   displayName: Storm Cloud
   effectDescription: Counter the Storm Cloud!

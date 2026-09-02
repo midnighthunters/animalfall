@@ -26,7 +26,13 @@ MonoBehaviour:
   _spawnInterval: 0.580303
   _spawnVariance: 0.15
   _maxOnScreen: 9
-  _hindrances: []
+  _hindrances:
+  - type: 59
+    weight: 1.35
+    initialDelay: 0
+  - type: 56
+    weight: 1
+    initialDelay: 0.35
   _hindranceSpawnInterval: 7
   _hindranceInitialDelay: 5
   _maxHindrancesActive: 3

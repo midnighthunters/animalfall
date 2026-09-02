@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 41
   prefab: {fileID: 787873604005811007, guid: 2a19d6f034de7ed4ab6fd1f8ffd3620c, type: 3}
-  icon: {fileID: 21300000, guid: 9f93049d2596638438fca933c6282096, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 83
   displayName: Lantern Spotlight
   effectDescription: Move the light, then tap!

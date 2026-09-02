@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 27
   prefab: {fileID: 495468336623942520, guid: 5a5c6cf0ec442a74c8d0c740b8866b16, type: 3}
-  icon: {fileID: 21300000, guid: 9427263b69f65724b83984d7e7feea42, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 55
   displayName: Echo Tap Rune
   effectDescription: Counter the Echo Tap Rune!

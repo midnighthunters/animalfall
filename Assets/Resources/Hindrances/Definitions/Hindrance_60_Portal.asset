@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_60_Portal
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 60
+  prefab: {fileID: 5128388193491554475, guid: 2d077542fbd4723428b2189561187ec9, type: 3}
+  icon: {fileID: -5816642994671486895, guid: 4bd0637302cbc22418cbc62073ce521e, type: 3}
+  unlockLevel: 53
+  displayName: Portal Pair
+  effectDescription: Animals entering one portal emerge from the other.
+  category: 3
+  baseWeight: 0.9
+  difficultyTier: 2
+  minDuration: 9
+  maxDuration: 9
+  maxSimultaneous: 1
+  cooldown: 12
+  compatibilityTags: 8
+  exclusionTags: 0
+  inputMode: 0
+  targetScope: 0
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Portals relocate falling animals.
+  stateSprites:
+  - {fileID: -5816642994671486895, guid: 4bd0637302cbc22418cbc62073ce521e, type: 3}
+  - {fileID: -68809774801260167, guid: 4bd0637302cbc22418cbc62073ce521e, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.35
+  interactionWindow: 9
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

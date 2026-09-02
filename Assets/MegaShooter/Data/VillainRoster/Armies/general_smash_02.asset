@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Meteor Raider
   prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
   sprite: {fileID: 7406105541468094581, guid: 73344ff856f41a242adb7d2d870c902f, type: 3}
-  weaponIcon: {fileID: -5039132156621874023, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  weaponIcon: {fileID: -528296542710574568, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   shadow: {fileID: 0}
   visualScale: 0.4
   colliderSize: {x: 0.85999995, y: 0.73}

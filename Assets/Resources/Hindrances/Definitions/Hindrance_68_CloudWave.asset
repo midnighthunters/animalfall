@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_68_CloudWave
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 68
+  prefab: {fileID: 3982998547031392216, guid: 99e5fb8ab5c57364ab5e8d5830cd1672, type: 3}
+  icon: {fileID: -6981827254641702772, guid: dc32dce72525558488d6651ed86ae7e9, type: 3}
+  unlockLevel: 91
+  displayName: Cloud Wave
+  effectDescription: A bunch of clouds sweeps across the screen from left to right.
+  category: 3
+  baseWeight: 1.2
+  difficultyTier: 2
+  minDuration: 6
+  maxDuration: 9
+  maxSimultaneous: 1
+  cooldown: 7
+  compatibilityTags: 8
+  exclusionTags: 8
+  inputMode: 0
+  targetScope: 0
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Watch the cloud wave cross the screen!
+  stateSprites:
+  - {fileID: -6981827254641702772, guid: dc32dce72525558488d6651ed86ae7e9, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 4
+  requiredInteractions: 0
+  primaryValue: 1
+  secondaryValue: 0

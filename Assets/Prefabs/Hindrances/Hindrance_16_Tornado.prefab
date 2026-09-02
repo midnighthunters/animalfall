@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1031965894904520649}
   - component: {fileID: 169356647210399475}
-  - component: {fileID: 3576283090795833135}
   - component: {fileID: 2625142083907403393}
   m_Layer: 0
   m_Name: Hindrance_16_Tornado
@@ -83,53 +82,17 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 30
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 236912135fbcc3b4ca71da5f5fed5567, type: 3}
+  m_Sprite: {fileID: 715368135737836640, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.64, y: 2.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!58 &3576283090795833135
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3568884565338152942}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.72
 --- !u!114 &2625142083907403393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +106,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLifetimeSeconds: 14
+  _frames:
+  - {fileID: 715368135737836640, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -6309994406216402850, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -8146329417134413000, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: 6174124654450928253, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -8508149933846727963, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -1986224622491227114, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: 6961960587225321616, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: 2032880742315017720, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: 230778320399745061, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -1193565549627174832, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -5370886884495729843, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  - {fileID: -3947255508092271235, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  _frameRate: 13
+  _travelDuration: 5
+  _captureRadius: 1.75
+  _maxCarried: 5

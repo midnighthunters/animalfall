@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 35
   prefab: {fileID: 6173694193164103207, guid: 3d88ebd2340fb9d4182a9f0c9cca58d5, type: 3}
-  icon: {fileID: 21300000, guid: de0d283f90ea5954a86c1748cdace315, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 71
   displayName: Seesaw Branch
   effectDescription: Counter the Seesaw Branch!

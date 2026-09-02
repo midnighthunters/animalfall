@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 39
   prefab: {fileID: 3206594553048346862, guid: e9f68edef1b61674aaf6d8fca070445c, type: 3}
-  icon: {fileID: 21300000, guid: 4ad4774c24fa0204faf0ff6bd17daf20, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 79
   displayName: Acorn Hail
   effectDescription: Counter the Acorn Hail!

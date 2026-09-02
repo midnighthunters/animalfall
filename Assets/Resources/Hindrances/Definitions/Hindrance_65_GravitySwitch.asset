@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31518663b0ec4e9c521f3f5c2e1ca, type: 3}
+  m_Name: Hindrance_65_GravitySwitch
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
+  hindranceType: 65
+  prefab: {fileID: 3563582551772807157, guid: c6e59e26931b94d4fbc9a800beb2b166, type: 3}
+  icon: {fileID: -5791533861771406970, guid: 9672e06a855f6bd499fd7c27f6ef39fc, type: 3}
+  unlockLevel: 73
+  displayName: Gravity Switch
+  effectDescription: Tap the closed switch to open it and reverse gravity.
+  category: 3
+  baseWeight: 1.35
+  difficultyTier: 3
+  minDuration: 6
+  maxDuration: 8
+  maxSimultaneous: 1
+  cooldown: 8
+  compatibilityTags: 10
+  exclusionTags: 10
+  inputMode: 1
+  targetScope: 2
+  normalLevelEligible: 1
+  megaLevelEligible: 0
+  debugShowcaseOnly: 0
+  tutorialInstruction: Tap the switch to open it and send animals upward!
+  stateSprites:
+  - {fileID: -5791533861771406970, guid: 9672e06a855f6bd499fd7c27f6ef39fc, type: 3}
+  - {fileID: 1971089474277950741, guid: 9672e06a855f6bd499fd7c27f6ef39fc, type: 3}
+  activationSfx: {fileID: 0}
+  successSfx: {fileID: 0}
+  blockedSfx: {fileID: 0}
+  completionSfx: {fileID: 0}
+  telegraphDuration: 0.75
+  interactionWindow: 4
+  requiredInteractions: 1
+  primaryValue: 1
+  secondaryValue: 0

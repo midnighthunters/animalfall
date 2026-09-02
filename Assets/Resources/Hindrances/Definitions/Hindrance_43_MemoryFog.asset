@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 43
   prefab: {fileID: 3920460732373271637, guid: 8fe27fc9350d5f844bb3d21ff658f063, type: 3}
-  icon: {fileID: 21300000, guid: a594657668e081747a9d243b991859ce, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 87
   displayName: Memory Fog
   effectDescription: Counter the Memory Fog!

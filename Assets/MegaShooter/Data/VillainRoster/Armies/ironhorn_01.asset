@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Horn Vanguard
   prefab: {fileID: 5591440235923339041, guid: 1dffc3e70174fab4abcafb2135a78497, type: 3}
   sprite: {fileID: 376967561984154833, guid: a1549b39810d7b147a5e2d4d99cc401f, type: 3}
-  weaponIcon: {fileID: -2600240032574155362, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  weaponIcon: {fileID: 2935192031122453201, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   shadow: {fileID: 0}
   visualScale: 0.4
   colliderSize: {x: 0.78, y: 0.66}

@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.BossShipData
   stableId: boss_08
   displayName: Solar Fang
+  archetype: 0
   prefab: {fileID: 6258944115004976243, guid: a5af9da6b6d42bd4f8a3755db8e00e67, type: 3}
   sprite: {fileID: -58109556490436234, guid: a751f139d97a6c343afe5cb9852d28fc, type: 3}
   weaponIcon: {fileID: -7353613653143852761, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  visualScale: 2
   colliderSize: {x: 2.575, y: 1.59}
   baseHitPoints: 3650
   movementBounds:
@@ -33,22 +35,36 @@ MonoBehaviour:
     attacks:
     - attackName: SWARM GATE
       pattern: 8
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 1
       spreadDegrees: 60
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: TRIPLE REND
       pattern: 3
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.936
       projectileCount: 6
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.935
     projectileSpeedMultiplier: 1
     projectileDamageOverride: 0
@@ -58,6 +74,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.62, g: 0.8632, b: 1, a: 1}
     cameraShake: 0.16
     warningText: CORE ONLINE
@@ -68,22 +85,36 @@ MonoBehaviour:
     attacks:
     - attackName: PREDATOR LOCK
       pattern: 1
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 3
       spreadDegrees: 68
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 1
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: DARK HALO
       pattern: 4
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.936
       projectileCount: 7
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.835
     projectileSpeedMultiplier: 1.06
     projectileDamageOverride: 0
@@ -93,6 +124,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.6275999, g: 0.62, b: 1, a: 1}
     cameraShake: 0.185
     warningText: PHASE 2
@@ -103,22 +135,36 @@ MonoBehaviour:
     attacks:
     - attackName: ROYAL FAN
       pattern: 2
+      projectile: {fileID: 0}
       weight: 1
       telegraphTime: 0.9
       projectileCount: 5
       spreadDegrees: 76
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     - attackName: VENOM FIELD
       pattern: 5
+      projectile: {fileID: 0}
       weight: 0.75
       telegraphTime: 0.936
       projectileCount: 8
       spreadDegrees: 105
+      volleyCount: 1
+      volleyInterval: 0.16
       aimed: 0
       reflectable: 1
       clearsBulletsBeforeAttack: 0
+      playerMovementMultiplier: 1
+      playerEffectDuration: 0
+      screenObscureStrength: 0
+      muzzleColor: {r: 1, g: 0.16, b: 0.04, a: 1}
     attackInterval: 1.735
     projectileSpeedMultiplier: 1.12
     projectileDamageOverride: 0
@@ -128,6 +174,7 @@ MonoBehaviour:
     usesWeakPoint: 0
     weakPointOffset: {x: 0, y: 0}
     transitionDuration: 1
+    bossScaleMultiplier: 1
     phaseTint: {r: 0.8783999, g: 0.62, b: 1, a: 1}
     cameraShake: 0.21
     warningText: PHASE 3

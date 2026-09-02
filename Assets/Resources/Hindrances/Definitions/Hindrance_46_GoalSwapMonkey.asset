@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 46
   prefab: {fileID: 337680457825016690, guid: c6e08897022e1344ebc30a750eb3d60b, type: 3}
-  icon: {fileID: 21300000, guid: dc6ab3177a872fe478c16641b8c10bd7, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 93
   displayName: Goal Swap Monkey
   effectDescription: Counter the Goal Swap Monkey!

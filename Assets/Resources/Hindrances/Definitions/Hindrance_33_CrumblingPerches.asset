@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 33
   prefab: {fileID: 6680059114737298636, guid: 5a449a9d2f0378941add67a564aa89ab, type: 3}
-  icon: {fileID: 21300000, guid: 80a26496d9fb4b64dbabb01a74c58820, type: 3}
+  icon: {fileID: 0}
   unlockLevel: 67
   displayName: Crumbling Perches
   effectDescription: Counter the Crumbling Perches!

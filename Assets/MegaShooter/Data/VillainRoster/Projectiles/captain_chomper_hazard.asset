@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.MegaShooter.ProjectileData
   stableId: captain_chomper_hazard
   prefab: {fileID: 2276153243778300450, guid: 857693a355563fb4485cfce6f06b1f21, type: 3}
-  sprite: {fileID: -1499788451389146327, guid: b9325e241d638d84aa9fa139216b327a, type: 3}
+  sprite: {fileID: -8813465039215467975, guid: 058976c66b8746d7a466d28a1e450a5c, type: 3}
   motion: 3
   speed: 8.139999
   damage: 1.35
