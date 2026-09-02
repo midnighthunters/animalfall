@@ -365,7 +365,7 @@ namespace AnimalFall.MegaShooter
             CompleteLevel();
         }
 
-        private void CompleteLevel()
+        public void CompleteLevel()
         {
             if (_ended) return;
             _ended = true;

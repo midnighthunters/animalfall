@@ -1058,7 +1058,7 @@ MonoBehaviour:
   _castleTabIcon: {fileID: 830245021}
   _petsTabIcon: {fileID: 0}
   _shopTabIcon: {fileID: 2081166275}
-  _debugStartLevel: 26
+  _debugStartLevel: 0
 --- !u!114 &646824479
 MonoBehaviour:
   m_ObjectHideFlags: 0
