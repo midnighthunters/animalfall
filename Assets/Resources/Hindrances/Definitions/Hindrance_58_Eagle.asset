@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.HindranceData
   hindranceType: 58
   prefab: {fileID: 6625202971045874101, guid: 92611340207b83e469ad90370f3b07c3, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ab2a2b811e8f8844d93ce6b934202939, type: 3}
   unlockLevel: 46
   displayName: Eagle
   effectDescription: Flies horizontally and carries away two animals.

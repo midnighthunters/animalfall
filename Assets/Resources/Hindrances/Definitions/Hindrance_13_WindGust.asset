@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 13
   prefab: {fileID: 88718838533770439, guid: d7c5d8ac12171544fbbf856d0faae04c, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -45338575, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 27
   displayName: Wind Gust
   effectDescription: Counter the Wind Gust!

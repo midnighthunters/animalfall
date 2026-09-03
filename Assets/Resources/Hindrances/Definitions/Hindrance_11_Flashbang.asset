@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 11
   prefab: {fileID: 5867811280993735260, guid: d8f16e67f369e314586f0adaf731cf71, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 610503321, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 23
   displayName: Flashbang
   effectDescription: Counter the Flashbang!

@@ -32,6 +32,11 @@ namespace AnimalFall.Managers
             ApplyMusicMute();
         }
 
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+
         private void OnEnable()
         {
             GameEvents.OnAnimalCollected  += OnAnimalCollected;

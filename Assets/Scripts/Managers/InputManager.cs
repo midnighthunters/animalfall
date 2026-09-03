@@ -1,4 +1,5 @@
 // Task 6.6 — InputManager: touch/mouse input, GestureDetector, magnet/mirror support
+// Task 6.6 — InputManager: touch/mouse input, GestureDetector, magnet/mirror support
 using UnityEngine;
 using AnimalFall.Core.Animals;
 using AnimalFall.Core.Hindrances;
@@ -14,11 +15,25 @@ namespace AnimalFall.Managers
         private readonly Dictionary<object, Vector2> _magnetOwners = new Dictionary<object, Vector2>();
         private readonly HashSet<object> _mirrorOwners = new HashSet<object>();
 
-        // Touch state
-        private Vector2 _touchStart;
-        private float   _touchStartTime;
-        private Animal  _pendingAnimal;
-        private IPointerGestureTarget _gestureTarget;
+        private struct PointerState
+        {
+            public Vector2 touchStart;
+            public float touchStartTime;
+            public Animal pendingAnimal;
+            public IPointerGestureTarget gestureTarget;
+        }
+
+        private readonly Dictionary<int, PointerState> _activePointers = new Dictionary<int, PointerState>(8);
+        private Camera _cachedCamera;
+        private Camera MainCam
+        {
+            get
+            {
+                if (_cachedCamera == null) _cachedCamera = Camera.main;
+                return _cachedCamera;
+            }
+        }
+
         private bool    _inputBlocked;
         private readonly Collider2D[] _hits = new Collider2D[16];
         private ContactFilter2D _contactFilter;
@@ -67,17 +82,24 @@ namespace AnimalFall.Managers
             // Mouse fallback for editor
             if (Input.GetMouseButtonDown(0))
             {
-                _touchStart     = Input.mousePosition;
-                _touchStartTime = Time.time;
-                _pendingAnimal  = GetAnimalAtScreenPos(Input.mousePosition);
-                _gestureTarget = GetBestGestureTarget(Input.mousePosition);
-                _gestureTarget?.OnPointerDown(BuildEvent(Input.mousePosition, Vector2.zero, 0f));
+                var state = new PointerState
+                {
+                    touchStart = Input.mousePosition,
+                    touchStartTime = Time.time,
+                    pendingAnimal = GetAnimalAtScreenPos(Input.mousePosition),
+                    gestureTarget = GetBestGestureTarget(Input.mousePosition)
+                };
+                _activePointers[-1] = state;
+                state.gestureTarget?.OnPointerDown(BuildEvent(Input.mousePosition, Vector2.zero, 0f));
             }
-            if (Input.GetMouseButton(0) && _gestureTarget != null)
-                _gestureTarget.OnPointerMove(BuildEvent(Input.mousePosition, (Vector2)Input.mousePosition - _touchStart, Time.time - _touchStartTime));
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButton(0) && _activePointers.TryGetValue(-1, out var currentMouseState))
             {
-                ProcessEnd(Input.mousePosition, Time.time - _touchStartTime);
+                currentMouseState.gestureTarget?.OnPointerMove(BuildEvent(Input.mousePosition, (Vector2)Input.mousePosition - currentMouseState.touchStart, Time.time - currentMouseState.touchStartTime));
+            }
+            if (Input.GetMouseButtonUp(0) && _activePointers.TryGetValue(-1, out var releasedMouseState))
+            {
+                _activePointers.Remove(-1);
+                ProcessEnd(releasedMouseState, Input.mousePosition, Time.time - releasedMouseState.touchStartTime);
             }
 #else
             for (int i = 0; i < Input.touchCount; i++)
@@ -85,33 +107,49 @@ namespace AnimalFall.Managers
                 var t = Input.GetTouch(i);
                 if (t.phase == TouchPhase.Began)
                 {
-                    _touchStart     = t.position;
-                    _touchStartTime = Time.time;
-                    _pendingAnimal  = GetAnimalAtScreenPos(t.position);
-                    _gestureTarget = GetBestGestureTarget(t.position);
-                    _gestureTarget?.OnPointerDown(BuildEvent(t.position, Vector2.zero, 0f));
+                    var state = new PointerState
+                    {
+                        touchStart = t.position,
+                        touchStartTime = Time.time,
+                        pendingAnimal = GetAnimalAtScreenPos(t.position),
+                        gestureTarget = GetBestGestureTarget(t.position)
+                    };
+                    _activePointers[t.fingerId] = state;
+                    state.gestureTarget?.OnPointerDown(BuildEvent(t.position, Vector2.zero, 0f));
                 }
                 else if (t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary)
-                    _gestureTarget?.OnPointerMove(BuildEvent(t.position, t.position - _touchStart, Time.time - _touchStartTime));
+                {
+                    if (_activePointers.TryGetValue(t.fingerId, out var state))
+                        state.gestureTarget?.OnPointerMove(BuildEvent(t.position, t.position - state.touchStart, Time.time - state.touchStartTime));
+                }
                 else if (t.phase == TouchPhase.Ended)
                 {
-                    ProcessEnd(t.position, Time.time - _touchStartTime);
+                    if (_activePointers.TryGetValue(t.fingerId, out var state))
+                    {
+                        _activePointers.Remove(t.fingerId);
+                        ProcessEnd(state, t.position, Time.time - state.touchStartTime);
+                    }
                 }
                 else if (t.phase == TouchPhase.Canceled)
-                    CancelPointer(t.position);
+                {
+                    if (_activePointers.TryGetValue(t.fingerId, out var state))
+                    {
+                        _activePointers.Remove(t.fingerId);
+                        CancelPointer(state, t.position);
+                    }
+                }
             }
 #endif
         }
 
-        private void ProcessEnd(Vector2 screenEndPos, float duration)
+        private void ProcessEnd(PointerState state, Vector2 screenEndPos, float duration)
         {
-            WorldPointerEvent pointerEvent = BuildEvent(screenEndPos, screenEndPos - _touchStart, duration);
-            if (GestureDetector.IsSwipe(_touchStart, screenEndPos, duration, out Vector2 swipeDelta))
+            WorldPointerEvent pointerEvent = BuildEvent(screenEndPos, screenEndPos - state.touchStart, duration);
+            if (GestureDetector.IsSwipe(state.touchStart, screenEndPos, duration, out Vector2 swipeDelta))
             {
-                _gestureTarget?.OnPointerUp(pointerEvent, false);
+                state.gestureTarget?.OnPointerUp(pointerEvent, false);
                 GameEvents.OnSwipeDetected?.Invoke(swipeDelta);
-                GameEvents.OnSwipeDetailed?.Invoke(_touchStart, screenEndPos);
-                ClearPointer();
+                GameEvents.OnSwipeDetailed?.Invoke(state.touchStart, screenEndPos);
                 return; // swipe — don't process as tap
             }
 
@@ -122,15 +160,14 @@ namespace AnimalFall.Managers
             IPointerTapTarget worldTarget = GetBestTapTarget(screenEndPos);
             if (worldTarget != null && worldTarget.TryHandleTap(pointerEvent))
             {
-                _gestureTarget?.OnPointerUp(pointerEvent, false);
-                ClearPointer();
+                state.gestureTarget?.OnPointerUp(pointerEvent, false);
                 return;
             }
 
             // Use the object that was under the initial press whenever possible.
             // Falling animals can move between pointer-down and pointer-up, so fall
             // back to the release position rather than silently discarding the tap.
-            Animal animal = _pendingAnimal;
+            Animal animal = state.pendingAnimal;
             if (animal == null || animal.Data == null || animal.IsCollected)
                 animal = GetAnimalAtScreenPos(screenEndPos);
 
@@ -139,14 +176,13 @@ namespace AnimalFall.Managers
                 var result = animal.HandleTap();
                 HandleTapResult(result, animal);
             }
-            _gestureTarget?.OnPointerUp(pointerEvent, false);
-            ClearPointer();
+            state.gestureTarget?.OnPointerUp(pointerEvent, false);
         }
 
         public void DispatchSyntheticWorldTap(Vector2 worldPosition)
         {
-            if (_inputBlocked || Camera.main == null) return;
-            Vector2 screen = Camera.main.WorldToScreenPoint(worldPosition);
+            if (_inputBlocked || MainCam == null) return;
+            Vector2 screen = MainCam.WorldToScreenPoint(worldPosition);
             IPointerTapTarget target = GetBestTapTarget(screen);
             if (target != null && target.TryHandleTap(new WorldPointerEvent(screen, worldPosition, Vector2.zero, 0f, true)))
                 return;
@@ -161,21 +197,19 @@ namespace AnimalFall.Managers
         private WorldPointerEvent BuildEvent(Vector2 screen, Vector2 delta, float duration)
             => new WorldPointerEvent(screen, GetWorldPos(screen), delta, duration);
 
-        private void CancelPointer(Vector2 screen)
+        private void CancelPointer(PointerState state, Vector2 screen)
         {
-            _gestureTarget?.OnPointerUp(BuildEvent(screen, screen - _touchStart, Time.time - _touchStartTime), true);
-            ClearPointer();
-        }
-
-        private void ClearPointer()
-        {
-            _pendingAnimal = null;
-            _gestureTarget = null;
+            state.gestureTarget?.OnPointerUp(BuildEvent(screen, screen - state.touchStart, Time.time - state.touchStartTime), true);
         }
 
         private void OnApplicationFocus(bool focused)
         {
-            if (!focused && _gestureTarget != null) CancelPointer(_touchStart);
+            if (!focused)
+            {
+                foreach (var kvp in _activePointers)
+                    CancelPointer(kvp.Value, kvp.Value.touchStart);
+                _activePointers.Clear();
+            }
         }
 
         private IPointerTapTarget GetBestTapTarget(Vector2 screenPos)
@@ -216,7 +250,7 @@ namespace AnimalFall.Managers
 
         private int GetHits(Vector2 screenPos)
         {
-            if (Camera.main == null) return 0;
+            if (MainCam == null) return 0;
             EnsureContactFilter();
             return Physics2D.OverlapPoint(GetWorldPos(screenPos), _contactFilter, _hits);
         }
@@ -244,7 +278,7 @@ namespace AnimalFall.Managers
 
         private Animal GetAnimalAtScreenPos(Vector2 screenPos)
         {
-            if (Camera.main == null) { Debug.LogWarning("[InputManager] Camera.main is null."); return null; }
+            if (MainCam == null) { Debug.LogWarning("[InputManager] MainCam is null."); return null; }
             Vector2 worldPos = GetWorldPos(screenPos);
             int count = Physics2D.OverlapPoint(worldPos, _contactFilter, _hits);
             Animal best = null;
@@ -264,8 +298,8 @@ namespace AnimalFall.Managers
 
         private Vector2 GetWorldPos(Vector2 screenPos)
         {
-            if (Camera.main == null) return screenPos;
-            Vector3 wp = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, Mathf.Abs(Camera.main.transform.position.z)));
+            if (MainCam == null) return screenPos;
+            Vector3 wp = MainCam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, Mathf.Abs(MainCam.transform.position.z)));
             var result = new Vector2(wp.x, wp.y);
             if (_mirrorMode) result.x = -result.x;
             result += MagnetOffset;

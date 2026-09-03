@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 31
   prefab: {fileID: 1515915859075486386, guid: 9bba23cdea364ab40b2a869202efc37d, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -1616263303, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 26
   displayName: Spring Mushroom
   effectDescription: Animals that touch it bounce back and fly off-screen.

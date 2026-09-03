@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 28
   prefab: {fileID: 2208086818843248611, guid: 9731bb3ca531fb84f8d2c580a9b6366d, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -606244946, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 57
   displayName: Numbered Flock
   effectDescription: Counter the Numbered Flock!

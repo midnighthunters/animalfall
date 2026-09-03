@@ -21,8 +21,10 @@ namespace AnimalFall.UI
         [SerializeField] private Button      _retryButton;
         [SerializeField] private Button      _quitButton;
 
-        private void OnEnable()  => GameEvents.OnLevelWon  += () => ShowWin(0, 0, false);
-        private void OnDisable() => GameEvents.OnLevelWon  -= () => ShowWin(0, 0, false);
+        private void OnEnable()  => GameEvents.OnLevelWon  += HandleLevelWon;
+        private void OnDisable() => GameEvents.OnLevelWon  -= HandleLevelWon;
+
+        private void HandleLevelWon() => ShowWin(0, 0, false);
 
         public void ShowWin(int score, int coins, bool isMegaLevel)
         {

@@ -178,6 +178,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -220,7 +221,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5753253419996788330}
-  - component: {fileID: 4768389895466036437}
   m_Layer: 5
   m_Name: BundleCard
   m_TagString: Untagged
@@ -249,23 +249,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4768389895466036437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721081129967872897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95e983464e31a944ba6f57e2b1267cae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconImage: {fileID: 0}
-  titleText: {fileID: 0}
-  priceText: {fileID: 6165004996168632389}
-  buyButton: {fileID: 4660734134791792864}
-  soldOutOverlay: {fileID: 0}
 --- !u!1 &8906619001509490286
 GameObject:
   m_ObjectHideFlags: 0

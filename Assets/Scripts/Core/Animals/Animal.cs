@@ -60,6 +60,20 @@ namespace AnimalFall.Core.Animals
         private bool           _isReturned;
         private float          _targetWorldSize = TargetWorldSize;
 
+        private static Sprite _cachedFrozenPig;
+        private static Sprite _cachedBubbleMonkey;
+        private static Sprite _cachedDogHelmet;
+        private static bool _hindranceSpritesCached;
+
+        private static void EnsureHindranceSpritesCached()
+        {
+            if (_hindranceSpritesCached) return;
+            _cachedFrozenPig = Resources.Load<Sprite>("icons/hindrances/frozen_pig");
+            _cachedBubbleMonkey = Resources.Load<Sprite>("icons/hindrances/bubble_monkey");
+            _cachedDogHelmet = Resources.Load<Sprite>("icons/hindrances/dog_helmet");
+            _hindranceSpritesCached = true;
+        }
+
         private static readonly System.Collections.Generic.Dictionary<float, WaitForSeconds>
             _waitCache = new System.Collections.Generic.Dictionary<float, WaitForSeconds>();
 
@@ -122,7 +136,7 @@ namespace AnimalFall.Core.Animals
             // pooled spawns) receives the special sprite and two-tap state.
             if (data.species == AnimalSpecies.Pig && LevelHasHindrance(level, HindranceType.IceCube))
             {
-                Sprite frozenPig = Resources.Load<Sprite>("icons/hindrances/frozen_pig");
+                EnsureHindranceSpritesCached(); Sprite frozenPig = _cachedFrozenPig;
                 if (frozenPig != null)
                 {
                     displaySprite = frozenPig;
@@ -135,7 +149,7 @@ namespace AnimalFall.Core.Animals
             }
             else if (data.species == AnimalSpecies.Monkey && LevelHasHindrance(level, HindranceType.BubbleShield))
             {
-                Sprite bubbleMonkey = Resources.Load<Sprite>("icons/hindrances/bubble_monkey");
+                EnsureHindranceSpritesCached(); Sprite bubbleMonkey = _cachedBubbleMonkey;
                 if (bubbleMonkey != null)
                 {
                     displaySprite = bubbleMonkey;
@@ -149,7 +163,7 @@ namespace AnimalFall.Core.Animals
 
             if (data.species == AnimalSpecies.Dog && LevelHasHindrance(level, HindranceType.DogHelmet))
             {
-                Sprite dogHelmet = Resources.Load<Sprite>("icons/hindrances/dog_helmet");
+                EnsureHindranceSpritesCached(); Sprite dogHelmet = _cachedDogHelmet;
                 if (dogHelmet != null)
                 {
                     displaySprite = dogHelmet;

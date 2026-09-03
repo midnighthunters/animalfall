@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 16
   prefab: {fileID: 3568884565338152942, guid: dd5f8f05a1049c94e852f56e2102ce61, type: 3}
-  icon: {fileID: 715368135737836640, guid: b02e894561d11224fbaf6463c545b2ee, type: 3}
+  icon: {fileID: -8620619, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 51
   displayName: Tornado
   effectDescription: Carries nearby animals away in its vortex.

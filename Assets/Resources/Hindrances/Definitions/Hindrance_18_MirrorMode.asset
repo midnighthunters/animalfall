@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 18
   prefab: {fileID: 7973368176020759339, guid: 3b733fca425f621438a0af630cfcde3b, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -66811409, guid: a4c2503205828b547a71fe4c9ca7355b, type: 3}
   unlockLevel: 37
   displayName: Mirror Mode
   effectDescription: Counter the Mirror Mode!

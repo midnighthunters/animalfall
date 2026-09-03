@@ -17,6 +17,9 @@ namespace AnimalFall.Services
         public bool[] seenHindranceTypes  = new bool[69]; // indexed by stable HindranceType ID 0-68
         public string selectedSuperAnimalId = "eagle_striker";
         public List<string> unlockedSuperAnimalIds = new List<string> { "eagle_striker" };
+        public List<string> unlockedSkins          = new List<string> { "default" };
+        public string       equippedSkin           = "default";
+        public int          arcadeTokens           = 0;
         public int[] megaBestScores = new int[100];
         public int[] megaBestStars = new int[100];
         public float[] megaBestTimes = new float[100];
@@ -28,11 +31,21 @@ namespace AnimalFall.Services
     {
         private const string PREFS_KEY = "AnimalFall_Save";
 
+        public static SaveService Instance { get; private set; }
+
         private SaveData _data = new SaveData();
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
             LoadAll();
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
         }
 
         // ── Persistence ───────────────────────────────────────────────────────
@@ -185,5 +198,45 @@ namespace AnimalFall.Services
 
         public bool IsMegaCompleted(int levelIndex)
             => levelIndex >= 0 && levelIndex < _data.megaCompleted.Length && _data.megaCompleted[levelIndex];
+
+        // ── Skins & Customization ─────────────────────────────────────────────
+
+        public void UnlockSkin(string skinId)
+        {
+            if (string.IsNullOrEmpty(skinId)) return;
+            if (_data.unlockedSkins == null) _data.unlockedSkins = new List<string>();
+            if (!_data.unlockedSkins.Contains(skinId))
+            {
+                _data.unlockedSkins.Add(skinId);
+                SaveAll();
+            }
+        }
+
+        public bool IsSkinUnlocked(string skinId)
+        {
+            if (string.IsNullOrEmpty(skinId)) return false;
+            return _data.unlockedSkins != null && _data.unlockedSkins.Contains(skinId);
+        }
+
+        public string GetEquippedSkin() => string.IsNullOrEmpty(_data.equippedSkin) ? "default" : _data.equippedSkin;
+
+        public void EquipSkin(string skinId)
+        {
+            if (string.IsNullOrEmpty(skinId)) return;
+            _data.equippedSkin = skinId;
+            SaveAll();
+        }
+
+        // ── Arcade Tokens ─────────────────────────────────────────────────────
+
+        public int GetArcadeTokens() => _data.arcadeTokens;
+        public void AddArcadeTokens(int amount) { _data.arcadeTokens = Mathf.Max(0, _data.arcadeTokens + amount); SaveAll(); }
+        public bool SpendArcadeTokens(int amount)
+        {
+            if (_data.arcadeTokens < amount) return false;
+            _data.arcadeTokens -= amount;
+            SaveAll();
+            return true;
+        }
     }
 }

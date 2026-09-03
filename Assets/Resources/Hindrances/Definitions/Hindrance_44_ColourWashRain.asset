@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 44
   prefab: {fileID: 784225072503392376, guid: 717b5787266d6af4b99528c5bc650202, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -760317888, guid: e93873251b4f2eb46848da96f9ad18ba, type: 3}
   unlockLevel: 89
   displayName: Colour Wash Rain
   effectDescription: Counter the Colour Wash Rain!

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 22
   prefab: {fileID: 4018694301008768863, guid: cee6e875869c62440b1bb72fb6d0a683, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 892915286, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 45
   displayName: Firefly Lock And Key
   effectDescription: Catch the matching key!

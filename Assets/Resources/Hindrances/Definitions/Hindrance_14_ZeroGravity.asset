@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 14
   prefab: {fileID: 5842967075165657708, guid: 7ed2a7a0d656cd0459ddf2db694caf87, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -169241952, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 29
   displayName: Zero Gravity
   effectDescription: Counter the Zero Gravity!

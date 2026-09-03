@@ -18,6 +18,7 @@ namespace AnimalFall.Core.Hindrances.Penalties
         private bool _shocking;
         private Material _lightningMaterial;
         private readonly List<GameObject> _bolts = new List<GameObject>(16);
+        private float _screenBottom = -6f;
 
         public override HindranceType Type => HindranceType.Jellyfish;
         public int InteractionPriority => 250;
@@ -44,6 +45,11 @@ namespace AnimalFall.Core.Hindrances.Penalties
             FitVisualAndCollider(Animal.TargetWorldSize * 1.35f);
             MoveIntoPlayArea(0.86f);
             if (_collider != null) _collider.enabled = true;
+            if (Camera.main != null)
+            {
+                float z = Mathf.Abs(Camera.main.transform.position.z);
+                _screenBottom = Camera.main.ViewportToWorldPoint(new Vector3(0f, -0.08f, z)).y;
+            }
             StartCoroutine(RetireAfter(_visibleLifetime));
         }
 
@@ -51,7 +57,7 @@ namespace AnimalFall.Core.Hindrances.Penalties
         {
             if (!_isActive || _shocking) return;
             transform.Translate(0f, -_fallSpeed * Time.deltaTime, 0f, Space.World);
-            if (Camera.main != null && Camera.main.WorldToViewportPoint(transform.position).y < -0.08f)
+            if (transform.position.y < _screenBottom)
                 Deactivate();
         }
 

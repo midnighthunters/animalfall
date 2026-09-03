@@ -59,6 +59,15 @@ namespace AnimalFall.Managers
             Instance = this;
         }
 
+        private void OnDestroy()
+        {
+            Time.timeScale = 1f;
+            CancelTutorialPause();
+            if (_goalTracker != null)
+                _goalTracker.OnAllGoalsComplete -= OnGoalsComplete;
+            if (Instance == this) Instance = null;
+        }
+
         private void Start()
         {
             ImageLibrary.LoadAll();

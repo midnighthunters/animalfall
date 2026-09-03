@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 19
   prefab: {fileID: 7936142880561573935, guid: adfad6094a5967542b11505e32aa269b, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -339714660, guid: a4c2503205828b547a71fe4c9ca7355b, type: 3}
   unlockLevel: 39
   displayName: Cursed Skull
   effectDescription: Counter the Cursed Skull!

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 12
   prefab: {fileID: 2544494893803018006, guid: 99d27cdd005960d4eb0d28569bbbee0e, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 985813751, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 25
   displayName: Falling Leaves
   effectDescription: Counter the Falling Leaves!

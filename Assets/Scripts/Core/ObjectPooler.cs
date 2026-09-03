@@ -44,6 +44,8 @@ namespace AnimalFall.Core
             for (int i = 0; i < initialSize; i++)
             {
                 GameObject obj = Instantiate(prefab, parent);
+                var tag = obj.AddComponent<PoolTag>();
+                tag.PrefabKey = key;
                 ResetObject(obj);
                 _pools[key].Push(obj);
             }

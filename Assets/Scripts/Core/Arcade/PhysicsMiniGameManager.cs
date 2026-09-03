@@ -92,7 +92,7 @@ namespace AnimalFall.Core.Arcade
             }
 
             int coins = CalculateReward(score);
-            Services.Save.SaveService.Instance?.AddCoins(coins);
+            AnimalFall.Services.SaveService.Instance?.AddCoins(coins);
 
             OnGameEnded?.Invoke(score);
 

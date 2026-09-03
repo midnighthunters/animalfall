@@ -14,7 +14,7 @@ namespace AnimalFall
             Application.targetFrameRate = 60;
 
             // Wire SaveService → LevelManager and LivesManager
-            var save = GetComponent<SaveService>() ?? FindFirstObjectByType<SaveService>();
+            var save = SaveService.Instance ?? GetComponent<SaveService>() ?? FindFirstObjectByType<SaveService>();
             if (save != null)
             {
                 LevelManager.Instance?.Init(save);

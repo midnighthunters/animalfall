@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 37
   prefab: {fileID: 2715553197376501199, guid: 651eb0cb4b6227947b6f4e1338bbbf95, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 1934734779, guid: e93873251b4f2eb46848da96f9ad18ba, type: 3}
   unlockLevel: 75
   displayName: Trapdoor Clouds
   effectDescription: Counter the Trapdoor Clouds!

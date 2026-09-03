@@ -12,47 +12,79 @@ namespace AnimalFall.UI.Components
         [SerializeField] private float floatDistance = 80f;
         [SerializeField] private float fadeDuration = 0.5f;
 
-        public void Spawn(string text, Vector3 screenPosition)
+        private class PooledText
         {
-            if (floatingTextPrefab == null || parentCanvas == null) return;
-
-            GameObject obj = Instantiate(floatingTextPrefab, parentCanvas.transform);
-            RectTransform rt = obj.GetComponent<RectTransform>();
-            TMP_Text tmp = obj.GetComponentInChildren<TMP_Text>();
-
-            if (rt != null) rt.position = screenPosition;
-            if (tmp != null) tmp.text = text;
-
-            bool isPositive = !text.StartsWith("-");
-            if (tmp != null)
-                tmp.color = isPositive ? new Color(0.2f, 0.9f, 0.3f) : new Color(0.9f, 0.2f, 0.2f);
-
-            StartCoroutine(AnimateFloatingText(obj, rt));
+            public GameObject gameObject;
+            public RectTransform rectTransform;
+            public TMP_Text textComponent;
+            public CanvasGroup canvasGroup;
         }
 
-        private IEnumerator AnimateFloatingText(GameObject obj, RectTransform rt)
+        private readonly System.Collections.Generic.Stack<PooledText> _pool = new System.Collections.Generic.Stack<PooledText>(16);
+
+        private PooledText GetFromPool()
+        {
+            while (_pool.Count > 0)
+            {
+                var item = _pool.Pop();
+                if (item != null && item.gameObject != null) return item;
+            }
+
+            if (floatingTextPrefab == null || parentCanvas == null) return null;
+            GameObject obj = Instantiate(floatingTextPrefab, parentCanvas.transform);
+            var cg = obj.GetComponent<CanvasGroup>() ?? obj.AddComponent<CanvasGroup>();
+            return new PooledText
+            {
+                gameObject = obj,
+                rectTransform = obj.GetComponent<RectTransform>(),
+                textComponent = obj.GetComponentInChildren<TMP_Text>(),
+                canvasGroup = cg
+            };
+        }
+
+        public void Spawn(string text, Vector3 screenPosition)
+        {
+            PooledText item = GetFromPool();
+            if (item == null) return;
+
+            item.gameObject.SetActive(true);
+            if (item.rectTransform != null) item.rectTransform.position = screenPosition;
+            if (item.textComponent != null) item.textComponent.text = text;
+
+            bool isPositive = !text.StartsWith("-");
+            if (item.textComponent != null)
+                item.textComponent.color = isPositive ? new Color(0.2f, 0.9f, 0.3f) : new Color(0.9f, 0.2f, 0.2f);
+
+            if (item.canvasGroup != null) item.canvasGroup.alpha = 1f;
+
+            StartCoroutine(AnimateFloatingText(item));
+        }
+
+        private IEnumerator AnimateFloatingText(PooledText item)
         {
             float elapsed = 0f;
-            Vector3 startPos = rt != null ? rt.localPosition : Vector3.zero;
-            CanvasGroup cg = obj.GetComponent<CanvasGroup>();
-            if (cg == null) cg = obj.AddComponent<CanvasGroup>();
+            Vector3 startPos = item.rectTransform != null ? item.rectTransform.localPosition : Vector3.zero;
 
             while (elapsed < floatDuration)
             {
                 elapsed += Time.deltaTime;
                 float t = elapsed / floatDuration;
 
-                if (rt != null)
-                    rt.localPosition = startPos + Vector3.up * (floatDistance * t);
+                if (item.rectTransform != null)
+                    item.rectTransform.localPosition = startPos + Vector3.up * (floatDistance * t);
 
                 float fadeStart = 1f - (fadeDuration / floatDuration);
-                if (t > fadeStart)
-                    cg.alpha = Mathf.Lerp(1f, 0f, (t - fadeStart) / (1f - fadeStart));
+                if (t > fadeStart && item.canvasGroup != null)
+                    item.canvasGroup.alpha = Mathf.Lerp(1f, 0f, (t - fadeStart) / (1f - fadeStart));
 
                 yield return null;
             }
 
-            Destroy(obj);
+            if (item.gameObject != null)
+            {
+                item.gameObject.SetActive(false);
+                _pool.Push(item);
+            }
         }
     }
 }

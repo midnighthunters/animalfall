@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 38
   prefab: {fileID: 3095003327661706814, guid: d7a699329743eaa48924c749236f398d, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -1883568732, guid: e93873251b4f2eb46848da96f9ad18ba, type: 3}
   unlockLevel: 77
   displayName: Rolling Log
   effectDescription: Counter the Rolling Log!

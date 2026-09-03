@@ -102,7 +102,11 @@ namespace AnimalFall.Managers
             SceneManager.LoadScene(GetSceneNameForLevel(_currentLevel));
         }
 
-        public void ReturnToMainScene() => SceneManager.LoadScene(_mainSceneName);
+        public void ReturnToMainScene()
+        {
+            GameEvents.ClearAll();
+            SceneManager.LoadScene(_mainSceneName);
+        }
 
         public void LevelSuccess(int levelIndex)
         {
@@ -129,7 +133,7 @@ namespace AnimalFall.Managers
         private bool ResolveSaveService()
         {
             if (_save != null) return true;
-            _save = FindFirstObjectByType<SaveService>();
+            _save = SaveService.Instance ?? FindFirstObjectByType<SaveService>();
             return _save != null;
         }
 

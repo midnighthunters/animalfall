@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 34
   prefab: {fileID: 129340756106770424, guid: a30937ecd999f7e429c60377123bbcc6, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 1925465331, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 69
   displayName: Pendulum Vines
   effectDescription: Counter the Pendulum Vines!

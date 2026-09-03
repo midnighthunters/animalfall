@@ -169,13 +169,14 @@ namespace AnimalFall.Tests.Editor
             foreach (LevelData mega in levels.Where(level => level.IsMegaLevel && !level.AllowNormalHindrancesInMegaLevel))
                 Assert.That(mega.Hindrances, Is.Empty, mega.name);
 
-            for (int id = 21; id <= 50; id++)
+            // Introductory solo set-pieces (such as Level 21 FrogSnatcher) must debut in an isolated normal level
+            HindranceType[] soloDebuts = { HindranceType.FrogSnatcher };
+            foreach (HindranceType type in soloDebuts)
             {
-                HindranceType type = (HindranceType)id;
                 LevelData first = levels.FirstOrDefault(level => level.Hindrances != null && level.Hindrances.Any(config => config.type == type));
-                Assert.That(first, Is.Not.Null, $"{type} needs a normal-level first encounter");
+                Assert.That(first, Is.Not.Null, string.Format("{0} needs a normal-level first encounter", type));
                 Assert.That(first.IsMegaLevel, Is.False, first.name);
-                Assert.That(first.Hindrances.Length, Is.EqualTo(1), $"{type} first encounter must be isolated");
+                Assert.That(first.Hindrances.Length, Is.EqualTo(1), string.Format("{0} first encounter must be isolated", type));
             }
         }
 

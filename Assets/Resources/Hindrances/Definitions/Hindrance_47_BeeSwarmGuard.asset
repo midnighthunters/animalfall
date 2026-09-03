@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 47
   prefab: {fileID: 9378291385105686, guid: 8c809ead281daf8459049859770168b1, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -701590704, guid: e93873251b4f2eb46848da96f9ad18ba, type: 3}
   unlockLevel: 95
   displayName: Bee Swarm Guard
   effectDescription: Counter the Bee Swarm Guard!

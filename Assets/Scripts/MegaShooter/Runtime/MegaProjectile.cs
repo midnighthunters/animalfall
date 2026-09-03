@@ -46,7 +46,7 @@ namespace AnimalFall.MegaShooter
             _body.gravityScale = 0f;
             _body.useFullKinematicContacts = true;
             _overlapFilter = new ContactFilter2D { useTriggers = true };
-            _overlapFilter.SetLayerMask(Physics2D.AllLayers);
+            _overlapFilter.SetLayerMask(1 << 0);
             GameObject glow = new GameObject("ProjectileGlow");
             glow.transform.SetParent(transform, false);
             glow.transform.localScale = Vector3.one * 1.25f;
@@ -127,7 +127,8 @@ namespace AnimalFall.MegaShooter
             // Continuous swept collision prevents tunneling at high speeds for both player and enemies
             if (ResolveSweptPlayerHit(previousPosition, transform.position)) return;
             if (ResolveSweptEnemyHit(previousPosition, transform.position)) return;
-            ResolveOverlappingHit();
+            if (_faction == MegaFaction.Player)
+                ResolveOverlappingHit();
             if (!gameObject.activeSelf) return;
             TrackNearMiss();
             if (_age >= _life || !_game.IsInsideDespawnBounds(transform.position))
@@ -171,9 +172,10 @@ namespace AnimalFall.MegaShooter
             if (_faction != MegaFaction.Player || _game == null) return false;
             Vector2 motion = to - from;
             float dist = motion.magnitude;
-            if (dist < 0.0001f) return false;
+            float castRadius = Mathf.Max(0.06f, _collider.radius * 0.45f);
+            if (dist < castRadius) return false;
             int hitCount = Physics2D.CircleCast(
-                from, Mathf.Max(0.06f, _collider.radius * 0.45f), motion / dist, _overlapFilter, _castBuffer, dist);
+                from, castRadius, motion / dist, _overlapFilter, _castBuffer, dist);
             for (int i = 0; i < hitCount; i++)
             {
                 Collider2D col = _castBuffer[i].collider;

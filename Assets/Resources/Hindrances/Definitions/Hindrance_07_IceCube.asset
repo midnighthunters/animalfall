@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 7
   prefab: {fileID: 5171824717870044448, guid: 87f235b97cad6e24ea3ec131955abb31, type: 3}
-  icon: {fileID: 21300000, guid: 2a117f7e23b40b6488e45a05c25cc17d, type: 3}
+  icon: {fileID: 844043226, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 7
   displayName: Frozen Pig
   effectDescription: Tap once to break the ice, then tap the pig again to collect

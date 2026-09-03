@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 3
   prefab: {fileID: 5111794322150989686, guid: 7ed593b8364ca00448a42165cdf08710, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -273325003, guid: 3b001ad552c0ead40bcfe89d7efdfafb, type: 3}
   unlockLevel: 7
   displayName: Poison Vial
   effectDescription: Counter the Poison Vial!

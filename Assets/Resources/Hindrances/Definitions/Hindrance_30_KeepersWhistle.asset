@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 30
   prefab: {fileID: 7578538980695076574, guid: 7ffa955c7f47da842939cdd8ea34783a, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 257842282, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 61
   displayName: Keepers Whistle
   effectDescription: Counter the Keepers Whistle!

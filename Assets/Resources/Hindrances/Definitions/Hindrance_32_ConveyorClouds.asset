@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 32
   prefab: {fileID: 5834806718142432889, guid: 1a691a72eef5db84eaf1d65ef2be7d1e, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -767418705, guid: 771b2731b5809e5438afe199843aefd5, type: 3}
   unlockLevel: 65
   displayName: Conveyor Clouds
   effectDescription: Counter the Conveyor Clouds!

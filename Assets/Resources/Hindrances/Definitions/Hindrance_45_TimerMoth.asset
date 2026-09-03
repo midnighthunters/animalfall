@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hindranceType: 45
   prefab: {fileID: 3825066103296868654, guid: 8c32ead455b70da46864a9340537345a, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -60405141, guid: e93873251b4f2eb46848da96f9ad18ba, type: 3}
   unlockLevel: 91
   displayName: Timer Moth
   effectDescription: Tap the moth three times!
