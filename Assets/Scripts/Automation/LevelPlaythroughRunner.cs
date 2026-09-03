@@ -19,6 +19,7 @@ namespace AnimalFall.Automation
         public static bool IsFinished { get; private set; } = false;
         public static int CompletedLevelsCount { get; private set; } = 0;
         public static int CurrentLevelProcessing { get; private set; } = 0;
+        public static bool FastPlayMode = true;
 
         private void Awake()
         {
@@ -26,6 +27,24 @@ namespace AnimalFall.Automation
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+#if UNITY_EDITOR
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void OnSceneLoadedRuntime()
+        {
+            if (UnityEditor.EditorPrefs.GetBool("AnimalFall.AutoStartPlaythrough", false) &&
+                SceneManager.GetActiveScene().name == "MainScene")
+            {
+                UnityEditor.EditorPrefs.DeleteKey("AnimalFall.AutoStartPlaythrough");
+                if (Instance == null)
+                {
+                    var go = new GameObject("LevelPlaythroughRunner");
+                    var runner = go.AddComponent<LevelPlaythroughRunner>();
+                    runner.StartPlaythrough();
+                }
+            }
+        }
+#endif
 
         public void StartPlaythrough()
         {
@@ -36,13 +55,18 @@ namespace AnimalFall.Automation
         {
             IsFinished = false;
             CompletedLevelsCount = 0;
+            MegaShooterGameManager.RuntimeTestFastStart = true;
             LogReport = "=== STARTING FULL 100-LEVEL GAMEPLAY PLAYTHROUGH ===\n";
 
+            PlayerPrefs.DeleteKey("AnimalFall.DebugLevel");
+            PlayerPrefs.Save();
+
             // Reset Save to Level 1
-            SaveService save = FindFirstObjectByType<SaveService>();
+            SaveService save = FindFirstObjectByType<SaveService>() ?? SaveService.Instance;
             if (save != null)
             {
                 save.SetHighestUnlockedLevel(0);
+                save.AddCoins(1000);
                 save.SaveAll();
             }
 
@@ -65,6 +89,10 @@ namespace AnimalFall.Automation
                     yield return null;
                     mainScreen = FindFirstObjectByType<MainScreenController>();
                 }
+
+                // Refill lives to avoid out-of-lives popup
+                LivesManager lives = FindFirstObjectByType<LivesManager>() ?? LivesManager.Instance;
+                lives?.Refill();
 
                 // Verify Level Button Text
                 var textProp = typeof(MainScreenController).GetField("_levelButtonText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -105,7 +133,7 @@ namespace AnimalFall.Automation
                 {
                     // Wait for GameManager running
                     timeout = Time.time + 8f;
-                    while ((GameManager.Instance == null || GameManager.Instance.State != GameState.Running) && Time.time < timeout)
+                    while ((GameManager.Instance == null || (GameManager.Instance.State != GameState.Running && GameManager.Instance.State != GameState.Ended)) && Time.time < timeout)
                         yield return null;
 
                     GoalTracker goalTracker = GoalTracker.Instance;
@@ -149,7 +177,7 @@ namespace AnimalFall.Automation
                             }
                         }
 
-                        yield return new WaitForSeconds(0.05f);
+                        yield return new WaitForSeconds(0.02f);
                     }
 
                     // Ensure EndLevel triggered if goal tracker completed
@@ -205,10 +233,9 @@ namespace AnimalFall.Automation
 
                     LogReport += $"[Level {levelNum:D3}] Playing Mega Level combat.\n";
 
-                    // Play through waves and bosses
-                    timeout = Time.time + 15f;
-                    while (megaGame != null && megaGame.State != MegaShooterState.Won && Time.time < timeout)
+                    if (FastPlayMode)
                     {
+                        yield return new WaitForSeconds(0.05f);
                         // Defeat active enemies in current wave
                         MegaEnemyController[] enemies = FindObjectsByType<MegaEnemyController>(FindObjectsSortMode.None);
                         foreach (var e in enemies)
@@ -220,66 +247,73 @@ namespace AnimalFall.Automation
                         }
 
                         // Defeat active boss if present
-                        if (megaGame.Boss != null && megaGame.Boss.gameObject.activeInHierarchy)
+                        if (megaGame != null && megaGame.Boss != null && megaGame.Boss.gameObject.activeInHierarchy)
                         {
                             megaGame.Boss.TakeDamage(9999f);
                         }
 
-                        yield return new WaitForSeconds(0.08f);
-                    }
-
-                    if (megaGame != null && megaGame.State != MegaShooterState.Won)
-                    {
-                        megaGame.CompleteLevel();
-                    }
-
-                    // Wait for VictoryOverlay or MegaResultCard
-                    VictoryOverlay victory = null;
-                    GameObject resultCard = null;
-                    timeout = Time.time + 8f;
-                    while (Time.time < timeout)
-                    {
-                        victory = FindFirstObjectByType<VictoryOverlay>();
-                        if (victory != null)
+                        if (megaGame != null && megaGame.State != MegaShooterState.Won)
                         {
-                            var rootField = typeof(VictoryOverlay).GetField("_root", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                            GameObject rootGo = rootField?.GetValue(victory) as GameObject;
-                            if (rootGo != null && rootGo.activeSelf) break;
-                        }
-                        resultCard = GameObject.Find("MegaResultCard");
-                        if (resultCard != null && resultCard.activeInHierarchy) break;
-                        yield return null;
-                    }
-
-                    // Click CONTINUE button
-                    if (victory != null)
-                    {
-                        var primaryBtnField = typeof(VictoryOverlay).GetField("_primaryButton", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                        Button continueBtn = primaryBtnField?.GetValue(victory) as Button;
-                        if (continueBtn != null)
-                        {
-                            continueBtn.onClick.Invoke();
-                            LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE on VictoryOverlay.\n";
-                        }
-                        else
-                        {
-                            if (megaGame != null) megaGame.Quit();
-                            else LevelManager.Instance?.ReturnToMainScene();
+                            megaGame.CompleteLevel();
                         }
                     }
                     else
                     {
-                        Button continueBtn = GameObject.Find("PrimaryActionButton")?.GetComponent<Button>();
-                        if (continueBtn != null)
+                        // Play through waves and bosses
+                        timeout = Time.time + 15f;
+                        while (megaGame != null && megaGame.State != MegaShooterState.Won && Time.time < timeout)
                         {
-                            continueBtn.onClick.Invoke();
-                            LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE on MegaResultCard.\n";
+                            MegaEnemyController[] enemies = FindObjectsByType<MegaEnemyController>(FindObjectsSortMode.None);
+                            foreach (var e in enemies)
+                            {
+                                if (e != null && e.gameObject.activeInHierarchy && e.Health > 0)
+                                {
+                                    e.TakeDamage(9999f);
+                                }
+                            }
+
+                            if (megaGame.Boss != null && megaGame.Boss.gameObject.activeInHierarchy)
+                            {
+                                megaGame.Boss.TakeDamage(9999f);
+                            }
+
+                            yield return new WaitForSeconds(0.08f);
                         }
-                        else
+
+                        if (megaGame != null && megaGame.State != MegaShooterState.Won)
                         {
-                            if (megaGame != null) megaGame.Quit();
-                            else LevelManager.Instance?.ReturnToMainScene();
+                            megaGame.CompleteLevel();
                         }
+                    }
+
+                    // Wait for VictoryOverlay or MegaResultCard
+                    timeout = Time.time + 8f;
+                    Button continueBtn = null;
+                    while (Time.time < timeout)
+                    {
+                        VictoryOverlay victory = FindFirstObjectByType<VictoryOverlay>();
+                        if (victory != null)
+                        {
+                            var primaryBtnField = typeof(VictoryOverlay).GetField("_primaryButton", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                            continueBtn = primaryBtnField?.GetValue(victory) as Button;
+                            if (continueBtn != null) break;
+                        }
+
+                        continueBtn = GameObject.Find("PrimaryActionButton")?.GetComponent<Button>();
+                        if (continueBtn != null && continueBtn.gameObject.activeInHierarchy) break;
+
+                        yield return null;
+                    }
+
+                    if (continueBtn != null)
+                    {
+                        continueBtn.onClick.Invoke();
+                        LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE.\n";
+                    }
+                    else
+                    {
+                        if (megaGame != null) megaGame.Quit();
+                        else LevelManager.Instance?.ReturnToMainScene();
                     }
                 }
 

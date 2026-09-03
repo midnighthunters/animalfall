@@ -67,6 +67,12 @@ namespace AnimalFall.UI
             if (_root == null) yield break;
 
             _root.SetActive(true);
+            if (AnimalFall.Automation.LevelPlaythroughRunner.FastPlayMode)
+            {
+                if (_primaryButtonLabel != null)
+                    _primaryButtonLabel.text = won ? "CONTINUE" : "RETRY";
+                yield break;
+            }
             if (_canvasGroup != null)
             {
                 _canvasGroup.alpha = 0f;

@@ -31,6 +31,13 @@ namespace AnimalFall.UI
 
         private IEnumerator CountdownCoroutine(Action onComplete)
         {
+            if (AnimalFall.Automation.LevelPlaythroughRunner.FastPlayMode)
+            {
+                if (_root != null) _root.SetActive(false);
+                onComplete?.Invoke();
+                yield break;
+            }
+
             if (_root != null) _root.SetActive(true);
             if (_canvasGroup == null && _root != null)
                 _canvasGroup = _root.GetComponent<CanvasGroup>() ?? _root.AddComponent<CanvasGroup>();
