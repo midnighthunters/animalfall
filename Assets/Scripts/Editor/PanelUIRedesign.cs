@@ -28,14 +28,15 @@ namespace AnimalFall.Editor
         private static TMP_FontAsset _bodyFont;
         private static Sprite[] _sheet;
 
-        [MenuItem("AnimalFall/Redesign Panels (Main + Game)")]
+        [MenuItem("AnimalFall/Redesign Panels (Main + Game + Mega)")]
         public static void RedesignAll()
         {
             LoadStyleAssets();
             BuildMainScene();
             BuildGameScene();
+            BuildMegaShooterResultCard();
             EditorSceneManager.OpenScene("Assets/Scenes/MainScene.unity", OpenSceneMode.Single);
-            Debug.Log("[PanelUIRedesign] MainScene and GameScene rebuilt from main_screen_panels. MegaShooterScene was not modified.");
+            Debug.Log("[PanelUIRedesign] MainScene, GameScene, and MegaShooterScene rebuilt with unified panels.");
         }
 
         [MenuItem("AnimalFall/Redesign Panels/Main Scene")]
@@ -106,6 +107,31 @@ namespace AnimalFall.Editor
             EnsureEventSystem();
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
             EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
+        }
+
+        [MenuItem("AnimalFall/Redesign Panels/MegaShooter Scene")]
+        public static void BuildMegaShooterResultCard()
+        {
+            LoadStyleAssets();
+            var scene = EditorSceneManager.OpenScene("Assets/Scenes/MegaShooterScene.unity", OpenSceneMode.Single);
+            var canvas = GameObject.Find("MegaShooterCanvas");
+            if (canvas == null)
+            {
+                Debug.LogError("[PanelUIRedesign] MegaShooterCanvas not found in MegaShooterScene.");
+                return;
+            }
+
+            var existingVictory = canvas.GetComponent<VictoryOverlay>();
+            if (existingVictory != null) UnityEngine.Object.DestroyImmediate(existingVictory);
+            var existingOverlay = canvas.transform.Find("VictoryOverlay");
+            if (existingOverlay != null) UnityEngine.Object.DestroyImmediate(existingOverlay.gameObject);
+
+            BuildResultCard(canvas.transform, canvas.gameObject);
+
+            EnsureEventSystem();
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("[PanelUIRedesign] Attached identical VictoryOverlay result card to MegaShooterCanvas in MegaShooterScene.");
         }
 
         private static void BuildMainTopCluster(Transform root, MainScreenController controller)
@@ -475,3 +501,4 @@ namespace AnimalFall.Editor
     }
 }
 #endif
+

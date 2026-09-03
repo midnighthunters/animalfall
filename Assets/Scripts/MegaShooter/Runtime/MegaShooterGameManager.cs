@@ -379,7 +379,10 @@ namespace AnimalFall.MegaShooter
             GameEvents.OnLevelWon?.Invoke();
             hud.ShowResult(true, _score, stars, _level.coinReward);
             StopCombat();
-            StartCoroutine(AutoExitRoutine());
+            if (FindFirstObjectByType<AnimalFall.UI.VictoryOverlay>() == null)
+            {
+                StartCoroutine(AutoExitRoutine());
+            }
         }
 
         private IEnumerator AutoExitRoutine()

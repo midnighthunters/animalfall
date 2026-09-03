@@ -233,27 +233,53 @@ namespace AnimalFall.Automation
                         megaGame.CompleteLevel();
                     }
 
-                    // Wait for MegaResultCard
+                    // Wait for VictoryOverlay or MegaResultCard
+                    VictoryOverlay victory = null;
                     GameObject resultCard = null;
                     timeout = Time.time + 8f;
                     while (Time.time < timeout)
                     {
+                        victory = FindFirstObjectByType<VictoryOverlay>();
+                        if (victory != null)
+                        {
+                            var rootField = typeof(VictoryOverlay).GetField("_root", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                            GameObject rootGo = rootField?.GetValue(victory) as GameObject;
+                            if (rootGo != null && rootGo.activeSelf) break;
+                        }
                         resultCard = GameObject.Find("MegaResultCard");
                         if (resultCard != null && resultCard.activeInHierarchy) break;
                         yield return null;
                     }
 
                     // Click CONTINUE button
-                    Button continueBtn = GameObject.Find("PrimaryActionButton")?.GetComponent<Button>();
-                    if (continueBtn != null)
+                    if (victory != null)
                     {
-                        continueBtn.onClick.Invoke();
-                        LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE on MegaResultCard.\n";
+                        var primaryBtnField = typeof(VictoryOverlay).GetField("_primaryButton", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                        Button continueBtn = primaryBtnField?.GetValue(victory) as Button;
+                        if (continueBtn != null)
+                        {
+                            continueBtn.onClick.Invoke();
+                            LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE on VictoryOverlay.\n";
+                        }
+                        else
+                        {
+                            if (megaGame != null) megaGame.Quit();
+                            else LevelManager.Instance?.ReturnToMainScene();
+                        }
                     }
                     else
                     {
-                        if (megaGame != null) megaGame.Quit();
-                        else LevelManager.Instance?.ReturnToMainScene();
+                        Button continueBtn = GameObject.Find("PrimaryActionButton")?.GetComponent<Button>();
+                        if (continueBtn != null)
+                        {
+                            continueBtn.onClick.Invoke();
+                            LogReport += $"[Level {levelNum:D3}] All villains defeated! Clicked CONTINUE on MegaResultCard.\n";
+                        }
+                        else
+                        {
+                            if (megaGame != null) megaGame.Quit();
+                            else LevelManager.Instance?.ReturnToMainScene();
+                        }
                     }
                 }
 

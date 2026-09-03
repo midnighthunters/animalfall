@@ -291,6 +291,7 @@ namespace AnimalFall.MegaShooter
 
         public void ShowResult(bool won, int score, int stars, int coins)
         {
+            if (FindFirstObjectByType<AnimalFall.UI.VictoryOverlay>() != null) return;
             if (!Application.isPlaying) return;
             if (_resultCardGo != null) Destroy(_resultCardGo);
 

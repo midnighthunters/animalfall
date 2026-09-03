@@ -141,7 +141,10 @@ namespace AnimalFall.UI
             }
 
             Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (LevelManager.Instance != null)
+                LevelManager.Instance.RetryCurrentLevel();
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private static void ReturnHome()
