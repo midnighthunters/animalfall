@@ -815,7 +815,7 @@ namespace AnimalFall.MegaShooter.Editor
             string path = $"{PrefabRoot}/MegaProjectile.prefab";
             if (PrefabHasComponents(path, typeof(MegaPoolMember), typeof(MegaProjectile))) return;
             GameObject go = CreatePhysicsSprite("MegaProjectile", sprite, true, false, true);
-            go.transform.localScale = Vector3.one * .42f;
+            go.transform.localScale = Vector3.one * .18f;
             go.AddComponent<MegaPoolMember>();
             go.AddComponent<MegaProjectile>();
             SavePrefab(go, path);

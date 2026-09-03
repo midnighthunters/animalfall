@@ -79,7 +79,14 @@ namespace AnimalFall.MegaShooter
             Color glowColor = faction == MegaFaction.Player ? data.playerColor : data.enemyColor;
             glowColor.a = 0.28f;
             _glowRenderer.color = glowColor;
-            _collider.radius = Mathf.Max(0.24f, data.colliderRadius * 1.5f);
+
+            // Reduce projectile scale for both hero and villain to sleek, arcade proportions
+            float baseScale = faction == MegaFaction.Player ? 0.16f : 0.18f;
+            float radiusFactor = Mathf.Clamp(data.colliderRadius / 0.11f, 0.85f, 1.4f);
+            float finalScale = baseScale * radiusFactor;
+            transform.localScale = Vector3.one * finalScale;
+
+            _collider.radius = Mathf.Max(0.55f, (data.colliderRadius / finalScale) * 0.9f);
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg - 90f;
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
             _registered = true;
@@ -157,8 +164,9 @@ namespace AnimalFall.MegaShooter
         // shot from visually crossing an enemy without registering its damage.
         private void ResolveOverlappingHit()
         {
+            float worldRadius = Mathf.Max(0.08f, _collider.radius * transform.lossyScale.x);
             int overlapCount = Physics2D.OverlapCircle(
-                transform.position, Mathf.Max(0.08f, _collider.radius), _overlapFilter, _overlapBuffer);
+                transform.position, worldRadius, _overlapFilter, _overlapBuffer);
             for (int i = 0; i < overlapCount; i++)
             {
                 Collider2D overlap = _overlapBuffer[i];
@@ -172,7 +180,7 @@ namespace AnimalFall.MegaShooter
             if (_faction != MegaFaction.Player || _game == null) return false;
             Vector2 motion = to - from;
             float dist = motion.magnitude;
-            float castRadius = Mathf.Max(0.06f, _collider.radius * 0.45f);
+            float castRadius = Mathf.Max(0.06f, _collider.radius * transform.lossyScale.x * 0.8f);
             if (dist < castRadius) return false;
             int hitCount = Physics2D.CircleCast(
                 from, castRadius, motion / dist, _overlapFilter, _castBuffer, dist);
@@ -269,7 +277,8 @@ namespace AnimalFall.MegaShooter
             Color color = _faction == MegaFaction.Player
                 ? new Color(0.25f, 0.95f, 1f, 0.95f)
                 : new Color(1f, 0.08f, 0.05f, 0.95f);
-            _game?.SpawnEffect(effect, transform.position, color, 0.42f, 0.2f);
+            float effectScale = Mathf.Max(0.22f, transform.localScale.x * 1.5f);
+            _game?.SpawnEffect(effect, transform.position, color, effectScale, 0.2f);
         }
 
         private void ConsumePierce()
