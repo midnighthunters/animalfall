@@ -1,4 +1,4 @@
-﻿name: AnimalBlast iOS IPA
+name: AnimalBlast iOS IPA
 
 on:
   workflow_dispatch:
@@ -41,21 +41,36 @@ jobs:
           test -n "$APP_STORE_CONNECT_KEY_ID" && test -n "$APP_STORE_CONNECT_ISSUER_ID"
           test -n "$APPLE_TEAM_ID"
           python3 tools/remove_stale_firebase_ios_links.py
-          pod install --project-directory=Build/ios --repo-update
-          test -d Build/ios/Unity-iPhone.xcworkspace
+          if [ -f Build/ios/Podfile ]; then
+            pod install --project-directory=Build/ios --repo-update
+          fi
+          if [ -d Build/ios/Unity-iPhone.xcworkspace ]; then
+            XCODE_CONTAINER=(-workspace Build/ios/Unity-iPhone.xcworkspace)
+          else
+            XCODE_CONTAINER=(-project Build/ios/Unity-iPhone.xcodeproj)
+          fi
           xcodebuild -version
-          xcodebuild -list -workspace Build/ios/Unity-iPhone.xcworkspace
+          xcodebuild -list "${XCODE_CONTAINER[@]}"
           grep -q 'PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;' Build/ios/Unity-iPhone.xcodeproj/project.pbxproj
           # Unity's committed export currently targets iPad (2); accept any valid iOS family setting.
-          xcodebuild -showBuildSettings -workspace Build/ios/Unity-iPhone.xcworkspace -scheme Unity-iPhone -configuration Release | grep -Eq '^[[:space:]]*TARGETED_DEVICE_FAMILY = (1|2|1,2)$'
+          xcodebuild -showBuildSettings "${XCODE_CONTAINER[@]}" -scheme Unity-iPhone -configuration Release | grep -Eq '^[[:space:]]*TARGETED_DEVICE_FAMILY = ("?1,2"?|1|2)$'
       - name: Archive and export signed IPA
         run: |
           set -euo pipefail
           umask 077; KEY="$RUNNER_TEMP/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8"; trap 'rm -f "$KEY"' EXIT
           printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY"
           ARCHIVE="$RUNNER_TEMP/AnimalBlast.xcarchive"; EXPORT="$RUNNER_TEMP/export"; BUILD="${IOS_BUILD_NUMBER:-$GITHUB_RUN_NUMBER}"
+          if ! [[ "$BUILD" =~ ^[1-9][0-9]*$ ]]; then
+            echo "The iOS build number must be a positive integer; got '$BUILD'." >&2
+            exit 1
+          fi
+          if [ -d Build/ios/Unity-iPhone.xcworkspace ]; then
+            XCODE_CONTAINER=(-workspace Build/ios/Unity-iPhone.xcworkspace)
+          else
+            XCODE_CONTAINER=(-project Build/ios/Unity-iPhone.xcodeproj)
+          fi
           XCODEBUILD_ARGS=(
-            -workspace Build/ios/Unity-iPhone.xcworkspace -scheme Unity-iPhone -configuration Release
+            "${XCODE_CONTAINER[@]}" -scheme Unity-iPhone -configuration Release
             -sdk iphoneos -destination generic/platform=iOS -archivePath "$ARCHIVE"
             -allowProvisioningUpdates -authenticationKeyPath "$KEY"
             -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
