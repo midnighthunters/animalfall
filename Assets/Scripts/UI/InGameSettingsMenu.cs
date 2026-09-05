@@ -74,18 +74,40 @@ namespace AnimalFall.UI
             Stretch(_actionsRoot.GetComponent<RectTransform>());
             _actionsRoot.SetActive(false);
 
-            CreateActionButton("ExitLevelButton", _redButton, _exitIcon, "EXIT LEVEL",
+            CreateActionButton("ExitLevelButton", _redButton, _exitIcon, null,
                 new Vector2(-220f, -80f), ExitLevel, out _, out _, out _);
-            CreateActionButton("MusicButton", _greenButton, _musicIconSprite, "MUSIC ON",
+            CreateActionButton("MusicButton", _greenButton, _musicIconSprite, null,
                 new Vector2(-220f, -210f), ToggleMusic, out _musicButton, out _musicLabel, out _musicIcon);
-            CreateActionButton("SoundButton", _greenButton, _soundIconSprite, "SOUND ON",
+            CreateActionButton("SoundButton", _greenButton, _soundIconSprite, null,
                 new Vector2(-220f, -340f), ToggleSound, out _soundButton, out _soundLabel, out _soundIcon);
 
             RefreshAudioButtons();
         }
 
+        private void OnEnable()
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.OnMusicMutedChanged += HandleMuteChanged;
+                AudioManager.Instance.OnSfxMutedChanged += HandleMuteChanged;
+            }
+            RefreshAudioButtons();
+        }
+
+        private void OnDisable()
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.OnMusicMutedChanged -= HandleMuteChanged;
+                AudioManager.Instance.OnSfxMutedChanged -= HandleMuteChanged;
+            }
+        }
+
+        private void HandleMuteChanged(bool _) => RefreshAudioButtons();
+
         private void ToggleActions()
         {
+            AudioManager.PlayClick();
             if (_actionsRoot == null) return;
             bool show = !_actionsRoot.activeSelf;
             _actionsRoot.SetActive(show);
@@ -94,8 +116,14 @@ namespace AnimalFall.UI
 
         private void ExitLevel()
         {
-            // Leaving voluntarily should return to the map without recording a failed life.
+            AudioManager.PlayClick();
+            // Leaving a level in progress forfeits a life
             Time.timeScale = 1f;
+            if (GameManager.Instance != null && GameManager.Instance.State == GameState.Running)
+            {
+                GameEvents.OnLevelFailed?.Invoke();
+            }
+
             if (LevelManager.Instance != null)
                 LevelManager.Instance.ReturnToMainScene();
             else
@@ -104,12 +132,14 @@ namespace AnimalFall.UI
 
         private void ToggleMusic()
         {
+            AudioManager.PlayClick();
             AudioManager.Instance?.ToggleMusicMuted();
             RefreshAudioButtons();
         }
 
         private void ToggleSound()
         {
+            AudioManager.PlayClick();
             AudioManager.Instance?.ToggleSfxMuted();
             RefreshAudioButtons();
         }
@@ -122,11 +152,16 @@ namespace AnimalFall.UI
             UpdateToggle(_soundButton, _soundLabel, _soundIcon, soundMuted, "SOUND");
         }
 
-        private static void UpdateToggle(Button button, Text label, Image icon, bool muted, string title)
+        private void UpdateToggle(Button button, Text label, Image icon, bool muted, string title)
         {
             if (button == null) return;
+            var buttonImage = button.GetComponent<Image>();
+            if (buttonImage != null)
+            {
+                buttonImage.sprite = muted ? _redButton : _greenButton;
+            }
             if (label != null) label.text = title + " " + (muted ? "OFF" : "ON");
-            if (icon != null) icon.color = muted ? new Color(0.62f, 0.62f, 0.62f, 1f) : Color.white;
+            if (icon != null) icon.color = muted ? new Color(0.62f, 0.62f, 0.62f, 0.75f) : Color.white;
         }
 
         private void CreateActionButton(string name, Sprite background, Sprite icon, string label,
@@ -147,8 +182,10 @@ namespace AnimalFall.UI
             button.targetGraphic = image;
             button.onClick.AddListener(action);
 
-            iconImage = CreateIcon("Icon", go.transform, icon, new Vector2(0f, 12f), new Vector2(70f, 70f));
-            text = CreateLabel(go.transform, label);
+            Vector2 iconPos = string.IsNullOrEmpty(label) ? Vector2.zero : new Vector2(0f, 12f);
+            Vector2 iconSize = string.IsNullOrEmpty(label) ? new Vector2(76f, 76f) : new Vector2(70f, 70f);
+            iconImage = CreateIcon("Icon", go.transform, icon, iconPos, iconSize);
+            text = !string.IsNullOrEmpty(label) ? CreateLabel(go.transform, label) : null;
         }
 
         private static Button CreateIconButton(string name, Transform parent, Sprite icon, Vector2 position, Vector2 size)

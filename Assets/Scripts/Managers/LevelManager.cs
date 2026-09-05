@@ -139,7 +139,8 @@ namespace AnimalFall.Managers
 
         public void LevelFailed()
         {
-            // Lives deduction handled by LivesManager on OnLevelFailed event
+            (LivesManager.Instance ?? FindFirstObjectByType<LivesManager>())?.UseLife();
+            GameEvents.OnLevelFailed?.Invoke();
         }
 
         // ── Pool pre-warm ─────────────────────────────────────────────────────

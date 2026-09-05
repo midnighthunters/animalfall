@@ -59,6 +59,7 @@ namespace AnimalFall.UI
 
         private void TogglePanel()
         {
+            AudioManager.PlayClick();
             if (_overlay == null) BuildPanel();
             if (_overlay == null) return;
 
@@ -150,18 +151,21 @@ namespace AnimalFall.UI
 
         private void ToggleMusic()
         {
+            AudioManager.PlayClick();
             AudioManager.Instance?.ToggleMusicMuted();
             RefreshToggles();
         }
 
         private void ToggleSound()
         {
+            AudioManager.PlayClick();
             AudioManager.Instance?.ToggleSfxMuted();
             RefreshToggles();
         }
 
         private void ToggleHaptics()
         {
+            AudioManager.PlayClick();
             _hapticsEnabled = !_hapticsEnabled;
             PlayerPrefs.SetInt(HapticsKey, _hapticsEnabled ? 1 : 0);
             PlayerPrefs.Save();

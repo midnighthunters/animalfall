@@ -76,6 +76,9 @@ namespace AnimalFall.Services
                 _data.unlockedSuperAnimalIds.Add("eagle_striker");
             if (string.IsNullOrWhiteSpace(_data.selectedSuperAnimalId))
                 _data.selectedSuperAnimalId = "eagle_striker";
+            if (_data.highestUnlockedLevel == 0 && _data.nextLifeUTC == 0 && _data.lives <= 0)
+                _data.lives = 5;
+            _data.lives = Mathf.Clamp(_data.lives, 0, 5);
         }
 
         private static T[] Grow<T>(T[] source, int length)

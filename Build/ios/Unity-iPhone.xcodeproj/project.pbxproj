@@ -1,4 +1,4 @@
-﻿// !$*UTF8*$!
+// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -102,7 +102,6 @@
 		7AFB3C9D357B37F076090706 /* KeyboardViews+iOS+Glass.h in Headers */ = {isa = PBXBuildFile; fileRef = D70E25AB46FCE27185ABF561 /* KeyboardViews+iOS+Glass.h */; };
 		7B37BCD52E8EB3E300EBD088 /* UnityRuntime.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B079BAA2E828D2B00C8A203 /* UnityRuntime.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C058CAE70F713F7AE4E6167 /* UnityScene.h in Headers */ = {isa = PBXBuildFile; fileRef = DD6123A9B450B0AB9F525AD2 /* UnityScene.h */; };
-		7EDD4A75B165505B5D7C4E79 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		7F4E05AB2717219200A2CBE4 /* libGameAssembly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4E05A02717216D00A2CBE4 /* libGameAssembly.a */; };
 		81044980025CF0C90896BB52 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5358B0594857BFF1F3D62D92 /* Security.framework */; };
 		826E40C67FAA509B29A0EFA3 /* IUnityGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 30347B5D7991A325732A4F10 /* IUnityGraphics.h */; };
@@ -152,6 +151,7 @@
 		C8B08A718A64D3A91613FE5F /* JSONUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A25ABE07E260C18BDB9581 /* JSONUtilities.swift */; };
 		C95BB8FA2915778E153F30F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E24128D928BD8B2432BC358 /* QuartzCore.framework */; };
 		C9A2D7455CFD1580FE84EA94 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C13D0547A187E626BE159C /* CoreGraphics.framework */; };
+		C9FB466C8C4A39B0742C7D9D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		CA7B9B92B4D171F66CFD0345 /* UnityAppController+ViewHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = E7306986136464D994B81E81 /* UnityAppController+ViewHandling.h */; };
 		CB197A90223FE5868464D227 /* ProductDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3FDEF471D18B0BEF47819 /* ProductDefinition.swift */; };
 		CDEAFE4B3645E24F0A5A894E /* KeyboardViews.h in Headers */ = {isa = PBXBuildFile; fileRef = A468170C27AF3CE1F9140010 /* KeyboardViews.h */; };
@@ -489,6 +489,7 @@
 		4F220071BD34BF6BF75F1125 /* UnityEngine.TerrainModule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UnityEngine.TerrainModule.cpp; path = Il2CppOutputProject/Source/il2cppOutput/UnityEngine.TerrainModule.cpp; sourceTree = SOURCE_ROOT; };
 		4F97D266790DB44CD01959EC /* Assembly-CSharp__4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Assembly-CSharp__4.cpp"; path = "Il2CppOutputProject/Source/il2cppOutput/Assembly-CSharp__4.cpp"; sourceTree = SOURCE_ROOT; };
 		4FE85250381D5D798978A432 /* UnityAppController+UnityInterface.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "UnityAppController+UnityInterface.mm"; path = "Classes/UnityAppController+UnityInterface.mm"; sourceTree = SOURCE_ROOT; };
+		504F10354AA6664ACC10AE55 /* Assembly-CSharp__7.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Assembly-CSharp__7.cpp"; path = "Il2CppOutputProject/Source/il2cppOutput/Assembly-CSharp__7.cpp"; sourceTree = SOURCE_ROOT; };
 		50FA716FD26EC3318C60967C /* Il2CppCCalculateFieldValues4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Il2CppCCalculateFieldValues4.cpp; path = Il2CppOutputProject/Source/il2cppOutput/Il2CppCCalculateFieldValues4.cpp; sourceTree = SOURCE_ROOT; };
 		512B5ED8520A650BB1C68162 /* Unity.RenderPipelines.Universal.Runtime__8.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Unity.RenderPipelines.Universal.Runtime__8.cpp; path = Il2CppOutputProject/Source/il2cppOutput/Unity.RenderPipelines.Universal.Runtime__8.cpp; sourceTree = SOURCE_ROOT; };
 		5144103AF05D1AF72F90FA46 /* SKResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SKResponseError.swift; path = Libraries/com.unity.purchasing/Plugins/UnityPurchasing/iOS/SK2/Responses/SKResponseError.swift; sourceTree = SOURCE_ROOT; };
@@ -1039,7 +1040,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EDD4A75B165505B5D7C4E79 /* StoreKit.framework in Frameworks */,
+				C9FB466C8C4A39B0742C7D9D /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1298,6 +1299,7 @@
 				4F97D266790DB44CD01959EC /* Assembly-CSharp__4.cpp */,
 				A34734E12320BFE93D77614B /* Assembly-CSharp__5.cpp */,
 				E0994B957EB074EB69BD9ABA /* Assembly-CSharp__6.cpp */,
+				504F10354AA6664ACC10AE55 /* Assembly-CSharp__7.cpp */,
 				D904E5E376B4426FDF7E041B /* DOTween.cpp */,
 				40C608E7DF3C3442EDC4FE0B /* DOTween_CodeGen.c */,
 				41D7183E8E0676D21577C84A /* DOTween__1.cpp */,
@@ -2562,7 +2564,7 @@
 					"$(inherited)",
 					"$(OTHER_CFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalfall;
 				PRODUCT_NAME = "$(PRODUCT_NAME_APP)";
 				PROVISIONING_PROFILE = "$(PROVISIONING_PROFILE_APP)";
 				PROVISIONING_PROFILE_APP = "";
@@ -2606,7 +2608,7 @@
 					"$(inherited)",
 					"$(OTHER_CFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalfall;
 				PRODUCT_NAME = "$(PRODUCT_NAME_APP)";
 				PROVISIONING_PROFILE = "$(PROVISIONING_PROFILE_APP)";
 				PROVISIONING_PROFILE_APP = "";
@@ -2796,7 +2798,7 @@
 					"$(inherited)",
 					"$(OTHER_CFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalfall;
 				PRODUCT_NAME = "$(PRODUCT_NAME_APP)";
 				PROVISIONING_PROFILE = "$(PROVISIONING_PROFILE_APP)";
 				PROVISIONING_PROFILE_APP = "";
@@ -2930,7 +2932,7 @@
 					"$(inherited)",
 					"$(OTHER_CFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalfall;
 				PRODUCT_NAME = "$(PRODUCT_NAME_APP)";
 				PROVISIONING_PROFILE = "$(PROVISIONING_PROFILE_APP)";
 				PROVISIONING_PROFILE_APP = "";

@@ -1,4 +1,4 @@
-name: AnimalBlast iOS IPA
+name: AnimalFall iOS IPA
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
       APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-      IOS_BUNDLE_ID: com.zemolabs.animalblast
+      IOS_BUNDLE_ID: com.zemolabs.animalfall
       IOS_EXPORT_METHOD: ${{ inputs.export_method }}
       IOS_BUILD_NUMBER: ${{ inputs.build_number }}
     steps:
@@ -51,7 +51,7 @@ jobs:
           fi
           xcodebuild -version
           xcodebuild -list "${XCODE_CONTAINER[@]}"
-          grep -q 'PRODUCT_BUNDLE_IDENTIFIER = com.zemolabs.animalblast;' Build/ios/Unity-iPhone.xcodeproj/project.pbxproj
+          grep -Eq 'PRODUCT_BUNDLE_IDENTIFIER = (com\.zemolabs\.animalfall|com\.zemolabs\.animalblast);' Build/ios/Unity-iPhone.xcodeproj/project.pbxproj
           # Unity's committed export currently targets iPad (2); accept any valid iOS family setting.
           xcodebuild -showBuildSettings "${XCODE_CONTAINER[@]}" -scheme Unity-iPhone -configuration Release | grep -Eq '^[[:space:]]*TARGETED_DEVICE_FAMILY = ("?1,2"?|1|2)$'
       - name: Archive and export signed IPA
@@ -59,7 +59,7 @@ jobs:
           set -euo pipefail
           umask 077; KEY="$RUNNER_TEMP/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8"; trap 'rm -f "$KEY"' EXIT
           printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY"
-          ARCHIVE="$RUNNER_TEMP/AnimalBlast.xcarchive"; EXPORT="$RUNNER_TEMP/export"; BUILD="${IOS_BUILD_NUMBER:-$GITHUB_RUN_NUMBER}"
+          ARCHIVE="$RUNNER_TEMP/AnimalFall.xcarchive"; EXPORT="$RUNNER_TEMP/export"; BUILD="${IOS_BUILD_NUMBER:-$GITHUB_RUN_NUMBER}"
           if ! [[ "$BUILD" =~ ^[1-9][0-9]*$ ]]; then
             echo "The iOS build number must be a positive integer; got '$BUILD'." >&2
             exit 1
@@ -90,10 +90,10 @@ jobs:
               exit 1
             fi
           fi
-          IPA="$(find "$EXPORT" -maxdepth 1 -type f -name '*.ipa' -print -quit)"; test -n "$IPA"; mkdir -p Builds/ipa; cp "$IPA" Builds/ipa/AnimalBlast.ipa; unzip -t Builds/ipa/AnimalBlast.ipa
+          IPA="$(find "$EXPORT" -maxdepth 1 -type f -name '*.ipa' -print -quit)"; test -n "$IPA"; mkdir -p Builds/ipa; cp "$IPA" Builds/ipa/AnimalFall.ipa; unzip -t Builds/ipa/AnimalFall.ipa
       - uses: actions/upload-artifact@v4
         with:
-          name: AnimalBlast-ipa-${{ github.run_number }}
-          path: Builds/ipa/AnimalBlast.ipa
+          name: AnimalFall-ipa-${{ github.run_number }}
+          path: Builds/ipa/AnimalFall.ipa
           if-no-files-found: error
           compression-level: 0

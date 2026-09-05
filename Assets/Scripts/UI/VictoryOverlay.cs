@@ -140,6 +140,7 @@ namespace AnimalFall.UI
 
         private void OnPrimaryPressed()
         {
+            AnimalFall.Managers.AudioManager.PlayClick();
             if (_lastResultWasWin)
             {
                 ReturnHome();
@@ -147,6 +148,12 @@ namespace AnimalFall.UI
             }
 
             Time.timeScale = 1f;
+            if (AnimalFall.Managers.LivesManager.Instance != null && !AnimalFall.Managers.LivesManager.Instance.HasLives())
+            {
+                ReturnHome();
+                return;
+            }
+
             if (LevelManager.Instance != null)
                 LevelManager.Instance.RetryCurrentLevel();
             else
@@ -155,6 +162,7 @@ namespace AnimalFall.UI
 
         private static void ReturnHome()
         {
+            AnimalFall.Managers.AudioManager.PlayClick();
             Time.timeScale = 1f;
             if (LevelManager.Instance != null)
                 LevelManager.Instance.ReturnToMainScene();

@@ -172,15 +172,8 @@ namespace AnimalFall.Managers
             }
             else
             {
+                (LivesManager.Instance ?? FindFirstObjectByType<LivesManager>())?.UseLife();
                 GameEvents.OnLevelFailed?.Invoke();
-                // The scene-local LivesManager can be destroyed when the
-                // persistent manager from MainScene already exists. Resolve
-                // the singleton as a fallback so normal level failures still
-                // consume a life.
-                LivesManager lives = _livesManager != null
-                    ? _livesManager
-                    : LivesManager.Instance;
-                lives?.UseLife();
             }
             _levelStarted = false;
         }

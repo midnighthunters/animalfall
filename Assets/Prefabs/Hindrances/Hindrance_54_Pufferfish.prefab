@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,3 +143,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalFall.Core.Hindrances.EnvironmentMods.PufferfishHindrance
   _maxLifetimeSeconds: 14
+  _visibleLifetime: 8.5
+  _viewportHeight: 0.92
+  _fallSpeed: 1.25
+  _horizontalDrift: 0.18
+  _deflatedScaleMultiplier: 0.55
+  _deflatedSquish: 0.6
+  _deflateDuration: 0.1
+  _rushDuration: 1.65
+  _rushSpeed: 13
+  _directionChangeInterval: 0.12

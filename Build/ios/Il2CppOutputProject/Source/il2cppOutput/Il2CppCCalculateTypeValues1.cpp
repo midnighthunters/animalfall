@@ -5169,7 +5169,7 @@ struct Managed_t7CB1B315B8E0E50EE8A2993B3E4CDF35E2B4909D  : public RuntimeObject
 struct SharedStatics_t1BB591F9E205BC35764C232444F95ED00379162D  : public RuntimeObject
 {
 };
-struct U3CLifetimeCoroutineU3Ed__85_t8193F51A932FD8748636D758E377257E8AF991D1  : public RuntimeObject
+struct U3CLifetimeCoroutineU3Ed__87_t400B8A325DCAF2FFAB62761CCCA3AD83B5BA9246  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
@@ -48556,13 +48556,21 @@ struct ArmadilloRicochetController_t63035673205FF3182BE21E83C51A325D55C0CCF1  : 
 };
 struct AudioManager_t22DBF453F35878533AFCA3BB6A353EE1C14B3890  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
+	AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ____bgmMainScene;
+	AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ____bgmGameScene;
+	AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ____sfxVictory;
+	AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ____sfxMatch;
 	AudioClipU5BU5D_t916722468F7EDCFA833318C35CD7D41097D75D31* ____sfxClips;
 	AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* ____bgmSource;
+	AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* ____victorySource;
 	AudioSourceU5BU5D_tBBF6E920E0DC80D53D4BB2A8D4C80D244EF170B2* ____pool;
 	int32_t ____poolSize;
 	int32_t ____lastUsed;
 	bool ____musicMuted;
 	bool ____sfxMuted;
+	bool ____isVictoryActive;
+	Action_1_t10DCB0C07D0D3C565CEACADC80D1152B35A45F6C* ___OnMusicMutedChanged;
+	Action_1_t10DCB0C07D0D3C565CEACADC80D1152B35A45F6C* ___OnSfxMutedChanged;
 };
 struct AuthUIController_t3D2913C55861D93600DD958C3DEF5BAA6CDABD17  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
@@ -49384,6 +49392,7 @@ struct LivesManager_t177895E462014C850C45E5DBF343820D7B8997C8  : public MonoBeha
 	float ____regenTimer;
 	SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* ____save;
 	Action_1_tD69A6DC9FBE94131E52F5A73B2A9D4AB51EEC404* ___OnLivesChanged;
+	int32_t ____lastLifeDeductedFrame;
 };
 struct MainScreenController_tD97BF862493DC3444AB6985E1AD9D69C54364C8D  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
@@ -57252,6 +57261,7 @@ struct Animal_t60E8E3D3DB046EEE36A44E336BE6514DD60F5C29_StaticFields
 	Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* ____cachedDogHelmet;
 	bool ____hindranceSpritesCached;
 	Dictionary_2_t5826E39B66190EFF2D3EA81361D5FC4BB8D6B212* ____waitCache;
+	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ____unlitSpriteMaterial;
 };
 struct ArcadeTokenService_tB3B9836A6CD5C06D087DC8AC02F16DADF1121BA7_StaticFields
 {
@@ -57259,7 +57269,7 @@ struct ArcadeTokenService_tB3B9836A6CD5C06D087DC8AC02F16DADF1121BA7_StaticFields
 };
 struct AudioManager_t22DBF453F35878533AFCA3BB6A353EE1C14B3890_StaticFields
 {
-	AudioManager_t22DBF453F35878533AFCA3BB6A353EE1C14B3890* ___U3CInstanceU3Ek__BackingField;
+	AudioManager_t22DBF453F35878533AFCA3BB6A353EE1C14B3890* ____instance;
 };
 struct CanvasHelper_t21B33A394256614E7C668801502A52924E6B2DCD_StaticFields
 {
@@ -65248,7 +65258,7 @@ const Il2CppTypeDefinitionSizes g_typeDefinitionSize9226 = { sizeof(SlamCharge_t
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize9227;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize9227 = { sizeof(ActiveAnimalRegistry_t3F9891ED8DA74228BBD7216BA0BE0C1527B37DCF), -1, sizeof(ActiveAnimalRegistry_t3F9891ED8DA74228BBD7216BA0BE0C1527B37DCF_StaticFields), 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize9228;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize9228 = { sizeof(U3CLifetimeCoroutineU3Ed__85_t8193F51A932FD8748636D758E377257E8AF991D1), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize9228 = { sizeof(U3CLifetimeCoroutineU3Ed__87_t400B8A325DCAF2FFAB62761CCCA3AD83B5BA9246), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize9229;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize9229 = { sizeof(Animal_t60E8E3D3DB046EEE36A44E336BE6514DD60F5C29), -1, sizeof(Animal_t60E8E3D3DB046EEE36A44E336BE6514DD60F5C29_StaticFields), 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize9230;

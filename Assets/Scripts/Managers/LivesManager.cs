@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 // Task 6.10 — LivesManager: lives cap, regen timer, offline catch-up
 using System;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace AnimalFall.Managers
         private const int   REGEN_MINUTES  = 30;
         private const long  REGEN_SECONDS  = REGEN_MINUTES * 60L;
 
-        private int      _currentLives;
+        private int      _currentLives = MAX_LIVES;
         private bool     _timerRunning;
         private float    _regenTimer; // seconds until next life
         private SaveService _save;
@@ -21,24 +22,94 @@ namespace AnimalFall.Managers
         /// <summary>Raised after a life is spent, restored, or regenerated.</summary>
         public event Action<int> OnLivesChanged;
 
+        private int _lastLifeDeductedFrame = -1;
+
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            _currentLives = MAX_LIVES;
+            SubscribeEvents();
+            var save = SaveService.Instance ?? FindFirstObjectByType<SaveService>();
+            if (save != null)
+            {
+                Init(save);
+            }
+        }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+            GameEvents.OnLevelStarted += HandleLevelStarted;
+            SubscribeEvents();
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
+            GameEvents.OnLevelStarted -= HandleLevelStarted;
+            UnsubscribeEvents();
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
+            GameEvents.OnLevelStarted -= HandleLevelStarted;
+            UnsubscribeEvents();
+            if (Instance == this) Instance = null;
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode) => SubscribeEvents();
+        private void HandleLevelStarted(int level) => SubscribeEvents();
+
+        public void SubscribeEvents()
+        {
+            GameEvents.OnLevelFailed -= HandleLevelFailed;
+            GameEvents.OnLevelFailed += HandleLevelFailed;
+        }
+
+        public void UnsubscribeEvents()
+        {
+            GameEvents.OnLevelFailed -= HandleLevelFailed;
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (!pauseStatus)
+            {
+                Init(_save ?? SaveService.Instance ?? FindFirstObjectByType<SaveService>());
+            }
+        }
+
+        private void HandleLevelFailed()
+        {
+            UseLife();
         }
 
         private void Start()
         {
             // All active Awake methods finish before Start, so this avoids the bootstrap-order race.
-            Init(FindFirstObjectByType<SaveService>());
+            if (_save == null)
+            {
+                Init(SaveService.Instance ?? FindFirstObjectByType<SaveService>());
+            }
         }
 
         public void Init(SaveService save)
         {
             _save = save;
+            SubscribeEvents();
             int storedLives = Mathf.Clamp(save?.GetLives() ?? MAX_LIVES, 0, MAX_LIVES);
             long nextUTC = save?.GetNextLifeUTC() ?? 0L;
             long nowUTC = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+            // A fresh game or newly created profile starts with full lives
+            if (storedLives <= 0 && nextUTC <= 0L && (save == null || save.GetHighestUnlockedLevel() == 0))
+            {
+                storedLives = MAX_LIVES;
+            }
 
             // A valid timestamp is the deadline for the *next* life.  Older
             // saves did not write one, so do not treat Unix epoch as elapsed
@@ -74,6 +145,8 @@ namespace AnimalFall.Managers
                 _timerRunning = false;
                 _regenTimer = 0f;
             }
+
+            OnLivesChanged?.Invoke(_currentLives);
         }
 
         public bool HasLives() => _currentLives > 0;
@@ -82,6 +155,9 @@ namespace AnimalFall.Managers
         public void UseLife()
         {
             if (_currentLives <= 0) return;
+            if (Time.frameCount == _lastLifeDeductedFrame && Application.isPlaying) return;
+            _lastLifeDeductedFrame = Time.frameCount;
+
             _currentLives--;
             if (!_timerRunning) StartRegenTimer();
             SaveCurrentLives();

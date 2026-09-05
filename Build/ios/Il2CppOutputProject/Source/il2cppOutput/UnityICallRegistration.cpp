@@ -1166,6 +1166,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_AudioSource_get_isPlaying_Injected();
 		Register_UnityEngine_AudioSource_get_isPlaying_Injected();
 
+		//System.IntPtr UnityEngine.AudioSource::get_generatorObject_Injected(System.IntPtr)
+		void Register_UnityEngine_AudioSource_get_generatorObject_Injected();
+		Register_UnityEngine_AudioSource_get_generatorObject_Injected();
+
 		//System.Single UnityEngine.AudioSource::GetPitch_Injected(System.IntPtr)
 		void Register_UnityEngine_AudioSource_GetPitch_Injected();
 		Register_UnityEngine_AudioSource_GetPitch_Injected();
@@ -1173,6 +1177,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Single UnityEngine.AudioSource::get_volume_Injected(System.IntPtr)
 		void Register_UnityEngine_AudioSource_get_volume_Injected();
 		Register_UnityEngine_AudioSource_get_volume_Injected();
+
+		//System.Void UnityEngine.AudioSource::PlayHelper_Injected(System.IntPtr,System.UInt64)
+		void Register_UnityEngine_AudioSource_PlayHelper_Injected();
+		Register_UnityEngine_AudioSource_PlayHelper_Injected();
 
 		//System.Void UnityEngine.AudioSource::PlayOneShotHelper_Injected(System.IntPtr,System.IntPtr,System.Single)
 		void Register_UnityEngine_AudioSource_PlayOneShotHelper_Injected();
@@ -1186,6 +1194,14 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_AudioSource_Stop_Injected();
 		Register_UnityEngine_AudioSource_Stop_Injected();
 
+		//System.Void UnityEngine.AudioSource::set_generatorObject_Injected(System.IntPtr,System.IntPtr)
+		void Register_UnityEngine_AudioSource_set_generatorObject_Injected();
+		Register_UnityEngine_AudioSource_set_generatorObject_Injected();
+
+		//System.Void UnityEngine.AudioSource::set_loop_Injected(System.IntPtr,System.Boolean)
+		void Register_UnityEngine_AudioSource_set_loop_Injected();
+		Register_UnityEngine_AudioSource_set_loop_Injected();
+
 		//System.Void UnityEngine.AudioSource::set_mute_Injected(System.IntPtr,System.Boolean)
 		void Register_UnityEngine_AudioSource_set_mute_Injected();
 		Register_UnityEngine_AudioSource_set_mute_Injected();
@@ -1193,6 +1209,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.AudioSource::set_playOnAwake_Injected(System.IntPtr,System.Boolean)
 		void Register_UnityEngine_AudioSource_set_playOnAwake_Injected();
 		Register_UnityEngine_AudioSource_set_playOnAwake_Injected();
+
+		//System.Void UnityEngine.AudioSource::set_spatialBlend_Injected(System.IntPtr,System.Single)
+		void Register_UnityEngine_AudioSource_set_spatialBlend_Injected();
+		Register_UnityEngine_AudioSource_set_spatialBlend_Injected();
 
 		//System.Void UnityEngine.AudioSource::set_volume_Injected(System.IntPtr,System.Single)
 		void Register_UnityEngine_AudioSource_set_volume_Injected();

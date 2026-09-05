@@ -413,9 +413,7 @@ namespace AnimalFall.MegaShooter
             if (_ended) return;
             _ended = true;
             State = MegaShooterState.Lost;
-            LivesManager lives = FindFirstObjectByType<LivesManager>();
-            if (lives != null) lives.UseLife();
-            else if (_save != null) { _save.SetLives(Mathf.Max(0, _save.GetLives() - 1)); _save.SaveAll(); }
+            (LivesManager.Instance ?? FindFirstObjectByType<LivesManager>())?.UseLife();
             GameEvents.OnLevelFailed?.Invoke();
             hud.ShowResult(false, _score, 0, 0);
             StopCombat();
@@ -460,6 +458,10 @@ namespace AnimalFall.MegaShooter
         public void Quit()
         {
             Time.timeScale = 1f;
+            if (State != MegaShooterState.Won && State != MegaShooterState.Lost)
+            {
+                GameEvents.OnLevelFailed?.Invoke();
+            }
             pools?.DespawnAll();
             if (LevelManager.Instance != null) LevelManager.Instance.ReturnToMainScene();
             else SceneManager.LoadScene("MainScene");

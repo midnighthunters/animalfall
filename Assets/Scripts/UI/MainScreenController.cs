@@ -54,20 +54,53 @@ namespace AnimalFall.UI
         private void Start()
         {
             // Grab SaveService from existing scene or bootstrap
-            _save = FindFirstObjectByType<SaveService>();
+            if (_save == null)
+                _save = SaveService.Instance ?? FindFirstObjectByType<SaveService>();
+
+            if (LivesManager.Instance != null)
+            {
+                LivesManager.Instance.OnLivesChanged -= HandleLivesChanged;
+                LivesManager.Instance.OnLivesChanged += HandleLivesChanged;
+            }
+
+            // Ensure AudioManager is active and playing MainScene music
+            _ = AudioManager.Instance;
+
             RefreshUI();
 
             if (_playButton != null)
                 _playButton.onClick.AddListener(OnPlayPressed);
+
+            if (_mapTabButton != null) _mapTabButton.onClick.AddListener(AudioManager.PlayClick);
+            if (_trophyTabButton != null) _trophyTabButton.onClick.AddListener(AudioManager.PlayClick);
+            if (_castleTabButton != null) _castleTabButton.onClick.AddListener(AudioManager.PlayClick);
+            if (_petsTabButton != null) _petsTabButton.onClick.AddListener(AudioManager.PlayClick);
+            if (_shopTabButton != null) _shopTabButton.onClick.AddListener(AudioManager.PlayClick);
         }
 
         private void OnEnable()
         {
+            if (LivesManager.Instance != null)
+            {
+                LivesManager.Instance.OnLivesChanged -= HandleLivesChanged;
+                LivesManager.Instance.OnLivesChanged += HandleLivesChanged;
+            }
             RefreshUI();
         }
 
+        private void OnDisable()
+        {
+            if (LivesManager.Instance != null)
+                LivesManager.Instance.OnLivesChanged -= HandleLivesChanged;
+        }
+
+        private void HandleLivesChanged(int _) => RefreshUI();
+
         private void RefreshUI()
         {
+            if (_save == null)
+                _save = SaveService.Instance ?? FindFirstObjectByType<SaveService>();
+
             if (_save != null)
             {
                 _currentLevel = _save.GetHighestUnlockedLevel();
@@ -89,15 +122,15 @@ namespace AnimalFall.UI
                 // Coins
                 if (_coinsText != null)
                     _coinsText.text = _save.GetCoins().ToString("N0");
-
-                // Lives
-                int lives = LivesManager.Instance != null
-                    ? LivesManager.Instance.CurrentLives
-                    : _save.GetLives();
-
-                if (_livesText != null)
-                    _livesText.text = lives >= 5 ? "Full" : lives.ToString();
             }
+
+            // Lives
+            int lives = LivesManager.Instance != null
+                ? LivesManager.Instance.CurrentLives
+                : (_save != null ? _save.GetLives() : 5);
+
+            if (_livesText != null)
+                _livesText.text = lives >= 5 ? "Full" : lives.ToString();
 
             // Level button label (1-indexed display)
             if (_levelButtonText != null)
@@ -106,6 +139,7 @@ namespace AnimalFall.UI
 
         public void OnPlayPressed()
         {
+            AudioManager.PlayClick();
             if (LivesManager.Instance != null && !LivesManager.Instance.HasLives())
             {
                 ShowNoLivesPopup();
@@ -210,6 +244,7 @@ namespace AnimalFall.UI
 
         private void CloseNoLivesPopup()
         {
+            AudioManager.PlayClick();
             if (_noLivesPopup == null) return;
             _noLivesPopup.SetActive(false);
             RefreshUI();

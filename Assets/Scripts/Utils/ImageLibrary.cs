@@ -53,6 +53,7 @@ namespace AnimalFall.Utils
 
         public static Sprite GetAnimalSprite(AnimalSpecies species)
         {
+            if (!_loaded) LoadAll();
             int idx = (int)species;
             if (idx < 0 || idx >= _animalSprites.Length) return _placeholder;
             return _animalSprites[idx] != null ? _animalSprites[idx] : _placeholder;
@@ -62,6 +63,7 @@ namespace AnimalFall.Utils
 
         public static Sprite GetHindranceSprite(HindranceType type)
         {
+            if (!_loaded) LoadAll();
             int idx = (int)type;
             if (idx < 0 || idx >= _hindranceSprites.Length) return _placeholder;
             return _hindranceSprites[idx] != null ? _hindranceSprites[idx] : _placeholder;
@@ -69,13 +71,13 @@ namespace AnimalFall.Utils
 
         // ── UI accessors ──────────────────────────────────────────────────────
 
-        public static Sprite GetPanel()        => _panel        ?? _placeholder;
-        public static Sprite GetPanel2()       => _panel2       ?? _placeholder;
-        public static Sprite GetRedButtons()   => _redButtons   ?? _placeholder;
-        public static Sprite GetLevelButton1() => _levelButton1 ?? _placeholder;
-        public static Sprite GetLevelButton2() => _levelButton2 ?? _placeholder;
-        public static Sprite GetClock()        => _clock        ?? _placeholder;
-        public static Sprite GetCoinStack()    => _coinStack    ?? _placeholder;
+        public static Sprite GetPanel()        { if (!_loaded) LoadAll(); return _panel        ?? _placeholder; }
+        public static Sprite GetPanel2()       { if (!_loaded) LoadAll(); return _panel2       ?? _placeholder; }
+        public static Sprite GetRedButtons()   { if (!_loaded) LoadAll(); return _redButtons   ?? _placeholder; }
+        public static Sprite GetLevelButton1() { if (!_loaded) LoadAll(); return _levelButton1 ?? _placeholder; }
+        public static Sprite GetLevelButton2() { if (!_loaded) LoadAll(); return _levelButton2 ?? _placeholder; }
+        public static Sprite GetClock()        { if (!_loaded) LoadAll(); return _clock        ?? _placeholder; }
+        public static Sprite GetCoinStack()    { if (!_loaded) LoadAll(); return _coinStack    ?? _placeholder; }
 
         // ── Internal loaders ──────────────────────────────────────────────────
 

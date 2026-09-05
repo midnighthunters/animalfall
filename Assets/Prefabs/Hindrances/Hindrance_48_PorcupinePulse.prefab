@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   _spikedSprite: {fileID: -8008371771090467732, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
   _noSpikesSprite: {fileID: -7314271896790312256, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
   _spikeSprite: {fileID: -3562472613985181281, guid: 672ee59b7d20ca149af86331e2da0a3b, type: 3}
-  _viewportHeight: 0.64
+  _fallSpeed: 2
   _displayScale: 0.18
   _spikeScale: 0.07
   _spikeTravelDuration: 0.42

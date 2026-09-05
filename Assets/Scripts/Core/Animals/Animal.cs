@@ -82,9 +82,29 @@ namespace AnimalFall.Core.Animals
             CacheComponents();
         }
 
+        private static Material _unlitSpriteMaterial;
+        public static Material GetUnlitSpriteMaterial()
+        {
+            if (_unlitSpriteMaterial == null)
+            {
+                Shader shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default")
+                             ?? Shader.Find("Sprites/Default");
+                if (shader != null)
+                {
+                    _unlitSpriteMaterial = new Material(shader) { hideFlags = HideFlags.DontSave };
+                }
+            }
+            return _unlitSpriteMaterial;
+        }
+
         private void CacheComponents()
         {
             if (_sr == null) _sr = GetComponent<SpriteRenderer>();
+            if (_sr != null && (_sr.sharedMaterial == null || (_sr.sharedMaterial.shader != null && _sr.sharedMaterial.shader.name.Contains("Lit"))))
+            {
+                Material unlitMat = GetUnlitSpriteMaterial();
+                if (unlitMat != null) _sr.sharedMaterial = unlitMat;
+            }
             if (_col == null) _col = GetComponent<BoxCollider2D>();
             if (_col == null) _col = gameObject.AddComponent<BoxCollider2D>();
             _col.isTrigger = true;
@@ -203,6 +223,11 @@ namespace AnimalFall.Core.Animals
         public void SetDisplaySprite(Sprite sprite)
         {
             if (_sr == null) _sr = GetComponent<SpriteRenderer>();
+            if (_sr != null && (_sr.sharedMaterial == null || (_sr.sharedMaterial.shader != null && _sr.sharedMaterial.shader.name.Contains("Lit"))))
+            {
+                Material unlitMat = GetUnlitSpriteMaterial();
+                if (unlitMat != null) _sr.sharedMaterial = unlitMat;
+            }
             _sr.sprite = sprite != null
                 ? sprite
                 : ImageLibrary.GetAnimalSprite(Data != null ? Data.species : AnimalSpecies.None);
