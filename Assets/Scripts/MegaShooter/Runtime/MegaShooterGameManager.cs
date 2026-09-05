@@ -14,8 +14,8 @@ namespace AnimalFall.MegaShooter
 #if UNITY_EDITOR
         // Editor-only play-mode audit hooks. They are never set by shipped gameplay.
         public static MegaLevelData RuntimeTestLevelOverride;
-        public static bool RuntimeTestFastStart;
 #endif
+        public static bool RuntimeTestFastStart;
 
         [Header("Scene References")]
         public Camera worldCamera;

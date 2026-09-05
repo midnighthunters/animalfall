@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 1
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: ZemoLabs
-  productName: AnimalFall
+  companyName: zemolabs
+  productName: animalfall
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -148,7 +148,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 2.0
+  bundleVersion: 1.0.0
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   metroInputSource: 0
@@ -172,7 +172,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.zemolabs.animalfall
     Standalone: com.DefaultCompany.2D-URP
-    iPhone: com.zemolabs.animalfall
+    iPhone: com.zemolabs.animalblast
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -304,7 +304,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 01feed7211303bb48bcfa6c26e295eff, type: 3}
+      m_Icon: {fileID: 2800000, guid: b5da4f33a5d0a6e4ba731e1da7001c26, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -498,7 +498,10 @@ PlayerSettings:
       m_Height: 1024
       m_Kind: 4
       m_SubKind: App Store
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: iPhone
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []

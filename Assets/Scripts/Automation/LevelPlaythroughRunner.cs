@@ -19,7 +19,7 @@ namespace AnimalFall.Automation
         public static bool IsFinished { get; private set; } = false;
         public static int CompletedLevelsCount { get; private set; } = 0;
         public static int CurrentLevelProcessing { get; private set; } = 0;
-        public static bool FastPlayMode = true;
+        public static bool FastPlayMode = false;
 
         private void Awake()
         {
@@ -55,6 +55,7 @@ namespace AnimalFall.Automation
         {
             IsFinished = false;
             CompletedLevelsCount = 0;
+            FastPlayMode = true;
             MegaShooterGameManager.RuntimeTestFastStart = true;
             LogReport = "=== STARTING FULL 100-LEVEL GAMEPLAY PLAYTHROUGH ===\n";
 
@@ -337,8 +338,16 @@ namespace AnimalFall.Automation
             var finalTextProp = typeof(MainScreenController).GetField("_levelButtonText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             TextMeshProUGUI finalLvlText = finalTextProp?.GetValue(finalScreen) as TextMeshProUGUI;
             LogReport += $"=== ALL 100 LEVELS PLAYED & COMPLETED! Final MainScene Button: '{finalLvlText?.text}' ===\n";
+            FastPlayMode = false;
+            MegaShooterGameManager.RuntimeTestFastStart = false;
             IsFinished = true;
             Debug.Log("[Playthrough] ALL 100 LEVELS PLAYED AND COMPLETED SUCCESSFULLY!");
+        }
+
+        private void OnDestroy()
+        {
+            FastPlayMode = false;
+            MegaShooterGameManager.RuntimeTestFastStart = false;
         }
     }
 }
