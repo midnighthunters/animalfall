@@ -6,9 +6,9 @@ on:
       export_method:
         description: IPA distribution method
         required: true
-        default: ad-hoc
+        default: development
         type: choice
-        options: [ad-hoc, app-store]
+        options: [development, ad-hoc, app-store]
       build_number:
         description: Optional iOS build number
         required: false
@@ -78,10 +78,18 @@ jobs:
           )
           xcodebuild "${XCODEBUILD_ARGS[@]}" archive
           plutil -create xml1 "$RUNNER_TEMP/ExportOptions.plist"
-          plutil -insert method -string "${IOS_EXPORT_METHOD:-ad-hoc}" "$RUNNER_TEMP/ExportOptions.plist"
+          plutil -insert method -string "${IOS_EXPORT_METHOD:-development}" "$RUNNER_TEMP/ExportOptions.plist"
           plutil -insert signingStyle -string automatic "$RUNNER_TEMP/ExportOptions.plist"
           plutil -insert teamID -string "$APPLE_TEAM_ID" "$RUNNER_TEMP/ExportOptions.plist"
-          xcodebuild -exportArchive -archivePath "$ARCHIVE" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$EXPORT" -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
+          if ! xcodebuild -exportArchive -archivePath "$ARCHIVE" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$EXPORT" -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"; then
+            if [ "${IOS_EXPORT_METHOD:-development}" != "development" ]; then
+              echo "Export with ${IOS_EXPORT_METHOD} failed. Retrying with development signing..."
+              plutil -replace method -string development "$RUNNER_TEMP/ExportOptions.plist"
+              xcodebuild -exportArchive -archivePath "$ARCHIVE" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$EXPORT" -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
+            else
+              exit 1
+            fi
+          fi
           IPA="$(find "$EXPORT" -maxdepth 1 -type f -name '*.ipa' -print -quit)"; test -n "$IPA"; mkdir -p Builds/ipa; cp "$IPA" Builds/ipa/AnimalBlast.ipa; unzip -t Builds/ipa/AnimalBlast.ipa
       - uses: actions/upload-artifact@v4
         with:
