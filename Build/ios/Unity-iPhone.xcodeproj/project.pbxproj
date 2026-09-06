@@ -26,6 +26,7 @@
 		165FE1A1A8C5C2E9E5EA5CB1 /* Quaternion4.h in Headers */ = {isa = PBXBuildFile; fileRef = 66C75227D30156329AE6BCDF /* Quaternion4.h */; };
 		1810063E942D118EA4348D0E /* SubscriptionInfoStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D15332058D191C1E2EE4 /* SubscriptionInfoStatusResponse.swift */; };
 		18EC6BA933589E2805D0A4E0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B5CB878D53B99534B11B55 /* Metal.framework */; };
+		19384A50B65B4D26C8404C0E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		196A4C50D95E27C688D8DF12 /* UnityScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 02241488FE72E459A0C905E3 /* UnityScene.mm */; };
 		1976014285633849E6353F6C /* NoGraphicsHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 33021DBF5A5B60EF2C1D15AA /* NoGraphicsHelper.mm */; };
 		1A22BC0AFE01EADB5B878017 /* UnityInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 864A7F8602F7096CE5937644 /* UnityInterface.h */; };
@@ -151,7 +152,6 @@
 		C8B08A718A64D3A91613FE5F /* JSONUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A25ABE07E260C18BDB9581 /* JSONUtilities.swift */; };
 		C95BB8FA2915778E153F30F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E24128D928BD8B2432BC358 /* QuartzCore.framework */; };
 		C9A2D7455CFD1580FE84EA94 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C13D0547A187E626BE159C /* CoreGraphics.framework */; };
-		C9FB466C8C4A39B0742C7D9D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		CA7B9B92B4D171F66CFD0345 /* UnityAppController+ViewHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = E7306986136464D994B81E81 /* UnityAppController+ViewHandling.h */; };
 		CB197A90223FE5868464D227 /* ProductDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3FDEF471D18B0BEF47819 /* ProductDefinition.swift */; };
 		CDEAFE4B3645E24F0A5A894E /* KeyboardViews.h in Headers */ = {isa = PBXBuildFile; fileRef = A468170C27AF3CE1F9140010 /* KeyboardViews.h */; };
@@ -1040,7 +1040,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9FB466C8C4A39B0742C7D9D /* StoreKit.framework in Frameworks */,
+				19384A50B65B4D26C8404C0E /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,6 +32,8 @@ namespace AnimalFall.Core.Animals
         /// Deriving the world size from the camera keeps that footprint stable on different phones.
         /// </summary>
         private const float TargetViewportWidth = 0.144f;
+        private const float DefaultColliderScale = 0.85f;
+        private const float NormalLevelColliderScale = 1.7f;
 
         /// <summary>Per-instance normalised scale, computed from the current sprite in SetupForPool.
         /// Movement, pop and pool-reset logic all read this instead of the flat IdealScale.</summary>
@@ -59,6 +61,7 @@ namespace AnimalFall.Core.Animals
         private Coroutine      _lifetimeCoroutine;
         private bool           _isReturned;
         private float          _targetWorldSize = TargetWorldSize;
+        private float          _colliderSpriteScale = DefaultColliderScale;
 
         private static Sprite _cachedFrozenPig;
         private static Sprite _cachedBubbleMonkey;
@@ -145,9 +148,13 @@ namespace AnimalFall.Core.Animals
             // simple to see and tap for new players.
             if (level != null && level.LevelNumber >= 1 && level.LevelNumber <= EarlyLevelMaxNumber)
                 _targetWorldSize *= EarlyLevelSizeMultiplier;
-            // Normal falling-animal levels use a larger 2x touch target; Mega Shooter has its own visuals.
-            if (level == null || !level.IsConfiguredMegaShooter)
-                _targetWorldSize *= 2f;
+            // Keep the sprite at its authored responsive size. The old implementation
+            // doubled the rendered sprite to enlarge the touch target, which made iPad
+            // animals overlap and look like only a couple were spawning. Enlarge only
+            // the invisible collider instead.
+            _colliderSpriteScale = level == null || !level.IsConfiguredMegaShooter
+                ? NormalLevelColliderScale
+                : DefaultColliderScale;
 
             Sprite displaySprite = ImageLibrary.GetAnimalSprite(data.species);
 
@@ -207,7 +214,7 @@ namespace AnimalFall.Core.Animals
 
             if (_col != null && _sr.sprite != null)
             {
-                _col.size = _sr.sprite.bounds.size * 0.85f;
+                _col.size = _sr.sprite.bounds.size * _colliderSpriteScale;
                 _col.offset = _sr.sprite.bounds.center;
                 _col.isTrigger = true;
             }
@@ -245,7 +252,7 @@ namespace AnimalFall.Core.Animals
         {
             if (_col == null) _col = GetComponent<BoxCollider2D>();
             if (_col == null || _sr == null || _sr.sprite == null) return;
-            _col.size = _sr.sprite.bounds.size * 0.85f;
+            _col.size = _sr.sprite.bounds.size * _colliderSpriteScale;
             _col.offset = _sr.sprite.bounds.center;
             _col.isTrigger = true;
         }

@@ -1610,6 +1610,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Canvas_set_overrideSorting_Injected();
 		Register_UnityEngine_Canvas_set_overrideSorting_Injected();
 
+		//System.Void UnityEngine.Canvas::set_planeDistance_Injected(System.IntPtr,System.Single)
+		void Register_UnityEngine_Canvas_set_planeDistance_Injected();
+		Register_UnityEngine_Canvas_set_planeDistance_Injected();
+
 		//System.Void UnityEngine.Canvas::set_referencePixelsPerUnit_Injected(System.IntPtr,System.Single)
 		void Register_UnityEngine_Canvas_set_referencePixelsPerUnit_Injected();
 		Register_UnityEngine_Canvas_set_referencePixelsPerUnit_Injected();
@@ -1629,6 +1633,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Canvas::set_sortingOrder_Injected(System.IntPtr,System.Int32)
 		void Register_UnityEngine_Canvas_set_sortingOrder_Injected();
 		Register_UnityEngine_Canvas_set_sortingOrder_Injected();
+
+		//System.Void UnityEngine.Canvas::set_worldCamera_Injected(System.IntPtr,System.IntPtr)
+		void Register_UnityEngine_Canvas_set_worldCamera_Injected();
+		Register_UnityEngine_Canvas_set_worldCamera_Injected();
 
 		//UnityEngine.AdditionalCanvasShaderChannels UnityEngine.Canvas::get_additionalShaderChannels_Injected(System.IntPtr)
 		void Register_UnityEngine_Canvas_get_additionalShaderChannels_Injected();

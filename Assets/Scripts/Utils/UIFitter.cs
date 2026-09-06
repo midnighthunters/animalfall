@@ -12,11 +12,15 @@ namespace AnimalFall.Utils
         private void Start()
         {
             if (canvasScaler == null || rectTransform == null) return;
-            if (Mathf.Approximately(canvasScaler.referenceResolution.x, Screen.width)) return;
+            Canvas canvas = canvasScaler.GetComponent<Canvas>();
+            float viewportWidth = canvas != null ? canvas.pixelRect.width : Screen.width;
+            float viewportHeight = canvas != null ? canvas.pixelRect.height : Screen.height;
+            if (viewportWidth <= 0f || viewportHeight <= 0f) return;
+            if (Mathf.Approximately(canvasScaler.referenceResolution.x, viewportWidth)) return;
 
             float imageResRatio = rectTransform.sizeDelta.x / rectTransform.sizeDelta.y;
             float oldRatio = canvasScaler.referenceResolution.x / canvasScaler.referenceResolution.y;
-            float newRatio = (float)Screen.width / Screen.height;
+            float newRatio = viewportWidth / viewportHeight;
 
             if (oldRatio > newRatio) return;
 

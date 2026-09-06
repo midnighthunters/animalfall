@@ -60,6 +60,8 @@ namespace AnimalFall.Core.Animals
                 return;
             }
 
+            RecalcBounds();
+
             _pattern     = data.movementPattern;
             _speed       = Random.Range(data.speedMin, data.speedMax) * FallSpeedMultiplier;
             _zigzagAmp   = data.zigzagAmplitude;
@@ -126,7 +128,7 @@ namespace AnimalFall.Core.Animals
                 if (_animal == null) { enabled = false; return; }
             }
 
-            if (_cachedScreenWidth != Screen.width || _cachedScreenHeight != Screen.height)
+            if (_cachedScreenWidth != Screen.width || _cachedScreenHeight != Screen.height || _screenTop == 0f)
             {
                 RecalcBounds();
                 _cachedScreenWidth  = Screen.width;
@@ -134,12 +136,16 @@ namespace AnimalFall.Core.Animals
             }
 
             var env = EnvironmentEffects.Instance;
-            float dt = Time.deltaTime;
+            float dt = Time.deltaTime > 0f ? Time.deltaTime : (!Application.isPlaying ? 0.01667f : 0f);
             if (dt <= 0f) return;
 
             if (_animal.IsBubble)
             {
                 transform.Translate(0f, _speed * 0.5f * dt, 0f);
+                if (transform.position.y > _screenTop + 0.6f && Time.time >= _releaseProtectionUntil)
+                {
+                    _animal.Despawn();
+                }
                 return;
             }
 
@@ -297,7 +303,8 @@ namespace AnimalFall.Core.Animals
             // Despawn when the animal leaves the playfield. FloatUp/Bubble exit the top;
             // everything else exits the bottom. A small margin avoids popping while visible.
             bool exitedBottom = pos.y < _screenBottom - 0.6f;
-            bool exitedTop    = pos.y > _screenTop + 0.6f;
+            bool isMovingUp   = _pattern == MovementPattern.FloatUp || reverseGravity || dy > 0.001f;
+            bool exitedTop    = (isMovingUp || _forceExit) && pos.y > _screenTop + 0.6f;
             bool exitedSide   = _forceExit && (pos.x < _screenLeft - 0.6f || pos.x > _screenRight + 0.6f);
             if ((exitedBottom || exitedTop || exitedSide) && Time.time >= _releaseProtectionUntil)
             {

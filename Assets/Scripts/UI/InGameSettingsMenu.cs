@@ -19,8 +19,6 @@ namespace AnimalFall.UI
         private GameObject _actionsRoot;
         private Button _musicButton;
         private Button _soundButton;
-        private Text _musicLabel;
-        private Text _soundLabel;
         private Image _musicIcon;
         private Image _soundIcon;
 
@@ -54,11 +52,11 @@ namespace AnimalFall.UI
             _redButton = CreateSprite(backgrounds, new Rect(8f, 30f, 225f, 230f), "settings_red_button");
             _greenButton = CreateSprite(backgrounds, new Rect(255f, 30f, 225f, 230f), "settings_green_button");
 
-            // The icon sheet is a 2 x 2 grid: exit, sound, music, settings.
-            _exitIcon = CreateSprite(icons, new Rect(0f, 512f, 768f, 512f), "settings_exit_icon");
-            _soundIconSprite = CreateSprite(icons, new Rect(768f, 512f, 768f, 512f), "settings_sound_icon");
-            _musicIconSprite = CreateSprite(icons, new Rect(0f, 0f, 768f, 512f), "settings_music_icon");
-            _settingsIcon = CreateSprite(icons, new Rect(768f, 0f, 768f, 512f), "settings_gear_icon");
+            // Crop to the visible artwork so every icon is optically centred in its button.
+            _exitIcon = CreateSprite(icons, new Rect(235f, 540f, 450f, 450f), "settings_exit_icon");
+            _soundIconSprite = CreateSprite(icons, new Rect(830f, 530f, 510f, 460f), "settings_sound_icon");
+            _musicIconSprite = CreateSprite(icons, new Rect(220f, 15f, 460f, 470f), "settings_music_icon");
+            _settingsIcon = CreateSprite(icons, new Rect(845f, 20f, 480f, 470f), "settings_gear_icon");
 
             _root = new GameObject("InGameSettings", typeof(RectTransform));
             _root.transform.SetParent(canvas.transform, false);
@@ -74,12 +72,12 @@ namespace AnimalFall.UI
             Stretch(_actionsRoot.GetComponent<RectTransform>());
             _actionsRoot.SetActive(false);
 
-            CreateActionButton("ExitLevelButton", _redButton, _exitIcon, null,
-                new Vector2(-220f, -80f), ExitLevel, out _, out _, out _);
-            CreateActionButton("MusicButton", _greenButton, _musicIconSprite, null,
-                new Vector2(-220f, -210f), ToggleMusic, out _musicButton, out _musicLabel, out _musicIcon);
-            CreateActionButton("SoundButton", _greenButton, _soundIconSprite, null,
-                new Vector2(-220f, -340f), ToggleSound, out _soundButton, out _soundLabel, out _soundIcon);
+            CreateActionButton("MusicButton", _greenButton, _musicIconSprite,
+                new Vector2(-76f, -210f), ToggleMusic, out _musicButton, out _musicIcon);
+            CreateActionButton("SoundButton", _greenButton, _soundIconSprite,
+                new Vector2(-76f, -338f), ToggleSound, out _soundButton, out _soundIcon);
+            CreateActionButton("ExitLevelButton", _redButton, _exitIcon,
+                new Vector2(-76f, -466f), ExitLevel, out _, out _);
 
             RefreshAudioButtons();
         }
@@ -148,11 +146,11 @@ namespace AnimalFall.UI
         {
             bool musicMuted = AudioManager.Instance != null && AudioManager.Instance.IsMusicMuted;
             bool soundMuted = AudioManager.Instance != null && AudioManager.Instance.IsSfxMuted;
-            UpdateToggle(_musicButton, _musicLabel, _musicIcon, musicMuted, "MUSIC");
-            UpdateToggle(_soundButton, _soundLabel, _soundIcon, soundMuted, "SOUND");
+            UpdateToggle(_musicButton, _musicIcon, musicMuted);
+            UpdateToggle(_soundButton, _soundIcon, soundMuted);
         }
 
-        private void UpdateToggle(Button button, Text label, Image icon, bool muted, string title)
+        private void UpdateToggle(Button button, Image icon, bool muted)
         {
             if (button == null) return;
             var buttonImage = button.GetComponent<Image>();
@@ -160,19 +158,18 @@ namespace AnimalFall.UI
             {
                 buttonImage.sprite = muted ? _redButton : _greenButton;
             }
-            if (label != null) label.text = title + " " + (muted ? "OFF" : "ON");
             if (icon != null) icon.color = muted ? new Color(0.62f, 0.62f, 0.62f, 0.75f) : Color.white;
         }
 
-        private void CreateActionButton(string name, Sprite background, Sprite icon, string label,
-            Vector2 position, UnityEngine.Events.UnityAction action, out Button button, out Text text, out Image iconImage)
+        private void CreateActionButton(string name, Sprite background, Sprite icon,
+            Vector2 position, UnityEngine.Events.UnityAction action, out Button button, out Image iconImage)
         {
             GameObject go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             go.transform.SetParent(_actionsRoot.transform, false);
             RectTransform rect = go.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = new Vector2(1f, 1f);
             rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.sizeDelta = new Vector2(120f, 120f);
+            rect.sizeDelta = new Vector2(108f, 108f);
             rect.anchoredPosition = position;
 
             Image image = go.GetComponent<Image>();
@@ -182,10 +179,7 @@ namespace AnimalFall.UI
             button.targetGraphic = image;
             button.onClick.AddListener(action);
 
-            Vector2 iconPos = string.IsNullOrEmpty(label) ? Vector2.zero : new Vector2(0f, 12f);
-            Vector2 iconSize = string.IsNullOrEmpty(label) ? new Vector2(76f, 76f) : new Vector2(70f, 70f);
-            iconImage = CreateIcon("Icon", go.transform, icon, iconPos, iconSize);
-            text = !string.IsNullOrEmpty(label) ? CreateLabel(go.transform, label) : null;
+            iconImage = CreateIcon("Icon", go.transform, icon, Vector2.zero, new Vector2(72f, 72f));
         }
 
         private static Button CreateIconButton(string name, Transform parent, Sprite icon, Vector2 position, Vector2 size)
@@ -220,28 +214,6 @@ namespace AnimalFall.UI
             image.preserveAspect = true;
             image.raycastTarget = false;
             return image;
-        }
-
-        private static Text CreateLabel(Transform parent, string value)
-        {
-            GameObject go = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
-            go.transform.SetParent(parent, false);
-            RectTransform rect = go.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0f, 0f);
-            rect.anchorMax = new Vector2(1f, 0f);
-            rect.pivot = new Vector2(0.5f, 0f);
-            rect.sizeDelta = new Vector2(0f, 28f);
-            rect.anchoredPosition = new Vector2(0f, 5f);
-
-            Text text = go.GetComponent<Text>();
-            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            text.text = value;
-            text.fontSize = 13;
-            text.fontStyle = FontStyle.Bold;
-            text.alignment = TextAnchor.MiddleCenter;
-            text.color = Color.white;
-            text.raycastTarget = false;
-            return text;
         }
 
         private static Sprite CreateSprite(Texture2D texture, Rect rect, string name)

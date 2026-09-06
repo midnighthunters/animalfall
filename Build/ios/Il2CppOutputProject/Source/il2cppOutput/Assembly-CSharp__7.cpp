@@ -1692,6 +1692,7 @@ struct Animal_t60E8E3D3DB046EEE36A44E336BE6514DD60F5C29  : public MonoBehaviour_
 	Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* ____lifetimeCoroutine;
 	bool ____isReturned;
 	float ____targetWorldSize;
+	float ____colliderSpriteScale;
 };
 struct GameManager_t2BAD4BC5620BE6167E190BDB34B7ED95DA4DC839  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
