@@ -719,6 +719,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* List_1_get_Item_m3FA771888C7FF2BEFB7E5513F2
 IL2CPP_EXTERN_C const RuntimeMethod* List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainScreenController_CloseNoLivesPopup_mD0EFF4BEB778FA21B49095FA71E0975676DE3B64_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainScreenController_HandleLivesChanged_m8CCE21EF76C7B0E040338785CD408A66D8192101_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainScreenController_OnPlayPressed_mD40CA890D47387E4CEE4F639EF90361DBD6AF7B3_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Object_FindFirstObjectByType_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_mD4ED377B9A82E1E15458BECA85F3A7C40E775FA6_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Object_FindObjectsByType_TisCanvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26_m7C320C9925C67C3FD24A9D80A9577B2544D4A749_RuntimeMethod_var;
@@ -3203,6 +3204,7 @@ struct ResultsScreenController_tE5549215E615031D9DE6D483E1F0B8118F443762  : publ
 struct SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
 	SaveData_tC4CD66E92E60E1146CB3733C569E9955CD834066* ____data;
+	bool ____isLoaded;
 };
 struct UIBehaviour_tB9D4295827BD2EEDEF0749200C6CA7090C742A9D  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
@@ -3895,6 +3897,8 @@ struct LevelPlaythroughRunner_t214C6CBB2C1664F868BF9211786001D3519175CD_StaticFi
 	int32_t ___U3CCompletedLevelsCountU3Ek__BackingField;
 	int32_t ___U3CCurrentLevelProcessingU3Ek__BackingField;
 	bool ___FastPlayMode;
+	int32_t ___StartLevelNumber;
+	int32_t ___MaxLevels;
 };
 struct LivesManager_t177895E462014C850C45E5DBF343820D7B8997C8_StaticFields
 {
@@ -3906,7 +3910,10 @@ struct ObjectPooler_t5661789FF979E21E0AB3E23014BC6218CFBBB608_StaticFields
 };
 struct SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_StaticFields
 {
-	SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* ___U3CInstanceU3Ek__BackingField;
+	Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___OnSaveDataLoaded;
+	Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___OnSaveDataChanged;
+	SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* ____instance;
+	RuntimeObject* ____fileLock;
 };
 struct Graphic_tCBFCA4585A19E2B75465AECFEAC43F4016BF7931_StaticFields
 {
@@ -4421,7 +4428,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Il2CppSharedGenericObject* GameObject_GetComp
 IL2CPP_EXTERN_C IL2CPP_NO_INLINE IL2CPP_METHOD_ATTR void List_1_AddWithResize_mCC24A812DFC30C3DE2230E3C8EE705871C1DFF81_gshared (List_1_t6959D78D53022948E65A4FDA6291D7F38FEFA02E* __this, Il2CppSharedGenericObject* ___0_item, const RuntimeMethod* method) ;
 
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Application_set_targetFrameRate_mB90EEA60DAE55CD71C38D4B7DFDBE2B34EA6B46F (int32_t ___0_value, const RuntimeMethod* method) ;
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4_inline (const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4 (const RuntimeMethod* method) ;
 inline SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* Component_GetComponent_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_m734B425CAD52759D1295A6674898B4C061738A19 (Component_t39FBE53E5EFCF4409111FB22C15FF73717632EC3* __this, const RuntimeMethod* method)
 {
 	return ((  SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* (*) (Component_t39FBE53E5EFCF4409111FB22C15FF73717632EC3*, const RuntimeMethod*))Component_GetComponent_TisIl2CppSharedGenericObject_mB7566A31421DEE164644EC1F96FB5EE487B96CC2_gshared)(__this, method);
@@ -5239,6 +5246,10 @@ inline TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* TweenSettingsExt
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void LivesManager_remove_OnLivesChanged_m07A1150924B11076FA4B93B9FFBFB0BF512AF4E9 (LivesManager_t177895E462014C850C45E5DBF343820D7B8997C8* __this, Action_1_tD69A6DC9FBE94131E52F5A73B2A9D4AB51EEC404* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void LivesManager_add_OnLivesChanged_m806FE8768706B55CBA1579B7FDBC775866EFAE00 (LivesManager_t177895E462014C850C45E5DBF343820D7B8997C8* __this, Action_1_tD69A6DC9FBE94131E52F5A73B2A9D4AB51EEC404* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_RefreshUI_m336C89731D5B3A884AC7270686638F969ED49445 (MainScreenController_tD97BF862493DC3444AB6985E1AD9D69C54364C8D* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SaveService_remove_OnSaveDataLoaded_m0CF41006879B237BC6B0E45BFE6177A0934B0E24 (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SaveService_add_OnSaveDataLoaded_mFB6B374472880654FB84DDE6EE60BE359C4B9464 (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SaveService_remove_OnSaveDataChanged_m7662AECFBFC85A278443F5C12B64CABF2D25414C (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SaveService_add_OnSaveDataChanged_m1BCD1408689C5C367D7422BD76E68B716A899B2E (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t LevelManager_get_TotalLevels_m1B719DECEB2ED90BDA783535B8A4F30B97C36A5E (LevelManager_tB6C5914F2C494423128DB5C0A38A045AA86302A5* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SaveService_GetCoins_m39F2B067598BE083F21D2AEFC7B43A97958EDFB7 (SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SaveService_GetLives_m16F2BDFF855CCCA762048F9471DBADB9657E9A33 (SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* __this, const RuntimeMethod* method) ;
@@ -5273,6 +5284,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AppBootstrap_Awake_m581C8750E5B25236CAFB
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Component_GetComponent_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_m734B425CAD52759D1295A6674898B4C061738A19_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_FindFirstObjectByType_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_mD4ED377B9A82E1E15458BECA85F3A7C40E775FA6_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* V_0 = NULL;
@@ -5286,8 +5298,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AppBootstrap_Awake_m581C8750E5B25236CAFB
 	{
 		il2cpp_codegen_runtime_class_init_inline(Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
 		Application_set_targetFrameRate_mB90EEA60DAE55CD71C38D4B7DFDBE2B34EA6B46F(((int32_t)60), NULL);
+		il2cpp_codegen_runtime_class_init_inline(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_0;
-		L_0 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4_inline(NULL);
+		L_0 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4(NULL);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_1 = L_0;
 		if (L_1)
 		{
@@ -22863,6 +22876,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_Start_m0DBF4359E601
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainScreenController_OnPlayPressed_mD40CA890D47387E4CEE4F639EF90361DBD6AF7B3_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_FindFirstObjectByType_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_mD4ED377B9A82E1E15458BECA85F3A7C40E775FA6_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
@@ -22881,8 +22895,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_Start_m0DBF4359E601
 		}
 	}
 	{
+		il2cpp_codegen_runtime_class_init_inline(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_2;
-		L_2 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4_inline(NULL);
+		L_2 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4(NULL);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_3 = L_2;
 		if (L_3)
 		{
@@ -23081,8 +23096,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_OnEnable_m165B380B9
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_1_tD69A6DC9FBE94131E52F5A73B2A9D4AB51EEC404_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainScreenController_HandleLivesChanged_m8CCE21EF76C7B0E040338785CD408A66D8192101_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	{
@@ -23113,6 +23131,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_OnEnable_m165B380B9
 
 IL_0039:
 	{
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_6 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_6, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		il2cpp_codegen_runtime_class_init_inline(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
+		SaveService_remove_OnSaveDataLoaded_m0CF41006879B237BC6B0E45BFE6177A0934B0E24(L_6, NULL);
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_7 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_7, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		SaveService_add_OnSaveDataLoaded_mFB6B374472880654FB84DDE6EE60BE359C4B9464(L_7, NULL);
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_8 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_8, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		SaveService_remove_OnSaveDataChanged_m7662AECFBFC85A278443F5C12B64CABF2D25414C(L_8, NULL);
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_9 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_9, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		SaveService_add_OnSaveDataChanged_m1BCD1408689C5C367D7422BD76E68B716A899B2E(L_9, NULL);
 		MainScreenController_RefreshUI_m336C89731D5B3A884AC7270686638F969ED49445(__this, NULL);
 		return;
 	}
@@ -23123,8 +23154,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_OnDisable_m70FE2292
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_1_tD69A6DC9FBE94131E52F5A73B2A9D4AB51EEC404_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainScreenController_HandleLivesChanged_m8CCE21EF76C7B0E040338785CD408A66D8192101_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	{
@@ -23149,6 +23183,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_OnDisable_m70FE2292
 
 IL_0023:
 	{
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_4 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_4, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		il2cpp_codegen_runtime_class_init_inline(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
+		SaveService_remove_OnSaveDataLoaded_m0CF41006879B237BC6B0E45BFE6177A0934B0E24(L_4, NULL);
+		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_5 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
+		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_5, __this, (intptr_t)((void*)MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E_RuntimeMethod_var), NULL);
+		SaveService_remove_OnSaveDataChanged_m7662AECFBFC85A278443F5C12B64CABF2D25414C(L_5, NULL);
+		return;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_HandleSaveDataChanged_mBB79D3904900F0F93B1F54B0FBAA3F00D7ADEA1E (MainScreenController_tD97BF862493DC3444AB6985E1AD9D69C54364C8D* __this, const RuntimeMethod* method) 
+{
+	{
+		MainScreenController_RefreshUI_m336C89731D5B3A884AC7270686638F969ED49445(__this, NULL);
 		return;
 	}
 }
@@ -23166,6 +23214,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_RefreshUI_m336C8973
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_FindFirstObjectByType_TisSaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_mD4ED377B9A82E1E15458BECA85F3A7C40E775FA6_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral211CD37AA63592C136A096F893A5362619328946);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral921E89896A83EEAD71759D0E569160913410C0AC);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA16A5A766620C92E70C8F0C13BC707B1DD24BB40);
@@ -23195,8 +23244,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController_RefreshUI_m336C8973
 		}
 	}
 	{
+		il2cpp_codegen_runtime_class_init_inline(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_2;
-		L_2 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4_inline(NULL);
+		L_2 = SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4(NULL);
 		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_3 = L_2;
 		if (L_3)
 		{
@@ -24060,19 +24110,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainScreenController__ctor_m1AB9567D8089
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* SaveService_get_Instance_mBF364F61713EFB0F7DCBC820DAB27548E7F6DDF4_inline (const RuntimeMethod* method) 
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var);
-		s_Il2CppMethodInitialized = true;
-	}
-	{
-		SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1* L_0 = ((SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_StaticFields*)il2cpp_codegen_static_fields_for(SaveService_tE83E55C287DB3C8E5830DB80F116EC1BA50622C1_il2cpp_TypeInfo_var))->___U3CInstanceU3Ek__BackingField;
-		return L_0;
-	}
-}
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR LevelManager_tB6C5914F2C494423128DB5C0A38A045AA86302A5* LevelManager_get_Instance_mA71FB4721E006397ECEC0AB9B96D604C9DD495DB_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;

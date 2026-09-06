@@ -28,6 +28,7 @@ namespace AnimalFall.Tests.Editor
             }
 
             PlayerPrefs.DeleteKey("AnimalFall_Save");
+            SaveService.DeleteSaveFiles();
 
             _saveObject = new GameObject("TestSaveService");
             _saveService = _saveObject.AddComponent<SaveService>();
@@ -52,6 +53,7 @@ namespace AnimalFall.Tests.Editor
             }
 
             PlayerPrefs.DeleteKey("AnimalFall_Save");
+            SaveService.DeleteSaveFiles();
         }
 
         [Test]

@@ -39,7 +39,7 @@ namespace AnimalFall.MegaShooter
                 {
                     int index = startIndex + c;
                     Vector2 position = GetSpawnPosition(group, index);
-                    GameObject go = MegaObjectPools.Instance.Spawn(group.enemy.prefab, position, Quaternion.Euler(0f, 0f, 180f), transform);
+                    GameObject go = MegaObjectPools.Instance.Spawn(group.enemy.prefab, position, Quaternion.identity, transform);
                     if (go != null)
                     {
                         MegaEnemyController controller = go.GetComponent<MegaEnemyController>();

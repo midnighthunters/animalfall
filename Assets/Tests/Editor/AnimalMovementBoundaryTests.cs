@@ -135,5 +135,29 @@ namespace AnimalFall.Tests.Editor
 
             Assert.That(_animal.IsCollected, Is.True, "FloatUp animal above screen top should despawn cleanly.");
         }
+
+        [Test]
+        public void BubbleShieldAnimal_SpawnedAboveScreen_FallsDownAndDoesNotDespawn()
+        {
+            _animalObject.transform.position = new Vector3(0f, 6.0f, 0f);
+            _animal.SetupForPool(_testData, null);
+            _movement.Configure(_testData, null);
+
+            // Set IsBubble
+            var isBubbleProp = typeof(Animal).GetProperty("IsBubble");
+            isBubbleProp.SetValue(_animal, true);
+
+            MethodInfo updateMethod = typeof(AnimalMovement).GetMethod("Update", InstancePrivate);
+            Assert.That(updateMethod, Is.Not.Null);
+
+            float initialY = _animalObject.transform.position.y;
+            for (int frame = 0; frame < 10; frame++)
+            {
+                updateMethod.Invoke(_movement, null);
+                Assert.That(_animal.IsCollected, Is.False, $"Bubble animal must not despawn on frame {frame + 1} while falling.");
+            }
+
+            Assert.That(_animalObject.transform.position.y, Is.LessThan(initialY), "Bubble animal should move downward into the screen.");
+        }
     }
 }

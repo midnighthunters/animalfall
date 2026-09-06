@@ -139,23 +139,20 @@ namespace AnimalFall.Core.Animals
             float dt = Time.deltaTime > 0f ? Time.deltaTime : (!Application.isPlaying ? 0.01667f : 0f);
             if (dt <= 0f) return;
 
-            if (_animal.IsBubble)
-            {
-                transform.Translate(0f, _speed * 0.5f * dt, 0f);
-                if (transform.position.y > _screenTop + 0.6f && Time.time >= _releaseProtectionUntil)
-                {
-                    _animal.Despawn();
-                }
-                return;
-            }
-
             float dx = 0f;
             float gravityScale = env != null && env.IsZeroGravityActive ? 0.18f : 1f;
             bool reverseGravity = env != null && env.IsReverseGravityActive;
-            float dy = _fallSuspended ? 0f : (reverseGravity ? _speed : -_speed * gravityScale) * dt;
+            float bubbleFallScale = _animal.IsBubble ? 0.75f : 1f;
+            float dy = _fallSuspended ? 0f : (reverseGravity ? _speed : -_speed * gravityScale * bubbleFallScale) * dt;
             float elapsed = Time.time - _spawnTime;
             float tilt = 0f;
             float pendingTeleportX = float.NaN;
+
+            if (_animal.IsBubble)
+            {
+                dx += Mathf.Sin(elapsed * 2.5f + _phase) * 0.45f * dt;
+                tilt = Mathf.Sin(elapsed * 3f + _phase) * 8f;
+            }
 
             if (_pattern != MovementPattern.Bounce && _pattern != MovementPattern.HeavyFall)
                 transform.localScale = Vector3.Lerp(transform.localScale, _baseScale, dt * 10f);

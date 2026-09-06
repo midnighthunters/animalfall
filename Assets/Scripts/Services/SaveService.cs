@@ -1,5 +1,6 @@
 // Task 12.2 — SaveService: JSON persistence, star rules, hindrance seen flags
 using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using AnimalFall.Core.Hindrances;
@@ -30,35 +31,146 @@ namespace AnimalFall.Services
     public class SaveService : MonoBehaviour
     {
         private const string PREFS_KEY = "AnimalFall_Save";
+        private const string FILE_NAME = "AnimalFall_Save.json";
 
-        public static SaveService Instance { get; private set; }
+        public static event Action OnSaveDataLoaded;
+        public static event Action OnSaveDataChanged;
 
+        private static SaveService _instance;
+        public static SaveService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindFirstObjectByType<SaveService>();
+                }
+                return _instance;
+            }
+            private set => _instance = value;
+        }
+
+        private static readonly object _fileLock = new object();
         private SaveData _data = new SaveData();
+        private bool _isLoaded;
+
+        public static string SaveFilePath => Path.Combine(Application.persistentDataPath, FILE_NAME);
+        public static string BackupFilePath => Path.Combine(Application.persistentDataPath, FILE_NAME + ".bak");
+        public static string TempFilePath => Path.Combine(Application.persistentDataPath, FILE_NAME + ".tmp");
 
         private void Awake()
         {
-            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-            Instance = this;
+            if (_instance != null && _instance != this) { Destroy(gameObject); return; }
+            _instance = this;
             DontDestroyOnLoad(gameObject);
             LoadAll();
         }
 
         private void OnDestroy()
         {
-            if (Instance == this) Instance = null;
+            if (_instance == this) _instance = null;
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) SaveAll();
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus) SaveAll();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveAll();
+        }
+
+        private void EnsureLoaded()
+        {
+            if (!_isLoaded && Application.isPlaying)
+            {
+                LoadAll();
+            }
         }
 
         // ── Persistence ───────────────────────────────────────────────────────
 
         public void LoadAll()
         {
-            string json = PlayerPrefs.GetString(PREFS_KEY, "");
-            if (!string.IsNullOrEmpty(json))
+            string primaryJson = null;
+            string backupJson = null;
+
+            lock (_fileLock)
             {
-                try { _data = JsonUtility.FromJson<SaveData>(json) ?? new SaveData(); }
-                catch { _data = new SaveData(); }
+                try
+                {
+                    if (File.Exists(SaveFilePath))
+                        primaryJson = File.ReadAllText(SaveFilePath, System.Text.Encoding.UTF8);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[SaveService] Primary save file read failed: {ex.Message}");
+                }
+
+                try
+                {
+                    if (File.Exists(BackupFilePath))
+                        backupJson = File.ReadAllText(BackupFilePath, System.Text.Encoding.UTF8);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[SaveService] Backup save file read failed: {ex.Message}");
+                }
             }
+
+            SaveData loaded = null;
+
+            // 1. Try parsing primary file
+            if (!string.IsNullOrEmpty(primaryJson))
+            {
+                try { loaded = JsonUtility.FromJson<SaveData>(primaryJson); }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[SaveService] Primary save file corrupted: {ex.Message}");
+                }
+            }
+
+            // 2. If primary failed or invalid, try backup file
+            if (loaded == null && !string.IsNullOrEmpty(backupJson))
+            {
+                try { loaded = JsonUtility.FromJson<SaveData>(backupJson); }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[SaveService] Backup save file corrupted: {ex.Message}");
+                }
+            }
+
+            // 3. Fallback to PlayerPrefs (migration from older builds)
+            if (loaded == null)
+            {
+                string prefsJson = PlayerPrefs.GetString(PREFS_KEY, "");
+                if (!string.IsNullOrEmpty(prefsJson))
+                {
+                    try { loaded = JsonUtility.FromJson<SaveData>(prefsJson); }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning($"[SaveService] PlayerPrefs save corrupted: {ex.Message}");
+                    }
+                }
+            }
+
+            _data = loaded ?? new SaveData();
             EnsureCapacity(100);
+            _isLoaded = true;
+
+            // If loaded from backup or PlayerPrefs because primary was missing/corrupted, re-save valid file
+            if (loaded != null && (string.IsNullOrEmpty(primaryJson) || !File.Exists(SaveFilePath)))
+            {
+                SaveToFile(JsonUtility.ToJson(_data));
+            }
+
+            OnSaveDataLoaded?.Invoke();
         }
 
         public void EnsureCapacity(int totalLevels)
@@ -91,19 +203,102 @@ namespace AnimalFall.Services
 
         public void SaveAll()
         {
-            PlayerPrefs.SetString(PREFS_KEY, JsonUtility.ToJson(_data));
-            PlayerPrefs.Save();
+            string json = JsonUtility.ToJson(_data);
+
+            // 1. Persist to PlayerPrefs as secondary backup
+            try
+            {
+                PlayerPrefs.SetString(PREFS_KEY, json);
+                PlayerPrefs.Save();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[SaveService] PlayerPrefs save error: {ex.Message}");
+            }
+
+            // 2. Persist to disk with immediate fsync flush
+            SaveToFile(json);
+
+            OnSaveDataChanged?.Invoke();
         }
 
-        private void OnApplicationPause(bool paused)
+        private void SaveToFile(string json)
         {
-            if (paused) SaveAll();
+            lock (_fileLock)
+            {
+                try
+                {
+                    string dir = Application.persistentDataPath;
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    string tempPath = TempFilePath;
+                    string savePath = SaveFilePath;
+                    string bakPath = BackupFilePath;
+
+                    using (var fs = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (var writer = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        writer.Write(json);
+                        writer.Flush();
+                        fs.Flush(true); // forces disk sync (fsync)
+                    }
+
+                    if (File.Exists(savePath))
+                    {
+                        try
+                        {
+                            if (File.Exists(bakPath)) File.Delete(bakPath);
+                            File.Copy(savePath, bakPath);
+                        }
+                        catch { }
+                        File.Delete(savePath);
+                    }
+
+                    File.Move(tempPath, savePath);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[SaveService] File save error: {ex.Message}");
+                }
+            }
+        }
+
+        /// <summary>Deletes persistent files and player prefs. For tests and profile reset.</summary>
+        public static void DeleteSaveFiles()
+        {
+            lock (_fileLock)
+            {
+                try
+                {
+                    if (File.Exists(SaveFilePath)) File.Delete(SaveFilePath);
+                    if (File.Exists(BackupFilePath)) File.Delete(BackupFilePath);
+                    if (File.Exists(TempFilePath)) File.Delete(TempFilePath);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[SaveService] Error deleting save files: {ex.Message}");
+                }
+                PlayerPrefs.DeleteKey(PREFS_KEY);
+                PlayerPrefs.Save();
+            }
+        }
+
+        public void ClearSave()
+        {
+            _data = new SaveData();
+            EnsureCapacity(100);
+            DeleteSaveFiles();
+            OnSaveDataChanged?.Invoke();
         }
 
         // ── Stars ─────────────────────────────────────────────────────────────
 
         public int GetStars(int levelIndex)
         {
+            EnsureLoaded();
             if (levelIndex < 0 || levelIndex >= _data.starRatings.Length) return -1;
             return _data.starRatings[levelIndex];
         }
@@ -111,34 +306,77 @@ namespace AnimalFall.Services
         /// <summary>Overwrites only if newStars > existing, or if no prior result exists.</summary>
         public void SetStars(int levelIndex, int newStars)
         {
+            EnsureLoaded();
             if (levelIndex < 0 || levelIndex >= _data.starRatings.Length) return;
             int existing = _data.starRatings[levelIndex];
             // -1 means unplayed; 0 = attempted; allow downward only on first-ever result
             bool noResult = (existing == 0 && GetHighestUnlockedLevel() <= levelIndex);
             if (noResult || newStars > existing)
+            {
                 _data.starRatings[levelIndex] = newStars;
+                SaveAll();
+            }
         }
 
         // ── Level progress ────────────────────────────────────────────────────
 
-        public int  GetHighestUnlockedLevel()          => _data.highestUnlockedLevel;
-        public void SetHighestUnlockedLevel(int v)     { _data.highestUnlockedLevel = v; SaveAll(); }
+        public int  GetHighestUnlockedLevel()
+        {
+            EnsureLoaded();
+            return _data.highestUnlockedLevel;
+        }
+
+        public void SetHighestUnlockedLevel(int v)
+        {
+            EnsureLoaded();
+            _data.highestUnlockedLevel = v;
+            SaveAll();
+        }
 
         // ── Economy ───────────────────────────────────────────────────────────
 
-        public int  GetCoins()         => _data.coins;
-        public void AddCoins(int v)    { _data.coins += v; SaveAll(); }
+        public int  GetCoins()
+        {
+            EnsureLoaded();
+            return _data.coins;
+        }
 
-        public int  GetLives()         => _data.lives;
-        public void SetLives(int v)    { _data.lives = v; }
+        public void AddCoins(int v)
+        {
+            EnsureLoaded();
+            _data.coins += v;
+            SaveAll();
+        }
 
-        public long GetNextLifeUTC()   => _data.nextLifeUTC;
-        public void SetNextLifeUTC(long v) { _data.nextLifeUTC = v; }
+        public int  GetLives()
+        {
+            EnsureLoaded();
+            return _data.lives;
+        }
+
+        public void SetLives(int v)
+        {
+            EnsureLoaded();
+            _data.lives = v;
+        }
+
+        public long GetNextLifeUTC()
+        {
+            EnsureLoaded();
+            return _data.nextLifeUTC;
+        }
+
+        public void SetNextLifeUTC(long v)
+        {
+            EnsureLoaded();
+            _data.nextLifeUTC = v;
+        }
 
         // ── Hindrance tutorial ────────────────────────────────────────────────
 
         public bool HasSeenHindrance(HindranceType t)
         {
+            EnsureLoaded();
             int idx = (int)t;
             if (idx < 0 || idx >= _data.seenHindranceTypes.Length) return false;
             return _data.seenHindranceTypes[idx];
@@ -146,6 +384,7 @@ namespace AnimalFall.Services
 
         public void MarkHindranceSeen(HindranceType t)
         {
+            EnsureLoaded();
             int idx = (int)t;
             if (idx < 0 || idx >= _data.seenHindranceTypes.Length) return;
             _data.seenHindranceTypes[idx] = true;

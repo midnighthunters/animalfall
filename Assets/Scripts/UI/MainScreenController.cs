@@ -85,6 +85,10 @@ namespace AnimalFall.UI
                 LivesManager.Instance.OnLivesChanged -= HandleLivesChanged;
                 LivesManager.Instance.OnLivesChanged += HandleLivesChanged;
             }
+            SaveService.OnSaveDataLoaded -= HandleSaveDataChanged;
+            SaveService.OnSaveDataLoaded += HandleSaveDataChanged;
+            SaveService.OnSaveDataChanged -= HandleSaveDataChanged;
+            SaveService.OnSaveDataChanged += HandleSaveDataChanged;
             RefreshUI();
         }
 
@@ -92,8 +96,11 @@ namespace AnimalFall.UI
         {
             if (LivesManager.Instance != null)
                 LivesManager.Instance.OnLivesChanged -= HandleLivesChanged;
+            SaveService.OnSaveDataLoaded -= HandleSaveDataChanged;
+            SaveService.OnSaveDataChanged -= HandleSaveDataChanged;
         }
 
+        private void HandleSaveDataChanged() => RefreshUI();
         private void HandleLivesChanged(int _) => RefreshUI();
 
         private void RefreshUI()

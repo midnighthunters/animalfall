@@ -7214,6 +7214,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_SpriteRenderer_set_flipX_Injected();
 		Register_UnityEngine_SpriteRenderer_set_flipX_Injected();
 
+		//System.Void UnityEngine.SpriteRenderer::set_flipY_Injected(System.IntPtr,System.Boolean)
+		void Register_UnityEngine_SpriteRenderer_set_flipY_Injected();
+		Register_UnityEngine_SpriteRenderer_set_flipY_Injected();
+
 		//System.Void UnityEngine.SpriteRenderer::set_hasSpriteChangeEvents_Injected(System.IntPtr,System.Boolean)
 		void Register_UnityEngine_SpriteRenderer_set_hasSpriteChangeEvents_Injected();
 		Register_UnityEngine_SpriteRenderer_set_hasSpriteChangeEvents_Injected();

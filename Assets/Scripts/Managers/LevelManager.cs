@@ -124,6 +124,10 @@ namespace AnimalFall.Managers
                 return;
             }
 
+            // Award 3 stars on first successful completion if not already awarded
+            if (_save.GetStars(completedLevelIndex) <= 0)
+                _save.SetStars(completedLevelIndex, 3);
+
             // Keep the menu on a valid playable level after the final level is completed.
             int nextLevel = Mathf.Min(completedLevelIndex + 1, TotalLevels - 1);
             if (nextLevel > _save.GetHighestUnlockedLevel())

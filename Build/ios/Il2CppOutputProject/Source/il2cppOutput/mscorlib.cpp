@@ -159,6 +159,7 @@ struct Comparison_1_tC9FBFF747FA0455CD35BD7D097691DE20DDCC2B5;
 struct Dictionary_2_t9FA6D82CAFC18769F7515BB51D1C56DAE09381C3;
 struct Dictionary_2_t87EDE08B2E48F793A22DE50D6B3CC2E7EBB2DB54;
 struct Dictionary_2_tE1603CE612C16451D1E56FF4D4859D4FE4087C28;
+struct Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8;
 struct IComparer_1_tA8FE324C126879C27B219151B67567D681D4429E;
 struct IComparer_1_t3B0F39D062C0830CA6D3DD5C771FEF9D2E6F5DEF;
 struct List_1_t4B07534C6EDA44BFBF4CD81E023B10C2692A5258;
@@ -249,6 +250,7 @@ struct SHA256_t6FEDD761EE6301127DAAF13320E8FD63296837F9;
 struct SHA384_tF08F34C59E6C681882B9DEF2EF07C1A57C45E631;
 struct SHA512_t4D716D49F898611875B880291C726B1D1DE354C8;
 struct SafeFileHandle_t033FA6AAAC65F4BB25F4CBA9A242A58C95CD406E;
+struct SafeHandle_tC1A4DA80DA89B867CC011B707A07275230321BF7;
 struct SafeSerializationManager_tCBB85B95DFD1634237140CD892E82D06ECB3F5E6;
 struct SecurityElement_tA7337C2977BEC2323B0A3EE95C1C6422013F4E55;
 struct SecurityParser_t864EA1971E964BFA84720CA7C3FB2D7AC5E9B652;
@@ -464,6 +466,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* Array_Reverse_TisByte_t94D9231AC217BE4D2E00
 IL2CPP_EXTERN_C const RuntimeMethod* DependencyInjector_ReflectionLoad_m7E41C5481B953C6BAC4208E750F6F59E8156990A_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* DependencyInjector_Register_mE11F7834670CF00696A2F21511074867EA9D8F82_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* DependencyInjector_get_SystemProvider_mE5A70536FA00E2120995E007441DE8BCA0372287_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* Interop_ThrowExceptionForIoErrno_mD1F1F0FA4F261F7541137053F29DC244D32DA714_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* KeyPairPersistence__ctor_mA9CF6D2A57F6DD77FD4E371A8309CA4AB7AB74BB_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* KeyPairPersistence_get_MachinePath_m886A38BEF61BD477A8F1EBC798CC3460EC34FFC4_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* KeyPairPersistence_get_UserPath_m1D46C5140E8867E88B80B7FA26628DC4DC04D2C9_RuntimeMethod_var;
@@ -653,6 +656,9 @@ struct Contraction_tAF10226C6FA2A0D9BE367AA4354E0145837F0540  : public RuntimeOb
 	ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* ___SortKey;
 };
 struct ContractionComparer_t1CE1C4539C6840E11BB0D3F7E5C5BE815A40144B  : public RuntimeObject
+{
+};
+struct CriticalFinalizerObject_t1DCAB623CAEA6529A96F5F3EDE3C7048A6E313C9  : public RuntimeObject
 {
 };
 struct CspParameters_t9004F77295A57F5D917C723ACBC835E9C54D18B3  : public RuntimeObject
@@ -989,6 +995,10 @@ struct Guid_t
 struct Int32_t680FF22E76F6EFAD4375103CBBFFA0421349384C 
 {
 	int32_t ___m_value;
+};
+struct Int64_t092CFB123BE63C28ACDAF65C68F21A526050DBA3 
+{
+	int64_t ___m_value;
 };
 struct IntPtr_t 
 {
@@ -2227,6 +2237,13 @@ struct SafeGPtrArrayHandle_t31BDC8B49810E694FFB8B78F7B4CDC70F952A76F
 {
 	RuntimeGPtrArrayHandle_t9C6250F1365ABD88E9E40A6AE91C2BC389200328 ___handle;
 };
+struct SafeHandle_tC1A4DA80DA89B867CC011B707A07275230321BF7  : public CriticalFinalizerObject_t1DCAB623CAEA6529A96F5F3EDE3C7048A6E313C9
+{
+	intptr_t ___handle;
+	int32_t ____state;
+	bool ____ownsHandle;
+	bool ____fullyInitialized;
+};
 struct SafeStringMarshal_t37C5C4D85118BDD5A55E3A20736550CF11C76C2E 
 {
 	String_t* ___str;
@@ -2392,6 +2409,9 @@ struct OperatingSystem_t08A94435A5C7D999B5553B6C58763A6F2E3C8557  : public Runti
 	String_t* ____servicePack;
 	String_t* ____versionString;
 };
+struct SafeHandleZeroOrMinusOneIsInvalid_tC152552D137451170B3B1A304227B0ECADB65629  : public SafeHandle_tC1A4DA80DA89B867CC011B707A07275230321BF7
+{
+};
 struct SortKey_tFE5594FAAAFF330066735114D1021DB0D5273740  : public RuntimeObject
 {
 	String_t* ___source;
@@ -2488,6 +2508,9 @@ struct FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2
 struct Comparison_1_t9348BD07A42E0B64874D56D54EB3C5984E623BCE  : public MulticastDelegate_t
 {
 };
+struct Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8  : public MulticastDelegate_t
+{
+};
 struct ArgumentException_tAD90411542A20A9C72D5CDA3A84181D8B947A263  : public SystemException_tCC48D868298F4C0705279823E34B00F4FBDB7295
 {
 	String_t* ____paramName;
@@ -2540,6 +2563,9 @@ struct NullReferenceException_tBDE63A6D24569B964908408389070C6A9F5005BB  : publi
 struct OperationCanceledException_tC97D0B4532C15E6F0E9F9375091C9ECCA438D662  : public SystemException_tCC48D868298F4C0705279823E34B00F4FBDB7295
 {
 	CancellationToken_t51142D9C6D7C02D314DA34A6A7988C528992FFED ____cancellationToken;
+};
+struct SafeFileHandle_t033FA6AAAC65F4BB25F4CBA9A242A58C95CD406E  : public SafeHandleZeroOrMinusOneIsInvalid_tC152552D137451170B3B1A304227B0ECADB65629
+{
 };
 struct SmallXmlParserException_t49EDAE5290024E0707864CCCFE1266C5AE5475C7  : public SystemException_tCC48D868298F4C0705279823E34B00F4FBDB7295
 {
@@ -3346,6 +3372,7 @@ struct __CanonU5BU5D_tFF96AE6C231BB36A6CEE54CEEB72ED8E90201979  : public Runtime
 };
 
 
+IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 Func_2_Invoke_m911CDB96474C146DFAFB9E9CDA9CDE8D68BB87AC_gshared_inline (Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* __this, ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_arg, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ArrayPool_1_t645A9854926DCA747C654687A362AD03D55D2C07* ArrayPool_1_get_Shared_m59AE954C801963CBE5E506D9378429032D161C97_gshared_inline (const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_mE18EBB601FBFA01BA29FE353364700952A9091FE_gshared_inline (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305* __this, void* ___0_pointer, int32_t ___1_length, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint8_t* MemoryMarshal_GetReference_TisByte_t94D9231AC217BE4D2E004C4CD32DF6D099EA41A3_m81BE3C6812CE881C00AAA80CCFC9349F754F63A6_gshared (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305 ___0_span, const RuntimeMethod* method) ;
@@ -3369,6 +3396,14 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t ReadOnlySpan_1_get_Length
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_mC9BE2938B716B46BB6B9070B94DBE5CE814BC0E2_gshared_inline (Span_1_tEDDF15FCF9EC6DEBA0F696BAACDDBAB9D92C252D* __this, Il2CppChar* ___0_ptr, int32_t ___1_length, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_NO_INLINE IL2CPP_METHOD_ATTR void List_1_AddWithResize_mCC24A812DFC30C3DE2230E3C8EE705871C1DFF81_gshared (List_1_t6959D78D53022948E65A4FDA6291D7F38FEFA02E* __this, Il2CppSharedGenericObject* ___0_item, const RuntimeMethod* method) ;
 
+inline ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 Func_2_Invoke_m911CDB96474C146DFAFB9E9CDA9CDE8D68BB87AC_inline (Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* __this, ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_arg, const RuntimeMethod* method)
+{
+	return ((  ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 (*) (Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8*, ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8, const RuntimeMethod*))Func_2_Invoke_m911CDB96474C146DFAFB9E9CDA9CDE8D68BB87AC_gshared_inline)(__this, ___0_arg, method);
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Exception_t* Interop_GetExceptionForIoErrno_m701F71EF26E8E84C4DB2278B54D7F89BD522C7E7 (ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_errorInfo, String_t* ___1_path, bool ___2_isDirectory, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 Sys_GetLastErrorInfo_m1C1BB8341DD84927BD33E6240585E753D4B3572B (const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Interop_ThrowExceptionForIoErrno_mD1F1F0FA4F261F7541137053F29DC244D32DA714 (ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_errorInfo, String_t* ___1_path, bool ___2_isDirectory, Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* ___3_errorRewriter, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t Interop_CheckIo_mCEB71E59B76B8B3B533398E029C7CC55500FE958 (int64_t ___0_result, String_t* ___1_path, bool ___2_isDirectory, Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* ___3_errorRewriter, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t ErrorInfo_get_Error_mF34947899E06A00CA22985B73034CE96610FBD2B_inline (ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478 (String_t* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DirectoryNotFoundException__ctor_mA7F098E81D1D163C09BF5E64A34634290B76F235 (DirectoryNotFoundException_tBE92A20AAC24C3B22DE38973ABE6886FA97419BF* __this, String_t* ___0_message, const RuntimeMethod* method) ;
@@ -3401,6 +3436,8 @@ inline ArrayPool_1_t645A9854926DCA747C654687A362AD03D55D2C07* ArrayPool_1_get_Sh
 }
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_ReadLink_mC85620C48F33C828AB0A025498E3388B553C8EAF (String_t* ___0_path, ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* ___1_buffer, int32_t ___2_bufferSize, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Encoding_t65CDEF28CF20A7B8C92E85A4E808920C2465F095* Encoding_get_UTF8_m9FA98A53CE96FD6D02982625C5246DD36C1235C9 (const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SafeHandle_DangerousAddRef_m9FA46208A92D8B33059B8E8712F49AE45BB5E922 (SafeHandle_tC1A4DA80DA89B867CC011B707A07275230321BF7* __this, bool* ___0_success, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SafeHandle_DangerousRelease_m30A8B4E5BEA935C8925BC2115CD0AD13B937953E (SafeHandle_tC1A4DA80DA89B867CC011B707A07275230321BF7* __this, const RuntimeMethod* method) ;
 inline void Span_1__ctor_mE18EBB601FBFA01BA29FE353364700952A9091FE_inline (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305* __this, void* ___0_pointer, int32_t ___1_length, const RuntimeMethod* method)
 {
 	((  void (*) (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305*, void*, int32_t, const RuntimeMethod*))Span_1__ctor_mE18EBB601FBFA01BA29FE353364700952A9091FE_gshared_inline)(__this, ___0_pointer, ___1_length, method);
@@ -3870,6 +3907,15 @@ IL2CPP_EXTERN_C int32_t STDCALL SystemNative_ReadLink(char*, uint8_t*, int32_t);
 IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Stat2(char*, FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2*);
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_LStat2(char*, FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2*);
+#endif
+#if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Symlink(char*, char*);
+#endif
+#if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_CopyFile(void*, void*);
+#endif
+#if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
 IL2CPP_EXTERN_C uint32_t STDCALL SystemNative_GetEGid();
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
@@ -3879,13 +3925,16 @@ IL2CPP_EXTERN_C uint32_t STDCALL SystemNative_GetEUid();
 IL2CPP_EXTERN_C int32_t STDCALL SystemNative_LChflagsCanSetHiddenFlag();
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Link(char*, char*);
+#endif
+#if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
 IL2CPP_EXTERN_C int32_t STDCALL SystemNative_MkDir(char*, int32_t);
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
-IL2CPP_EXTERN_C int32_t STDCALL SystemNative_RmDir(char*);
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Rename(char*, char*);
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
-IL2CPP_EXTERN_C int32_t STDCALL SystemNative_LStat2(uint8_t*, FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2*);
+IL2CPP_EXTERN_C int32_t STDCALL SystemNative_RmDir(char*);
 #endif
 #if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_System_Native_INTERNAL
 IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Unlink(char*);
@@ -3903,6 +3952,80 @@ IL2CPP_EXTERN_C int32_t STDCALL SystemNative_Unlink(char*);
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Interop_ThrowExceptionForIoErrno_mD1F1F0FA4F261F7541137053F29DC244D32DA714 (ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_errorInfo, String_t* ___1_path, bool ___2_isDirectory, Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* ___3_errorRewriter, const RuntimeMethod* method) 
+{
+	{
+		Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* L_0 = ___3_errorRewriter;
+		if (!L_0)
+		{
+			goto IL_000c;
+		}
+	}
+	{
+		Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* L_1 = ___3_errorRewriter;
+		ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 L_2 = ___0_errorInfo;
+		NullCheck(L_1);
+		ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 L_3;
+		L_3 = Func_2_Invoke_m911CDB96474C146DFAFB9E9CDA9CDE8D68BB87AC_inline(L_1, L_2, NULL);
+		___0_errorInfo = L_3;
+	}
+
+IL_000c:
+	{
+		ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 L_4 = ___0_errorInfo;
+		String_t* L_5 = ___1_path;
+		bool L_6 = ___2_isDirectory;
+		Exception_t* L_7;
+		L_7 = Interop_GetExceptionForIoErrno_m701F71EF26E8E84C4DB2278B54D7F89BD522C7E7(L_4, L_5, L_6, NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_7, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&Interop_ThrowExceptionForIoErrno_mD1F1F0FA4F261F7541137053F29DC244D32DA714_RuntimeMethod_var)));
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t Interop_CheckIo_mCEB71E59B76B8B3B533398E029C7CC55500FE958 (int64_t ___0_result, String_t* ___1_path, bool ___2_isDirectory, Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* ___3_errorRewriter, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Sys_tE4FBEFBB8F788192C8E494DA0EC7EFE86D952AD8_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		int64_t L_0 = ___0_result;
+		int64_t L_1 = (il2cpp_codegen_conv<int64_t,int32_t,int32_t,false,false>(0,NULL));
+		if ((((int64_t)L_0) >= ((int64_t)L_1)))
+		{
+			goto IL_0012;
+		}
+	}
+	{
+		il2cpp_codegen_runtime_class_init_inline(Sys_tE4FBEFBB8F788192C8E494DA0EC7EFE86D952AD8_il2cpp_TypeInfo_var);
+		ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 L_2;
+		L_2 = Sys_GetLastErrorInfo_m1C1BB8341DD84927BD33E6240585E753D4B3572B(NULL);
+		String_t* L_3 = ___1_path;
+		bool L_4 = ___2_isDirectory;
+		Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* L_5 = ___3_errorRewriter;
+		Interop_ThrowExceptionForIoErrno_mD1F1F0FA4F261F7541137053F29DC244D32DA714(L_2, L_3, L_4, L_5, NULL);
+	}
+
+IL_0012:
+	{
+		int64_t L_6 = ___0_result;
+		return L_6;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Interop_CheckIo_m728976E4859E2A05F20BC663805C0AD0D080B6B4 (int32_t ___0_result, String_t* ___1_path, bool ___2_isDirectory, Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* ___3_errorRewriter, const RuntimeMethod* method) 
+{
+	{
+		int32_t L_0 = ___0_result;
+		int64_t L_1 = (il2cpp_codegen_conv<int64_t,int32_t,int32_t,false,false>(L_0,NULL));
+		String_t* L_2 = ___1_path;
+		bool L_3 = ___2_isDirectory;
+		Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* L_4 = ___3_errorRewriter;
+		int64_t L_5;
+		L_5 = Interop_CheckIo_mCEB71E59B76B8B3B533398E029C7CC55500FE958(L_1, L_2, L_3, L_4, NULL);
+		int32_t L_6 = ___0_result;
+		return L_6;
+	}
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Exception_t* Interop_GetExceptionForIoErrno_m701F71EF26E8E84C4DB2278B54D7F89BD522C7E7 (ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_errorInfo, String_t* ___1_path, bool ___2_isDirectory, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4743,6 +4866,73 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_Stat_m335FF7F9EF8D4ADB75EFEF43655
 
 	return returnValue;
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_LStat_m0CC3605549429D0A6C168B4C4A309970AF480333 (String_t* ___0_path, FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2* ___1_output, const RuntimeMethod* method) 
+{
+	typedef int32_t (STDCALL *PInvokeFunc) (char*, FileStatus_tCB96EDE0D0F945F685B9BBED6DBF0731207458C2*);
+
+	char* ____0_path_marshaled = NULL;
+	____0_path_marshaled = il2cpp_codegen_marshal_string(___0_path);
+
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(SystemNative_LStat2)(____0_path_marshaled, ___1_output);
+	il2cpp_codegen_marshal_store_last_error();
+
+	il2cpp_codegen_marshal_free(____0_path_marshaled);
+	____0_path_marshaled = NULL;
+
+	return returnValue;
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_Symlink_mC157FE093FCA98F21ECE96782D5EBBC3ECD69A06 (String_t* ___0_target, String_t* ___1_linkPath, const RuntimeMethod* method) 
+{
+	typedef int32_t (STDCALL *PInvokeFunc) (char*, char*);
+
+	char* ____0_target_marshaled = NULL;
+	____0_target_marshaled = il2cpp_codegen_marshal_string(___0_target);
+
+	char* ____1_linkPath_marshaled = NULL;
+	____1_linkPath_marshaled = il2cpp_codegen_marshal_string(___1_linkPath);
+
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(SystemNative_Symlink)(____0_target_marshaled, ____1_linkPath_marshaled);
+	il2cpp_codegen_marshal_store_last_error();
+
+	il2cpp_codegen_marshal_free(____0_target_marshaled);
+	____0_target_marshaled = NULL;
+
+	il2cpp_codegen_marshal_free(____1_linkPath_marshaled);
+	____1_linkPath_marshaled = NULL;
+
+	return returnValue;
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_CopyFile_m2BBE494E63EEE4C4CA6B9721F5B7EBE6E81AAAA5 (SafeFileHandle_t033FA6AAAC65F4BB25F4CBA9A242A58C95CD406E* ___0_source, SafeFileHandle_t033FA6AAAC65F4BB25F4CBA9A242A58C95CD406E* ___1_destination, const RuntimeMethod* method) 
+{
+	typedef int32_t (STDCALL *PInvokeFunc) (void*, void*);
+
+	void* ____0_source_marshaled = NULL;
+	if (___0_source == NULL) IL2CPP_RAISE_MANAGED_EXCEPTION(il2cpp_codegen_get_argument_null_exception("source"), NULL);
+	bool ___safeHandle_reference_incremented_for____0_source = false;
+	SafeHandle_DangerousAddRef_m9FA46208A92D8B33059B8E8712F49AE45BB5E922(___0_source, (&___safeHandle_reference_incremented_for____0_source), NULL);
+	____0_source_marshaled = reinterpret_cast<void*>((___0_source)->___handle);
+
+	void* ____1_destination_marshaled = NULL;
+	if (___1_destination == NULL) IL2CPP_RAISE_MANAGED_EXCEPTION(il2cpp_codegen_get_argument_null_exception("destination"), NULL);
+	bool ___safeHandle_reference_incremented_for____1_destination = false;
+	SafeHandle_DangerousAddRef_m9FA46208A92D8B33059B8E8712F49AE45BB5E922(___1_destination, (&___safeHandle_reference_incremented_for____1_destination), NULL);
+	____1_destination_marshaled = reinterpret_cast<void*>((___1_destination)->___handle);
+
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(SystemNative_CopyFile)(____0_source_marshaled, ____1_destination_marshaled);
+	il2cpp_codegen_marshal_store_last_error();
+
+	if (___safeHandle_reference_incremented_for____0_source)
+	{
+		SafeHandle_DangerousRelease_m30A8B4E5BEA935C8925BC2115CD0AD13B937953E(___0_source, NULL);
+	}
+
+	if (___safeHandle_reference_incremented_for____1_destination)
+	{
+		SafeHandle_DangerousRelease_m30A8B4E5BEA935C8925BC2115CD0AD13B937953E(___1_destination, NULL);
+	}
+
+	return returnValue;
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t Sys_GetEGid_m3CC143731AC972DB0889EE1F4E7D0F8A1C11ED06 (const RuntimeMethod* method) 
 {
 	typedef uint32_t (STDCALL *PInvokeFunc) ();
@@ -4767,6 +4957,27 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_LChflagsCanSetHiddenFlag_mF927D75
 
 	return returnValue;
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_Link_m1ABE7876057F533DA5837BB69F5864985911BE33 (String_t* ___0_source, String_t* ___1_link, const RuntimeMethod* method) 
+{
+	typedef int32_t (STDCALL *PInvokeFunc) (char*, char*);
+
+	char* ____0_source_marshaled = NULL;
+	____0_source_marshaled = il2cpp_codegen_marshal_string(___0_source);
+
+	char* ____1_link_marshaled = NULL;
+	____1_link_marshaled = il2cpp_codegen_marshal_string(___1_link);
+
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(SystemNative_Link)(____0_source_marshaled, ____1_link_marshaled);
+	il2cpp_codegen_marshal_store_last_error();
+
+	il2cpp_codegen_marshal_free(____0_source_marshaled);
+	____0_source_marshaled = NULL;
+
+	il2cpp_codegen_marshal_free(____1_link_marshaled);
+	____1_link_marshaled = NULL;
+
+	return returnValue;
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_MkDir_m54A331C73E144CC723F5583CF6B1CCCEABEA8E30 (String_t* ___0_path, int32_t ___1_mode, const RuntimeMethod* method) 
 {
 	typedef int32_t (STDCALL *PInvokeFunc) (char*, int32_t);
@@ -4779,6 +4990,27 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_MkDir_m54A331C73E144CC723F5583CF6
 
 	il2cpp_codegen_marshal_free(____0_path_marshaled);
 	____0_path_marshaled = NULL;
+
+	return returnValue;
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Sys_Rename_mF38C4FBCF2C68EB495DF9E885139AFA7BF63CC96 (String_t* ___0_oldPath, String_t* ___1_newPath, const RuntimeMethod* method) 
+{
+	typedef int32_t (STDCALL *PInvokeFunc) (char*, char*);
+
+	char* ____0_oldPath_marshaled = NULL;
+	____0_oldPath_marshaled = il2cpp_codegen_marshal_string(___0_oldPath);
+
+	char* ____1_newPath_marshaled = NULL;
+	____1_newPath_marshaled = il2cpp_codegen_marshal_string(___1_newPath);
+
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(SystemNative_Rename)(____0_oldPath_marshaled, ____1_newPath_marshaled);
+	il2cpp_codegen_marshal_store_last_error();
+
+	il2cpp_codegen_marshal_free(____0_oldPath_marshaled);
+	____0_oldPath_marshaled = NULL;
+
+	il2cpp_codegen_marshal_free(____1_newPath_marshaled);
+	____1_newPath_marshaled = NULL;
 
 	return returnValue;
 }
@@ -27624,6 +27856,11 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR String_t* KeyPairPersistence_get_
 		String_t* L_0 = __this->____keyvalue;
 		return L_0;
 	}
+}
+IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 Func_2_Invoke_m911CDB96474C146DFAFB9E9CDA9CDE8D68BB87AC_gshared_inline (Func_2_t17D1F9D76B6D544ECA831BF2D9F94AE46EDFDAF8* __this, ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 ___0_arg, const RuntimeMethod* method) 
+{
+	typedef ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8 (*FunctionPointerType) (RuntimeObject*, ErrorInfo_t776D0DEFF42C5321EB2548D87ED238CBE55467F8, const RuntimeMethod*);
+	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ArrayPool_1_t645A9854926DCA747C654687A362AD03D55D2C07* ArrayPool_1_get_Shared_m59AE954C801963CBE5E506D9378429032D161C97_gshared_inline (const RuntimeMethod* method) 
 {

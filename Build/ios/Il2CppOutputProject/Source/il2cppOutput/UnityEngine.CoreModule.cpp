@@ -5024,6 +5024,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer_set_color_Injected_mE8361
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool SpriteRenderer_get_flipX_Injected_m00A696DB06D80629636689879FB7211333735026 (intptr_t ___0__unity_self, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer_set_flipX_Injected_mB00DAB7B434B7709F3DFB465AFD1C2B6BE0CABDE (intptr_t ___0__unity_self, bool ___1_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool SpriteRenderer_get_flipY_Injected_m0B851E978E00184FA5B0B458E57734F6F2F43B88 (intptr_t ___0__unity_self, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702 (intptr_t ___0__unity_self, bool ___1_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Renderer__ctor_m8B4EE9696B155A1B0A2CF13EBFC363CE175B9271 (Renderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1 (String_t* ___0_a, String_t* ___1_b, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Object_Equals_m434DF93FDA204D5C06E889A9CB53BC2E5D39ABF7 (RuntimeObject* ___0_objA, RuntimeObject* ___1_objB, const RuntimeMethod* method) ;
@@ -12984,6 +12985,41 @@ IL_000f:
 		return L_2;
 	}
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer_set_flipY_mB3B2BF1BF87C6BC2DE1795CA4698726091E1FEFA (SpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B* __this, bool ___0_value, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MarshalledUnityObject_MarshalNotNull_TisSpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B_m9E17DAED8F06785033B999496C835FF215CF6F41_RuntimeMethod_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	intptr_t G_B2_0;
+	memset((&G_B2_0), 0, sizeof(G_B2_0));
+	intptr_t G_B1_0;
+	memset((&G_B1_0), 0, sizeof(G_B1_0));
+	{
+		intptr_t L_0;
+		L_0 = MarshalledUnityObject_MarshalNotNull_TisSpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B_m9E17DAED8F06785033B999496C835FF215CF6F41_inline(__this, MarshalledUnityObject_MarshalNotNull_TisSpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B_m9E17DAED8F06785033B999496C835FF215CF6F41_RuntimeMethod_var);
+		intptr_t L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000f;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		ThrowHelper_ThrowNullReferenceException_mA9C7629D32240EE0218631933DAC647668CA63CF(__this, NULL);
+		G_B2_0 = G_B1_0;
+	}
+
+IL_000f:
+	{
+		bool L_2 = ___0_value;
+		SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702(G_B2_0, L_2, NULL);
+		return;
+	}
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer__ctor_mB4B5F280BD21B60892B5DBCC34445457EFFDD9BA (SpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B* __this, const RuntimeMethod* method) 
 {
 	{
@@ -13074,6 +13110,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool SpriteRenderer_get_flipY_Injected_m0B851
 	_il2cpp_icall_func = (SpriteRenderer_get_flipY_Injected_m0B851E978E00184FA5B0B458E57734F6F2F43B88_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.SpriteRenderer::get_flipY_Injected(System.IntPtr)");
 	bool icallRetVal = _il2cpp_icall_func(___0__unity_self);
 	return icallRetVal;
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702 (intptr_t ___0__unity_self, bool ___1_value, const RuntimeMethod* method) 
+{
+	typedef void (*SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702_ftn) (intptr_t, bool);
+	static SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (SpriteRenderer_set_flipY_Injected_mFF605615948A5D1E0A4A5435208CB799EC189702_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.SpriteRenderer::set_flipY_Injected(System.IntPtr,System.Boolean)");
+	_il2cpp_icall_func(___0__unity_self, ___1_value);
 }
 #ifdef __clang__
 #pragma clang diagnostic pop

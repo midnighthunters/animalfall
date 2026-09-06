@@ -30,10 +30,14 @@ namespace AnimalFall.MegaShooter
         private bool _elite;
         private Vector3 _baseScale;
         // Match the reference layout in screen space: regular army villains occupy
-        // about eighteen percent of the viewport width and elite leaders about thirty-two (scaled 2x).
-        private const float VillainViewportWidth = 0.18f;
-        private const float EliteViewportWidth = 0.32f;
-        private const float FallbackVillainSizeScale = 0.56f;
+        // about 21.6% of the viewport width (increased by 20% from 0.18f) and elite leaders about 38.4% (increased by 20% from 0.32f).
+        public const float ArmyVillainScaleMultiplier = 1.20f;
+        public const float BaseVillainViewportWidth = 0.18f;
+        public const float BaseEliteViewportWidth = 0.32f;
+        public const float BaseFallbackVillainSizeScale = 0.56f;
+        public const float VillainViewportWidth = BaseVillainViewportWidth * ArmyVillainScaleMultiplier;
+        public const float EliteViewportWidth = BaseEliteViewportWidth * ArmyVillainScaleMultiplier;
+        public const float FallbackVillainSizeScale = BaseFallbackVillainSizeScale * ArmyVillainScaleMultiplier;
         private float _halfWidth;
         private float _halfHeight;
 
@@ -44,22 +48,29 @@ namespace AnimalFall.MegaShooter
 
         private void Awake()
         {
-            _renderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<BoxCollider2D>();
+            EnsureComponents();
+        }
+
+        private void EnsureComponents()
+        {
+            if (_renderer == null) _renderer = GetComponent<SpriteRenderer>();
+            if (_collider == null) _collider = GetComponent<BoxCollider2D>();
             if (_collider == null) _collider = gameObject.AddComponent<BoxCollider2D>();
             _collider.isTrigger = true;
-            _body = GetComponent<Rigidbody2D>();
+            if (_body == null) _body = GetComponent<Rigidbody2D>();
             if (_body == null) _body = gameObject.AddComponent<Rigidbody2D>();
             _body.bodyType = RigidbodyType2D.Kinematic;
             _body.gravityScale = 0f;
             _body.useFullKinematicContacts = true;
-            _warningLine = GetComponentInChildren<LineRenderer>(true);
-            _baseScale = transform.localScale;
+            if (_warningLine == null) _warningLine = GetComponentInChildren<LineRenderer>(true);
+            if (_baseScale == Vector3.zero) _baseScale = transform.localScale;
+            if (_baseScale == Vector3.zero) _baseScale = Vector3.one;
         }
 
         public void Configure(EnemyShipData data, EnemySpawnGroup group, MegaWaveData wave, MegaLevelData level,
             MegaShooterGameManager game, MegaWaveDirector director, bool elite)
         {
+            EnsureComponents();
             _data = data;
             _group = group;
             _wave = wave;
@@ -68,6 +79,9 @@ namespace AnimalFall.MegaShooter
             _director = director;
             _elite = elite;
             _renderer.sprite = data.sprite;
+            transform.localRotation = Quaternion.identity;
+            _renderer.flipX = false;
+            _renderer.flipY = false;
             Camera camera = Camera.main;
             float spriteWidth = data.sprite != null ? data.sprite.bounds.size.x : 0f;
             if (camera != null && camera.orthographic && spriteWidth > 0.001f)
@@ -95,15 +109,15 @@ namespace AnimalFall.MegaShooter
             _speed = Mathf.Clamp(overrideSpeed * wave.speedMultiplier * 0.62f, 0.65f, 1.85f);
             // Stagger each ship's first shot.  Groups no longer release a full
             // screen of bullets at exactly the same instant.
-            _fireTimer = Mathf.Max(0.75f, data.initialFireDelay) + _game.NextRandom01() * 1.15f;
+            _fireTimer = Mathf.Max(0.75f, data.initialFireDelay) + (_game != null ? _game.NextRandom01() : Random.value) * 1.15f;
             _age = 0f;
             _telegraphRemaining = 0f;
             _telegraphing = false;
             _hitGlowRemaining = 0f;
             _spawnPosition = transform.position;
             _registered = true;
-            _director.EnemySpawned(this);
-            _game.RegisterEnemy(this);
+            _director?.EnemySpawned(this);
+            _game?.RegisterEnemy(this);
             if (_warningLine != null) _warningLine.gameObject.SetActive(false);
         }
 
@@ -292,7 +306,10 @@ namespace AnimalFall.MegaShooter
             Unregister(false);
             if (_warningLine != null) _warningLine.gameObject.SetActive(false);
             transform.localScale = _baseScale;
+            transform.localRotation = Quaternion.identity;
             _renderer.color = Color.white;
+            _renderer.flipX = false;
+            _renderer.flipY = false;
             _data = null;
             _group = null;
             _wave = null;

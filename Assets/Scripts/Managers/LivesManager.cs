@@ -77,10 +77,27 @@ namespace AnimalFall.Managers
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            if (!pauseStatus)
+            if (pauseStatus)
+            {
+                SaveCurrentLives();
+            }
+            else
             {
                 Init(_save ?? SaveService.Instance ?? FindFirstObjectByType<SaveService>());
             }
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus)
+            {
+                SaveCurrentLives();
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveCurrentLives();
         }
 
         private void HandleLevelFailed()

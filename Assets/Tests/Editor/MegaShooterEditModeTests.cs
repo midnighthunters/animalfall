@@ -216,6 +216,43 @@ namespace AnimalFall.Tests.Editor
         }
 
         [Test]
+        public void ArmyVillainsAreUprightAndSizeIncreasedByTwentyPercent()
+        {
+            Assert.That(MegaEnemyController.ArmyVillainScaleMultiplier, Is.EqualTo(1.20f).Within(0.001f));
+            Assert.That(MegaEnemyController.VillainViewportWidth, Is.EqualTo(0.18f * 1.20f).Within(0.001f));
+            Assert.That(MegaEnemyController.EliteViewportWidth, Is.EqualTo(0.32f * 1.20f).Within(0.001f));
+            Assert.That(MegaEnemyController.FallbackVillainSizeScale, Is.EqualTo(0.56f * 1.20f).Within(0.001f));
+
+            GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/MegaShooter/Prefabs/MegaEnemy.prefab");
+            GameObject instance = Object.Instantiate(enemyPrefab);
+            try
+            {
+                MegaEnemyController controller = instance.GetComponent<MegaEnemyController>();
+                Assert.That(controller, Is.Not.Null);
+
+                EnemyShipData armyData = AssetDatabase.LoadAssetAtPath<EnemyShipData>(
+                    "Assets/MegaShooter/Data/VillainRoster/Armies/captain_chomper_01.asset");
+                Assert.That(armyData, Is.Not.Null);
+
+                // Simulate upside down initial state before configure
+                instance.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+                controller.Configure(armyData, new EnemySpawnGroup { enemy = armyData },
+                    _levels[0].waves[0], _levels[0], null, null, false);
+
+                Assert.That(instance.transform.localRotation, Is.EqualTo(Quaternion.identity));
+                Assert.That(Mathf.DeltaAngle(instance.transform.eulerAngles.z, 0f), Is.EqualTo(0f).Within(0.01f));
+
+                SpriteRenderer renderer = instance.GetComponent<SpriteRenderer>();
+                Assert.That(renderer.flipY, Is.False);
+                Assert.That(renderer.flipX, Is.False);
+            }
+            finally
+            {
+                Object.DestroyImmediate(instance);
+            }
+        }
+
+        [Test]
         public void MegaPrefabsHaveNoMissingScriptsAndGameplaySizesArePositive()
         {
             string[] prefabPaths =

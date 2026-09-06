@@ -26,7 +26,6 @@
 		165FE1A1A8C5C2E9E5EA5CB1 /* Quaternion4.h in Headers */ = {isa = PBXBuildFile; fileRef = 66C75227D30156329AE6BCDF /* Quaternion4.h */; };
 		1810063E942D118EA4348D0E /* SubscriptionInfoStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D15332058D191C1E2EE4 /* SubscriptionInfoStatusResponse.swift */; };
 		18EC6BA933589E2805D0A4E0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B5CB878D53B99534B11B55 /* Metal.framework */; };
-		19384A50B65B4D26C8404C0E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		196A4C50D95E27C688D8DF12 /* UnityScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 02241488FE72E459A0C905E3 /* UnityScene.mm */; };
 		1976014285633849E6353F6C /* NoGraphicsHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 33021DBF5A5B60EF2C1D15AA /* NoGraphicsHelper.mm */; };
 		1A22BC0AFE01EADB5B878017 /* UnityInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 864A7F8602F7096CE5937644 /* UnityInterface.h */; };
@@ -38,6 +37,7 @@
 		1ED6081A6FB4F1A38FD15F9F /* KeyboardViews+iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EB0B040435FD47FAA15EAA /* KeyboardViews+iOS.h */; };
 		1F152690AF66EDC2ECEC7FFD /* RenewalInfoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2EBBCDD870A0BA9EE76652 /* RenewalInfoExtensions.swift */; };
 		204AE389BB46DEDF8ED9194A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F88021824C7597D5382883B /* CFNetwork.framework */; };
+		22B144F296E10E49E94306FB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C801E7F3CBAB00070AC52BC6 /* StoreKit.framework */; };
 		2373E9E02BAA678F79EC8814 /* IUnityEventQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FEA0BE273F1825F1BE7B7B69 /* IUnityEventQueue.h */; };
 		2481DD04D9E8F062AFE37702 /* PromotionInfoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25E4868F22CDB4A94DA5149 /* PromotionInfoExtensions.swift */; };
 		2C0F25EF94A9B1555F35239C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F06E837EECF2C94AEABF609 /* CoreVideo.framework */; };
@@ -1040,7 +1040,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19384A50B65B4D26C8404C0E /* StoreKit.framework in Frameworks */,
+				22B144F296E10E49E94306FB /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
