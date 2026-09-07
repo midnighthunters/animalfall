@@ -4,31 +4,51 @@ on:
   workflow_dispatch:
     inputs:
       export_method:
-        description: IPA distribution method
+        description: 'IPA distribution method (use app-store for TestFlight)'
         required: true
-        default: development
+        default: 'app-store'
         type: choice
-        options: [development, ad-hoc, app-store]
+        options:
+          - app-store
+          - development
+          - ad-hoc
+      upload_to_testflight:
+        description: 'Upload exported IPA to Apple TestFlight'
+        required: true
+        default: true
+        type: boolean
       build_number:
-        description: Optional iOS build number
+        description: 'Optional iOS build number (CFBundleVersion). Defaults to GitHub run number.'
         required: false
+        type: string
+      app_version:
+        description: 'Optional marketing version (CFBundleShortVersionString, e.g. 1.0.0)'
+        required: false
+        type: string
+      release_notes:
+        description: 'Optional TestFlight "What to Test" release notes'
+        required: false
+        type: string
 
 permissions:
   contents: read
 
 jobs:
   ipa:
-    name: Archive and export IPA
+    name: Archive, Export & Deploy IPA
     runs-on: macos-15
     timeout-minutes: 90
     env:
-      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID || '2LYFPDG6BB' }}
       APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
-      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || 'Q68W5MNJG6' }}
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
       IOS_BUNDLE_ID: com.zemolabs.animalfall
       IOS_EXPORT_METHOD: ${{ inputs.export_method }}
       IOS_BUILD_NUMBER: ${{ inputs.build_number }}
+      IOS_APP_VERSION: ${{ inputs.app_version }}
+      UPLOAD_TO_TESTFLIGHT: ${{ inputs.upload_to_testflight }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,10 +56,14 @@ jobs:
       - name: Validate export and signing configuration
         run: |
           set -euo pipefail
-          test -d Build/ios/Unity-iPhone.xcodeproj
+
+          echo "=== Checking Apple Developer Configuration & Secrets ==="
           test -n "$APP_STORE_CONNECT_PRIVATE_KEY"
           test -n "$APP_STORE_CONNECT_KEY_ID" && test -n "$APP_STORE_CONNECT_ISSUER_ID"
           test -n "$APPLE_TEAM_ID"
+
+          echo "=== Validating Project Structure ==="
+          test -d Build/ios/Unity-iPhone.xcodeproj
           python3 tools/remove_stale_firebase_ios_links.py
           if [ -f Build/ios/Podfile ]; then
             pod install --project-directory=Build/ios --repo-update
@@ -57,6 +81,20 @@ jobs:
       - name: Archive and export signed IPA
         run: |
           set -euo pipefail
+
+          # Install provisioning profiles
+          PROFILES_DIR="$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"
+          mkdir -p "$PROFILES_DIR"
+          if [ -n "${PROVISIONING_PROFILE_BASE64:-}" ]; then
+            echo "Installing provisioning profile from secret..."
+            printf '%s' "$PROVISIONING_PROFILE_BASE64" | base64 -d > "$PROFILES_DIR/1c726770-ed63-48f1-8723-e48f483ea73e.mobileprovision"
+            cp "$PROFILES_DIR/1c726770-ed63-48f1-8723-e48f483ea73e.mobileprovision" "$PROFILES_DIR/animalfall_prod_profile.mobileprovision"
+          elif [ -f "animalfall_prod_profile.mobileprovision" ]; then
+            echo "Installing provisioning profile from repository..."
+            cp "animalfall_prod_profile.mobileprovision" "$PROFILES_DIR/1c726770-ed63-48f1-8723-e48f483ea73e.mobileprovision"
+            cp "animalfall_prod_profile.mobileprovision" "$PROFILES_DIR/animalfall_prod_profile.mobileprovision"
+          fi
+
           umask 077; KEY="$RUNNER_TEMP/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8"; trap 'rm -f "$KEY"' EXIT
           printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY"
           ARCHIVE="$RUNNER_TEMP/AnimalFall.xcarchive"; EXPORT="$RUNNER_TEMP/export"; BUILD="${IOS_BUILD_NUMBER:-$GITHUB_RUN_NUMBER}"
@@ -64,6 +102,18 @@ jobs:
             echo "The iOS build number must be a positive integer; got '$BUILD'." >&2
             exit 1
           fi
+
+          echo "=== Preparing Build Versioning & Export Compliance in Info.plist ==="
+          plutil -replace CFBundleVersion -string "$BUILD" Build/ios/Info.plist
+          if [ -n "$IOS_APP_VERSION" ]; then
+            plutil -replace CFBundleShortVersionString -string "$IOS_APP_VERSION" Build/ios/Info.plist
+          fi
+          if plutil -extract ITSAppUsesNonExemptEncryption raw Build/ios/Info.plist >/dev/null 2>&1; then
+            plutil -replace ITSAppUsesNonExemptEncryption -bool NO Build/ios/Info.plist
+          else
+            plutil -insert ITSAppUsesNonExemptEncryption -bool NO Build/ios/Info.plist
+          fi
+
           if [ -d Build/ios/Unity-iPhone.xcworkspace ]; then
             XCODE_CONTAINER=(-workspace Build/ios/Unity-iPhone.xcworkspace)
           else
@@ -76,24 +126,67 @@ jobs:
             -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
             CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION="$BUILD"
           )
+          if [ -n "$IOS_APP_VERSION" ]; then
+            XCODEBUILD_ARGS+=(MARKETING_VERSION="$IOS_APP_VERSION")
+          fi
           xcodebuild "${XCODEBUILD_ARGS[@]}" archive
+
+          echo "=== Generating ExportOptions.plist ==="
           plutil -create xml1 "$RUNNER_TEMP/ExportOptions.plist"
-          plutil -insert method -string "${IOS_EXPORT_METHOD:-development}" "$RUNNER_TEMP/ExportOptions.plist"
+          plutil -insert method -string "${IOS_EXPORT_METHOD:-app-store}" "$RUNNER_TEMP/ExportOptions.plist"
           plutil -insert signingStyle -string automatic "$RUNNER_TEMP/ExportOptions.plist"
           plutil -insert teamID -string "$APPLE_TEAM_ID" "$RUNNER_TEMP/ExportOptions.plist"
-          if ! xcodebuild -exportArchive -archivePath "$ARCHIVE" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$EXPORT" -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"; then
-            if [ "${IOS_EXPORT_METHOD:-development}" != "development" ]; then
+          plutil -insert destination -string export "$RUNNER_TEMP/ExportOptions.plist"
+          plutil -insert manageAppVersionAndBuildNumber -bool NO "$RUNNER_TEMP/ExportOptions.plist"
+          plutil -insert stripSwiftSymbols -bool YES "$RUNNER_TEMP/ExportOptions.plist"
+
+          echo "=== Exporting IPA ==="
+          EXPORT_CMD=(
+            xcodebuild -exportArchive -archivePath "$ARCHIVE"
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+            -exportPath "$EXPORT"
+            -allowProvisioningUpdates
+            -authenticationKeyPath "$KEY"
+            -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID"
+            -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
+          )
+
+          if ! "${EXPORT_CMD[@]}"; then
+            if [ "${UPLOAD_TO_TESTFLIGHT}" = "true" ] || [ "${IOS_EXPORT_METHOD:-app-store}" = "app-store" ]; then
+              echo "Export with automatic signing failed. Retrying with explicit provisioning profile mapping..."
+              plutil -insert provisioningProfiles -dictionary "$RUNNER_TEMP/ExportOptions.plist" || true
+              plutil -insert "provisioningProfiles.$IOS_BUNDLE_ID" -string "animalfall_prod_profile" "$RUNNER_TEMP/ExportOptions.plist" || true
+              if ! "${EXPORT_CMD[@]}"; then
+                echo "::error::Export with app-store signing failed. TestFlight deployment requires Cloud Managed Distribution Certificate permission or a distribution certificate installed on the runner." >&2
+                exit 1
+              fi
+            elif [ "${IOS_EXPORT_METHOD:-app-store}" != "development" ]; then
               echo "Export with ${IOS_EXPORT_METHOD} failed. Retrying with development signing..."
               plutil -replace method -string development "$RUNNER_TEMP/ExportOptions.plist"
-              xcodebuild -exportArchive -archivePath "$ARCHIVE" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$EXPORT" -allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$APP_STORE_CONNECT_KEY_ID" -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID"
+              "${EXPORT_CMD[@]}"
             else
               exit 1
             fi
           fi
+
           IPA="$(find "$EXPORT" -maxdepth 1 -type f -name '*.ipa' -print -quit)"; test -n "$IPA"; mkdir -p Builds/ipa; cp "$IPA" Builds/ipa/AnimalFall.ipa; unzip -t Builds/ipa/AnimalFall.ipa
-      - uses: actions/upload-artifact@v4
+          echo "IPA successfully verified at Builds/ipa/AnimalFall.ipa"
+
+      - name: Upload IPA artifact to GitHub
+        uses: actions/upload-artifact@v4
         with:
           name: AnimalFall-ipa-${{ github.run_number }}
           path: Builds/ipa/AnimalFall.ipa
           if-no-files-found: error
           compression-level: 0
+
+      - name: Upload to Apple TestFlight
+        if: ${{ inputs.upload_to_testflight == true && inputs.export_method == 'app-store' }}
+        uses: apple-actions/upload-testflight-build@v5
+        with:
+          app-path: Builds/ipa/AnimalFall.ipa
+          issuer-id: ${{ env.APP_STORE_CONNECT_ISSUER_ID }}
+          api-key-id: ${{ env.APP_STORE_CONNECT_KEY_ID }}
+          api-private-key: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          release-notes: ${{ inputs.release_notes }}
+
