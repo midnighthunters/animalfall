@@ -340,14 +340,20 @@ jobs:
 
           ipa_path="$GITHUB_WORKSPACE/Builds/ipa/AnimalFall.ipa"
           echo "Uploading $ipa_path to TestFlight using xcrun altool..."
-          if xcrun altool --upload-app \
+          upload_log="$RUNNER_TEMP/altool_upload.log"
+          set +e
+          xcrun altool --upload-app \
             --type ios \
             --file "$ipa_path" \
             --apiKey "$APP_STORE_CONNECT_KEY_ID" \
-            --apiIssuer "$APP_STORE_CONNECT_ISSUER_ID"; then
+            --apiIssuer "$APP_STORE_CONNECT_ISSUER_ID" 2>&1 | tee "$upload_log"
+          altool_exit=${PIPESTATUS[0]}
+          set -e
+
+          if [[ $altool_exit -eq 0 ]] && ! grep -Eq "UPLOAD FAILED|ERROR:|STATE_ERROR" "$upload_log"; then
             echo "=== TestFlight upload successful via altool! ==="
           else
-            echo "Warning: altool upload returned an error; attempting fallback upload with iTMSTransporter..."
+            echo "Warning: altool upload encountered errors; attempting fallback upload with iTMSTransporter..."
             xcrun iTMSTransporter \
               -m upload \
               -assetFile "$ipa_path" \
