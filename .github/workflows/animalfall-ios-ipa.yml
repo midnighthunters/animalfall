@@ -196,4 +196,5 @@ jobs:
           api-key-id: ${{ env.APP_STORE_CONNECT_KEY_ID }}
           api-private-key: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
           release-notes: ${{ inputs.release_notes }}
+          wait-for-processing: false
 
