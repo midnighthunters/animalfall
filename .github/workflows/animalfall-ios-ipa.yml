@@ -154,8 +154,15 @@ jobs:
           if ! "${EXPORT_CMD[@]}"; then
             if [ "${UPLOAD_TO_TESTFLIGHT}" = "true" ] || [ "${IOS_EXPORT_METHOD:-app-store}" = "app-store" ]; then
               echo "Export with automatic signing failed. Retrying with explicit provisioning profile mapping..."
-              plutil -insert provisioningProfiles -dictionary "$RUNNER_TEMP/ExportOptions.plist" || true
-              plutil -insert "provisioningProfiles.$IOS_BUNDLE_ID" -string "animalfall_prod_profile" "$RUNNER_TEMP/ExportOptions.plist" || true
+              python3 -c "
+              import plistlib
+              p_path = '$RUNNER_TEMP/ExportOptions.plist'
+              with open(p_path, 'rb') as f:
+                  p = plistlib.load(f)
+              p['provisioningProfiles'] = {'$IOS_BUNDLE_ID': 'animalfall_prod_profile'}
+              with open(p_path, 'wb') as f:
+                  plistlib.dump(p, f)
+              "
               if ! "${EXPORT_CMD[@]}"; then
                 echo "::error::Export with app-store signing failed. TestFlight deployment requires Cloud Managed Distribution Certificate permission or a distribution certificate installed on the runner." >&2
                 exit 1
